@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.1
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 02-06-2020 a las 23:17:29
+-- Tiempo de generación: 02-06-2020 a las 23:36:01
 -- Versión del servidor: 10.4.11-MariaDB
--- Versión de PHP: 7.4.3
+-- Versión de PHP: 7.4.5
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -19,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `tiendaw_v`
+-- Base de datos: `tiendabd`
 --
 
 -- --------------------------------------------------------
@@ -33,13 +32,6 @@ CREATE TABLE `administrador` (
   `nombre` varchar(100) DEFAULT NULL,
   `password` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Volcado de datos para la tabla `administrador`
---
-
-INSERT INTO `administrador` (`dni`, `nombre`, `password`) VALUES
-('73184116', 'bryan', '12345\r\n');
 
 -- --------------------------------------------------------
 
@@ -80,6 +72,7 @@ CREATE TABLE `detallepedido` (
   `idDetalle` int(11) NOT NULL,
   `fecha` datetime DEFAULT NULL,
   `cantidad` int(3) DEFAULT NULL,
+  `precio` double(10,2) DEFAULT NULL,
   `idProducto` int(11) DEFAULT NULL,
   `idPedido` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
