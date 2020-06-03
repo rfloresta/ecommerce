@@ -4,7 +4,7 @@ JSP
 *S JSP
 *F
 + 0 login.jsp
-admin/login.jsp
+login.jsp
 *L
 1,38:60
 38:138,14

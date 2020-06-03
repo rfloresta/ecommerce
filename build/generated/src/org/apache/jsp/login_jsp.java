@@ -1,4 +1,4 @@
-package org.apache.jsp.admin;
+package org.apache.jsp;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -69,7 +69,7 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("        <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\r\n");
       out.write("\r\n");
       out.write("        <!-- Font Awesome -->\r\n");
-      out.write("        <link rel=\"stylesheet\" href=\"public/css/all.min.css\">\r\n");
+      out.write("        <link rel=\"stylesheet\" href=\"admin/public/css/all.min.css\">\r\n");
       out.write("        <link rel=\"stylesheet\" href=\"https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css\">\r\n");
       out.write("\r\n");
       out.write("        <!-- Ionicons -->\r\n");
@@ -77,7 +77,7 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("        <!-- icheck bootstrap -->\r\n");
       out.write("        <link rel=\"stylesheet\" href=\"public/css/icheck-bootstrap.min.css\">\r\n");
       out.write("        <!-- Theme style -->\r\n");
-      out.write("        <link rel=\"stylesheet\" href=\"public/css/adminlte.min.css\">\r\n");
+      out.write("        <link rel=\"stylesheet\" href=\"admin/public/css/adminlte.min.css\">\r\n");
       out.write("        <!-- Google Font: Source Sans Pro -->\r\n");
       out.write("        <link href=\"https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700\" rel=\"stylesheet\">\r\n");
       out.write("\r\n");
@@ -138,7 +138,7 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
     org.apache.struts2.views.jsp.ui.FormTag _jspx_th_s_form_0 = (org.apache.struts2.views.jsp.ui.FormTag) _jspx_tagPool_s_form_styleId_action.get(org.apache.struts2.views.jsp.ui.FormTag.class);
     _jspx_th_s_form_0.setPageContext(_jspx_page_context);
     _jspx_th_s_form_0.setParent(null);
-    _jspx_th_s_form_0.setAction("../ingresoAdmin");
+    _jspx_th_s_form_0.setAction("ingresoAdmin");
     _jspx_th_s_form_0.setDynamicAttribute(null, "styleId", new String("acc"));
     int _jspx_eval_s_form_0 = _jspx_th_s_form_0.doStartTag();
     if (_jspx_eval_s_form_0 != javax.servlet.jsp.tagext.Tag.SKIP_BODY) {
