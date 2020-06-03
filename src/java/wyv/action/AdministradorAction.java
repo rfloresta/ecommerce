@@ -6,6 +6,7 @@ import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Result;
 
 import com.opensymphony.xwork2.ActionSupport;
+import com.sun.org.apache.xalan.internal.xsltc.cmdline.getopt.GetOptsException;
 
 import wyv.servicios.AdministradorServicio;
 import wyv.persistencia.Administrador;
@@ -13,7 +14,7 @@ import wyv.persistencia.Administrador;
 @SuppressWarnings("serial")
 public class AdministradorAction extends ActionSupport {
 
-    AdministradorServicio adminSer;
+    AdministradorServicio admSer;
     private String resultado;
     private Administrador admin;
     private List<Administrador> lstAdmin;
@@ -26,7 +27,7 @@ public class AdministradorAction extends ActionSupport {
     public void setAdmin(Administrador admin) {
         this.admin = admin;
     }
-    
+
     public Administrador getAdmin() {
         return admin;
     }
@@ -39,8 +40,8 @@ public class AdministradorAction extends ActionSupport {
         return edit;
     }
 
-    public void setSerAdmin(AdministradorServicio serAdmin) {
-        this.adminSer = serAdmin;
+    public void setAdmSer(AdministradorServicio admSer) {
+        this.admSer = admSer;
     }
 
     @Action(value = "ingresoAdmin", results = {
@@ -50,20 +51,16 @@ public class AdministradorAction extends ActionSupport {
 
     })
     public String ingresoAdmin() {
-        
         try {
-            adminSer=new AdministradorServicio();
-            admin = adminSer.ingresar(admin);
-            
-            if(admin==null){
+            admSer=new AdministradorServicio();
+            admin = admSer.ingresar(admin);
+            if (admin == null) {
                 return "incorrecto";
             }
             return "ok";
-
         } catch (Exception e) {
             resultado = "Error en: ingresoAdmin :: " + e.getMessage();
             return "error";
         }
     }
-
 }
