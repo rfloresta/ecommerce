@@ -45,7 +45,7 @@ public class AdministradorAction extends ActionSupport {
 
     @Action(value = "ingresoAdmin", results = {
         @Result(name = "ok", location = "/admin/principal.jsp"),
-        @Result(name = "invalido", location = "/admin/login.jsp"),
+        @Result(name = "incorrecto", location = "/admin/login.jsp"),
 	@Result(name = "error", location = "/admin/error.jsp")
 
     })
@@ -56,7 +56,7 @@ public class AdministradorAction extends ActionSupport {
             admin = adminSer.ingresar(admin);
             
             if(admin==null){
-                return "invalido";
+                return "incorrecto";
             }
             return "ok";
 
