@@ -15,13 +15,13 @@
 <!-- ./wrapper -->
 
 <!-- jQuery -->
-<script src="js/jquery.min.js"></script>
+<script src="../js/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
-<script src="js/bootstrap.bundle.min.js"></script>
+<script src="../js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
-<script src="js/adminlte.min.js"></script>
+<script src="../js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="js/demo.js"></script>
+<script src="../js/demo.js"></script>
 
  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>   
 <script src="https://kit.fontawesome.com/93bc7256e3.js" crossorigin="anonymous"></script>
