@@ -42,8 +42,6 @@ public class AdministradorServicio implements IOperacionesBD<Administrador>{
 
     @Override
     public Administrador ingresar(Administrador entrada) {
-         System.out.println(entrada.getDni());
-        
         return admDao.ingresar(entrada);
     }
     
