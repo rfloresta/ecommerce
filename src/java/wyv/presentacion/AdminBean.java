@@ -12,9 +12,9 @@ package wyv.presentacion;
 public class AdminBean {
     
 
-    private String dni;
-    private String nombre;
-    private String password;
+    public String dni;
+    public String nombre;
+    public String password;
 
     public String getDni() {
         return dni;

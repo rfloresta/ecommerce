@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.swing.JOptionPane;
 import wyv.persistencia.Administrador;
 import wyv.servicios.ServicioAdministrador;
+import wyv.servicios.ServicioAdministradorImp;
 
 /**
  *
@@ -45,17 +46,18 @@ public class Login extends HttpServlet {
       String dnistring=  request.getParameter("dni");
       
       
-      AdminBean bean=new AdminBean();
-      bean.setDni(dnistring);
-     
-      Administrador adm= serAdmin.buscarAdmin(bean);
+      
+   
+      ServicioAdministradorImp serv= new ServicioAdministradorImp();
+      Administrador adm= serv.buscarAdmin(dnistring);
+      
        
-        if(adm != null)
+        if(adm.getDni().equals(dnistring))
         {
-            response.sendRedirect("admin/login.jsp");
-        }else
+            getServletContext().getRequestDispatcher("/admin/prueba.jsp").forward(request, response);
+        }else if(adm.getDni() != dnistring)
         {
-            response.sendRedirect("admin/prueba.jsp");
+            getServletContext().getRequestDispatcher("/admin/login.jsp").forward(request, response);
         }
        
         

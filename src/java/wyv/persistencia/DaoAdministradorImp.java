@@ -5,6 +5,8 @@
  */
 package wyv.persistencia;
 
+import wyv.presentacion.AdminBean;
+
 /**
  *
  * @author Data
@@ -17,8 +19,10 @@ public class DaoAdministradorImp implements DaoAdministrador{
     public Administrador buscarAdmin(String id) {
         Administrador admin=new Administrador();
         try {
-           admin= adminJpa.findAdministrador(id);
            
+           admin =adminJpa.findAdministrador(id);
+           
+          
         } catch (Exception e) {
             e.printStackTrace();
         }

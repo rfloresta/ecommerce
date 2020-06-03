@@ -18,18 +18,24 @@ import wyv.presentacion.AdminBean;
 public class ServicioAdministradorImp implements ServicioAdministrador {
     
     DaoAdministrador daoAdmin;
-    Administrador admi;
+    Administrador admin;
 
     public void setDaoAdmin(DaoAdministrador daoAdmin) {
         this.daoAdmin = daoAdmin;
     }
-    
-    
-    @Override
-    public Administrador buscarAdmin(AdminBean bean) {
+
+
+
+    @Override  
+    public Administrador buscarAdmin(String dni) {
+        admin =new Administrador();
+        DaoAdministradorImp dao=new DaoAdministradorImp();
         
-        admi= daoAdmin.buscarAdmin(bean.getDni());
-       return admi;
+        admin = dao.buscarAdmin(dni);
+        return admin;
     }
+    
+    
+
     
 }

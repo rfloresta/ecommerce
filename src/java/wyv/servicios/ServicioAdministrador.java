@@ -14,7 +14,7 @@ import wyv.presentacion.AdminBean;
  */
 public interface ServicioAdministrador {
     
-    public Administrador buscarAdmin(AdminBean id);
+     public Administrador buscarAdmin(String dni);
     
     
 }
