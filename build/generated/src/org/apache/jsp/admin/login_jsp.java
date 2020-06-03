@@ -138,7 +138,7 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
     org.apache.struts2.views.jsp.ui.FormTag _jspx_th_s_form_0 = (org.apache.struts2.views.jsp.ui.FormTag) _jspx_tagPool_s_form_styleId_action.get(org.apache.struts2.views.jsp.ui.FormTag.class);
     _jspx_th_s_form_0.setPageContext(_jspx_page_context);
     _jspx_th_s_form_0.setParent(null);
-    _jspx_th_s_form_0.setAction("../ingresoAdmin");
+    _jspx_th_s_form_0.setAction("ingresoAdmin");
     _jspx_th_s_form_0.setDynamicAttribute(null, "styleId", new String("acc"));
     int _jspx_eval_s_form_0 = _jspx_th_s_form_0.doStartTag();
     if (_jspx_eval_s_form_0 != javax.servlet.jsp.tagext.Tag.SKIP_BODY) {

@@ -1,4 +1,4 @@
-package wyv.presentacion;
+package wyv.action;
 
 import java.util.List;
 
@@ -26,6 +26,10 @@ public class AdministradorAction extends ActionSupport {
     public void setAdmin(Administrador admin) {
         this.admin = admin;
     }
+    
+    public Administrador getAdmin() {
+        return admin;
+    }
 
     public List<Administrador> getLstAdmin() {
         return lstAdmin;
@@ -40,23 +44,24 @@ public class AdministradorAction extends ActionSupport {
     }
 
     @Action(value = "ingresoAdmin", results = {
-        @Result(name = "ok", location = "/principal.jsp"),
-        @Result(name = "invalido", location = "/login.jsp"),
-	@Result(name = "error", location = "/error.jsp")
+        @Result(name = "ok", location = "/admin/principal.jsp"),
+        @Result(name = "invalido", location = "/admin/login.jsp"),
+	@Result(name = "error", location = "/admin/error.jsp")
 
     })
     public String ingresoAdmin() {
+        
         try {
-
+            adminSer=new AdministradorServicio();
             admin = adminSer.ingresar(admin);
-            lstAdmin=adminSer.listar();
+            
             if(admin==null){
                 return "invalido";
             }
             return "ok";
 
         } catch (Exception e) {
-            resultado = "Error en: ingresoAdmin ::" + e.getMessage();
+            resultado = "Error en: ingresoAdmin :: " + e.getMessage();
             return "error";
         }
     }

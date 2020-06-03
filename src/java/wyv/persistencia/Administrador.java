@@ -3,7 +3,7 @@ package wyv.persistencia;
 public class Administrador {
     private String dni;
     private String password;
-    private String nombre;
+    private String nombres;
 
     public String getDni() {
         return dni;
@@ -21,12 +21,12 @@ public class Administrador {
         this.password = password;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getNombres() {
+        return nombres;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setNombres(String nombres) {
+        this.nombres = nombres;
     }
 
    

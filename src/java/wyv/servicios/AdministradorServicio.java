@@ -8,7 +8,7 @@ import wyv.persistencia.IOperacionesBD;
 public class AdministradorServicio implements IOperacionesBD<Administrador>{
 
     
-    AdministradorDao admDao;
+    AdministradorDao admDao=new AdministradorDao();
     Administrador admin;
     
     public void setObjDao(AdministradorDao objDao) {
@@ -42,15 +42,9 @@ public class AdministradorServicio implements IOperacionesBD<Administrador>{
 
     @Override
     public Administrador ingresar(Administrador entrada) {
-        entrada.getDni();
-        entrada.getPassword();
-        admin = admDao.ingresar(entrada);
-        if (admin != null) {
-            if (admin.getPassword().equals(entrada.getPassword())) {
-                return admin;
-            }
-        }
-        return null;
+         System.out.println(entrada.getDni());
+        
+        return admDao.ingresar(entrada);
     }
     
     

@@ -39,7 +39,7 @@ public class AdministradorDao implements IOperacionesBD<Administrador> {
 	            lstAdmin=new ArrayList<Administrador>();
 	            while(rs.next()) {
 	            admin=new Administrador();
-	            admin.setNombre(rs.getString("id_cliente"));
+	            admin.setNombres(rs.getString("id_cliente"));
 	            }
 	           
 	            pt.close();
@@ -62,14 +62,14 @@ public class AdministradorDao implements IOperacionesBD<Administrador> {
     public Administrador ingresar(Administrador entrada) {
         try {
              cn=Util.getConexionBD();
-	            pt=cn.prepareStatement("SELECT * FROM usuario  WHERE email = ? and password = ? ;");
+	            pt=cn.prepareStatement("SELECT * FROM administrador  WHERE dni = ? and password = ? ;");
                     pt.setString(1, entrada.getDni());
                     pt.setString(2, entrada.getPassword());
 	            rs= pt.executeQuery();
 	            lstAdmin=new ArrayList<Administrador>();
 	            while(rs.next()) {
 	            admin=new Administrador();
-	            admin.setNombre(rs.getString("nombre"));
+	            admin.setNombres(rs.getString("nombres"));
 	            }
                     
 	            pt.close();
