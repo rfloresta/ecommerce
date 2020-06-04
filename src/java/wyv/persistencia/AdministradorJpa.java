@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package wyv.persistencia;
 
 import java.io.Serializable;
@@ -12,6 +17,10 @@ import javax.persistence.criteria.Root;
 import wyv.persistencia.exceptions.NonexistentEntityException;
 import wyv.persistencia.exceptions.PreexistingEntityException;
 
+/**
+ *
+ * @author Romario
+ */
 public class AdministradorJpa implements Serializable {
 
     public AdministradorJpa() {
@@ -26,6 +35,7 @@ public class AdministradorJpa implements Serializable {
         return emf.createEntityManager();
     }
 
+    
     public void create(Administrador administrador) throws PreexistingEntityException, Exception {
         EntityManager em = null;
         try {
@@ -134,4 +144,5 @@ public class AdministradorJpa implements Serializable {
             em.close();
         }
     }
+    
 }

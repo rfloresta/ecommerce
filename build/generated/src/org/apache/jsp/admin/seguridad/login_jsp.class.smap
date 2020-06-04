@@ -7,6 +7,7 @@ JSP
 admin/seguridad/login.jsp
 *L
 <<<<<<< HEAD
+<<<<<<< HEAD
 1,38:63
 38:144,14
 39,3:158
@@ -31,4 +32,16 @@ admin/seguridad/login.jsp
 71,10:194
 80,21:100
 >>>>>>> 17c29bc78b620ffd92c3f9ddc4b8eb17900b0e79
+=======
+1,38:60
+38:138,14
+39,3:152
+41:223,7
+41,11:157
+51:243,7
+51,21:170
+71:263,7
+71,10:193
+80,21:100
+>>>>>>> parent of 499f877... login y pagina principal
 *E

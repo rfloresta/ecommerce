@@ -1,9 +1,13 @@
 package wyv.action;
 
 import java.util.List;
+
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Result;
+
 import com.opensymphony.xwork2.ActionSupport;
+import com.sun.org.apache.xalan.internal.xsltc.cmdline.getopt.GetOptsException;
+
 import wyv.servicios.AdministradorServicio;
 import wyv.persistencia.Administrador;
 
@@ -51,14 +55,12 @@ public class AdministradorAction extends ActionSupport {
             admSer=new AdministradorServicio();
             admin = admSer.ingresar(admin);
             if (admin == null) {
-                resultado = "Dni y/o password incorrecto, intente de nuevo por favor";
                 return "incorrecto";
             }
             return "ok";
         } catch (Exception e) {
             resultado = "Error en: ingresoAdmin :: " + e.getMessage();
             return "error";
-            
         }
     }
 }

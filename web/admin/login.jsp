@@ -80,7 +80,7 @@
                     </s:form>        
                 </div>
                 <!-- /.login-card-body -->
-                <div><s:property value="resultado"/></div>
+               
             </div>
         </div>
         <!-- /.login-box -->
