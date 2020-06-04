@@ -5,15 +5,6 @@
         <param-name>contextConfigLocation</param-name>
         <param-value>/WEB-INF/applicationContext.xml</param-value>
     </context-param>
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-    
-    
->>>>>>> 17c29bc78b620ffd92c3f9ddc4b8eb17900b0e79
-=======
-    
->>>>>>> parent of 499f877... login y pagina principal
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
