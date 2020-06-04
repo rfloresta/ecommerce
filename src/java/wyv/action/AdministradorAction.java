@@ -6,13 +6,9 @@ import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Result;
 
 import com.opensymphony.xwork2.ActionSupport;
-<<<<<<< HEAD
-
 import com.sun.org.apache.xalan.internal.xsltc.cmdline.getopt.GetOptsException;
-=======
 import com.sun.org.apache.xalan.internal.xsltc.cmdline.getopt.GetOptsException;
 
->>>>>>> parent of 499f877... login y pagina principal
 import wyv.servicios.AdministradorServicio;
 import wyv.persistencia.Administrador;
 
