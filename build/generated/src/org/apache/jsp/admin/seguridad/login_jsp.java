@@ -14,6 +14,7 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
   private org.apache.jasper.runtime.TagHandlerPool _jspx_tagPool_s_form_styleId_action;
   private org.apache.jasper.runtime.TagHandlerPool _jspx_tagPool_s_textfield_styleId_name_cssClass_nobody;
   private org.apache.jasper.runtime.TagHandlerPool _jspx_tagPool_s_submit_value_styleId_cssClass_nobody;
+  private org.apache.jasper.runtime.TagHandlerPool _jspx_tagPool_s_property_value_nobody;
 
   private org.glassfish.jsp.api.ResourceInjector _jspx_resourceInjector;
 
@@ -25,12 +26,14 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
     _jspx_tagPool_s_form_styleId_action = org.apache.jasper.runtime.TagHandlerPool.getTagHandlerPool(getServletConfig());
     _jspx_tagPool_s_textfield_styleId_name_cssClass_nobody = org.apache.jasper.runtime.TagHandlerPool.getTagHandlerPool(getServletConfig());
     _jspx_tagPool_s_submit_value_styleId_cssClass_nobody = org.apache.jasper.runtime.TagHandlerPool.getTagHandlerPool(getServletConfig());
+    _jspx_tagPool_s_property_value_nobody = org.apache.jasper.runtime.TagHandlerPool.getTagHandlerPool(getServletConfig());
   }
 
   public void _jspDestroy() {
     _jspx_tagPool_s_form_styleId_action.release();
     _jspx_tagPool_s_textfield_styleId_name_cssClass_nobody.release();
     _jspx_tagPool_s_submit_value_styleId_cssClass_nobody.release();
+    _jspx_tagPool_s_property_value_nobody.release();
   }
 
   public void _jspService(HttpServletRequest request, HttpServletResponse response)
@@ -69,15 +72,15 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("        <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\r\n");
       out.write("\r\n");
       out.write("        <!-- Font Awesome -->\r\n");
-      out.write("        <link rel=\"stylesheet\" href=\"public/css/all.min.css\">\r\n");
+      out.write("        <link rel=\"stylesheet\" href=\"../css/all.min.css\">\r\n");
       out.write("        <link rel=\"stylesheet\" href=\"https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css\">\r\n");
       out.write("\r\n");
       out.write("        <!-- Ionicons -->\r\n");
       out.write("        <link rel=\"stylesheet\" href=\"https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css\">\r\n");
       out.write("        <!-- icheck bootstrap -->\r\n");
-      out.write("        <link rel=\"stylesheet\" href=\"public/css/icheck-bootstrap.min.css\">\r\n");
+      out.write("        <link rel=\"stylesheet\" href=\"../css/icheck-bootstrap.min.css\">\r\n");
       out.write("        <!-- Theme style -->\r\n");
-      out.write("        <link rel=\"stylesheet\" href=\"public/css/adminlte.min.css\">\r\n");
+      out.write("        <link rel=\"stylesheet\" href=\"../css/adminlte.min.css\">\r\n");
       out.write("        <!-- Google Font: Source Sans Pro -->\r\n");
       out.write("        <link href=\"https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700\" rel=\"stylesheet\">\r\n");
       out.write("\r\n");
@@ -100,7 +103,10 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("        \r\n");
       out.write("                </div>\r\n");
       out.write("                <!-- /.login-card-body -->\r\n");
-      out.write("               \r\n");
+      out.write("                <div>");
+      if (_jspx_meth_s_property_0(_jspx_page_context))
+        return;
+      out.write("</div>\r\n");
       out.write("            </div>\r\n");
       out.write("        </div>\r\n");
       out.write("        <!-- /.login-box -->\r\n");
@@ -272,6 +278,24 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
       return true;
     }
     _jspx_tagPool_s_submit_value_styleId_cssClass_nobody.reuse(_jspx_th_s_submit_0);
+    return false;
+  }
+
+  private boolean _jspx_meth_s_property_0(PageContext _jspx_page_context)
+          throws Throwable {
+    PageContext pageContext = _jspx_page_context;
+    JspWriter out = _jspx_page_context.getOut();
+    //  s:property
+    org.apache.struts2.views.jsp.PropertyTag _jspx_th_s_property_0 = (org.apache.struts2.views.jsp.PropertyTag) _jspx_tagPool_s_property_value_nobody.get(org.apache.struts2.views.jsp.PropertyTag.class);
+    _jspx_th_s_property_0.setPageContext(_jspx_page_context);
+    _jspx_th_s_property_0.setParent(null);
+    _jspx_th_s_property_0.setValue("resultado");
+    int _jspx_eval_s_property_0 = _jspx_th_s_property_0.doStartTag();
+    if (_jspx_th_s_property_0.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
+      _jspx_tagPool_s_property_value_nobody.reuse(_jspx_th_s_property_0);
+      return true;
+    }
+    _jspx_tagPool_s_property_value_nobody.reuse(_jspx_th_s_property_0);
     return false;
   }
 }
