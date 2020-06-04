@@ -6,66 +6,14 @@ JSP
 + 0 login.jsp
 admin/seguridad/login.jsp
 *L
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-1,38:63
-38:144,14
-39,3:158
-41:229,7
-41,11:163
-51:249,7
-51,21:176
-71:269,7
-71,10:199
-80,4:103
-83:289,5
-83,18:109
-=======
-1,38:60
-38:138,15
-39,3:153
-41:224,7
-41,11:158
-51:244,7
-51,21:171
-71:264,7
-71,10:194
-80,21:100
->>>>>>> 17c29bc78b620ffd92c3f9ddc4b8eb17900b0e79
-=======
-=======
->>>>>>> parent of 499f877... login y pagina principal
-=======
->>>>>>> parent of 499f877... login y pagina principal
-=======
->>>>>>> parent of 499f877... login y pagina principal
-=======
->>>>>>> parent of 499f877... login y pagina principal
-1,38:60
-38:138,14
-39,3:152
-41:223,7
-41,11:157
-51:243,7
-51,21:170
-71:263,7
-71,10:193
-80,21:100
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> parent of 499f877... login y pagina principal
-=======
->>>>>>> parent of 499f877... login y pagina principal
-=======
->>>>>>> parent of 499f877... login y pagina principal
-=======
->>>>>>> parent of 499f877... login y pagina principal
-=======
->>>>>>> parent of 499f877... login y pagina principal
+1,37:63
+37:144,15
+38,3:159
+40:230,8
+40,11:164
+50:251,8
+50,21:177
+70:272,8
+70,10:200
+79,25:102
 *E

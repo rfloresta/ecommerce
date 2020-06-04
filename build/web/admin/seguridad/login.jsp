@@ -24,7 +24,6 @@
 
         <!-- sweetalert -->
 
-        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     </head>
     <body class="hold-transition login-page">
         <div class="login-box">
@@ -35,10 +34,10 @@
             <div class="card">
                 <div class="card-body login-card-body">
                     <p class="login-box-msg">Inicie Sesión</p>
-                    <s:form action="ingresoAdmin" styleId="acc" theme="simple">
+                    <s:form id="form_login"  styleId="acc" theme="simple">
                         <div class="input-group mb-3">
 
-                            <s:textfield name="admin.dni" styleId="dni" cssClass="form-control" />
+                            <s:textfield id="dni" name="admin.dni" styleId="dni" cssClass="form-control" />
                                 <div class="input-group-append">
                                     <div class="input-group-text">
                                         <i class="fa fa-envelope"></i>
@@ -48,7 +47,7 @@
 
                             <div class="input-group mb-3">
 
-                            <s:textfield name="admin.password" styleId="pass" cssClass="form-control"/>
+                                <s:password id="password" name="admin.password" styleId="pass" cssClass="form-control"/>
 
                                 <div class="input-group-append">
                                     <div class="input-group-text">
@@ -68,7 +67,7 @@
                                 <!-- /.col -->
                                 <div class="col-12 my-4">
 
-                                <s:submit styleId="btnreg" cssClass="btn btn-primary btn-block" value="Iniciar Sesión" />
+                                <s:submit id="ingresar" styleId="btnreg" cssClass="btn btn-primary btn-block" value="Iniciar Sesión" />
 
                             </div>
                             <!-- /.col -->
@@ -85,15 +84,19 @@
         </div>
         <!-- /.login-box -->
 
-        <!--mi script-->
-        <script src="js/main.js" type="text/javascript"></script>
-
         <!-- jQuery -->
-        <script src="resources/js/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <!-- Bootstrap 4 -->
         <script src="resources/js/bootstrap.bundle.min.js"></script>
         <!-- AdminLTE App -->
         <script src="resources/js/adminlte.min.js"></script>
+
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+        <script src="../js/funciones.js" type="text/javascript"></script>
+        
+        <!--mi script-->
+        <script src="../js/main.js" type="text/javascript"></script>
+
 
     </body>
 </html>

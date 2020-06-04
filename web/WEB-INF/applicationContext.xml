@@ -13,6 +13,7 @@
     <bean id="adminSer" class="wyv.servicios.AdministradorServicio" >  
     <property name="admDao" ref="adminDao" />
     </bean>
-
-    
+    <bean id="/AdministradorAction" class="wyv.action.AdministradorAction">
+    <property name="admSer" ref="adminSer" />
+    </bean>
 </beans>
