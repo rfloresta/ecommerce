@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 02-06-2020 a las 23:36:01
+-- Tiempo de generación: 04-06-2020 a las 07:13:00
 -- Versión del servidor: 10.4.11-MariaDB
 -- Versión de PHP: 7.4.5
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `tiendabd`
+-- Base de datos: `tiendaw_v`
 --
 
 -- --------------------------------------------------------

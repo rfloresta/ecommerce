@@ -11,8 +11,8 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
 
   private static java.util.List<String> _jspx_dependants;
 
-  private org.apache.jasper.runtime.TagHandlerPool _jspx_tagPool_s_form_styleId_action;
   private org.apache.jasper.runtime.TagHandlerPool _jspx_tagPool_s_textfield_styleId_name_cssClass_nobody;
+  private org.apache.jasper.runtime.TagHandlerPool _jspx_tagPool_s_form_theme_styleId_action;
   private org.apache.jasper.runtime.TagHandlerPool _jspx_tagPool_s_submit_value_styleId_cssClass_nobody;
   private org.apache.jasper.runtime.TagHandlerPool _jspx_tagPool_s_property_value_nobody;
 
@@ -23,15 +23,15 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
   }
 
   public void _jspInit() {
-    _jspx_tagPool_s_form_styleId_action = org.apache.jasper.runtime.TagHandlerPool.getTagHandlerPool(getServletConfig());
     _jspx_tagPool_s_textfield_styleId_name_cssClass_nobody = org.apache.jasper.runtime.TagHandlerPool.getTagHandlerPool(getServletConfig());
+    _jspx_tagPool_s_form_theme_styleId_action = org.apache.jasper.runtime.TagHandlerPool.getTagHandlerPool(getServletConfig());
     _jspx_tagPool_s_submit_value_styleId_cssClass_nobody = org.apache.jasper.runtime.TagHandlerPool.getTagHandlerPool(getServletConfig());
     _jspx_tagPool_s_property_value_nobody = org.apache.jasper.runtime.TagHandlerPool.getTagHandlerPool(getServletConfig());
   }
 
   public void _jspDestroy() {
-    _jspx_tagPool_s_form_styleId_action.release();
     _jspx_tagPool_s_textfield_styleId_name_cssClass_nobody.release();
+    _jspx_tagPool_s_form_theme_styleId_action.release();
     _jspx_tagPool_s_submit_value_styleId_cssClass_nobody.release();
     _jspx_tagPool_s_property_value_nobody.release();
   }
@@ -141,11 +141,12 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
     PageContext pageContext = _jspx_page_context;
     JspWriter out = _jspx_page_context.getOut();
     //  s:form
-    org.apache.struts2.views.jsp.ui.FormTag _jspx_th_s_form_0 = (org.apache.struts2.views.jsp.ui.FormTag) _jspx_tagPool_s_form_styleId_action.get(org.apache.struts2.views.jsp.ui.FormTag.class);
+    org.apache.struts2.views.jsp.ui.FormTag _jspx_th_s_form_0 = (org.apache.struts2.views.jsp.ui.FormTag) _jspx_tagPool_s_form_theme_styleId_action.get(org.apache.struts2.views.jsp.ui.FormTag.class);
     _jspx_th_s_form_0.setPageContext(_jspx_page_context);
     _jspx_th_s_form_0.setParent(null);
     _jspx_th_s_form_0.setAction("ingresoAdmin");
     _jspx_th_s_form_0.setDynamicAttribute(null, "styleId", new String("acc"));
+    _jspx_th_s_form_0.setTheme("simple");
     int _jspx_eval_s_form_0 = _jspx_th_s_form_0.doStartTag();
     if (_jspx_eval_s_form_0 != javax.servlet.jsp.tagext.Tag.SKIP_BODY) {
       if (_jspx_eval_s_form_0 != javax.servlet.jsp.tagext.Tag.EVAL_BODY_INCLUDE) {
@@ -214,10 +215,10 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
         out = _jspx_page_context.popBody();
     }
     if (_jspx_th_s_form_0.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
-      _jspx_tagPool_s_form_styleId_action.reuse(_jspx_th_s_form_0);
+      _jspx_tagPool_s_form_theme_styleId_action.reuse(_jspx_th_s_form_0);
       return true;
     }
-    _jspx_tagPool_s_form_styleId_action.reuse(_jspx_th_s_form_0);
+    _jspx_tagPool_s_form_theme_styleId_action.reuse(_jspx_th_s_form_0);
     return false;
   }
 
