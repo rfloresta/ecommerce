@@ -35,7 +35,7 @@
             <div class="card">
                 <div class="card-body login-card-body">
                     <p class="login-box-msg">Inicie Sesión</p>
-                    <s:form action="ingresoAdmin" styleId="acc">
+                    <s:form action="ingresoAdmin" styleId="acc" theme="simple">
                         <div class="input-group mb-3">
 
                             <s:textfield name="admin.dni" styleId="dni" cssClass="form-control" />
