@@ -43,9 +43,9 @@ public class AdministradorAction extends ActionSupport {
     }
 
     @Action(value = "ingresoAdmin", results = {
-        @Result(name = "ok", location = "/admin/principal.jsp"),
-        @Result(name = "incorrecto", location = "/admin/login.jsp"),
-	@Result(name = "error", location = "/admin/error.jsp")
+        @Result(name = "ok", location = "/admin/principal/inicio.jsp"),
+        @Result(name = "incorrecto", location = "/admin/seguridad/login.jsp"),
+	@Result(name = "error", location = "admin/error.jsp")
 
     })
     public String ingresoAdmin() {
