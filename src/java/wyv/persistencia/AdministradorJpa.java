@@ -19,13 +19,14 @@ import wyv.persistencia.exceptions.PreexistingEntityException;
 
 /**
  *
- * @author Romario
+ * @author Data
  */
 public class AdministradorJpa implements Serializable {
-
+    
     public AdministradorJpa() {
          this.emf= Persistence.createEntityManagerFactory("W_V_S.A.CPU");
     }
+
     public AdministradorJpa(EntityManagerFactory emf) {
         this.emf = emf;
     }
@@ -35,7 +36,6 @@ public class AdministradorJpa implements Serializable {
         return emf.createEntityManager();
     }
 
-    
     public void create(Administrador administrador) throws PreexistingEntityException, Exception {
         EntityManager em = null;
         try {

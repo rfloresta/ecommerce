@@ -1,9 +1,12 @@
 package wyv.servicios;
 
+
 import java.util.List;
+
 import wyv.persistencia.Administrador;
 import wyv.persistencia.AdministradorDao;
 import wyv.persistencia.IOperacionesBD;
+
 
 public class AdministradorServicio implements IOperacionesBD<Administrador>{
 
@@ -16,29 +19,48 @@ public class AdministradorServicio implements IOperacionesBD<Administrador>{
     }
     
     @Override
-    public int registrar(Administrador a) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public String registrar(Administrador a) {
+        admDao=new AdministradorDao();
+        
+        admDao.registrar(a);
+        
+       return "ok";
     }
 
     @Override
-    public int actualizar(Administrador a) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public String actualizar(Administrador a) {
+        admDao=new AdministradorDao();
+        admDao.actualizar(a);
+        
+        return "ok";
+        
     }
 
     @Override
-    public int eliminar(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public String eliminar(String id) {
+       
+        admDao=new AdministradorDao();
+        
+        return admDao.eliminar(id);
+        
     }
 
     @Override
-    public Administrador buscar(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Administrador buscar(String id) {
+        admDao=new AdministradorDao();
+        
+        return admDao.buscar(id);
     }
 
     @Override
     public List<Administrador> listar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        admDao=new AdministradorDao();
+        
+      
+        return admDao.listar();
     }
+    
+  
 
     @Override
     public Administrador ingresar(Administrador entrada) {

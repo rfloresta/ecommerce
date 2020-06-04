@@ -17,7 +17,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Romario
+ * @author Data
  */
 @Entity
 @Table(name = "administrador")
@@ -25,8 +25,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Administrador.findAll", query = "SELECT a FROM Administrador a")
     , @NamedQuery(name = "Administrador.findByDni", query = "SELECT a FROM Administrador a WHERE a.dni = :dni")
-    , @NamedQuery(name = "Administrador.findByNombres", query = "SELECT a FROM Administrador a WHERE a.nombres = :nombres")
-    , @NamedQuery(name = "Administrador.findByApellidos", query = "SELECT a FROM Administrador a WHERE a.apellidos = :apellidos")
+    , @NamedQuery(name = "Administrador.findByNombre", query = "SELECT a FROM Administrador a WHERE a.nombre = :nombre")
     , @NamedQuery(name = "Administrador.findByPassword", query = "SELECT a FROM Administrador a WHERE a.password = :password")})
 public class Administrador implements Serializable {
 
@@ -35,11 +34,8 @@ public class Administrador implements Serializable {
     @Basic(optional = false)
     @Column(name = "dni")
     private String dni;
-    @Column(name = "nombres")
-    private String nombres;
-    @Basic(optional = false)
-    @Column(name = "apellidos")
-    private String apellidos;
+    @Column(name = "nombre")
+    private String nombre;
     @Column(name = "password")
     private String password;
 
@@ -50,11 +46,6 @@ public class Administrador implements Serializable {
         this.dni = dni;
     }
 
-    public Administrador(String dni, String apellidos) {
-        this.dni = dni;
-        this.apellidos = apellidos;
-    }
-
     public String getDni() {
         return dni;
     }
@@ -63,20 +54,12 @@ public class Administrador implements Serializable {
         this.dni = dni;
     }
 
-    public String getNombres() {
-        return nombres;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setNombres(String nombres) {
-        this.nombres = nombres;
-    }
-
-    public String getApellidos() {
-        return apellidos;
-    }
-
-    public void setApellidos(String apellidos) {
-        this.apellidos = apellidos;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public String getPassword() {
