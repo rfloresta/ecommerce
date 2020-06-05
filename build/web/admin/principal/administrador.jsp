@@ -26,19 +26,19 @@
                      
                   <div class="col-3">
                       <label>Dni</label>
-                    <s:textfield  name="admin.dni"  cssClass="form-control " />
+                    <s:textfield  name="admin.dni"  cssClass="form-control " placeholder="Ingrese Dni" />
                   </div>
                   <div class="col-3">
                       <label>Nombre</label>
-                    <s:textfield  name="admin.nombres" cssClass="form-control" />
+                    <s:textfield  name="admin.nombres" cssClass="form-control" placeholder="Ingrese Nombre" />
                   </div>
                   <div class="col-3">
                       <label>Apellido</label>
-                    <s:textfield  name="admin.apellidos" cssClass="form-control" />
+                    <s:textfield  name="admin.apellidos" cssClass="form-control" placeholder="Ingrese Apellido"/>
                   </div>
                    <div class="col-3">
                        <label>Password</label>
-                    <s:textfield  name="admin.password" cssClass="form-control" />
+                    <s:textfield  name="admin.password" cssClass="form-control"  placeholder="Ingrese Password"/>
                   </div>
                   
                    <div class="col-2 offset-5 btn-admin  my-4">
