@@ -232,7 +232,7 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
     _jspx_th_s_textfield_0.setPageContext(_jspx_page_context);
     _jspx_th_s_textfield_0.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_s_form_0);
     _jspx_th_s_textfield_0.setId("dni");
-    _jspx_th_s_textfield_0.setName("admin.dni");
+    _jspx_th_s_textfield_0.setName("adminLog.dni");
     _jspx_th_s_textfield_0.setDynamicAttribute(null, "styleId", new String("dni"));
     _jspx_th_s_textfield_0.setCssClass("form-control");
     int _jspx_eval_s_textfield_0 = _jspx_th_s_textfield_0.doStartTag();
@@ -253,7 +253,7 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
     _jspx_th_s_password_0.setPageContext(_jspx_page_context);
     _jspx_th_s_password_0.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_s_form_0);
     _jspx_th_s_password_0.setId("password");
-    _jspx_th_s_password_0.setName("admin.password");
+    _jspx_th_s_password_0.setName("adminLog.password");
     _jspx_th_s_password_0.setDynamicAttribute(null, "styleId", new String("pass"));
     _jspx_th_s_password_0.setCssClass("form-control");
     int _jspx_eval_s_password_0 = _jspx_th_s_password_0.doStartTag();

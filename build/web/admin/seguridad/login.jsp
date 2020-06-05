@@ -92,7 +92,7 @@
         <script src="resources/js/adminlte.min.js"></script>
 
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-        <script src="../js/funciones.js" type="text/javascript"></script>
+        //<script src="../js/funciones.js" type="text/javascript"></script>
         
         <!--mi script-->
         <script src="../js/main.js" type="text/javascript"></script>
