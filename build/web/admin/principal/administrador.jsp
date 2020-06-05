@@ -15,12 +15,12 @@
                     <h1 class="my-5  text-center text-uppercase font-weight-bold display-1">Mantenimiento Administrador</h1>
                     
                     <div class="justify-content-center d-flex">
-                        <s:form action="%{(edit==1)? 'actualizarAdmin': 'registrarAdmin'}" theme="simple" >
+                        <s:form id="form_mante" action="%{(edit==1)? 'actualizarAdmin': 'registrarAdmin'}" theme="simple" >
                             <span class="py-5">Dni</span> <s:textfield  name="admin.dni"  cssClass="form-control mb-2"/>
                             <span>Nombres</span> <s:textfield  name="admin.nombres" cssClass="form-control mb-2" />
                             <span>Apellidos</span> <s:textfield  name="admin.apellidos" cssClass="form-control mb-2" />
                             <span>Password</span> <s:textfield  name="admin.password" cssClass="form-control mb-2" />
-                            <s:submit value="%{(edit==1)? 'Editar' : 'Registrar'}" cssClass="%{(edit==1)? 'btn btn-warning mt-2 ml-3 pt-2 px-5 text-center' : 'btn btn-success mt-2 ml-3 pt-2 px-5 text-center'}" />
+                            <s:submit id="grabar" value="%{(edit==1)? 'Editar' : 'Registrar'}" cssClass="%{(edit==1)? 'btn btn-warning mt-2 ml-3 pt-2 px-5 text-center' : 'btn btn-success mt-2 ml-3 pt-2 px-5 text-center'}" />
                         </s:form>	
                     </div>
                     <div id="tbl" class="mt-5">
@@ -49,7 +49,7 @@
                                                 <s:url id="lnkEditar" action="editarAdmin">
                                                     <s:param value="dni" name="admin.dni" />
                                                 </s:url>
-                                                <s:a href="%{lnkEditar}" cssClass="fa fa-edit form-control btn-primary"></s:a>
+                                                <s:a href="%{lnkEditar}" cssClass="fa fa-edit form-control btn-primary opcion"></s:a>
                                               
                                              <td>
                                                  <s:url id="lnkEliminar" action="eliminarAdmin">

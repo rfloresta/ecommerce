@@ -108,7 +108,7 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("        <!-- /.login-box -->\r\n");
       out.write("\r\n");
       out.write("        <!-- jQuery -->\r\n");
-      out.write("        <script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js\"></script>\r\n");
+      out.write("        <script src=\"../js/jquery.min.js\"></script>\r\n");
       out.write("        <!-- Bootstrap 4 -->\r\n");
       out.write("        <script src=\"resources/js/bootstrap.bundle.min.js\"></script>\r\n");
       out.write("        <!-- AdminLTE App -->\r\n");
@@ -158,7 +158,6 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
       do {
         out.write("\r\n");
         out.write("                        <div class=\"input-group mb-3\">\r\n");
-        out.write("\r\n");
         out.write("                            ");
         if (_jspx_meth_s_textfield_0((javax.servlet.jsp.tagext.JspTag) _jspx_th_s_form_0, _jspx_page_context))
           return true;
@@ -232,7 +231,7 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
     _jspx_th_s_textfield_0.setPageContext(_jspx_page_context);
     _jspx_th_s_textfield_0.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_s_form_0);
     _jspx_th_s_textfield_0.setId("dni");
-    _jspx_th_s_textfield_0.setName("admin.dni");
+    _jspx_th_s_textfield_0.setName("adminLog.dni");
     _jspx_th_s_textfield_0.setDynamicAttribute(null, "styleId", new String("dni"));
     _jspx_th_s_textfield_0.setCssClass("form-control");
     int _jspx_eval_s_textfield_0 = _jspx_th_s_textfield_0.doStartTag();
@@ -253,7 +252,7 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
     _jspx_th_s_password_0.setPageContext(_jspx_page_context);
     _jspx_th_s_password_0.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_s_form_0);
     _jspx_th_s_password_0.setId("password");
-    _jspx_th_s_password_0.setName("admin.password");
+    _jspx_th_s_password_0.setName("adminLog.password");
     _jspx_th_s_password_0.setDynamicAttribute(null, "styleId", new String("pass"));
     _jspx_th_s_password_0.setCssClass("form-control");
     int _jspx_eval_s_password_0 = _jspx_th_s_password_0.doStartTag();

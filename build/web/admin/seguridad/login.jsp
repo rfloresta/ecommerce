@@ -36,8 +36,7 @@
                    <p class="login-box-msg">Inicie Sesión</p>
                     <s:form  action="ingresoAdmin" id="form_login"  styleId="acc" theme="simple">
                         <div class="input-group mb-3">
-
-                            <s:textfield id="dni" name="adminLog.dni" styleId="dni" cssClass="form-control" />
+                            <s:textfield id="dni"  name="adminLog.dni" styleId="dni" cssClass="form-control" />
                                 <div class="input-group-append">
                                     <div class="input-group-text">
                                         <i class="fa fa-envelope"></i>
@@ -85,7 +84,7 @@
         <!-- /.login-box -->
 
         <!-- jQuery -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="../js/jquery.min.js"></script>
         <!-- Bootstrap 4 -->
         <script src="resources/js/bootstrap.bundle.min.js"></script>
         <!-- AdminLTE App -->

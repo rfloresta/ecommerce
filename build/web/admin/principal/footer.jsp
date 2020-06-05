@@ -26,6 +26,6 @@
  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>   
 <script src="https://kit.fontawesome.com/93bc7256e3.js" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
+<script src="../js/funciones.js" type="text/javascript"></script>
   </body>
 </html>
