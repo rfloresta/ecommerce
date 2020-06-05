@@ -141,7 +141,6 @@ CREATE TABLE `producto` (
   `nombre` varchar(255) DEFAULT NULL,
   `descripcion` text NOT NULL,
   `stock` int(11) DEFAULT NULL,
-  `proveedor` varchar(50) DEFAULT NULL,
   `precioCompra` double(10,2) DEFAULT NULL,
   `precioVenta` double(10,2) DEFAULT NULL,
   `descuento` double(10,2) DEFAULT NULL,
