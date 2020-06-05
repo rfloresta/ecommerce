@@ -6,35 +6,51 @@ public class AdministradorDao implements IOperacionesBD<Administrador> {
     AdministradorJpa admJpa=new AdministradorJpa();
 
     @Override
-    public int registrar(Administrador a) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public String registrar(Administrador a) {
+        try {
+            admJpa.create(a);
+            return "ok";
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "error";
+        }
     }
 
     @Override
-    public int actualizar(Administrador a) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public String actualizar(Administrador a) {
+        try {
+            admJpa.edit(a);
+            return "ok";
+        } catch (Exception e) {
+            
+            e.getMessage();
+            return "error";
+        }
     }
 
     @Override
-    public int eliminar(int id) {
-//        try {
-//            adminJpa.destroy(String.valueOf(id));
-//            msg="ok";
-//        } catch (Exception e) {
-//            msg=e.getMessage();
-//        }
-//        return msg;
-    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public String eliminar(String id) {
+        try {
+            
+           admJpa.destroy(id);
+           
+           return "ok";
+       } catch (Exception e) {
+            e.getMessage();
+            return null;
+        }
+      
     }
 
     @Override
-    public Administrador buscar(int id) {
+    public Administrador buscar(String id) {
 
-     return  admJpa.findAdministrador(String.valueOf(id));
+     return  admJpa.findAdministrador(id);
     }
 
     @Override
     public List<Administrador> listar() {
+        
        return admJpa.findAdministradorEntities();
     }
 

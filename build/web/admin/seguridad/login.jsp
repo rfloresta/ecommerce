@@ -29,15 +29,15 @@
         <div class="login-box">
             <div class="login-logo">
                 <a href="../../index2.html"><b>W&V</b>S.A.C</a>
-            </div>
+                   <div class="card-body login-card-body">
+          </div>
             <!-- /.login-logo -->
             <div class="card">
-                <div class="card-body login-card-body">
-                    <p class="login-box-msg">Inicie Sesión</p>
-                    <s:form id="form_login"  styleId="acc" theme="simple">
+                   <p class="login-box-msg">Inicie Sesión</p>
+                    <s:form  action="ingresoAdmin" id="form_login"  styleId="acc" theme="simple">
                         <div class="input-group mb-3">
 
-                            <s:textfield id="dni" name="admin.dni" styleId="dni" cssClass="form-control" />
+                            <s:textfield id="dni" name="adminLog.dni" styleId="dni" cssClass="form-control" />
                                 <div class="input-group-append">
                                     <div class="input-group-text">
                                         <i class="fa fa-envelope"></i>
@@ -47,7 +47,7 @@
 
                             <div class="input-group mb-3">
 
-                                <s:password id="password" name="admin.password" styleId="pass" cssClass="form-control"/>
+                                <s:password id="password" name="adminLog.password" styleId="pass" cssClass="form-control"/>
 
                                 <div class="input-group-append">
                                     <div class="input-group-text">

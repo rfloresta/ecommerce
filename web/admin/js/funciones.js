@@ -16,9 +16,25 @@ $(function () {
              return;
         } 
         else {
-            form.action="/W_V_S.A.C/admin/seguridad/ingresoAdmin.action";
             form.submit();
         }
     }
     );
 });
+
+//$(function () {
+//    $(".menu").click(function (event)
+//
+//    {
+//       event.preventDefault();
+//        
+//     $("#sectionAjax").load($(this).attr('href'), function (response, status, xhr)
+//    {
+//        if (status == "success") {
+//           
+//        }
+//    });
+//        
+//    }
+//    );
+//});

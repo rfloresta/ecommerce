@@ -2,7 +2,7 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="../../index3.html" class="brand-link">
-        <img src="imagenes/nego.png"
+        <img src="../imagenes/nego.png"
            alt="AdminLTE Logo"
            class="brand-image img-circle elevation-3"
            style="opacity: .8">
@@ -17,7 +17,7 @@
             <img src="../imagenes/8.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-            <a href="#" class="d-block"><s:text name="admin.nombres"/> <s:text name="admin.apellidos"/></a>
+            <a href="#" class="d-block"><s:label  name="adminLog.nombres"  /> <s:label  name="adminLog.apellidos"  /></a>
         </div>
       </div>
 
@@ -44,7 +44,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="ListarProducto" class="nav-link">
+                <a href="producto" class="nav-link">
                   <i class="fas fa-list nav-icon"></i>
                   <p>Marcas</p>
                 </a>
@@ -56,7 +56,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="ListarCategoria" class="nav-link">
+                <a href="listarAdmin" class="nav-link">
                   <i class="fas fa-list nav-icon"></i>
                   <p>Productos</p>
                 </a>
@@ -73,7 +73,7 @@
             
           </li>
           <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
+              <a  href="listarAdmin" class="nav-link menu">
               <i class="nav-icon fas fa-users"></i>
               <p>
                 Administradores

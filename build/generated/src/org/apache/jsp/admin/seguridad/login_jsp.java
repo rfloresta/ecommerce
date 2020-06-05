@@ -12,8 +12,8 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
   private static java.util.List<String> _jspx_dependants;
 
   private org.apache.jasper.runtime.TagHandlerPool _jspx_tagPool_s_password_styleId_name_id_cssClass_nobody;
-  private org.apache.jasper.runtime.TagHandlerPool _jspx_tagPool_s_form_theme_styleId_id;
   private org.apache.jasper.runtime.TagHandlerPool _jspx_tagPool_s_submit_value_styleId_id_cssClass_nobody;
+  private org.apache.jasper.runtime.TagHandlerPool _jspx_tagPool_s_form_theme_styleId_id_action;
   private org.apache.jasper.runtime.TagHandlerPool _jspx_tagPool_s_textfield_styleId_name_id_cssClass_nobody;
 
   private org.glassfish.jsp.api.ResourceInjector _jspx_resourceInjector;
@@ -24,15 +24,15 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
 
   public void _jspInit() {
     _jspx_tagPool_s_password_styleId_name_id_cssClass_nobody = org.apache.jasper.runtime.TagHandlerPool.getTagHandlerPool(getServletConfig());
-    _jspx_tagPool_s_form_theme_styleId_id = org.apache.jasper.runtime.TagHandlerPool.getTagHandlerPool(getServletConfig());
     _jspx_tagPool_s_submit_value_styleId_id_cssClass_nobody = org.apache.jasper.runtime.TagHandlerPool.getTagHandlerPool(getServletConfig());
+    _jspx_tagPool_s_form_theme_styleId_id_action = org.apache.jasper.runtime.TagHandlerPool.getTagHandlerPool(getServletConfig());
     _jspx_tagPool_s_textfield_styleId_name_id_cssClass_nobody = org.apache.jasper.runtime.TagHandlerPool.getTagHandlerPool(getServletConfig());
   }
 
   public void _jspDestroy() {
     _jspx_tagPool_s_password_styleId_name_id_cssClass_nobody.release();
-    _jspx_tagPool_s_form_theme_styleId_id.release();
     _jspx_tagPool_s_submit_value_styleId_id_cssClass_nobody.release();
+    _jspx_tagPool_s_form_theme_styleId_id_action.release();
     _jspx_tagPool_s_textfield_styleId_name_id_cssClass_nobody.release();
   }
 
@@ -91,11 +91,11 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("        <div class=\"login-box\">\r\n");
       out.write("            <div class=\"login-logo\">\r\n");
       out.write("                <a href=\"../../index2.html\"><b>W&V</b>S.A.C</a>\r\n");
-      out.write("            </div>\r\n");
+      out.write("                   <div class=\"card-body login-card-body\">\r\n");
+      out.write("          </div>\r\n");
       out.write("            <!-- /.login-logo -->\r\n");
       out.write("            <div class=\"card\">\r\n");
-      out.write("                <div class=\"card-body login-card-body\">\r\n");
-      out.write("                    <p class=\"login-box-msg\">Inicie Sesión</p>\r\n");
+      out.write("                   <p class=\"login-box-msg\">Inicie Sesión</p>\r\n");
       out.write("                    ");
       if (_jspx_meth_s_form_0(_jspx_page_context))
         return;
@@ -141,9 +141,10 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
     PageContext pageContext = _jspx_page_context;
     JspWriter out = _jspx_page_context.getOut();
     //  s:form
-    org.apache.struts2.views.jsp.ui.FormTag _jspx_th_s_form_0 = (org.apache.struts2.views.jsp.ui.FormTag) _jspx_tagPool_s_form_theme_styleId_id.get(org.apache.struts2.views.jsp.ui.FormTag.class);
+    org.apache.struts2.views.jsp.ui.FormTag _jspx_th_s_form_0 = (org.apache.struts2.views.jsp.ui.FormTag) _jspx_tagPool_s_form_theme_styleId_id_action.get(org.apache.struts2.views.jsp.ui.FormTag.class);
     _jspx_th_s_form_0.setPageContext(_jspx_page_context);
     _jspx_th_s_form_0.setParent(null);
+    _jspx_th_s_form_0.setAction("ingresoAdmin");
     _jspx_th_s_form_0.setId("form_login");
     _jspx_th_s_form_0.setDynamicAttribute(null, "styleId", new String("acc"));
     _jspx_th_s_form_0.setTheme("simple");
@@ -215,10 +216,10 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
         out = _jspx_page_context.popBody();
     }
     if (_jspx_th_s_form_0.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
-      _jspx_tagPool_s_form_theme_styleId_id.reuse(_jspx_th_s_form_0);
+      _jspx_tagPool_s_form_theme_styleId_id_action.reuse(_jspx_th_s_form_0);
       return true;
     }
-    _jspx_tagPool_s_form_theme_styleId_id.reuse(_jspx_th_s_form_0);
+    _jspx_tagPool_s_form_theme_styleId_id_action.reuse(_jspx_th_s_form_0);
     return false;
   }
 

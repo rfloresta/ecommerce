@@ -57,7 +57,7 @@
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" data-toggle="dropdown"  
            id="cerrarsesion" aria-haspopup="true" aria-expanded="false">
-         
+         Administrador: <s:label  name="admin.nombre"  />
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right"
              aria-labelledby="#cerrarsesion" >
