@@ -16,7 +16,7 @@
                     
                     <div class="justify-content-center d-flex">
                         <s:form id="form_mante" action="%{(edit==1)? 'actualizarAdmin': 'registrarAdmin'}" theme="simple" >
-                            <span class="py-5">Dni</span> <s:textfield  name="admin.dni"  cssClass="form-control mb-2"/>
+                            <span class="py-5">Dni</span> <s:textfield name="admin.dni"  cssClass="form-control mb-2"/>
                             <span>Nombres</span> <s:textfield  name="admin.nombres" cssClass="form-control mb-2" />
                             <span>Apellidos</span> <s:textfield  name="admin.apellidos" cssClass="form-control mb-2" />
                             <span>Password</span> <s:textfield  name="admin.password" cssClass="form-control mb-2" />

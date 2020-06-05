@@ -8,15 +8,15 @@
         <title>AdminLTE 3 | Log in</title>
         <!-- Tell the browser to be responsive to screen width -->
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
+        <!-- icheck bootstrap -->
+        <link rel="stylesheet" href="../css/icheck-bootstrap.min.css">
         <!-- Font Awesome -->
         <link rel="stylesheet" href="../css/all.min.css">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
         <!-- Ionicons -->
         <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-        <!-- icheck bootstrap -->
-        <link rel="stylesheet" href="../css/icheck-bootstrap.min.css">
+
         <!-- Theme style -->
         <link rel="stylesheet" href="../css/adminlte.min.css">
         <!-- Google Font: Source Sans Pro -->
@@ -29,10 +29,11 @@
         <div class="login-box">
             <div class="login-logo">
                 <a href="../../index2.html"><b>W&V</b>S.A.C</a>
-                   <div class="card-body login-card-body">
-          </div>
+            </div>
+                
             <!-- /.login-logo -->
             <div class="card">
+                <div class="card-body login-card-body">
                    <p class="login-box-msg">Inicie Sesión</p>
                     <s:form  action="ingresoAdmin" id="form_login"  styleId="acc" theme="simple">
                         <div class="input-group mb-3">
@@ -75,7 +76,10 @@
                         <p class="mb-1">
                             <a href="forgot-password.html">Olvidé mi contraseña</a>
                         </p>
-                    </s:form>        
+                    </s:form>  
+                           
+                       
+          </div>
                 </div>
                 <!-- /.login-card-body -->
                
