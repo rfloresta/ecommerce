@@ -14,15 +14,45 @@
 
                     <h1 class="my-5  text-center text-uppercase font-weight-bold display-1">Mantenimiento Administrador</h1>
                     
-                    <div class="justify-content-center d-flex">
-                        <s:form action="%{(edit==1)? 'actualizarAdmin': 'registrarAdmin'}" theme="simple" >
-                            <span class="py-5">Dni</span> <s:textfield  name="admin.dni"  cssClass="form-control mb-2"/>
-                            <span>Nombres</span> <s:textfield  name="admin.nombres" cssClass="form-control mb-2" />
-                            <span>Apellidos</span> <s:textfield  name="admin.apellidos" cssClass="form-control mb-2" />
-                            <span>Password</span> <s:textfield  name="admin.password" cssClass="form-control mb-2" />
-                            <s:submit value="%{(edit==1)? 'Editar' : 'Registrar'}" cssClass="%{(edit==1)? 'btn btn-warning mt-2 ml-3 pt-2 px-5 text-center' : 'btn btn-success mt-2 ml-3 pt-2 px-5 text-center'}" />
-                        </s:form>	
-                    </div>
+                
+                    
+              <div class="card card-danger">
+              <div class="card-header">
+                <h3 class="card-title">Registrar Administrador</h3>
+              </div>
+              <div class="card-body">
+                  <s:form action="%{(edit==1)? 'actualizarAdmin': 'registrarAdmin'}" theme="simple" >
+                <div class="row">
+                     
+                  <div class="col-3">
+                      <label>Dni</label>
+                    <s:textfield  name="admin.dni"  cssClass="form-control " placeholder="Ingrese Dni" />
+                  </div>
+                  <div class="col-3">
+                      <label>Nombre</label>
+                    <s:textfield  name="admin.nombres" cssClass="form-control" placeholder="Ingrese Nombre" />
+                  </div>
+                  <div class="col-3">
+                      <label>Apellido</label>
+                    <s:textfield  name="admin.apellidos" cssClass="form-control" placeholder="Ingrese Apellido"/>
+                  </div>
+                   <div class="col-3">
+                       <label>Password</label>
+                    <s:textfield  name="admin.password" cssClass="form-control"  placeholder="Ingrese Password"/>
+                  </div>
+                  
+                   <div class="col-2 offset-5 btn-admin  my-4">
+                     <s:submit value="%{(edit==1)? 'Editar' : 'Registrar'}" cssClass="%{(edit==1)? 'btn btn-warning btn-block ' : 'btn btn-success btn-block '}" />
+                  </div>
+                  
+                 
+                   
+                </div>
+                  </s:form>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
                     <div id="tbl" class="mt-5">
                         <div class="table-responsive table-centered">
                             <table id="datos" class="table w-100">
@@ -49,14 +79,14 @@
                                                 <s:url id="lnkEditar" action="editarAdmin">
                                                     <s:param value="dni" name="admin.dni" />
                                                 </s:url>
-                                                <s:a href="%{lnkEditar}" cssClass="fa fa-edit form-control btn-primary"></s:a>
+                                                <s:a href="%{lnkEditar}" cssClass="fa fa-edit form-control btn-primary text-center "></s:a>
                                               
                                              <td>
                                                  <s:url id="lnkEliminar" action="eliminarAdmin">
                                                      <s:param value="dni" name="admin.dni"/>
                                                  </s:url>
                                                  
-                                             <s:a href="%{lnkEliminar}" cssClass="form-control btn-danger" > X </s:a>
+                                             <s:a href="%{lnkEliminar}" cssClass="form-control btn-danger text-center" > X </s:a>
                                                      
                                                  
                                              </td>

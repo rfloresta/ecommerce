@@ -17,7 +17,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
+<<<<<<< HEAD
  * @author Delco
+=======
+ * @author Data
+>>>>>>> 667997af868bb52d9b1455b469b6ba20b7322d6b
  */
 @Entity
 @Table(name = "administrador")
