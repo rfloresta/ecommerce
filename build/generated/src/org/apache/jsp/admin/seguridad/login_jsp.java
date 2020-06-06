@@ -70,15 +70,15 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("        <title>AdminLTE 3 | Log in</title>\r\n");
       out.write("        <!-- Tell the browser to be responsive to screen width -->\r\n");
       out.write("        <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\r\n");
-      out.write("\r\n");
+      out.write("        <!-- icheck bootstrap -->\r\n");
+      out.write("        <link rel=\"stylesheet\" href=\"../css/icheck-bootstrap.min.css\">\r\n");
       out.write("        <!-- Font Awesome -->\r\n");
       out.write("        <link rel=\"stylesheet\" href=\"../css/all.min.css\">\r\n");
       out.write("        <link rel=\"stylesheet\" href=\"https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css\">\r\n");
       out.write("\r\n");
       out.write("        <!-- Ionicons -->\r\n");
       out.write("        <link rel=\"stylesheet\" href=\"https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css\">\r\n");
-      out.write("        <!-- icheck bootstrap -->\r\n");
-      out.write("        <link rel=\"stylesheet\" href=\"../css/icheck-bootstrap.min.css\">\r\n");
+      out.write("\r\n");
       out.write("        <!-- Theme style -->\r\n");
       out.write("        <link rel=\"stylesheet\" href=\"../css/adminlte.min.css\">\r\n");
       out.write("        <!-- Google Font: Source Sans Pro -->\r\n");
@@ -91,15 +91,19 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("        <div class=\"login-box\">\r\n");
       out.write("            <div class=\"login-logo\">\r\n");
       out.write("                <a href=\"../../index2.html\"><b>W&V</b>S.A.C</a>\r\n");
-      out.write("                   <div class=\"card-body login-card-body\">\r\n");
-      out.write("          </div>\r\n");
+      out.write("            </div>\r\n");
+      out.write("                \r\n");
       out.write("            <!-- /.login-logo -->\r\n");
       out.write("            <div class=\"card\">\r\n");
+      out.write("                <div class=\"card-body login-card-body\">\r\n");
       out.write("                   <p class=\"login-box-msg\">Inicie Sesión</p>\r\n");
       out.write("                    ");
       if (_jspx_meth_s_form_0(_jspx_page_context))
         return;
-      out.write("        \r\n");
+      out.write("  \r\n");
+      out.write("                           \r\n");
+      out.write("                       \r\n");
+      out.write("          </div>\r\n");
       out.write("                </div>\r\n");
       out.write("                <!-- /.login-card-body -->\r\n");
       out.write("               \r\n");
@@ -108,7 +112,7 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("        <!-- /.login-box -->\r\n");
       out.write("\r\n");
       out.write("        <!-- jQuery -->\r\n");
-      out.write("        <script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js\"></script>\r\n");
+      out.write("        <script src=\"../js/jquery.min.js\"></script>\r\n");
       out.write("        <!-- Bootstrap 4 -->\r\n");
       out.write("        <script src=\"resources/js/bootstrap.bundle.min.js\"></script>\r\n");
       out.write("        <!-- AdminLTE App -->\r\n");
@@ -158,7 +162,6 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
       do {
         out.write("\r\n");
         out.write("                        <div class=\"input-group mb-3\">\r\n");
-        out.write("\r\n");
         out.write("                            ");
         if (_jspx_meth_s_textfield_0((javax.servlet.jsp.tagext.JspTag) _jspx_th_s_form_0, _jspx_page_context))
           return true;

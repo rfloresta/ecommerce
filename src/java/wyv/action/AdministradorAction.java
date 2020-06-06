@@ -52,9 +52,33 @@ public class AdministradorAction extends ActionSupport {
         this.admSer = admSer;
     }
     
+    
+    @Action(value = "ingresoAdmin", results = {
+        @Result(name = "ok", location = "/admin/principal/inicio.jsp"),
+        @Result(name = "incorrecto", location = "/admin/seguridad/login.jsp"),
+	@Result(name = "error", location = "/admin/error.jsp"),
+            
+
+    })
+       public String ingresoAdmin() {
+        try {
+            
+            admSer=new AdministradorServicio();
+            adminLog = admSer.ingresar(adminLog);
+            if (adminLog == null) {
+            resultado = "Dni y/o password incorrecto";
+            return "incorrecto";
+            }
+            return "ok";
+        } catch (Exception e) {
+            resultado = "Error en: ingresoAdmin :: " + e.getMessage();
+            return "error";
+        }
+    }
+       
    @Action(value = "listarAdmin", results = {
         @Result(name = "ok", location = "/admin/principal/administrador.jsp"),
-	@Result(name = "error", location = "admin/error.jsp")
+	@Result(name = "error", location = "admin/error.jsp"),
 
     })
     public String listarAdmin() {
@@ -69,9 +93,26 @@ public class AdministradorAction extends ActionSupport {
         }
     }
     
+//    @Override
+//    public void validate(){
+//        if(getAdmin().getDni() == null){
+//            addFieldError("dni", "Ingrese el DNI");
+//        }
+//        if(getAdmin().getNombres()== null){
+//            addFieldError("nombres", "Ingrese Nombres");
+//        }
+//        if(getAdmin().getApellidos()== null){
+//            addFieldError("apellidos", "Ingrese Apellidos");
+//        }
+//        if(getAdmin().getPassword()== null){
+//            addFieldError("password", "Ingrese Password");
+//        }
+//    }
+    
     @Action(value="registrarAdmin",results= {
 			@Result(name="ok",location="/admin/principal/administrador.jsp"),
-			@Result(name="error",location="/error.jsp")
+			@Result(name="error",location="/error.jsp"),
+                        @Result(name="input",location="/admin/principal/administrador.jsp")
 	})
 	public String registrarAdmin() {
 		try {
@@ -139,25 +180,5 @@ public class AdministradorAction extends ActionSupport {
 
    
 
-    @Action(value = "ingresoAdmin", results = {
-        @Result(name = "ok", location = "/admin/principal/inicio.jsp"),
-        @Result(name = "incorrecto", location = "/admin/seguridad/login.jsp"),
-	@Result(name = "error", location = "/admin/error.jsp")
-
-    })
-    public String ingresoAdmin() {
-        try {
-            
-            admSer=new AdministradorServicio();
-            adminLog = admSer.ingresar(adminLog);
-            if (adminLog == null) {
-            resultado = "Dni y/o password incorrecto";
-            return "incorrecto";
-            }
-            return "ok";
-        } catch (Exception e) {
-            resultado = "Error en: ingresoAdmin :: " + e.getMessage();
-            return "error";
-        }
-    }
+ 
 }

@@ -13,10 +13,14 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
  
   <link href="../css/adminlte.min.css" rel="stylesheet" type="text/css"/>
- 
+  
+  <!-- Datatables -->
+  <link rel="stylesheet" href="//cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" >
+  
   <!-- Ionicons -->
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
   <!-- overlayScrollbars -->
+ 
   <!-- Mis Estilos -->
   <link href="../css/main.css" rel="stylesheet" type="text/css"/>
   <!-- Google Font: Source Sans Pro -->
@@ -58,7 +62,7 @@
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" data-toggle="dropdown"  
            id="cerrarsesion" aria-haspopup="true" aria-expanded="false">
-         Administrador: <s:label  name="admin.nombre"  />
+         Administrador: <s:label  name="adminLog.nombres"  />
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right"
              aria-labelledby="#cerrarsesion" >
