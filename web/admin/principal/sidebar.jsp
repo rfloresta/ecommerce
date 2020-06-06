@@ -44,7 +44,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="producto" class="nav-link">
+                <a href="listarMarca" class="nav-link">
                   <i class="fas fa-list nav-icon"></i>
                   <p>Marcas</p>
                 </a>

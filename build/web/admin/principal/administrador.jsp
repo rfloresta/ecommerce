@@ -5,7 +5,7 @@
         <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Mantenimiento Administrador</h1>
+                <h1 class="text-uppercase font-weight-bold">Mantenimiento Administrador</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
@@ -25,7 +25,7 @@
                 <div class="col-md-4">
                     <div class="card card-text">
                         <div class="card-header">
-                            <h3 class="card-title">Resgistro/Edición</h3>
+                            <h3 class="card-title text-uppercase font-weight-bold">Resgistro/Edición</h3>
                         </div>
                         <s:form id="form_mante" action="%{(edit==1)? 'actualizarAdmin': 'registrarAdmin'}" theme="simple" >
 
@@ -59,7 +59,7 @@
                 <div class="col-md-8">
                     <div class="card card-text">
                         <div class="card-header">
-                            <h3 class="card-title">Listado</h3>
+                            <h3 class="card-title text-uppercase font-weight-bold">Listado</h3>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive table-centered">

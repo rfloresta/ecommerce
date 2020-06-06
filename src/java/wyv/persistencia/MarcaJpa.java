@@ -25,8 +25,6 @@ public class MarcaJpa implements Serializable {
     public MarcaJpa() {
         this.emf= Persistence.createEntityManagerFactory("W_V_S.A.CPU");
     }
-    
-    
 
     public MarcaJpa(EntityManagerFactory emf) {
         this.emf = emf;

@@ -5,7 +5,7 @@
         <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Mantenimiento Categoria</h1>
+                <h1 class="text-uppercase font-weight-bold ">Mantenimiento Categoria</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
@@ -25,13 +25,18 @@
                 <div class="col-md-4">
                     <div class="card card-text">
                         <div class="card-header">
-                            <h3 class="card-title">Resgistro/Edición</h3>
+                            <h3 class="card-title text-uppercase font-weight-bold">Resgistro/Edición</h3>
                         </div>
-                        <s:form id="form_mante" action="%{(edit==1)? 'actualizarCate': 'registrarCate'}" theme="simple" >
+                           <s:form id="form_mante" action="%{(edit==1)? 'actualizarCate': 'registrarCate'}" theme="simple" >
 
                             <div class="card-body">
+                                 <div class="form-group">
+                                    
+                                    <s:hidden  name="categoria.idCategoria" cssClass="form-control" placeholder="Ingrese Nombre" />
+                                </div>
                                 <div class="form-group">
                                     <label for="inputID">Nombre</label>
+                                    
                                     <s:textfield  name="categoria.nombre" cssClass="form-control" placeholder="Ingrese Nombre" />
                                 </div>
                                 <div class="form-group">
@@ -52,7 +57,7 @@
                 <div class="col-md-8">
                     <div class="card card-text">
                         <div class="card-header">
-                            <h3 class="card-title">Listado</h3>
+                            <h3 class="card-title text-uppercase font-weight-bold">Listado</h3>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive table-centered">
