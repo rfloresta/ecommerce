@@ -29,7 +29,7 @@ $(function () {
         var check = checkCampos(form);
         if(!check) {
             swal({
-                    title: "Error !",
+                    title: "¡Error!",
                     text: "Debe completar todos los campos",
                     icon: "error",
                     button: "Aceptar",

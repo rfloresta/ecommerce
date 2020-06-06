@@ -1,6 +1,6 @@
 <script>
  
-function  cargaTablaJQUERY()
+function  cargaTablajQuery()
 {
     $(document).ready(function () {
         $('#datos').addClass( 'nowrap' ).DataTable({
@@ -77,6 +77,6 @@ function fecha(){
 	var today = now.getFullYear()+"-"+(month)+"-"+(day) ;
     $('#fecha').val(today);}
 
-cargaTablaJQUERY2();
-cargaTablaJQUERY();
+cargaTablajQuery();
 fecha();
+
