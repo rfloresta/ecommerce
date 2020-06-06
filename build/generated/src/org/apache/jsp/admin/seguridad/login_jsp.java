@@ -96,7 +96,7 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("            <!-- /.login-logo -->\r\n");
       out.write("            <div class=\"card\">\r\n");
       out.write("                <div class=\"card-body login-card-body\">\r\n");
-      out.write("                   <p class=\"login-box-msg\">Inicie Sesión</p>\r\n");
+      out.write("                   <p class=\"login-box-msg\">Inicie Sesi�n</p>\r\n");
       out.write("                    ");
       if (_jspx_meth_s_form_0(_jspx_page_context))
         return;
@@ -126,7 +126,7 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\r\n");
       out.write("\r\n");
       out.write("    </body>\r\n");
-      out.write("</html>\r\n");
+      out.write("</html>");
     } catch (Throwable t) {
       if (!(t instanceof SkipPageException)){
         out = _jspx_out;
@@ -208,7 +208,7 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
         out.write("                        </div>\r\n");
         out.write("                                \r\n");
         out.write("                        <p class=\"mb-1\">\r\n");
-        out.write("                            <a href=\"forgot-password.html\">Olvidé mi contraseña</a>\r\n");
+        out.write("                            <a href=\"forgot-password.html\">Olvid� mi contrase�a</a>\r\n");
         out.write("                        </p>\r\n");
         out.write("                    ");
         int evalDoAfterBody = _jspx_th_s_form_0.doAfterBody();
@@ -279,7 +279,7 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
     _jspx_th_s_submit_0.setId("ingresar");
     _jspx_th_s_submit_0.setDynamicAttribute(null, "styleId", new String("btnreg"));
     _jspx_th_s_submit_0.setCssClass("btn btn-primary btn-block");
-    _jspx_th_s_submit_0.setValue("Iniciar Sesión");
+    _jspx_th_s_submit_0.setValue("Iniciar Sesi�n");
     int _jspx_eval_s_submit_0 = _jspx_th_s_submit_0.doStartTag();
     if (_jspx_th_s_submit_0.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
       _jspx_tagPool_s_submit_value_styleId_id_cssClass_nobody.reuse(_jspx_th_s_submit_0);

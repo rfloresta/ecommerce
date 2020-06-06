@@ -8,6 +8,17 @@ and open the template in the editor.
     Author     : Data
 */
 
-.btn-admin{
+
+
+
+/* Login */
+.swal2-popup.swal2-toast.swal2-show
+{
+    background-color: #6c757d;
     
+}
+
+.swal2-popup.swal2-toast .swal2-title
+{
+    color: white;
 }

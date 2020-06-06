@@ -13,7 +13,7 @@
         <!-- Font Awesome -->
         <link rel="stylesheet" href="../css/all.min.css">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-
+        <link href="../css/main.css" rel="stylesheet" type="text/css"/>
         <!-- Ionicons -->
         <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 
@@ -74,7 +74,7 @@
                         </div>
                                 
                         <p class="mb-1">
-                            <a href="forgot-password.html">Olvidé mi contraseña</a>
+                            <a href="forgot-password.html">Olvide mi contraseña</a>
                         </p>
                     </s:form>  
                            
@@ -84,7 +84,7 @@
                 <!-- /.login-card-body -->
                
             </div>
-        </div>
+      
         <!-- /.login-box -->
 
         <!-- jQuery -->
@@ -94,8 +94,9 @@
         <!-- AdminLTE App -->
         <script src="resources/js/adminlte.min.js"></script>
 
-        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-        //<script src="../js/funciones.js" type="text/javascript"></script>
+
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+        <script src="../js/funciones.js" type="text/javascript"></script>
         
         <!--mi script-->
         <script src="../js/main.js" type="text/javascript"></script>
