@@ -50,7 +50,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="registrarProducto.jsp" class="nav-link">
+                <a href="listarCate" class="nav-link">
                   <i class="fas fa-pen-square nav-icon"></i>
                   <p>Categorías</p>
                 </a>
