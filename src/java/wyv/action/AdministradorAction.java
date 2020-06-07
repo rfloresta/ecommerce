@@ -18,13 +18,13 @@ public class AdministradorAction extends ActionSupport {
     private static Administrador adminLog;// Variable estática para que el nombre del admin logeado no cambie al ejecutar cualquier opcion que utilice la clase Administrador
     private List<Administrador> lstAdmin;
     private int edit;
-
+    
     public Administrador getAdminLog() {
         return adminLog;
     }
 
     public void setAdminLog(Administrador adminLog) {
-        this.adminLog = adminLog;
+        AdministradorAction.adminLog = adminLog;
     }
 
     
@@ -93,6 +93,8 @@ public class AdministradorAction extends ActionSupport {
         }
     }
     
+    
+    
 //    @Override
 //    public void validate(){
 //        if(getAdmin().getDni() == null){
@@ -115,7 +117,7 @@ public class AdministradorAction extends ActionSupport {
                         @Result(name="input",location="/admin/principal/administrador.jsp")
 	})
 	public String registrarAdmin() {
-		try {
+		try {        
 			new AdministradorServicio().registrar(admin);
 			lstAdmin=new AdministradorServicio().listar();
 			admin=new Administrador();
@@ -134,6 +136,9 @@ public class AdministradorAction extends ActionSupport {
 	public String editarAdmin() {
 		
 		try {
+//                    if(getAdmin().getDni().equals(LOG)){
+//           addFieldError("dni", "Ingrese el DNI");
+//       }
 			admin =new AdministradorServicio().buscar(admin.getDni());
 			lstAdmin=new AdministradorServicio().listar();
                         edit=1;
@@ -143,6 +148,8 @@ public class AdministradorAction extends ActionSupport {
 			return "error";
 		}
 	}
+        
+        
         
         
         @Action(value="actualizarAdmin",results= {

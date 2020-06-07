@@ -20,14 +20,15 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author Romario
  */
 @Entity
-@Table(name = "administrador")
+@Table(name = "administrador", catalog = "tiendaw_v", schema = "")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Administrador.findAll", query = "SELECT a FROM Administrador a")
     , @NamedQuery(name = "Administrador.findByDni", query = "SELECT a FROM Administrador a WHERE a.dni = :dni")
     , @NamedQuery(name = "Administrador.findByNombres", query = "SELECT a FROM Administrador a WHERE a.nombres = :nombres")
     , @NamedQuery(name = "Administrador.findByApellidos", query = "SELECT a FROM Administrador a WHERE a.apellidos = :apellidos")
-    , @NamedQuery(name = "Administrador.findByPassword", query = "SELECT a FROM Administrador a WHERE a.password = :password")})
+    , @NamedQuery(name = "Administrador.findByPassword", query = "SELECT a FROM Administrador a WHERE a.password = :password")
+    , @NamedQuery(name = "Administrador.findByPrivilegio", query = "SELECT a FROM Administrador a WHERE a.privilegio = :privilegio")})
 public class Administrador implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -42,6 +43,9 @@ public class Administrador implements Serializable {
     private String apellidos;
     @Column(name = "password")
     private String password;
+    @Basic(optional = false)
+    @Column(name = "privilegio")
+    private String privilegio;
 
     public Administrador() {
     }
@@ -50,9 +54,10 @@ public class Administrador implements Serializable {
         this.dni = dni;
     }
 
-    public Administrador(String dni, String apellidos) {
+    public Administrador(String dni, String apellidos, String privilegio) {
         this.dni = dni;
         this.apellidos = apellidos;
+        this.privilegio = privilegio;
     }
 
     public String getDni() {
@@ -85,6 +90,14 @@ public class Administrador implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getPrivilegio() {
+        return privilegio;
+    }
+
+    public void setPrivilegio(String privilegio) {
+        this.privilegio = privilegio;
     }
 
     @Override
