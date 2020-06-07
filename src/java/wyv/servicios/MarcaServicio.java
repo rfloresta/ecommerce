@@ -32,16 +32,8 @@ public class MarcaServicio implements IOperacionesBD<Marca> {
     @Override
     public String actualizar(Marca a) {
             marcDao = new MarcaDao();
-        try {
-            marcDao.actualizar(a);
-
-        return "ok";
-        } catch (Exception e) {
             
-            e.getMessage();
-            return "error";
-        }
-        
+            return marcDao.actualizar(a);   
 
     }
 

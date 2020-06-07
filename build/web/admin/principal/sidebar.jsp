@@ -56,7 +56,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="listarAdmin" class="nav-link">
+                <a href="listarProducto" class="nav-link">
                   <i class="fas fa-list nav-icon"></i>
                   <p>Productos</p>
                 </a>

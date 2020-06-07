@@ -30,10 +30,12 @@
                            <s:form id="form_mante" action="%{(edit==1)? 'actualizarCate': 'registrarCate'}" theme="simple" >
 
                             <div class="card-body">
+                                 <s:if test="%{edit==1}">
                                  <div class="form-group">
                                     
                                     <s:hidden  name="categoria.idCategoria" cssClass="form-control" placeholder="Ingrese Nombre" />
                                 </div>
+                                </s:if> 
                                 <div class="form-group">
                                     <label for="inputID">Nombre</label>
                                     

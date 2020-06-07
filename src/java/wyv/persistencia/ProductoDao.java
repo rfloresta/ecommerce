@@ -11,15 +11,14 @@ import java.util.List;
  *
  * @author Data
  */
-public class MarcaDao  implements IOperacionesBD<Marca>{
+public class ProductoDao implements IOperacionesBD<Producto>{
 
-    MarcaJpa marcaJpa;
-    
+    ProductoJpa proJpa=new ProductoJpa();
     @Override
-    public String registrar(Marca a) {
+    public String registrar(Producto a) {
         try {
-            marcaJpa=new MarcaJpa();
-            marcaJpa.create(a);
+        
+            proJpa.create(a);
             return "ok";
         } catch (Exception e) {
             e.getMessage();
@@ -28,13 +27,11 @@ public class MarcaDao  implements IOperacionesBD<Marca>{
     }
 
     @Override
-    public String actualizar(Marca a) {
-        try {
-            marcaJpa=new MarcaJpa();
-            marcaJpa.edit(a);
+    public String actualizar(Producto a) {
+       try {
+            proJpa.edit(a);
             return "ok";
         } catch (Exception e) {
-            
             e.getMessage();
             return "error";
         }
@@ -42,11 +39,9 @@ public class MarcaDao  implements IOperacionesBD<Marca>{
 
     @Override
     public String eliminar(String id) {
-        int idMarca=Integer.parseInt(id);
+        int idPro= Integer.parseInt(id);
         try {
-            marcaJpa=new MarcaJpa();
-            
-            marcaJpa.destroy(idMarca);
+            proJpa.destroy(idPro);
             return "ok";
         } catch (Exception e) {
             e.getMessage();
@@ -55,14 +50,11 @@ public class MarcaDao  implements IOperacionesBD<Marca>{
     }
 
     @Override
-    public Marca buscar(String id) {
-        
-        int idMarca=Integer.parseInt(id);
-         try {
+    public Producto buscar(String id) {
+        int idPro= Integer.parseInt(id);
+        try {
             
-             marcaJpa=new MarcaJpa();
-            return marcaJpa.findMarca(idMarca);
-            
+            return proJpa.findProducto(idPro);
         } catch (Exception e) {
             e.getMessage();
             return null;
@@ -70,12 +62,10 @@ public class MarcaDao  implements IOperacionesBD<Marca>{
     }
 
     @Override
-    public List<Marca> listar() {
-         try {
-             
-              marcaJpa=new MarcaJpa();
-            return marcaJpa.findMarcaEntities();
+    public List<Producto> listar() {
+        try {
            
+            return  proJpa.findProductoEntities();
         } catch (Exception e) {
             e.getMessage();
             return null;
@@ -83,9 +73,8 @@ public class MarcaDao  implements IOperacionesBD<Marca>{
     }
 
     @Override
-    public Marca ingresar(Marca entrada) {
+    public Producto ingresar(Producto entrada) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
     
 }

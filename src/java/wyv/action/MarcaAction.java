@@ -20,7 +20,7 @@ public class MarcaAction extends ActionSupport{
     
     
     
-     MarcaServicio marSer;
+    MarcaServicio marSer;
     private String resultado;
     private Marca marca;
     private List<Marca> lstMarca;

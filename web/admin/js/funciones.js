@@ -53,7 +53,7 @@ $(function () {
     }
     );
 });
-
+/*
 $(function () {
     $("#grabar").click(function (event)
     {
@@ -75,6 +75,7 @@ $(function () {
     );
 });
 
+/*
 //Función para comprobar los campos de texto
 function checkCampos(obj) {
     var camposRellenados = true;
@@ -107,4 +108,4 @@ function checkCampos(obj) {
 //        
 //    }
 //    );
-//});
+//});*/

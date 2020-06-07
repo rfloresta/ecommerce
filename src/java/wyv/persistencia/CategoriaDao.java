@@ -45,7 +45,7 @@ public class CategoriaDao implements IOperacionesBD<Categoria>{
     public String eliminar(String id) {
         int idcat= Integer.parseInt(id);
          try {
-            cateJpa=new CategoriaJpa();
+            cateJpa=new  CategoriaJpa();
             cateJpa.destroy(idcat);
             return "ok";
         } catch (Exception e) {
