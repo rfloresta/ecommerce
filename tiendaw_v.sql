@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 05-06-2020 a las 21:46:57
+-- Tiempo de generación: 08-06-2020 a las 02:56:05
 -- Versión del servidor: 10.4.11-MariaDB
 -- Versión de PHP: 7.4.5
 
@@ -41,8 +41,7 @@ CREATE TABLE `administrador` (
 
 CREATE TABLE `categoria` (
   `idCategoria` int(11) NOT NULL,
-  `nombre` varchar(50) DEFAULT NULL,
-  `descripcion` varchar(250) DEFAULT NULL
+  `nombre` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -136,6 +135,7 @@ CREATE TABLE `producto` (
   `precioVenta` double(10,2) DEFAULT NULL,
   `descuento` double(10,2) DEFAULT NULL,
   `imagen` varchar(250) DEFAULT NULL,
+  `descripcion` varchar(250) DEFAULT NULL,
   `idCategoria` int(11) DEFAULT NULL,
   `idMarca` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
