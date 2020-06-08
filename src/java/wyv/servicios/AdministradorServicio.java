@@ -18,17 +18,14 @@ public class AdministradorServicio implements IOperacionesBD<Administrador> {
     @Override
     public String registrar(Administrador a) {
         admDao = new AdministradorDao();
-        admDao.registrar(a);
-
-        return "ok";
+        return  admDao.registrar(a);
     }
 
     @Override
     public String actualizar(Administrador a) {
         admDao = new AdministradorDao();
-        admDao.actualizar(a);
 
-        return "ok";
+        return admDao.actualizar(a);
 
     }
 

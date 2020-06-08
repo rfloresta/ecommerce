@@ -72,6 +72,7 @@
             </a>
             
           </li>
+           <s:if  test='adminLog.privilegio.equals("1")'>
           <li class="nav-item has-treeview">
               <a  href="listarAdmin" class="nav-link menu">
               <i class="nav-icon fas fa-users"></i>
@@ -80,6 +81,7 @@
               </p>
             </a>
               </li>
+              </s:if>
         </ul>
 
       </nav>

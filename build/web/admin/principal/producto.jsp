@@ -5,7 +5,7 @@
         <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="text-uppercase font-weight-bold ">Mantenimiento Producto</h1>
+                <h1 class="font-weight-bold ">Mantenimiento Producto</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
@@ -25,7 +25,7 @@
                 <div class="col-md-4">
                     <div class="card card-text">
                         <div class="card-header">
-                            <h3 class="card-title text-uppercase font-weight-bold">Resgistro/Edición</h3>
+                            <h3 class="card-title font-weight-bold">Resgistro/Edición</h3>
                         </div>
                            <s:form id="form_mante" action="%{(edit==1)? 'actualizarProducto': 'registrarProducto'}" theme="simple" >
 
@@ -47,43 +47,40 @@
                                 </div>
                                 
                                 <div class="form-group">
-                                    <label for="inputNombre">Categoía</label>
+                                    <label for="inputNombre">Categoría</label>
                                       <s:select list="lstCategoria" headerKey="0" 
-                                              headerValue="[--Seleccione--]" name="producto.idCategoria"
+                                              headerValue="[--Seleccione--]" name="producto.idCategoria.idCategoria"
                                               listKey="idCategoria" listValue="nombre"
-                                              label="Marca" cssClass="form-control"  />
+                                              label="Categoría" cssClass="form-control"  />
                                 </div>
                                
                                  <div class="form-group">
                                     <label for="inputNombre">Marca</label>
                                       <s:select list="lstMarca" headerKey="0" 
-                                              headerValue="[--Seleccione--]" name="producto.idMarca"
+                                              headerValue="[--Seleccione--]" name="producto.idMarca.idMarca"
                                               listKey="idMarca" listValue="nombre"
                                               label="Marca"  cssClass="form-control"  />
                                 </div>
 
                                 <div class="form-group">
                                     <label for="inputNombre">Stock</label>
-                                    <s:textfield  name="producto.stock" cssClass="form-control" placeholder="Ingrese Descripción"/>
+                                    <s:textfield  name="producto.stock" cssClass="form-control" placeholder="Ingrese Stock"/>
                                 </div>
                                 <div class="form-group">
                                     <label for="inputNombre">Precio Compra</label>
-                                    <s:textfield  name="producto.precioCompra" cssClass="form-control" placeholder="Ingrese Descripción"/>
+                                    <s:textfield  name="producto.precioCompra" cssClass="form-control" placeholder="Ingrese Precio de Compra"/>
                                 </div>
                                 <div class="form-group">
                                     <label for="inputNombre">Precio Venta</label>
-                                    <s:textfield  name="producto.precioVenta" cssClass="form-control" placeholder="Ingrese Descripción"/>
+                                    <s:textfield  name="producto.precioVenta" cssClass="form-control" placeholder="Ingrese Precio de Venta"/>
                                 </div>
                                 <div class="form-group">
                                     <label for="inputNombre">Descuento</label>
                                     <s:textfield  name="producto.descuento" cssClass="form-control" placeholder="Ingrese Descripción"/>
                                 </div>
-                                
-
                             </div>
-
                             <div class="card-footer">
-                                <s:submit id="grabar" value="%{(edit==1)? 'Editar' : 'Registrar'}" cssClass="%{(edit==1)? 'btn btn-warning' : 'btn btn-success'}"/>
+                                <s:submit id="grabar" value="%{(edit==1)? 'Actualizar' : 'Registrar'}" cssClass="%{(edit==1)? 'btn btn-warning' : 'btn btn-success'}"/>
                             </div>
                         </s:form>   
                     </div>
@@ -92,14 +89,13 @@
                 <div class="col-md-8">
                     <div class="card card-text">
                         <div class="card-header">
-                            <h3 class="card-title text-uppercase font-weight-bold">Listado</h3>
+                            <h3 class="card-title font-weight-bold">Listado</h3>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive table-centered">
                                 <table id="datos" class="table w-100">
                                     <thead>
                                         <tr class="">
-                                            <th>Id</th>
                                             <th>Nombre</th>
                                             <th>Stock</th>
                                             <th>Categoría</th>
@@ -113,7 +109,6 @@
                                     <tbody>
                                         <s:iterator value="lstProducto">
                                             <tr>
-                                                <td><s:property value="idProducto"/> </td>
                                                 <td><s:property value="nombre"/></td>    
                                                 <td><s:property value="stock"/> </td>
                                                 <td><s:property value="idCategoria"/> </td>
@@ -139,7 +134,6 @@
                                     </tbody>
 
                                     <tfoot>
-                                    <th>Id</th>
                                     <th>Nombre</th>
                                     <th>Stock</th>
                                     <th>Categoría</th>

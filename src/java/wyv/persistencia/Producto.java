@@ -22,7 +22,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Data
+ * @author Romario
  */
 @Entity
 @Table(name = "producto")
@@ -36,13 +36,6 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Producto.findByPrecioVenta", query = "SELECT p FROM Producto p WHERE p.precioVenta = :precioVenta")
     , @NamedQuery(name = "Producto.findByDescuento", query = "SELECT p FROM Producto p WHERE p.descuento = :descuento")})
 public class Producto implements Serializable {
-
-    @JoinColumn(name = "idCategoria", referencedColumnName = "idCategoria")
-    @ManyToOne
-    private Categoria idCategoria;
-    @JoinColumn(name = "idMarca", referencedColumnName = "idMarca")
-    @ManyToOne
-    private Marca idMarca;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -65,6 +58,15 @@ public class Producto implements Serializable {
     private Double precioVenta;
     @Column(name = "descuento")
     private Double descuento;
+    @Lob
+    @Column(name = "imagen")
+    private String imagen;
+    @JoinColumn(name = "idCategoria", referencedColumnName = "idCategoria")
+    @ManyToOne
+    private Categoria idCategoria;
+    @JoinColumn(name = "idMarca", referencedColumnName = "idMarca")
+    @ManyToOne
+    private Marca idMarca;
 
     public Producto() {
     }
@@ -134,6 +136,30 @@ public class Producto implements Serializable {
         this.descuento = descuento;
     }
 
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
+    }
+
+    public Categoria getIdCategoria() {
+        return idCategoria;
+    }
+
+    public void setIdCategoria(Categoria idCategoria) {
+        this.idCategoria = idCategoria;
+    }
+
+    public Marca getIdMarca() {
+        return idMarca;
+    }
+
+    public void setIdMarca(Marca idMarca) {
+        this.idMarca = idMarca;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -157,22 +183,6 @@ public class Producto implements Serializable {
     @Override
     public String toString() {
         return "wyv.persistencia.Producto[ idProducto=" + idProducto + " ]";
-    }
-
-    public Categoria getIdCategoria() {
-        return idCategoria;
-    }
-
-    public void setIdCategoria(Categoria idCategoria) {
-        this.idCategoria = idCategoria;
-    }
-
-    public Marca getIdMarca() {
-        return idMarca;
-    }
-
-    public void setIdMarca(Marca idMarca) {
-        this.idMarca = idMarca;
     }
     
 }

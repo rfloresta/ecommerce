@@ -6,7 +6,9 @@
 package wyv.servicios;
 
 import java.util.List;
+import wyv.persistencia.Categoria;
 import wyv.persistencia.IOperacionesBD;
+import wyv.persistencia.Marca;
 import wyv.persistencia.Producto;
 import wyv.persistencia.ProductoDao;
 
@@ -14,13 +16,11 @@ import wyv.persistencia.ProductoDao;
  *
  * @author Data
  */
-public class Productoservicio implements  IOperacionesBD<Producto>{
+public class ProductoServicio implements  IOperacionesBD<Producto>{
 
     ProductoDao proDao;
-    
     @Override
     public String registrar(Producto a) {
-        
         proDao=new ProductoDao();
         return proDao.registrar(a);
     }

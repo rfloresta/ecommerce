@@ -5,7 +5,7 @@
         <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="text-uppercase font-weight-bold ">Mantenimiento Categoria</h1>
+                <h1 class="font-weight-bold ">Mantenimiento Categoria</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
@@ -25,7 +25,7 @@
                 <div class="col-md-4">
                     <div class="card card-text">
                         <div class="card-header">
-                            <h3 class="card-title text-uppercase font-weight-bold">Resgistro/Edición</h3>
+                            <h3 class="card-title font-weight-bold">Resgistro/Edición</h3>
                         </div>
                            <s:form id="form_mante" action="%{(edit==1)? 'actualizarCate': 'registrarCate'}" theme="simple" >
 
@@ -59,14 +59,13 @@
                 <div class="col-md-8">
                     <div class="card card-text">
                         <div class="card-header">
-                            <h3 class="card-title text-uppercase font-weight-bold">Listado</h3>
+                            <h3 class="card-title font-weight-bold">Listado</h3>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive table-centered">
                                 <table id="datos" class="table w-100">
                                     <thead>
                                         <tr class="">
-                                            <th>Id</th>
                                             <th>Nombre</th>
                                             <th>Descripcion</th>
                                             <th>Opciones</th>
@@ -75,7 +74,6 @@
                                     <tbody>
                                         <s:iterator value="lstCate">
                                             <tr>
-                                                <td><s:property value="idCategoria"/> </td>
                                                 <td><s:property value="nombre"/></td> 
                                                 <td><s:property value="descripcion"/></td>     
 
@@ -96,7 +94,6 @@
                                     </tbody>
 
                                     <tfoot>
-                                    <th>Id</th>
                                     <th>Nombre</th>
                                     <th>Descripcion</th>
                                     <th>Opciones</th>

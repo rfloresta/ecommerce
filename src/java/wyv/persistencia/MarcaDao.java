@@ -13,12 +13,11 @@ import java.util.List;
  */
 public class MarcaDao  implements IOperacionesBD<Marca>{
 
-    MarcaJpa marcaJpa;
+    MarcaJpa marcaJpa=new MarcaJpa();
     
     @Override
     public String registrar(Marca a) {
         try {
-            marcaJpa=new MarcaJpa();
             marcaJpa.create(a);
             return "ok";
         } catch (Exception e) {
@@ -30,7 +29,6 @@ public class MarcaDao  implements IOperacionesBD<Marca>{
     @Override
     public String actualizar(Marca a) {
         try {
-            marcaJpa=new MarcaJpa();
             marcaJpa.edit(a);
             return "ok";
         } catch (Exception e) {
@@ -44,8 +42,6 @@ public class MarcaDao  implements IOperacionesBD<Marca>{
     public String eliminar(String id) {
         int idMarca=Integer.parseInt(id);
         try {
-            marcaJpa=new MarcaJpa();
-            
             marcaJpa.destroy(idMarca);
             return "ok";
         } catch (Exception e) {
@@ -59,10 +55,7 @@ public class MarcaDao  implements IOperacionesBD<Marca>{
         
         int idMarca=Integer.parseInt(id);
          try {
-            
-             marcaJpa=new MarcaJpa();
             return marcaJpa.findMarca(idMarca);
-            
         } catch (Exception e) {
             e.getMessage();
             return null;
@@ -72,10 +65,7 @@ public class MarcaDao  implements IOperacionesBD<Marca>{
     @Override
     public List<Marca> listar() {
          try {
-             
-              marcaJpa=new MarcaJpa();
             return marcaJpa.findMarcaEntities();
-           
         } catch (Exception e) {
             e.getMessage();
             return null;

@@ -6,27 +6,26 @@
 package wyv.persistencia;
 
 import java.io.Serializable;
+import javax.persistence.Query;
+import javax.persistence.EntityNotFoundException;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.Query;
-import javax.persistence.EntityNotFoundException;
 import javax.persistence.Persistence;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
 import wyv.persistencia.exceptions.NonexistentEntityException;
 
 /**
  *
- * @author Data
+ * @author Romario
  */
 public class CategoriaJpa implements Serializable {
 
     public CategoriaJpa() {
-        this.emf= Persistence.createEntityManagerFactory("W_V_S.A.CPU");
+        this.emf = Persistence.createEntityManagerFactory("W_V_S.A.CPU");
     }
-    
-    
 
     public CategoriaJpa(EntityManagerFactory emf) {
         this.emf = emf;
@@ -38,11 +37,29 @@ public class CategoriaJpa implements Serializable {
     }
 
     public void create(Categoria categoria) {
+        if (categoria.getProductoList() == null) {
+            categoria.setProductoList(new ArrayList<Producto>());
+        }
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
+            List<Producto> attachedProductoList = new ArrayList<Producto>();
+            for (Producto productoListProductoToAttach : categoria.getProductoList()) {
+                productoListProductoToAttach = em.getReference(productoListProductoToAttach.getClass(), productoListProductoToAttach.getIdProducto());
+                attachedProductoList.add(productoListProductoToAttach);
+            }
+            categoria.setProductoList(attachedProductoList);
             em.persist(categoria);
+            for (Producto productoListProducto : categoria.getProductoList()) {
+                Categoria oldIdCategoriaOfProductoListProducto = productoListProducto.getIdCategoria();
+                productoListProducto.setIdCategoria(categoria);
+                productoListProducto = em.merge(productoListProducto);
+                if (oldIdCategoriaOfProductoListProducto != null) {
+                    oldIdCategoriaOfProductoListProducto.getProductoList().remove(productoListProducto);
+                    oldIdCategoriaOfProductoListProducto = em.merge(oldIdCategoriaOfProductoListProducto);
+                }
+            }
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -56,7 +73,34 @@ public class CategoriaJpa implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
+            Categoria persistentCategoria = em.find(Categoria.class, categoria.getIdCategoria());
+            List<Producto> productoListOld = persistentCategoria.getProductoList();
+            List<Producto> productoListNew = categoria.getProductoList();
+            List<Producto> attachedProductoListNew = new ArrayList<Producto>();
+            for (Producto productoListNewProductoToAttach : productoListNew) {
+                productoListNewProductoToAttach = em.getReference(productoListNewProductoToAttach.getClass(), productoListNewProductoToAttach.getIdProducto());
+                attachedProductoListNew.add(productoListNewProductoToAttach);
+            }
+            productoListNew = attachedProductoListNew;
+            categoria.setProductoList(productoListNew);
             categoria = em.merge(categoria);
+            for (Producto productoListOldProducto : productoListOld) {
+                if (!productoListNew.contains(productoListOldProducto)) {
+                    productoListOldProducto.setIdCategoria(null);
+                    productoListOldProducto = em.merge(productoListOldProducto);
+                }
+            }
+            for (Producto productoListNewProducto : productoListNew) {
+                if (!productoListOld.contains(productoListNewProducto)) {
+                    Categoria oldIdCategoriaOfProductoListNewProducto = productoListNewProducto.getIdCategoria();
+                    productoListNewProducto.setIdCategoria(categoria);
+                    productoListNewProducto = em.merge(productoListNewProducto);
+                    if (oldIdCategoriaOfProductoListNewProducto != null && !oldIdCategoriaOfProductoListNewProducto.equals(categoria)) {
+                        oldIdCategoriaOfProductoListNewProducto.getProductoList().remove(productoListNewProducto);
+                        oldIdCategoriaOfProductoListNewProducto = em.merge(oldIdCategoriaOfProductoListNewProducto);
+                    }
+                }
+            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
@@ -85,6 +129,11 @@ public class CategoriaJpa implements Serializable {
                 categoria.getIdCategoria();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The categoria with id " + id + " no longer exists.", enfe);
+            }
+            List<Producto> productoList = categoria.getProductoList();
+            for (Producto productoListProducto : productoList) {
+                productoListProducto.setIdCategoria(null);
+                productoListProducto = em.merge(productoListProducto);
             }
             em.remove(categoria);
             em.getTransaction().commit();
@@ -140,5 +189,5 @@ public class CategoriaJpa implements Serializable {
             em.close();
         }
     }
-    
+
 }

@@ -3,17 +3,18 @@
     <!-- Content Header (Page header) -->
     <section class="content-header" id="sectionAjax">
         <div class="container-fluid">
-        <div class="row mb-2">
-            <div class="col-sm-6">
-                <h1 class="text-uppercase font-weight-bold">Mantenimiento Administrador</h1>
+
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="font-weight-bold">Mantenimiento Administrador</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Inicio</a></li>
+                        <li class="breadcrumb-item active">Administradores</li>
+                    </ol>
+                </div> 
             </div>
-            <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-                    <li class="breadcrumb-item active">Administradores</li>
-                </ol>
-            </div>  
-        </div>
         </div>
     </section>
 
@@ -25,7 +26,7 @@
                 <div class="col-md-4">
                     <div class="card card-text">
                         <div class="card-header">
-                            <h3 class="card-title text-uppercase font-weight-bold">Resgistro/Edición</h3>
+                            <h3 class="card-title font-weight-bold">Resgistro/Edición</h3>
                         </div>
                         <s:form id="form_mante" action="%{(edit==1)? 'actualizarAdmin': 'registrarAdmin'}" theme="simple" >
 
@@ -35,22 +36,24 @@
                                     <s:textfield  name="admin.dni"  cssClass="form-control " placeholder="Ingrese Dni" />
                                 </div>
                                 <div class="form-group">
-                                    <label for="inputDni">Nombres</label>
+                                    <label for="inputNombres">Nombres</label>
                                     <s:textfield  name="admin.nombres" cssClass="form-control" placeholder="Ingrese Nombre" />
                                 </div>
                                 <div class="form-group">
-                                    <label for="inputDni">Apellidos</label>
+                                    <label for="inputApellidos">Apellidos</label>
                                     <s:textfield  name="admin.apellidos" cssClass="form-control" placeholder="Ingrese Apellido"/>
                                 </div>
                                 <div class="form-group">
-                                    <label for="inputDni">Password</label>
-                                    <s:textfield  name="admin.password" cssClass="form-control"  placeholder="Ingrese Password"/>
+                                    <label for="inputPrivilegio">Privilegio</label>
+                                    <s:select list="#{"A":'Alto','M':'Medio'}" headerKey="0" label="Privilegio"
+                                              headerValue="Selecione" name="admin.privilegio" 
+                                              cssClass="form-control"/>
                                 </div> 
 
                             </div>
 
                             <div class="card-footer">
-                                <s:submit id="grabar" value="%{(edit==1)? 'Editar' : 'Registrar'}" cssClass="%{(edit==1)? 'btn btn-warning' : 'btn btn-success'}"/>
+                                <s:submit id="grabar" value="%{(edit==1)? 'Actualizar' : 'Registrar'}" cssClass="%{(edit==1)? 'btn btn-warning' : 'btn btn-success'}"/>
                             </div>
                         </s:form>   
                     </div>
@@ -59,49 +62,65 @@
                 <div class="col-md-8">
                     <div class="card card-text">
                         <div class="card-header">
-                            <h3 class="card-title text-uppercase font-weight-bold">Listado</h3>
+                            <h3 class="card-title font-weight-bold">Listado</h3>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive table-centered">
                                 <table id="datos" class="table w-100">
                                     <thead>
-                                        <tr class="">
+                                        <tr>
                                             <th>DNI</th>
                                             <th>Nombres</th>
                                             <th>Apellidos</th>
-                                            <th>Password</th>
+                                            <th>Privilegio</th>
                                             <th>Opciones</th>
                                         </tr> 
                                     </thead>     
                                     <tbody>
                                         <s:iterator value="lstAdmin">
                                             <tr>
-                                                <td><s:property value="dni"/> </td>
-                                                <td><s:property value="nombres"/></td> 
-                                                <td><s:property value="apellidos"/></td> 
-                                                <td><s:property value="password"/></td>
 
-                                                <td>
-                                                    <s:url id="lnkEditar" action="editarAdmin">
-                                                        <s:param value="dni" name="admin.dni" />
-                                                    </s:url>
+                                                <s:if test="adminLog.dni.equals(dni)">
 
-                                                    <s:a href="%{lnkEditar}" cssClass="btn btn-mini btn-primary"><i class="fa fa-edit"></i></s:a>
+                                                </s:if>
+                                                <s:else>
+                                                    <td><s:property value="dni"/> </td>
+                                                    <td><s:property value="nombres"/></td> 
+                                                    <td><s:property value="apellidos"/></td> 
+                                                    <td><s:property value="privilegio"/></td>
 
-                                                    <s:url id="lnkEliminar" action="eliminarAdmin">
-                                                        <s:param value="dni" name="admin.dni"/>
-                                                    </s:url>
+                                                    <td>
+                                                        <s:if test='privilegio.equals("2")'>
+                                                            <s:url id="lnkEditar" action="editarAdmin">
+                                                                <s:param value="dni" name="admin.dni" />
+                                                            </s:url>
 
-                                                    <s:a href="%{lnkEliminar}" cssClass="btn btn-mini btn-danger" ><i class="fa fa-remove"></i></s:a>  
+                                                            <s:a href="%{lnkEditar}" cssClass="btn btn-mini btn-primary"><i class="fa fa-edit"></i></s:a>
+
+                                                            <s:url id="lnkEliminar" action="eliminarAdmin">
+                                                                <s:param value="dni" name="admin.dni"/>
+                                                            </s:url>
+
+                                                            <s:a href="%{lnkEliminar}" cssClass="btn btn-mini btn-danger" ><i class="fa fa-remove"></i></s:a>  
+
+                                                        </s:if>
+                                                        <s:else>
+                                                            <a href="#" Class="btn btn-mini btn-primary disabled"><i class="fa fa-edit"></i></a>
+                                                            <a href="#" Class="btn btn-mini btn-danger disabled" ><i class="fa fa-remove"></i></a>  
+                                                        </s:else>
+
                                                     </td>
-                                            </s:iterator>	
+
+                                                </s:else>
+                                            </tr>
+                                        </s:iterator>	
                                     </tbody>
 
                                     <tfoot>
                                     <th>DNI</th>
                                     <th>Nombres</th>
                                     <th>Apellidos</th>
-                                    <th>Password</th>
+                                    <th>Privilegio</th>
                                     <th>Opciones</th>
                                     </tfoot>
 

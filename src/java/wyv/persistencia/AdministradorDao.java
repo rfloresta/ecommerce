@@ -22,7 +22,6 @@ public class AdministradorDao implements IOperacionesBD<Administrador> {
             admJpa.edit(a);
             return "ok";
         } catch (Exception e) {
-            
             e.getMessage();
             return "error";
         }
@@ -31,9 +30,7 @@ public class AdministradorDao implements IOperacionesBD<Administrador> {
     @Override
     public String eliminar(String id) {
         try {
-            
            admJpa.destroy(id);
-           
            return "ok";
        } catch (Exception e) {
             e.getMessage();

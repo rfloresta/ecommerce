@@ -13,13 +13,13 @@ import java.util.List;
  */
 public class CategoriaDao implements IOperacionesBD<Categoria>{
 
-    CategoriaJpa cateJpa;
+    CategoriaJpa  cateJpa=new CategoriaJpa();
     Categoria categoria;
     
     @Override
     public String registrar(Categoria a) {
         try {
-            cateJpa=new CategoriaJpa();
+           
             cateJpa.create(a);
             return "ok";
         } catch (Exception e) {
@@ -32,7 +32,6 @@ public class CategoriaDao implements IOperacionesBD<Categoria>{
     @Override
     public String actualizar(Categoria a) {
         try {
-            cateJpa=new CategoriaJpa();
             cateJpa.edit(a);
             return "ok";
         } catch (Exception e) {
@@ -45,7 +44,6 @@ public class CategoriaDao implements IOperacionesBD<Categoria>{
     public String eliminar(String id) {
         int idcat= Integer.parseInt(id);
          try {
-            cateJpa=new  CategoriaJpa();
             cateJpa.destroy(idcat);
             return "ok";
         } catch (Exception e) {
@@ -58,8 +56,6 @@ public class CategoriaDao implements IOperacionesBD<Categoria>{
     public Categoria buscar(String id) {
         int idcat= Integer.parseInt(id);
          try {
-            cateJpa=new CategoriaJpa();
-            
             return cateJpa.findCategoria(idcat);
         } catch (Exception e) {
             e.getMessage();
@@ -70,8 +66,6 @@ public class CategoriaDao implements IOperacionesBD<Categoria>{
     @Override
     public List<Categoria> listar() {
        try {
-            cateJpa=new CategoriaJpa();
-            
             return cateJpa.findCategoriaEntities();
         } catch (Exception e) {
             e.getMessage();

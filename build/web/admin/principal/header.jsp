@@ -72,6 +72,7 @@
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right"
              aria-labelledby="#cerrarsesion" >
             <a  href="login.jsp" class="dropdown-item">Cerrar Sesion</a>
+            <a  href="editarDatos.jsp" class="dropdown-item">Editar Datos</a>
           
         </div>
       </li>

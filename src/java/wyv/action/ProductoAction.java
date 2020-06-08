@@ -1,15 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package wyv.action;
 
 import com.opensymphony.xwork2.ActionSupport;
 import java.util.List;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Result;
-import wyv.servicios.Productoservicio;
+import wyv.servicios.ProductoServicio;
 import wyv.persistencia.Producto;
 import wyv.persistencia.Categoria;
 import wyv.persistencia.Marca;
@@ -23,7 +18,7 @@ import wyv.servicios.MarcaServicio;
 @SuppressWarnings("serial")
 public class ProductoAction extends ActionSupport {
     
-    Productoservicio proSer;
+    ProductoServicio proSer;
     private String resultado;
     private Producto producto;
     private List<Producto> lstProducto;
@@ -61,7 +56,7 @@ public class ProductoAction extends ActionSupport {
         return edit;
     }
 
-    public void setProSer(Productoservicio proSer) {
+    public void setProSer(ProductoServicio proSer) {
         this.proSer = proSer;
     }
 
@@ -75,13 +70,13 @@ public class ProductoAction extends ActionSupport {
     public String listarProducto() {
         try {
             
-            lstProducto=new Productoservicio().listar();
+            lstProducto=new ProductoServicio().listar();
             lstCategoria=new CategoriaServicio().listar();
             lstMarca=new MarcaServicio().listar();
           
             return "ok";
         } catch (Exception e) {
-            resultado = "Error en: listarMarca :: " + e.getMessage();
+            resultado = "Error en: listarProducto :: " + e.getMessage();
             return "error";
         }
     }
@@ -91,18 +86,19 @@ public class ProductoAction extends ActionSupport {
 			@Result(name="error",location="/error.jsp")
 	})
 	public String registrarProducto() {
+            System.out.println("el producto es " + producto.getNombre());
 		try {
                         
-			new Productoservicio().registrar(producto);
-                        System.out.println("el producto es " + producto);
+			new ProductoServicio().registrar(producto);
+                        
+                        System.out.println("el producto es " + producto.getNombre());
                         lstCategoria=new CategoriaServicio().listar();
                         lstMarca=new MarcaServicio().listar();
-			lstProducto=new Productoservicio().listar();
-                        
+			lstProducto=new ProductoServicio().listar();
 			producto=new Producto();
 			return "ok";
 		} catch (Exception e) {
-			resultado="Error en: registrarCate :: "+e.getMessage();
+			resultado="Error en: registrarProducto :: "+e.getMessage();
 			return "error";
 		}
 	}
@@ -115,14 +111,14 @@ public class ProductoAction extends ActionSupport {
 	public String editarProducto() {
 		
 		try {
-			producto =new Productoservicio().buscar(String.valueOf(producto.getIdProducto()));
-			lstProducto=new Productoservicio().listar();
+			producto =new ProductoServicio().buscar(String.valueOf(producto.getIdProducto()));
+			lstProducto=new ProductoServicio().listar();
                         lstCategoria=new CategoriaServicio().listar();
                         lstMarca=new MarcaServicio().listar();
                         edit=1;
 			return "ok";
 		} catch (Exception e) {
-			resultado="Error en: editarAdmin :: "+e.getMessage();
+			resultado="Error en: editarProducto :: "+e.getMessage();
 			return "error";
 		}
 	}
@@ -135,14 +131,14 @@ public class ProductoAction extends ActionSupport {
 	public String actualizarProducto() {
 		
 		try {
-			new Productoservicio().actualizar(producto);
-			lstProducto=new Productoservicio().listar();
+			new ProductoServicio().actualizar(producto);
+			lstProducto=new ProductoServicio().listar();
                         lstCategoria=new CategoriaServicio().listar();
                         lstMarca=new MarcaServicio().listar();
                         producto=new Producto();
 			return "ok";
 		} catch (Exception e) {
-			resultado="Error en: eliminarMarca :: "+e.getMessage();
+			resultado="Error en: eliminarProducto :: "+e.getMessage();
 			return "error";
 		}
 	}
@@ -154,13 +150,13 @@ public class ProductoAction extends ActionSupport {
 	public String eliminarProducto() {
 		
 		try {
-			new Productoservicio().eliminar(String.valueOf(producto.getIdProducto()));
-			lstProducto=new Productoservicio().listar();
+			new ProductoServicio().eliminar(String.valueOf(producto.getIdProducto()));
+			lstProducto=new ProductoServicio().listar();
                         lstCategoria=new CategoriaServicio().listar();
                         lstMarca=new MarcaServicio().listar();
 			return "ok";
 		} catch (Exception e) {
-			resultado="Error en: eliminarMarca :: "+e.getMessage();
+			resultado="Error en: eliminarProducto :: "+e.getMessage();
 			return "error";
 		}
 	}

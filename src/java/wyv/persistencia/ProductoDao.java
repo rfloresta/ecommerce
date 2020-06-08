@@ -17,11 +17,11 @@ public class ProductoDao implements IOperacionesBD<Producto>{
     @Override
     public String registrar(Producto a) {
         try {
-        
+
             proJpa.create(a);
             return "ok";
         } catch (Exception e) {
-            e.getMessage();
+            System.out.println(e.getMessage());
             return "error";
         }
     }

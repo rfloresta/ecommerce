@@ -23,7 +23,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Data
+ * @author Romario
  */
 @Entity
 @Table(name = "categoria")
@@ -33,9 +33,6 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Categoria.findByIdCategoria", query = "SELECT c FROM Categoria c WHERE c.idCategoria = :idCategoria")
     , @NamedQuery(name = "Categoria.findByNombre", query = "SELECT c FROM Categoria c WHERE c.nombre = :nombre")})
 public class Categoria implements Serializable {
-
-    @OneToMany(mappedBy = "idCategoria")
-    private List<Producto> productoList;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -48,6 +45,8 @@ public class Categoria implements Serializable {
     @Lob
     @Column(name = "descripcion")
     private String descripcion;
+    @OneToMany(mappedBy = "idCategoria")
+    private List<Producto> productoList;
 
     public Categoria() {
     }
@@ -80,6 +79,15 @@ public class Categoria implements Serializable {
         this.descripcion = descripcion;
     }
 
+    @XmlTransient
+    public List<Producto> getProductoList() {
+        return productoList;
+    }
+
+    public void setProductoList(List<Producto> productoList) {
+        this.productoList = productoList;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -102,16 +110,7 @@ public class Categoria implements Serializable {
 
     @Override
     public String toString() {
-        return "wyv.persistencia.Categoria[ idCategoria=" + idCategoria + " ]";
-    }
-
-    @XmlTransient
-    public List<Producto> getProductoList() {
-        return productoList;
-    }
-
-    public void setProductoList(List<Producto> productoList) {
-        this.productoList = productoList;
+        return nombre;
     }
     
 }

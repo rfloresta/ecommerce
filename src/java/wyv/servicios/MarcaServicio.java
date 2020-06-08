@@ -19,10 +19,6 @@ public class MarcaServicio implements IOperacionesBD<Marca> {
     MarcaDao marcDao;
     Marca marca;
     
-    
-    
-    
-    
     @Override
     public String registrar(Marca a) {
         marcDao = new MarcaDao();
