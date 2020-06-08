@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 08-06-2020 a las 02:56:05
+-- Tiempo de generación: 08-06-2020 a las 19:10:01
 -- Versión del servidor: 10.4.11-MariaDB
 -- Versión de PHP: 7.4.5
 
@@ -69,7 +69,6 @@ CREATE TABLE `cliente` (
 
 CREATE TABLE `detallepedido` (
   `idDetalle` int(11) NOT NULL,
-  `fecha` datetime DEFAULT NULL,
   `cantidad` int(3) DEFAULT NULL,
   `precio` double(10,2) DEFAULT NULL,
   `idProducto` int(11) DEFAULT NULL,
