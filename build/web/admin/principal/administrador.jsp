@@ -3,16 +3,17 @@
     <!-- Content Header (Page header) -->
     <section class="content-header" id="sectionAjax">
         <div class="container-fluid">
+
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Mantenimiento Administrador</h1>
+                    <h1 class="font-weight-bold">Mantenimiento Administrador</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Inicio</a></li>
                         <li class="breadcrumb-item active">Administradores</li>
                     </ol>
-                </div>  
+                </div> 
             </div>
         </div>
     </section>
@@ -25,7 +26,7 @@
                 <div class="col-md-4">
                     <div class="card card-text">
                         <div class="card-header">
-                            <h3 class="card-title">Resgistro/Edición</h3>
+                            <h3 class="card-title font-weight-bold">Resgistro/Edición</h3>
                         </div>
                         <s:form id="form_mante" action="%{(edit==1)? 'actualizarAdmin': 'registrarAdmin'}" theme="simple" >
 
@@ -61,13 +62,13 @@
                 <div class="col-md-8">
                     <div class="card card-text">
                         <div class="card-header">
-                            <h3 class="card-title">Listado</h3>
+                            <h3 class="card-title font-weight-bold">Listado</h3>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive table-centered">
                                 <table id="datos" class="table w-100">
                                     <thead>
-                                        <tr class="">
+                                        <tr>
                                             <th>DNI</th>
                                             <th>Nombres</th>
                                             <th>Apellidos</th>
@@ -104,12 +105,8 @@
 
                                                         </s:if>
                                                         <s:else>
-
-
                                                             <a href="#" Class="btn btn-mini btn-primary disabled"><i class="fa fa-edit"></i></a>
-
                                                             <a href="#" Class="btn btn-mini btn-danger disabled" ><i class="fa fa-remove"></i></a>  
-
                                                         </s:else>
 
                                                     </td>

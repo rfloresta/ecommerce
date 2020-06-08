@@ -75,7 +75,7 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("        <!-- Font Awesome -->\r\n");
       out.write("        <link rel=\"stylesheet\" href=\"../css/all.min.css\">\r\n");
       out.write("        <link rel=\"stylesheet\" href=\"https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css\">\r\n");
-      out.write("\r\n");
+      out.write("        <link href=\"../css/main.css\" rel=\"stylesheet\" type=\"text/css\"/>\r\n");
       out.write("        <!-- Ionicons -->\r\n");
       out.write("        <link rel=\"stylesheet\" href=\"https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css\">\r\n");
       out.write("\r\n");
@@ -108,7 +108,7 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                <!-- /.login-card-body -->\r\n");
       out.write("               \r\n");
       out.write("            </div>\r\n");
-      out.write("        </div>\r\n");
+      out.write("      \r\n");
       out.write("        <!-- /.login-box -->\r\n");
       out.write("\r\n");
       out.write("        <!-- jQuery -->\r\n");
@@ -118,15 +118,16 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("        <!-- AdminLTE App -->\r\n");
       out.write("        <script src=\"resources/js/adminlte.min.js\"></script>\r\n");
       out.write("\r\n");
-      out.write("        <script src=\"https://unpkg.com/sweetalert/dist/sweetalert.min.js\"></script>\r\n");
-      out.write("        //<script src=\"../js/funciones.js\" type=\"text/javascript\"></script>\r\n");
+      out.write("\r\n");
+      out.write("        <script src=\"https://cdn.jsdelivr.net/npm/sweetalert2@9\"></script>\r\n");
+      out.write("        <script src=\"../js/funciones.js\" type=\"text/javascript\"></script>\r\n");
       out.write("        \r\n");
       out.write("        <!--mi script-->\r\n");
       out.write("        <script src=\"../js/main.js\" type=\"text/javascript\"></script>\r\n");
       out.write("\r\n");
       out.write("\r\n");
       out.write("    </body>\r\n");
-      out.write("</html>\r\n");
+      out.write("</html>");
     } catch (Throwable t) {
       if (!(t instanceof SkipPageException)){
         out = _jspx_out;
@@ -208,7 +209,7 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
         out.write("                        </div>\r\n");
         out.write("                                \r\n");
         out.write("                        <p class=\"mb-1\">\r\n");
-        out.write("                            <a href=\"forgot-password.html\">Olvidé mi contraseña</a>\r\n");
+        out.write("                            <a href=\"forgot-password.html\">Olvide mi contraseña</a>\r\n");
         out.write("                        </p>\r\n");
         out.write("                    ");
         int evalDoAfterBody = _jspx_th_s_form_0.doAfterBody();

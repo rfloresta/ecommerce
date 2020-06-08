@@ -14,6 +14,7 @@ public class AdministradorAction extends ActionSupport {
 
     AdministradorServicio admSer;
     private String resultado;
+    private String estado;
     private Administrador admin;
     private static Administrador adminLog;// Variable estática para que el nombre del admin logeado no cambie al ejecutar cualquier opcion que utilice la clase Administrador
     private List<Administrador> lstAdmin;
@@ -24,7 +25,7 @@ public class AdministradorAction extends ActionSupport {
     }
 
     public void setAdminLog(Administrador adminLog) {
-        AdministradorAction.adminLog = adminLog;
+        this.adminLog = adminLog;
     }
 
     
@@ -111,6 +112,8 @@ public class AdministradorAction extends ActionSupport {
 //        }
 //    }
     
+    
+    //HACER ASÍ EL MANTENIMIENTO, CON LA VARIABLE "estado"
     @Action(value="registrarAdmin",results= {
 			@Result(name="ok",location="/admin/principal/administrador.jsp"),
 			@Result(name="error",location="/error.jsp"),
@@ -118,10 +121,11 @@ public class AdministradorAction extends ActionSupport {
 	})
 	public String registrarAdmin() {
 		try {        
-			new AdministradorServicio().registrar(admin);
+                        admSer=new AdministradorServicio();
+                        estado= admSer.registrar(admin);
 			lstAdmin=new AdministradorServicio().listar();
 			admin=new Administrador();
-			return "ok";
+			return estado;
 		} catch (Exception e) {
 			resultado="Error en: registrarAdmin :: "+e.getMessage();
 			return "error";

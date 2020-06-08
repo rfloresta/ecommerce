@@ -1,10 +1,13 @@
 <%@ taglib uri="/struts-tags" prefix="s"%>
+
 <!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>AdminLTE 3 | Blank Page</title>
+
+
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -25,6 +28,8 @@
   <link href="../css/main.css" rel="stylesheet" type="text/css"/>
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  
+
 </head>
 <body class="hold-transition sidebar-mini">
 <!-- Site wrapper -->
@@ -66,7 +71,8 @@
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right"
              aria-labelledby="#cerrarsesion" >
-            <a  href="Login.jsp" class="dropdown-item">Cerrar Sesion</a>
+            <a  href="login.jsp" class="dropdown-item">Cerrar Sesion</a>
+            <a  href="editarDatos.jsp" class="dropdown-item">Editar Datos</a>
           
         </div>
       </li>

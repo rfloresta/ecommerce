@@ -44,19 +44,19 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="producto" class="nav-link">
+                <a href="listarMarca" class="nav-link">
                   <i class="fas fa-list nav-icon"></i>
                   <p>Marcas</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="registrarProducto.jsp" class="nav-link">
+                <a href="listarCate" class="nav-link">
                   <i class="fas fa-pen-square nav-icon"></i>
                   <p>Categorías</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="listarAdmin" class="nav-link">
+                <a href="listarProducto" class="nav-link">
                   <i class="fas fa-list nav-icon"></i>
                   <p>Productos</p>
                 </a>

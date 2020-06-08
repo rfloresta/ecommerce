@@ -3,6 +3,9 @@
   <persistence-unit name="W_V_S.A.CPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>wyv.persistencia.Administrador</class>
+    <class>wyv.persistencia.Categoria</class>
+    <class>wyv.persistencia.Producto</class>
+    <class>wyv.persistencia.Marca</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/tiendaw_v?zeroDateTimeBehavior=convertToNull"/>
