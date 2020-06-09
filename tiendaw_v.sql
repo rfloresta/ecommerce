@@ -3,9 +3,15 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
+<<<<<<< HEAD
+-- Tiempo de generación: 08-06-2020 a las 19:10:01
+-- Versión del servidor: 10.4.11-MariaDB
+-- Versión de PHP: 7.4.5
+=======
 -- Tiempo de generación: 08-06-2020 a las 08:42:32
 -- Versión del servidor: 10.1.21-MariaDB
 -- Versión de PHP: 5.6.30
+>>>>>>> ec461f1a3ec77895c6bec525ac6c23653e4fcd01
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -91,7 +97,6 @@ CREATE TABLE `cliente` (
 
 CREATE TABLE `detalle_pedido` (
   `idDetalle` int(11) NOT NULL,
-  `fecha` datetime DEFAULT NULL,
   `cantidad` int(3) DEFAULT NULL,
   `precio` double(10,2) DEFAULT NULL,
   `idProducto` int(11) DEFAULT NULL,
