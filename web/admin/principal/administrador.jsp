@@ -44,6 +44,10 @@
                                     <s:textfield  name="admin.apellidos" cssClass="form-control" placeholder="Ingrese Apellido"/>
                                 </div>
                                 <div class="form-group">
+                                    <label for="inputPassword">Password</label>
+                                    <s:textfield  name="admin.password" cssClass="form-control" placeholder="Ingrese Password"/>
+                                </div>
+                                <div class="form-group">
                                     <label for="inputPrivilegio">Privilegio</label>
                                     <s:select list="#{"A":'Alto','M':'Medio'}" headerKey="0" label="Privilegio"
                                               headerValue="Selecione" name="admin.privilegio" 

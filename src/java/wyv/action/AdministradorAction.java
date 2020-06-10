@@ -1,11 +1,14 @@
 package wyv.action;
 
+import com.opensymphony.xwork2.ActionContext;
 import java.util.List;
 
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Result;
 
 import com.opensymphony.xwork2.ActionSupport;
+import java.util.Map;
+import org.apache.struts2.interceptor.SessionAware;
 import wyv.servicios.AdministradorServicio;
 import wyv.persistencia.Administrador;
 
@@ -19,6 +22,8 @@ public class AdministradorAction extends ActionSupport {
     private static Administrador adminLog;// Variable estática para que el nombre del admin logeado no cambie al ejecutar cualquier opcion que utilice la clase Administrador
     private List<Administrador> lstAdmin;
     private int edit;
+
+    
     
     public Administrador getAdminLog() {
         return adminLog;
@@ -53,6 +58,8 @@ public class AdministradorAction extends ActionSupport {
         this.admSer = admSer;
     }
     
+
+    
     
     @Action(value = "ingresoAdmin", results = {
         @Result(name = "ok", location = "/admin/principal/inicio.jsp"),
@@ -66,16 +73,23 @@ public class AdministradorAction extends ActionSupport {
             
             admSer=new AdministradorServicio();
             adminLog = admSer.ingresar(adminLog);
+            
             if (adminLog == null) {
             resultado = "Dni y/o password incorrecto";
             return "incorrecto";
             }
+             
+            /*Map admSession = ActionContext.getContext().getSession();
+            
+             admSession.put("admSession" ,adminLog);
+              System.out.println(" prueba " + admSession.values());*/
+             
             return "ok";
         } catch (Exception e) {
             resultado = "Error en: ingresoAdmin :: " + e.getMessage();
             return "error";
         }
-    }
+    }   
        
    @Action(value = "listarAdmin", results = {
         @Result(name = "ok", location = "/admin/principal/administrador.jsp"),
@@ -189,6 +203,7 @@ public class AdministradorAction extends ActionSupport {
 		}
 	}
 
+    
    
 
  
