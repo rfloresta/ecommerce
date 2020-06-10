@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 10-06-2020 a las 05:16:22
+-- Tiempo de generación: 10-06-2020 a las 06:04:34
 -- Versión del servidor: 10.4.11-MariaDB
 -- Versión de PHP: 7.4.6
 
@@ -35,13 +35,6 @@ CREATE TABLE `administrador` (
   `privilegio` char(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Volcado de datos para la tabla `administrador`
---
-
-INSERT INTO `administrador` (`dni`, `nombres`, `apellidos`, `password`, `privilegio`) VALUES
-('12345678', 'luis', 'condori', '123', 'A');
-
 -- --------------------------------------------------------
 
 --
@@ -53,13 +46,6 @@ CREATE TABLE `categoria` (
   `nombre` varchar(150) DEFAULT NULL,
   `idSubCategoria` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Volcado de datos para la tabla `categoria`
---
-
-INSERT INTO `categoria` (`idCategoria`, `nombre`, `idSubCategoria`) VALUES
-(1, 'Perfumes', 1);
 
 -- --------------------------------------------------------
 
@@ -78,13 +64,6 @@ CREATE TABLE `cliente` (
   `password` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Volcado de datos para la tabla `cliente`
---
-
-INSERT INTO `cliente` (`idCliente`, `nombres`, `apellidos`, `dni`, `numCelular`, `direccion`, `email`, `password`) VALUES
-(1, 'jose', 'contreras', '12356479', '123456789', 'VES', 'jose@gmail.com', '123');
-
 -- --------------------------------------------------------
 
 --
@@ -100,13 +79,6 @@ CREATE TABLE `detalle_pedido` (
   `idPedido` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Volcado de datos para la tabla `detalle_pedido`
---
-
-INSERT INTO `detalle_pedido` (`idDetalle`, `cantidad`, `precio`, `descuento`, `idProducto`, `idPedido`) VALUES
-(1, 4, 200.00, 0.00, 1, 1);
-
 -- --------------------------------------------------------
 
 --
@@ -121,13 +93,6 @@ CREATE TABLE `empresa` (
   `mision` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Volcado de datos para la tabla `empresa`
---
-
-INSERT INTO `empresa` (`idEmpresa`, `ruc`, `razonSocial`, `vision`, `mision`) VALUES
-(1, '20166158162', 'W&V Negocios y Servicios S.A.C', 'expandir la belleza', 'ser empresa lider');
-
 -- --------------------------------------------------------
 
 --
@@ -138,13 +103,6 @@ CREATE TABLE `marca` (
   `idMarca` int(11) NOT NULL,
   `nombre` varchar(150) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Volcado de datos para la tabla `marca`
---
-
-INSERT INTO `marca` (`idMarca`, `nombre`) VALUES
-(1, 'esika');
 
 -- --------------------------------------------------------
 
@@ -165,13 +123,6 @@ CREATE TABLE `pedido` (
   `idEmpresa` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Volcado de datos para la tabla `pedido`
---
-
-INSERT INTO `pedido` (`idPedido`, `numero`, `fecha`, `subtotal`, `igv`, `total`, `pago`, `estado`, `idCliente`, `idEmpresa`) VALUES
-(1, 1, '2020-06-09 21:28:57', 200.00, 0.18, 200.00, 'Online', 'P', 1, 1);
-
 -- --------------------------------------------------------
 
 --
@@ -191,13 +142,6 @@ CREATE TABLE `producto` (
   `idMarca` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Volcado de datos para la tabla `producto`
---
-
-INSERT INTO `producto` (`idProducto`, `nombre`, `descripcion`, `stock`, `precioCompra`, `precioVenta`, `descuento`, `imagen`, `idCategoria`, `idMarca`) VALUES
-(1, 'altheus', 'hecho de hierbas', 500, 50.00, 85.00, 0.00, 'jkp.jpg', 1, 1);
-
 -- --------------------------------------------------------
 
 --
@@ -208,16 +152,6 @@ CREATE TABLE `subcategoria` (
   `idSubCategoria` int(11) NOT NULL,
   `nombre` varchar(150) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Volcado de datos para la tabla `subcategoria`
---
-
-INSERT INTO `subcategoria` (`idSubCategoria`, `nombre`) VALUES
-(1, 'Hombre'),
-(3, 'Mujer'),
-(5, 'Ninos'),
-(6, 'Niñas');
 
 --
 -- Índices para tablas volcadas
@@ -285,60 +219,14 @@ ALTER TABLE `subcategoria`
   ADD PRIMARY KEY (`idSubCategoria`);
 
 --
--- AUTO_INCREMENT de las tablas volcadas
---
-
---
--- AUTO_INCREMENT de la tabla `categoria`
---
-ALTER TABLE `categoria`
-  MODIFY `idCategoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT de la tabla `cliente`
---
-ALTER TABLE `cliente`
-  MODIFY `idCliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT de la tabla `detalle_pedido`
---
-ALTER TABLE `detalle_pedido`
-  MODIFY `idDetalle` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT de la tabla `empresa`
---
-ALTER TABLE `empresa`
-  MODIFY `idEmpresa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT de la tabla `marca`
---
-ALTER TABLE `marca`
-  MODIFY `idMarca` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT de la tabla `pedido`
---
-ALTER TABLE `pedido`
-  MODIFY `idPedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT de la tabla `producto`
---
-ALTER TABLE `producto`
-  MODIFY `idProducto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT de la tabla `subcategoria`
---
-ALTER TABLE `subcategoria`
-  MODIFY `idSubCategoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
---
 -- Restricciones para tablas volcadas
 --
+
+--
+-- Filtros para la tabla `categoria`
+--
+ALTER TABLE `categoria`
+  ADD CONSTRAINT `categoria_ibfk_1` FOREIGN KEY (`idSubCategoria`) REFERENCES `subcategoria` (`idSubCategoria`);
 
 --
 -- Filtros para la tabla `detalle_pedido`
