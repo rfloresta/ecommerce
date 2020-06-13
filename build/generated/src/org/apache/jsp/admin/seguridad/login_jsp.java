@@ -78,7 +78,7 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("        <link href=\"../css/main.css\" rel=\"stylesheet\" type=\"text/css\"/>\r\n");
       out.write("        <!-- Ionicons -->\r\n");
       out.write("        <link rel=\"stylesheet\" href=\"https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css\">\r\n");
-      out.write("\r\n");
+      out.write("        <link href=\"../css/toastr.min.css\" rel=\"stylesheet\" type=\"text/css\"/>\r\n");
       out.write("        <!-- Theme style -->\r\n");
       out.write("        <link rel=\"stylesheet\" href=\"../css/adminlte.min.css\">\r\n");
       out.write("        <!-- Google Font: Source Sans Pro -->\r\n");
@@ -122,9 +122,10 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("        <script src=\"https://cdn.jsdelivr.net/npm/sweetalert2@9\"></script>\r\n");
       out.write("        <script src=\"../js/funciones.js\" type=\"text/javascript\"></script>\r\n");
       out.write("        \r\n");
+      out.write("        <script src=\"../plugins/toastr/toastr.min.js\"></script>\r\n");
       out.write("        <!--mi script-->\r\n");
       out.write("        <script src=\"../js/main.js\" type=\"text/javascript\"></script>\r\n");
-      out.write("\r\n");
+      out.write("        <script src=\"../js/toastr.min.js\" type=\"text/javascript\"></script>\r\n");
       out.write("\r\n");
       out.write("    </body>\r\n");
       out.write("</html>");
@@ -279,7 +280,7 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
     _jspx_th_s_submit_0.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_s_form_0);
     _jspx_th_s_submit_0.setId("ingresar");
     _jspx_th_s_submit_0.setDynamicAttribute(null, "styleId", new String("btnreg"));
-    _jspx_th_s_submit_0.setCssClass("btn btn-primary btn-block");
+    _jspx_th_s_submit_0.setCssClass("btn btn-primary btn-block toastrDefaultError");
     _jspx_th_s_submit_0.setValue("Iniciar Sesión");
     int _jspx_eval_s_submit_0 = _jspx_th_s_submit_0.doStartTag();
     if (_jspx_th_s_submit_0.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {

@@ -16,7 +16,7 @@
         <link href="../css/main.css" rel="stylesheet" type="text/css"/>
         <!-- Ionicons -->
         <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-
+        <link href="../css/toastr.min.css" rel="stylesheet" type="text/css"/>
         <!-- Theme style -->
         <link rel="stylesheet" href="../css/adminlte.min.css">
         <!-- Google Font: Source Sans Pro -->
@@ -67,7 +67,7 @@
                                 <!-- /.col -->
                                 <div class="col-12 my-4">
 
-                                <s:submit id="ingresar" styleId="btnreg" cssClass="btn btn-primary btn-block" value="Iniciar Sesión" />
+                                <s:submit id="ingresar" styleId="btnreg" cssClass="btn btn-primary btn-block toastrDefaultError" value="Iniciar Sesión" />
 
                             </div>
                             <!-- /.col -->
@@ -98,9 +98,10 @@
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
         <script src="../js/funciones.js" type="text/javascript"></script>
         
+        <script src="../plugins/toastr/toastr.min.js"></script>
         <!--mi script-->
         <script src="../js/main.js" type="text/javascript"></script>
-
+        <script src="../js/toastr.min.js" type="text/javascript"></script>
 
     </body>
 </html>

@@ -1,9 +1,11 @@
 package wyv.persistencia;
 import java.util.List;
+import java.util.Map;
 
 public class AdministradorDao implements IOperacionesBD<Administrador> {
     
     AdministradorJpa admJpa=new AdministradorJpa();
+    
 
     @Override
     public String registrar(Administrador a) {
@@ -57,7 +59,30 @@ public class AdministradorDao implements IOperacionesBD<Administrador> {
      return admJpa.findAdministrador(entrada.getDni());
   
     }
-
+    // Metodo para la line Chart
+    public List<Map<String, String>> ventaMes()
+    {
+        
+        
+        return   admJpa.ventaMes();
+    }
+    //Metodo para contar Cliente
     
-    
+     public int ContarCliente()
+    {
+        return admJpa.ContarClientes();
+    }
+ 
+    //Metodo para contar Administrador 
+     public int ContarAdministrador()
+    {
+        return admJpa.ContarAdministrador();
+    }
+     
+     //Metodo para contar Pedido
+     
+     public int ContarPedido()
+    {
+        return admJpa.ContarPedido();
+    }
 }

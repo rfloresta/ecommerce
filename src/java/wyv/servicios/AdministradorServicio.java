@@ -7,6 +7,7 @@ import wyv.persistencia.AdministradorDao;
 import wyv.persistencia.IOperacionesBD;
 import java.security.MessageDigest;
 import java.util.Arrays;
+import java.util.Map;
 import javax.crypto.Cipher;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
@@ -74,6 +75,7 @@ public class AdministradorServicio implements IOperacionesBD<Administrador> {
             String passDesencriptado= Desencriptar(admin.getPassword());
                 System.out.println(passDesencriptado);
             if (passDesencriptado.equals(entrada.getPassword())) {
+                
                 return admin;
             }
         }
@@ -87,7 +89,33 @@ public class AdministradorServicio implements IOperacionesBD<Administrador> {
     public void nuevoObj() {
         admin = new Administrador();
     }
-
+    
+    //Metodo para el Chart Line
+    
+    public List<Map<String, String>> ventaMes()
+    {
+        
+        return   admDao.ventaMes();
+    }
+    
+    // Metodo para contar cliente
+    
+    public int ContarCliente()
+    {
+        return admDao.ContarCliente();
+    }
+    //Metodo para contar Administrador
+    public int ContarAdministrador()
+    {
+        return admDao.ContarAdministrador();
+    }
+    
+    //Metodo para contar Pedidos
+    
+    public int ContarPedido()
+    {
+        return admDao.ContarPedido();
+    }
     
 
     public static String Encriptar(String texto) {

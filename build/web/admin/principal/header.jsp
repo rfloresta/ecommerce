@@ -23,7 +23,7 @@
   <!-- Ionicons -->
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
   <!-- overlayScrollbars -->
- 
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
   <!-- Mis Estilos -->
   <link href="../css/main.css" rel="stylesheet" type="text/css"/>
   <!-- Google Font: Source Sans Pro -->
