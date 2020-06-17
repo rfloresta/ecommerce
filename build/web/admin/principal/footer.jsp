@@ -26,7 +26,7 @@
  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>   
 <script src="https://kit.fontawesome.com/93bc7256e3.js" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-<script src="//cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
 <script src="../js/funciones.js" type="text/javascript"></script>
 
 

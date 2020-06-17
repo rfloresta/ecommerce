@@ -3,17 +3,17 @@
     <!-- Content Header (Page header) -->
     <section class="content-header" id="sectionAjax">
         <div class="container-fluid">
-        <div class="row mb-2">
-            <div class="col-sm-6">
-                <h1 class="font-weight-bold">Mantenimiento Marca</h1>
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="font-weight-bold">Mantenimiento Marca</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Inicio</a></li>
+                        <li class="breadcrumb-item active ">Marcas</li>
+                    </ol>
+                </div>  
             </div>
-            <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-                    <li class="breadcrumb-item active ">Marcas</li>
-                </ol>
-            </div>  
-        </div>
         </div>
     </section>
 
@@ -29,9 +29,9 @@
                         </div>
                         <s:form id="form_mante" action="%{(edit==1)? 'actualizarMarca': 'registrarMarca'}" theme="simple" >
                             <div class="card-body">
-                                 <s:if test="%{edit==1}">
+                                <s:if test="%{edit==1}">
                                     <s:hidden  name="marca.idMarca" cssClass="form-control" placeholder="Ingrese Nombre" />
-                                 </s:if> 
+                                </s:if> 
                                 <div class="form-group">
                                     <label for="inputNombre">Nombre</label>
                                     <s:textfield  name="marca.nombre" cssClass="form-control" placeholder="Ingrese Nombre" />
@@ -62,13 +62,12 @@
                                         <s:iterator value="lstMarca">
                                             <tr>
                                                 <td><s:property value="nombre"/></td> 
-                                                    
                                                 <td>
                                                     <s:url id="lnkEditar" action="editarMarca">
                                                         <s:param value="idMarca" name="marca.idMarca" />
                                                     </s:url>
                                                     <s:a href="%{lnkEditar}" cssClass="btn btn-mini btn-primary"><i class="fa fa-edit"></i></s:a>
-                                               
+
                                                     <s:url id="lnkEliminar" action="eliminarMarca">
                                                         <s:param value="idMarca" name="marca.idMarca" />
                                                     </s:url>
@@ -77,20 +76,20 @@
 
                                                     </td>
                                             </tr>
-                                            </s:iterator>	
+                                        </s:iterator>	
                                     </tbody>
-
                                     <tfoot>
-                                    <th>Nombre</th>
-                                    <th>Opciones</th>
+                                        <tr>
+                                            <th>Nombre</th>
+                                            <th>Opciones</th>
+                                        </tr>
                                     </tfoot>
-
                                 </table>
                             </div>
                         </div>
                     </div>
                 </div>
-             
+
 
             </div>
         </div>

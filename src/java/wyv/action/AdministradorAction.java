@@ -1,11 +1,14 @@
 package wyv.action;
 
+import com.opensymphony.xwork2.ActionContext;
 import java.util.List;
 
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Result;
 
 import com.opensymphony.xwork2.ActionSupport;
+import java.util.Map;
+import org.apache.struts2.interceptor.SessionAware;
 import wyv.servicios.AdministradorServicio;
 import wyv.persistencia.Administrador;
 
@@ -14,11 +17,13 @@ public class AdministradorAction extends ActionSupport {
 
     AdministradorServicio admSer;
     private String resultado;
-    private String estado;
+    private String estado="error";
     private Administrador admin;
     private static Administrador adminLog;// Variable estática para que el nombre del admin logeado no cambie al ejecutar cualquier opcion que utilice la clase Administrador
     private List<Administrador> lstAdmin;
     private int edit;
+
+    
     
     public Administrador getAdminLog() {
         return adminLog;
@@ -53,6 +58,8 @@ public class AdministradorAction extends ActionSupport {
         this.admSer = admSer;
     }
     
+
+    
     
     @Action(value = "ingresoAdmin", results = {
         @Result(name = "ok", location = "/admin/principal/inicio.jsp"),
@@ -66,16 +73,23 @@ public class AdministradorAction extends ActionSupport {
             
             admSer=new AdministradorServicio();
             adminLog = admSer.ingresar(adminLog);
+            
             if (adminLog == null) {
             resultado = "Dni y/o password incorrecto";
             return "incorrecto";
             }
+             
+            /*Map admSession = ActionContext.getContext().getSession();
+            
+             admSession.put("admSession" ,adminLog);
+              System.out.println(" prueba " + admSession.values());*/
+             
             return "ok";
         } catch (Exception e) {
             resultado = "Error en: ingresoAdmin :: " + e.getMessage();
             return "error";
         }
-    }
+    }   
        
    @Action(value = "listarAdmin", results = {
         @Result(name = "ok", location = "/admin/principal/administrador.jsp"),
@@ -86,7 +100,6 @@ public class AdministradorAction extends ActionSupport {
         try {
             admSer=new AdministradorServicio();
             lstAdmin = admSer.listar();
-          
             return "ok";
         } catch (Exception e) {
             resultado = "Error en: listarAdmin :: " + e.getMessage();
@@ -116,23 +129,22 @@ public class AdministradorAction extends ActionSupport {
     //HACER ASÍ EL MANTENIMIENTO, CON LA VARIABLE "estado"
     @Action(value="registrarAdmin",results= {
 			@Result(name="ok",location="/admin/principal/administrador.jsp"),
-			@Result(name="error",location="/error.jsp"),
+			@Result(name="error",location="/admin/error.jsp"),
                         @Result(name="input",location="/admin/principal/administrador.jsp")
 	})
 	public String registrarAdmin() {
 		try {        
                         admSer=new AdministradorServicio();
-                        estado= admSer.registrar(admin);
-			lstAdmin=new AdministradorServicio().listar();
+                        estado=admSer.registrar(admin);
+			lstAdmin=admSer.listar();
 			admin=new Administrador();
 			return estado;
 		} catch (Exception e) {
 			resultado="Error en: registrarAdmin :: "+e.getMessage();
-			return "error";
+			return estado;
 		}
 	}
-        
-        
+
         @Action(value="editarAdmin",results= {
 			@Result(name="ok",location="/admin/principal/administrador.jsp"),
 			@Result(name="error",location="/error.jsp")
@@ -143,8 +155,9 @@ public class AdministradorAction extends ActionSupport {
 //                    if(getAdmin().getDni().equals(LOG)){
 //           addFieldError("dni", "Ingrese el DNI");
 //       }
-			admin =new AdministradorServicio().buscar(admin.getDni());
-			lstAdmin=new AdministradorServicio().listar();
+                        admSer=new AdministradorServicio();
+			admin=admSer.buscar(admin.getDni());
+			lstAdmin=admSer.listar();
                         edit=1;
 			return "ok";
 		} catch (Exception e) {
@@ -154,22 +167,21 @@ public class AdministradorAction extends ActionSupport {
 	}
         
         
-        
-        
         @Action(value="actualizarAdmin",results= {
 			@Result(name="ok",location="/admin/principal/administrador.jsp"),
-			@Result(name="error",location="/error.jsp")
+			@Result(name="error",location="/admin/error.jsp")
 	})
 	public String actualizarAdmin() {
 		
 		try {
-			new AdministradorServicio().actualizar(admin);
-			lstAdmin=new AdministradorServicio().listar();
+                        admSer=new AdministradorServicio();
+			estado=admSer.actualizar(admin);
+			lstAdmin=admSer.listar();
                         admin=new Administrador();
-			return "ok";
+			return estado;
 		} catch (Exception e) {
 			resultado="Error en: eliminarMarca :: "+e.getMessage();
-			return "error";
+			return estado;
 		}
 	}
 
@@ -180,16 +192,17 @@ public class AdministradorAction extends ActionSupport {
 	public String eliminarAdmin() {
 		
 		try {
-			new AdministradorServicio().eliminar(admin.getDni());
-			lstAdmin=new AdministradorServicio().listar();
-			return "ok";
+                        admSer=new AdministradorServicio();
+			estado=admSer.eliminar(admin.getDni());
+			lstAdmin=admSer.listar();
+			return estado;
 		} catch (Exception e) {
 			resultado="Error en: eliminarMarca :: "+e.getMessage();
-			return "error";
+			return estado;
 		}
 	}
 
+    
    
 
- 
 }

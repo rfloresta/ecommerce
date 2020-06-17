@@ -11,10 +11,11 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
 
   private static java.util.List<String> _jspx_dependants;
 
-  private org.apache.jasper.runtime.TagHandlerPool _jspx_tagPool_s_password_styleId_name_id_cssClass_nobody;
+  private org.apache.jasper.runtime.TagHandlerPool _jspx_tagPool_s_textfield_styleId_placeholder_name_id_cssClass_nobody;
   private org.apache.jasper.runtime.TagHandlerPool _jspx_tagPool_s_submit_value_styleId_id_cssClass_nobody;
   private org.apache.jasper.runtime.TagHandlerPool _jspx_tagPool_s_form_theme_styleId_id_action;
-  private org.apache.jasper.runtime.TagHandlerPool _jspx_tagPool_s_textfield_styleId_name_id_cssClass_nobody;
+  private org.apache.jasper.runtime.TagHandlerPool _jspx_tagPool_s_password_styleId_placeholder_name_id_cssClass_nobody;
+  private org.apache.jasper.runtime.TagHandlerPool _jspx_tagPool_s_text_name_nobody;
 
   private org.glassfish.jsp.api.ResourceInjector _jspx_resourceInjector;
 
@@ -23,17 +24,19 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
   }
 
   public void _jspInit() {
-    _jspx_tagPool_s_password_styleId_name_id_cssClass_nobody = org.apache.jasper.runtime.TagHandlerPool.getTagHandlerPool(getServletConfig());
+    _jspx_tagPool_s_textfield_styleId_placeholder_name_id_cssClass_nobody = org.apache.jasper.runtime.TagHandlerPool.getTagHandlerPool(getServletConfig());
     _jspx_tagPool_s_submit_value_styleId_id_cssClass_nobody = org.apache.jasper.runtime.TagHandlerPool.getTagHandlerPool(getServletConfig());
     _jspx_tagPool_s_form_theme_styleId_id_action = org.apache.jasper.runtime.TagHandlerPool.getTagHandlerPool(getServletConfig());
-    _jspx_tagPool_s_textfield_styleId_name_id_cssClass_nobody = org.apache.jasper.runtime.TagHandlerPool.getTagHandlerPool(getServletConfig());
+    _jspx_tagPool_s_password_styleId_placeholder_name_id_cssClass_nobody = org.apache.jasper.runtime.TagHandlerPool.getTagHandlerPool(getServletConfig());
+    _jspx_tagPool_s_text_name_nobody = org.apache.jasper.runtime.TagHandlerPool.getTagHandlerPool(getServletConfig());
   }
 
   public void _jspDestroy() {
-    _jspx_tagPool_s_password_styleId_name_id_cssClass_nobody.release();
+    _jspx_tagPool_s_textfield_styleId_placeholder_name_id_cssClass_nobody.release();
     _jspx_tagPool_s_submit_value_styleId_id_cssClass_nobody.release();
     _jspx_tagPool_s_form_theme_styleId_id_action.release();
-    _jspx_tagPool_s_textfield_styleId_name_id_cssClass_nobody.release();
+    _jspx_tagPool_s_password_styleId_placeholder_name_id_cssClass_nobody.release();
+    _jspx_tagPool_s_text_name_nobody.release();
   }
 
   public void _jspService(HttpServletRequest request, HttpServletResponse response)
@@ -203,7 +206,11 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
         if (_jspx_meth_s_submit_0((javax.servlet.jsp.tagext.JspTag) _jspx_th_s_form_0, _jspx_page_context))
           return true;
         out.write("\r\n");
-        out.write("\r\n");
+        out.write("                                <div class=\"text-danger text-center\">");
+        if (_jspx_meth_s_text_0((javax.servlet.jsp.tagext.JspTag) _jspx_th_s_form_0, _jspx_page_context))
+          return true;
+        out.write("</div>\r\n");
+        out.write("                             \r\n");
         out.write("                            </div>\r\n");
         out.write("                            <!-- /.col -->\r\n");
         out.write("                        </div>\r\n");
@@ -232,19 +239,20 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
     PageContext pageContext = _jspx_page_context;
     JspWriter out = _jspx_page_context.getOut();
     //  s:textfield
-    org.apache.struts2.views.jsp.ui.TextFieldTag _jspx_th_s_textfield_0 = (org.apache.struts2.views.jsp.ui.TextFieldTag) _jspx_tagPool_s_textfield_styleId_name_id_cssClass_nobody.get(org.apache.struts2.views.jsp.ui.TextFieldTag.class);
+    org.apache.struts2.views.jsp.ui.TextFieldTag _jspx_th_s_textfield_0 = (org.apache.struts2.views.jsp.ui.TextFieldTag) _jspx_tagPool_s_textfield_styleId_placeholder_name_id_cssClass_nobody.get(org.apache.struts2.views.jsp.ui.TextFieldTag.class);
     _jspx_th_s_textfield_0.setPageContext(_jspx_page_context);
     _jspx_th_s_textfield_0.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_s_form_0);
     _jspx_th_s_textfield_0.setId("dni");
     _jspx_th_s_textfield_0.setName("adminLog.dni");
     _jspx_th_s_textfield_0.setDynamicAttribute(null, "styleId", new String("dni"));
     _jspx_th_s_textfield_0.setCssClass("form-control");
+    _jspx_th_s_textfield_0.setDynamicAttribute(null, "placeholder", new String("Ingrese DNI"));
     int _jspx_eval_s_textfield_0 = _jspx_th_s_textfield_0.doStartTag();
     if (_jspx_th_s_textfield_0.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
-      _jspx_tagPool_s_textfield_styleId_name_id_cssClass_nobody.reuse(_jspx_th_s_textfield_0);
+      _jspx_tagPool_s_textfield_styleId_placeholder_name_id_cssClass_nobody.reuse(_jspx_th_s_textfield_0);
       return true;
     }
-    _jspx_tagPool_s_textfield_styleId_name_id_cssClass_nobody.reuse(_jspx_th_s_textfield_0);
+    _jspx_tagPool_s_textfield_styleId_placeholder_name_id_cssClass_nobody.reuse(_jspx_th_s_textfield_0);
     return false;
   }
 
@@ -253,19 +261,20 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
     PageContext pageContext = _jspx_page_context;
     JspWriter out = _jspx_page_context.getOut();
     //  s:password
-    org.apache.struts2.views.jsp.ui.PasswordTag _jspx_th_s_password_0 = (org.apache.struts2.views.jsp.ui.PasswordTag) _jspx_tagPool_s_password_styleId_name_id_cssClass_nobody.get(org.apache.struts2.views.jsp.ui.PasswordTag.class);
+    org.apache.struts2.views.jsp.ui.PasswordTag _jspx_th_s_password_0 = (org.apache.struts2.views.jsp.ui.PasswordTag) _jspx_tagPool_s_password_styleId_placeholder_name_id_cssClass_nobody.get(org.apache.struts2.views.jsp.ui.PasswordTag.class);
     _jspx_th_s_password_0.setPageContext(_jspx_page_context);
     _jspx_th_s_password_0.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_s_form_0);
     _jspx_th_s_password_0.setId("password");
     _jspx_th_s_password_0.setName("adminLog.password");
     _jspx_th_s_password_0.setDynamicAttribute(null, "styleId", new String("pass"));
     _jspx_th_s_password_0.setCssClass("form-control");
+    _jspx_th_s_password_0.setDynamicAttribute(null, "placeholder", new String("Ingrese contraseña"));
     int _jspx_eval_s_password_0 = _jspx_th_s_password_0.doStartTag();
     if (_jspx_th_s_password_0.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
-      _jspx_tagPool_s_password_styleId_name_id_cssClass_nobody.reuse(_jspx_th_s_password_0);
+      _jspx_tagPool_s_password_styleId_placeholder_name_id_cssClass_nobody.reuse(_jspx_th_s_password_0);
       return true;
     }
-    _jspx_tagPool_s_password_styleId_name_id_cssClass_nobody.reuse(_jspx_th_s_password_0);
+    _jspx_tagPool_s_password_styleId_placeholder_name_id_cssClass_nobody.reuse(_jspx_th_s_password_0);
     return false;
   }
 
@@ -287,6 +296,24 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
       return true;
     }
     _jspx_tagPool_s_submit_value_styleId_id_cssClass_nobody.reuse(_jspx_th_s_submit_0);
+    return false;
+  }
+
+  private boolean _jspx_meth_s_text_0(javax.servlet.jsp.tagext.JspTag _jspx_th_s_form_0, PageContext _jspx_page_context)
+          throws Throwable {
+    PageContext pageContext = _jspx_page_context;
+    JspWriter out = _jspx_page_context.getOut();
+    //  s:text
+    org.apache.struts2.views.jsp.TextTag _jspx_th_s_text_0 = (org.apache.struts2.views.jsp.TextTag) _jspx_tagPool_s_text_name_nobody.get(org.apache.struts2.views.jsp.TextTag.class);
+    _jspx_th_s_text_0.setPageContext(_jspx_page_context);
+    _jspx_th_s_text_0.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_s_form_0);
+    _jspx_th_s_text_0.setName("resultado");
+    int _jspx_eval_s_text_0 = _jspx_th_s_text_0.doStartTag();
+    if (_jspx_th_s_text_0.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
+      _jspx_tagPool_s_text_name_nobody.reuse(_jspx_th_s_text_0);
+      return true;
+    }
+    _jspx_tagPool_s_text_name_nobody.reuse(_jspx_th_s_text_0);
     return false;
   }
 }

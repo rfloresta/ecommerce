@@ -3,27 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
-            <file>file:/C:/Users/Romario/Desktop/Git/W-V-S.A.C/src/java/wyv/action/MarcaAction.java</file>
-            <file>file:/C:/Users/Romario/Desktop/Git/W-V-S.A.C/web/admin/principal/administrador.jsp</file>
             <file>file:/C:/Users/Romario/Desktop/Git/W-V-S.A.C/web/admin/principal/footer.jsp</file>
-            <file>file:/C:/Users/Romario/Desktop/Git/W-V-S.A.C/src/java/wyv/persistencia/MarcaDao.java</file>
-            <file>file:/C:/Users/Romario/Desktop/Git/W-V-S.A.C/src/java/wyv/action/AdministradorAction.java</file>
-            <file>file:/C:/Users/Romario/Desktop/Git/W-V-S.A.C/web/admin/principal/marca.jsp</file>
-=======
-<<<<<<< HEAD
-            <file>file:/C:/Users/Delco/Desktop/W-V-S.A.C/web/admin/seguridad/login.jsp</file>
-=======
-            <file>file:/C:/Users/Romario/Desktop/Git/W-V-S.A.C/src/java/wyv/action/AdministradorAction.java</file>
-            <file>file:/C:/Users/Romario/Desktop/Git/W-V-S.A.C/web/admin/principal/administrador.jsp</file>
-            <file>file:/C:/Users/Romario/Desktop/Git/W-V-S.A.C/src/java/wyv/persistencia/AdministradorJpa.java</file>
+            <file>file:/C:/Users/Romario/Desktop/Git/W-V-S.A.C/web/admin/principal/producto.jsp</file>
             <file>file:/C:/Users/Romario/Desktop/Git/W-V-S.A.C/web/admin/principal/sidebar.jsp</file>
-            <file>file:/C:/Users/Romario/Desktop/Git/W-V-S.A.C/web/WEB-INF/applicationContext.xml</file>
-            <file>file:/C:/Users/Romario/Desktop/Git/W-V-S.A.C/src/java/wyv/persistencia/Categoria.java</file>
-            <file>file:/C:/Users/Romario/Desktop/Git/W-V-S.A.C/web/admin/seguridad/login.jsp</file>
-            <file>file:/C:/Users/Romario/Desktop/Git/W-V-S.A.C/src/java/wyv/persistencia/Administrador.java</file>
->>>>>>> ec461f1a3ec77895c6bec525ac6c23653e4fcd01
->>>>>>> f4d3e01a284e38a25bde7e0331e3e835f63d0244
+            <file>file:/C:/Users/Romario/Desktop/Git/W-V-S.A.C/web/admin/css/main.css</file>
+            <file>file:/C:/Users/Romario/Desktop/Git/W-V-S.A.C/src/java/wyv/action/ProductoActio.java</file>
+            <file>file:/C:/Users/Romario/Desktop/Git/W-V-S.A.C/src/java/wyv/action/ProductoAction.java</file>
+            <file>file:/C:/Users/Romario/Desktop/Git/W-V-S.A.C/web/admin/principal/header.jsp</file>
         </group>
     </open-files>
 </project-private>

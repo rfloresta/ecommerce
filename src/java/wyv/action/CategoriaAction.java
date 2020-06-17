@@ -61,7 +61,6 @@ public class CategoriaAction extends ActionSupport{
         try {
             catSer=new CategoriaServicio();
             lstCate = catSer.listar();
-          
             return "ok";
         } catch (Exception e) {
             resultado = "Error en: listarCate :: " + e.getMessage();
