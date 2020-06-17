@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 16-06-2020 a las 06:31:31
+-- Tiempo de generación: 17-06-2020 a las 03:41:29
 -- Versión del servidor: 10.4.11-MariaDB
 -- Versión de PHP: 7.4.5
 
@@ -142,22 +142,21 @@ INSERT INTO `cliente` (`idCliente`, `nombres`, `apellidos`, `dni`, `numCelular`,
 --
 
 CREATE TABLE `detalle_pedido` (
-  `idDetalle` int(11) NOT NULL,
   `cantidad` int(3) DEFAULT NULL,
   `precio` double(10,2) DEFAULT NULL,
   `descuento` double(10,2) NOT NULL,
-  `idProducto` int(11) DEFAULT NULL,
-  `idPedido` int(11) DEFAULT NULL
+  `idProducto` int(11) NOT NULL,
+  `idPedido` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `detalle_pedido`
 --
 
-INSERT INTO `detalle_pedido` (`idDetalle`, `cantidad`, `precio`, `descuento`, `idProducto`, `idPedido`) VALUES
-(18, 1, 100.00, 0.00, 3, 1),
-(19, 2, 100.00, 0.00, 3, 2),
-(20, 3, 100.00, 0.00, 3, 3);
+INSERT INTO `detalle_pedido` (`cantidad`, `precio`, `descuento`, `idProducto`, `idPedido`) VALUES
+(1, 100.00, 0.00, 3, 1),
+(2, 100.00, 0.00, 3, 2),
+(3, 100.00, 0.00, 3, 3);
 
 --
 -- Disparadores `detalle_pedido`
@@ -292,9 +291,9 @@ ALTER TABLE `cliente`
 -- Indices de la tabla `detalle_pedido`
 --
 ALTER TABLE `detalle_pedido`
-  ADD PRIMARY KEY (`idDetalle`),
-  ADD KEY `detallepedido_ibfk_1` (`idProducto`),
-  ADD KEY `detallepedido_ibfk_2` (`idPedido`);
+  ADD PRIMARY KEY (`idProducto`,`idPedido`),
+  ADD KEY `idProducto` (`idProducto`),
+  ADD KEY `idPedico` (`idPedido`);
 
 --
 -- Indices de la tabla `empresa`
@@ -339,12 +338,6 @@ ALTER TABLE `categoria`
 --
 ALTER TABLE `cliente`
   MODIFY `idCliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT de la tabla `detalle_pedido`
---
-ALTER TABLE `detalle_pedido`
-  MODIFY `idDetalle` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT de la tabla `empresa`
