@@ -15,7 +15,7 @@ import wyv.servicios.AdministradorServicio;
 import wyv.persistencia.Administrador;
 
 @SuppressWarnings("serial")
-public class AdministradorAction extends ActionSupport {
+public class AdministradorAction extends ActionSupport implements SessionAware {
 
     AdministradorServicio admSer;
     private String resultado;
@@ -31,7 +31,15 @@ public class AdministradorAction extends ActionSupport {
     private int contarPedidos;
     private String jsonMes; 
     private String jsonTotal;
+    private Map<String, Object> sesion;
+    
 
+     @Override
+    public void setSession(Map<String, Object> map) {
+        this.sesion = map;
+    }
+
+    
     public int getContarAdministrador() {
         return contarAdministrador;
     }
@@ -118,6 +126,9 @@ public class AdministradorAction extends ActionSupport {
 
             admSer = new AdministradorServicio();
             adminLog = admSer.ingresar(adminLog);
+            sesion.put("privilegio", adminLog.getPrivilegio());
+            sesion.put("NombreCompleto", adminLog.getNombres() + " " + adminLog.getApellidos());
+            sesion.put("Nombre", adminLog.getNombres());
             //Metodo para mandar listas al dashboard
             List<Map<String, String>>lista= admSer.ventaMes();
             List<String> listaMesP=new ArrayList();
@@ -267,4 +278,5 @@ public class AdministradorAction extends ActionSupport {
         }
     }
 
+   
 }

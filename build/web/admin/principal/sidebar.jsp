@@ -18,10 +18,8 @@
         </div>
         <div class="info">
             
-            <s:label  name="adminLog.nombres" cssClass="text-light" /><s:label  name="adminLog.apellidos" cssClass="text-light" />
-            <!--<s:iterator value="%{#session.admSession}">
-            //<a href="#" class="d-block"><s:property value="adminLog" />  </a>
-            //</s:iterator>-->
+            <s:label  name="#session.NombreCompleto" cssClass="text-light" />
+            
             </div>
       </div>
 
@@ -31,7 +29,7 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item has-treeview">
-             <a href="RedireccionVentas" class="nav-link">
+             <a href="listarPedido" class="nav-link">
                  <i class="nav-icon fas fa-cash-register"></i>
                   <p>Pedidos</p>
                 </a>
@@ -76,7 +74,8 @@
             </a>
             
           </li>
-           <s:if  test='adminLog.privilegio.equals("A")'>
+        
+           <s:if  test='#session.privilegio == "A"'>
           <li class="nav-item has-treeview">
               <a  href="listarAdmin" class="nav-link menu">
               <i class="nav-icon fas fa-users"></i>

@@ -6,7 +6,9 @@
 package wyv.persistencia;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,8 +19,10 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -36,6 +40,10 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Producto.findByPrecioVenta", query = "SELECT p FROM Producto p WHERE p.precioVenta = :precioVenta")
     , @NamedQuery(name = "Producto.findByDescuento", query = "SELECT p FROM Producto p WHERE p.descuento = :descuento")})
 public class Producto implements Serializable {
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "producto")
+    private List<DetallePedido> detallePedidoList;
+
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -184,5 +192,16 @@ public class Producto implements Serializable {
     public String toString() {
         return "wyv.persistencia.Producto[ idProducto=" + idProducto + " ]";
     }
+
+    @XmlTransient
+    public List<DetallePedido> getDetallePedidoList() {
+        return detallePedidoList;
+    }
+
+    public void setDetallePedidoList(List<DetallePedido> detallePedidoList) {
+        this.detallePedidoList = detallePedidoList;
+    }
+
+    
     
 }

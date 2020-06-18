@@ -25,13 +25,16 @@ import wyv.persistencia.exceptions.PreexistingEntityException;
 
 /**
  *
- * @author Romario
+ * @author Data
  */
 public class AdministradorJpa implements Serializable {
 
     public AdministradorJpa() {
-        this.emf = Persistence.createEntityManagerFactory("W_V_S.A.CPU");
+         this.emf = Persistence.createEntityManagerFactory("W_V_S.A.CPU");
     }
+    
+    
+
     public AdministradorJpa(EntityManagerFactory emf) {
         this.emf = emf;
     }
@@ -156,10 +159,10 @@ public class AdministradorJpa implements Serializable {
         Connection cn;
         PreparedStatement pstmt;
         ResultSet rs;
-        
+
         List<Map<String, String>> venMes =new ArrayList<>();
         try {
-            
+
             cn = Util.getConexionBD();
             pstmt = cn.prepareStatement("SELECT monthname(fecha) as fecha,sum(total) as Total FROM pedido WHERE estado=1 GROUP BY monthname (fecha) ORDER BY date(fecha)");
             rs = pstmt.executeQuery();
@@ -172,28 +175,28 @@ public class AdministradorJpa implements Serializable {
                 mapa.put("Fecha", Mes);
                 mapa.put("Total", Total);
                 venMes.add(mapa);
-                
-                 
+
+
             }
-            
-            
+
+
         } catch (Exception e) {
             e.printStackTrace();
         }
-     
-      
+
+
         return venMes;
-        
+
     }
-    
-    
+
+
     public int ContarClientes()
     {
         Connection cn;
         PreparedStatement pstmt;
         ResultSet rs;
         int resultado = 0;
-        
+
         try {
             cn = Util.getConexionBD();
             pstmt = cn.prepareStatement("SELECT COUNT(idCliente) FROM cliente");
@@ -202,20 +205,20 @@ public class AdministradorJpa implements Serializable {
             {
                 resultado = rs.getInt(1);
             }
-        
+
         } catch (Exception e) {
             e.getMessage();
         }
         return resultado;
     }
-    
+
      public int ContarAdministrador()
     {
         Connection cn;
         PreparedStatement pstmt;
         ResultSet rs;
         int resultado = 0;
-        
+
         try {
             cn = Util.getConexionBD();
             pstmt = cn.prepareStatement("select COUNT(dni) from administrador");
@@ -224,20 +227,20 @@ public class AdministradorJpa implements Serializable {
             {
                 resultado = rs.getInt(1);
             }
-        
+
         } catch (Exception e) {
             e.getMessage();
         }
         return resultado;
     }
-     
+
       public int ContarPedido()
     {
         Connection cn;
         PreparedStatement pstmt;
         ResultSet rs;
         int resultado = 0;
-        
+
         try {
             cn = Util.getConexionBD();
             pstmt = cn.prepareStatement("SELECT COUNT(idPedido) from pedido");
@@ -246,12 +249,11 @@ public class AdministradorJpa implements Serializable {
             {
                 resultado = rs.getInt(1);
             }
-        
+
         } catch (Exception e) {
             e.getMessage();
         }
         return resultado;
     }
     
- 
 }

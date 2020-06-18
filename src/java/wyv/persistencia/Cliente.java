@@ -6,6 +6,7 @@
 package wyv.persistencia;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,8 +15,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -36,6 +39,10 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Cliente.findByPassword", query = "SELECT c FROM Cliente c WHERE c.password = :password")})
 public class Cliente implements Serializable {
 
+    @OneToMany(mappedBy = "idCliente")
+    private List<Pedido> pedidoList;
+
+   
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -152,5 +159,16 @@ public class Cliente implements Serializable {
     public String toString() {
         return "wyv.persistencia.Cliente[ idCliente=" + idCliente + " ]";
     }
+
+    @XmlTransient
+    public List<Pedido> getPedidoList() {
+        return pedidoList;
+    }
+
+    public void setPedidoList(List<Pedido> pedidoList) {
+        this.pedidoList = pedidoList;
+    }
+
+   
     
 }

@@ -32,6 +32,7 @@
 <script src="//cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
 <script src="../js/funciones.js" type="text/javascript"></script>
 <script src="../js/Chart.min.js" type="text/javascript"></script>
+<script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
 
 <script>
     //Se obtiene la lista y se convierte a json
