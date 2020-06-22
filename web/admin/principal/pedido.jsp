@@ -40,13 +40,15 @@
                                             <th>SubTotal</th>
                                             <th>IGV</th>
                                             <th>Total</th>
-                                            <th>Pago</th>
+                                            <th>Tipo Pago</th>
                                             <th>Estado</th>
                                             <th>Cliente</th>
-                                            <th>Empresa</th>
                                             <th>Reporte</th>
+<<<<<<< HEAD
                                                 
 
+=======
+>>>>>>> 97edac29254a5880c5c2e5d3c6e7960383a0a617
                                         </tr> 
                                     </thead>     
                                     <tbody>
@@ -58,6 +60,7 @@
                                                 <td><s:property value="igv"/></td> 
                                                 <td><s:property value="total"/></td> 
                                                 <td><s:property value="pago"/></td> 
+<<<<<<< HEAD
                                                 
                                                 <td>
                                                     <s:if test="estado == '1'">
@@ -103,14 +106,28 @@
                                                     </s:elseif>
 
                                                 </td>
+=======
+                                                <s:if test='estado.equals("1")'>
+                                                    <td class="bg-success">Entregado</td>
+                                                </s:if>
+                                                <s:elseif test='#estado.equals("0")'>
+                                                <td class="bg-danger">Pendiente</td>
+                                                </s:elseif>
+                                                <s:elseif test='estado.equals("2")'>
+                                                   <td class="bg-warning">En proceso</td>
+                                                </s:elseif>
+                                                   <s:else >
+                                                   <td class="bg-warning">s</td>
+                                                </s:else>
+>>>>>>> 97edac29254a5880c5c2e5d3c6e7960383a0a617
                                                 <td><s:property value="idCliente.nombres"/></td> 
-                                                <td><s:property value="idEmpresa.razonSocial"/></td> 
                                                 <td><i class="fas fa-eye "></i></td>
 
                                             </s:iterator>	
                                     </tbody>
 
                                     <tfoot>
+                                        <tr>
                                     <th>Numero Pedido</th>
                                     <th>Fecha</th>
                                     <th>SubTotal</th>
@@ -119,8 +136,8 @@
                                     <th>Pago</th>
                                     <th>Estado</th>
                                     <th>Cliente</th>
-                                    <th>Empresa</th>
-                                    <th>Reporte</th>            
+                                    <th>Reporte</th>
+                                        </tr>
                                     </tfoot>
 
                                 </table>

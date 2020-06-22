@@ -12,7 +12,7 @@ import javax.persistence.Embeddable;
 
 /**
  *
- * @author Data
+ * @author Romario
  */
 @Embeddable
 public class DetallePedidoPK implements Serializable {

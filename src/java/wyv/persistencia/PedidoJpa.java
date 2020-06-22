@@ -23,14 +23,16 @@ import wyv.persistencia.exceptions.NonexistentEntityException;
 
 /**
  *
- * @author Data
+ * @author Romario
  */
 public class PedidoJpa implements Serializable {
-
-    public PedidoJpa() {
-        this.emf = Persistence.createEntityManagerFactory("W_V_S.A.CPU");
+ public PedidoJpa() {
+         this.emf = Persistence.createEntityManagerFactory("W_V_S.A.CPU");
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 97edac29254a5880c5c2e5d3c6e7960383a0a617
     public PedidoJpa(EntityManagerFactory emf) {
         this.emf = emf;
     }
@@ -53,11 +55,6 @@ public class PedidoJpa implements Serializable {
                 idCliente = em.getReference(idCliente.getClass(), idCliente.getIdCliente());
                 pedido.setIdCliente(idCliente);
             }
-            Empresa idEmpresa = pedido.getIdEmpresa();
-            if (idEmpresa != null) {
-                idEmpresa = em.getReference(idEmpresa.getClass(), idEmpresa.getIdEmpresa());
-                pedido.setIdEmpresa(idEmpresa);
-            }
             List<DetallePedido> attachedDetallePedidoList = new ArrayList<DetallePedido>();
             for (DetallePedido detallePedidoListDetallePedidoToAttach : pedido.getDetallePedidoList()) {
                 detallePedidoListDetallePedidoToAttach = em.getReference(detallePedidoListDetallePedidoToAttach.getClass(), detallePedidoListDetallePedidoToAttach.getDetallePedidoPK());
@@ -68,10 +65,6 @@ public class PedidoJpa implements Serializable {
             if (idCliente != null) {
                 idCliente.getPedidoList().add(pedido);
                 idCliente = em.merge(idCliente);
-            }
-            if (idEmpresa != null) {
-                idEmpresa.getPedidoList().add(pedido);
-                idEmpresa = em.merge(idEmpresa);
             }
             for (DetallePedido detallePedidoListDetallePedido : pedido.getDetallePedidoList()) {
                 Pedido oldPedidoOfDetallePedidoListDetallePedido = detallePedidoListDetallePedido.getPedido();
@@ -98,8 +91,6 @@ public class PedidoJpa implements Serializable {
             Pedido persistentPedido = em.find(Pedido.class, pedido.getIdPedido());
             Cliente idClienteOld = persistentPedido.getIdCliente();
             Cliente idClienteNew = pedido.getIdCliente();
-            Empresa idEmpresaOld = persistentPedido.getIdEmpresa();
-            Empresa idEmpresaNew = pedido.getIdEmpresa();
             List<DetallePedido> detallePedidoListOld = persistentPedido.getDetallePedidoList();
             List<DetallePedido> detallePedidoListNew = pedido.getDetallePedidoList();
             List<String> illegalOrphanMessages = null;
@@ -118,10 +109,6 @@ public class PedidoJpa implements Serializable {
                 idClienteNew = em.getReference(idClienteNew.getClass(), idClienteNew.getIdCliente());
                 pedido.setIdCliente(idClienteNew);
             }
-            if (idEmpresaNew != null) {
-                idEmpresaNew = em.getReference(idEmpresaNew.getClass(), idEmpresaNew.getIdEmpresa());
-                pedido.setIdEmpresa(idEmpresaNew);
-            }
             List<DetallePedido> attachedDetallePedidoListNew = new ArrayList<DetallePedido>();
             for (DetallePedido detallePedidoListNewDetallePedidoToAttach : detallePedidoListNew) {
                 detallePedidoListNewDetallePedidoToAttach = em.getReference(detallePedidoListNewDetallePedidoToAttach.getClass(), detallePedidoListNewDetallePedidoToAttach.getDetallePedidoPK());
@@ -137,14 +124,6 @@ public class PedidoJpa implements Serializable {
             if (idClienteNew != null && !idClienteNew.equals(idClienteOld)) {
                 idClienteNew.getPedidoList().add(pedido);
                 idClienteNew = em.merge(idClienteNew);
-            }
-            if (idEmpresaOld != null && !idEmpresaOld.equals(idEmpresaNew)) {
-                idEmpresaOld.getPedidoList().remove(pedido);
-                idEmpresaOld = em.merge(idEmpresaOld);
-            }
-            if (idEmpresaNew != null && !idEmpresaNew.equals(idEmpresaOld)) {
-                idEmpresaNew.getPedidoList().add(pedido);
-                idEmpresaNew = em.merge(idEmpresaNew);
             }
             for (DetallePedido detallePedidoListNewDetallePedido : detallePedidoListNew) {
                 if (!detallePedidoListOld.contains(detallePedidoListNewDetallePedido)) {
@@ -201,11 +180,6 @@ public class PedidoJpa implements Serializable {
             if (idCliente != null) {
                 idCliente.getPedidoList().remove(pedido);
                 idCliente = em.merge(idCliente);
-            }
-            Empresa idEmpresa = pedido.getIdEmpresa();
-            if (idEmpresa != null) {
-                idEmpresa.getPedidoList().remove(pedido);
-                idEmpresa = em.merge(idEmpresa);
             }
             em.remove(pedido);
             em.getTransaction().commit();

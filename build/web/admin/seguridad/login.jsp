@@ -37,7 +37,7 @@
                    <p class="login-box-msg">Inicie Sesión</p>
                     <s:form  action="ingresoAdmin" id="form_login"  styleId="acc" theme="simple">
                         <div class="input-group mb-3">
-                            <s:textfield id="dni"  name="adminLog.dni" styleId="dni" cssClass="form-control" />
+                            <s:textfield id="dni"   name="admin.dni" styleId="dni" cssClass="form-control" placeholder="Ingrese DNI"/>
                                 <div class="input-group-append">
                                     <div class="input-group-text">
                                         <i class="fa fa-envelope"></i>
@@ -47,7 +47,7 @@
 
                             <div class="input-group mb-3">
 
-                                <s:password id="password" name="adminLog.password" styleId="pass" cssClass="form-control"/>
+                                <s:password id="password" name="admin.password" styleId="pass" cssClass="form-control" placeholder="Ingrese contraseña"/>
 
                                 <div class="input-group-append">
                                     <div class="input-group-text">
@@ -66,9 +66,9 @@
                                 </div>
                                 <!-- /.col -->
                                 <div class="col-12 my-4">
-
                                 <s:submit id="ingresar" styleId="btnreg" cssClass="btn btn-primary btn-block toastrDefaultError" value="Iniciar Sesión" />
-
+                                <div class="text-danger text-center"><s:text name="resultado"/></div>
+   
                             </div>
                             <!-- /.col -->
                         </div>

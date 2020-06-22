@@ -13,3 +13,4 @@ public interface IOperacionesBD<T> {
          T ingresar(T entrada);
     
 }
+

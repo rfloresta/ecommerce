@@ -25,7 +25,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Data
+ * @author Romario
  */
 @Entity
 @Table(name = "pedido")
@@ -68,9 +68,6 @@ public class Pedido implements Serializable {
     @JoinColumn(name = "idCliente", referencedColumnName = "idCliente")
     @ManyToOne
     private Cliente idCliente;
-    @JoinColumn(name = "idEmpresa", referencedColumnName = "idEmpresa")
-    @ManyToOne
-    private Empresa idEmpresa;
 
     public Pedido() {
     }
@@ -158,14 +155,6 @@ public class Pedido implements Serializable {
 
     public void setIdCliente(Cliente idCliente) {
         this.idCliente = idCliente;
-    }
-
-    public Empresa getIdEmpresa() {
-        return idEmpresa;
-    }
-
-    public void setIdEmpresa(Empresa idEmpresa) {
-        this.idEmpresa = idEmpresa;
     }
 
     @Override

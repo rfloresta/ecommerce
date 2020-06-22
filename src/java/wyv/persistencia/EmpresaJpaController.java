@@ -6,23 +6,33 @@
 package wyv.persistencia;
 
 import java.io.Serializable;
-import javax.persistence.Query;
-import javax.persistence.EntityNotFoundException;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
-import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+<<<<<<< HEAD:src/java/wyv/persistencia/EmpresaJpaController.java
+=======
+import javax.persistence.Query;
+import javax.persistence.EntityNotFoundException;
+import javax.persistence.Persistence;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+>>>>>>> 97edac29254a5880c5c2e5d3c6e7960383a0a617:src/java/wyv/persistencia/EmpresaJpa.java
 import wyv.persistencia.exceptions.NonexistentEntityException;
 
 /**
  *
- * @author Data
+ * @author Romario
  */
 public class EmpresaJpaController implements Serializable {
 
+<<<<<<< HEAD:src/java/wyv/persistencia/EmpresaJpaController.java
     public EmpresaJpaController(EntityManagerFactory emf) {
+=======
+     public EmpresaJpa(){
+        this.emf = Persistence.createEntityManagerFactory("W_V_S.A.CPU");
+    }
+    public EmpresaJpa(EntityManagerFactory emf) {
+>>>>>>> 97edac29254a5880c5c2e5d3c6e7960383a0a617:src/java/wyv/persistencia/EmpresaJpa.java
         this.emf = emf;
     }
     private EntityManagerFactory emf = null;
@@ -32,29 +42,11 @@ public class EmpresaJpaController implements Serializable {
     }
 
     public void create(Empresa empresa) {
-        if (empresa.getPedidoList() == null) {
-            empresa.setPedidoList(new ArrayList<Pedido>());
-        }
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            List<Pedido> attachedPedidoList = new ArrayList<Pedido>();
-            for (Pedido pedidoListPedidoToAttach : empresa.getPedidoList()) {
-                pedidoListPedidoToAttach = em.getReference(pedidoListPedidoToAttach.getClass(), pedidoListPedidoToAttach.getIdPedido());
-                attachedPedidoList.add(pedidoListPedidoToAttach);
-            }
-            empresa.setPedidoList(attachedPedidoList);
             em.persist(empresa);
-            for (Pedido pedidoListPedido : empresa.getPedidoList()) {
-                Empresa oldIdEmpresaOfPedidoListPedido = pedidoListPedido.getIdEmpresa();
-                pedidoListPedido.setIdEmpresa(empresa);
-                pedidoListPedido = em.merge(pedidoListPedido);
-                if (oldIdEmpresaOfPedidoListPedido != null) {
-                    oldIdEmpresaOfPedidoListPedido.getPedidoList().remove(pedidoListPedido);
-                    oldIdEmpresaOfPedidoListPedido = em.merge(oldIdEmpresaOfPedidoListPedido);
-                }
-            }
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -68,34 +60,7 @@ public class EmpresaJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Empresa persistentEmpresa = em.find(Empresa.class, empresa.getIdEmpresa());
-            List<Pedido> pedidoListOld = persistentEmpresa.getPedidoList();
-            List<Pedido> pedidoListNew = empresa.getPedidoList();
-            List<Pedido> attachedPedidoListNew = new ArrayList<Pedido>();
-            for (Pedido pedidoListNewPedidoToAttach : pedidoListNew) {
-                pedidoListNewPedidoToAttach = em.getReference(pedidoListNewPedidoToAttach.getClass(), pedidoListNewPedidoToAttach.getIdPedido());
-                attachedPedidoListNew.add(pedidoListNewPedidoToAttach);
-            }
-            pedidoListNew = attachedPedidoListNew;
-            empresa.setPedidoList(pedidoListNew);
             empresa = em.merge(empresa);
-            for (Pedido pedidoListOldPedido : pedidoListOld) {
-                if (!pedidoListNew.contains(pedidoListOldPedido)) {
-                    pedidoListOldPedido.setIdEmpresa(null);
-                    pedidoListOldPedido = em.merge(pedidoListOldPedido);
-                }
-            }
-            for (Pedido pedidoListNewPedido : pedidoListNew) {
-                if (!pedidoListOld.contains(pedidoListNewPedido)) {
-                    Empresa oldIdEmpresaOfPedidoListNewPedido = pedidoListNewPedido.getIdEmpresa();
-                    pedidoListNewPedido.setIdEmpresa(empresa);
-                    pedidoListNewPedido = em.merge(pedidoListNewPedido);
-                    if (oldIdEmpresaOfPedidoListNewPedido != null && !oldIdEmpresaOfPedidoListNewPedido.equals(empresa)) {
-                        oldIdEmpresaOfPedidoListNewPedido.getPedidoList().remove(pedidoListNewPedido);
-                        oldIdEmpresaOfPedidoListNewPedido = em.merge(oldIdEmpresaOfPedidoListNewPedido);
-                    }
-                }
-            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
@@ -124,11 +89,6 @@ public class EmpresaJpaController implements Serializable {
                 empresa.getIdEmpresa();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The empresa with id " + id + " no longer exists.", enfe);
-            }
-            List<Pedido> pedidoList = empresa.getPedidoList();
-            for (Pedido pedidoListPedido : pedidoList) {
-                pedidoListPedido.setIdEmpresa(null);
-                pedidoListPedido = em.merge(pedidoListPedido);
             }
             em.remove(empresa);
             em.getTransaction().commit();

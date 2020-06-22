@@ -22,10 +22,9 @@ import wyv.persistencia.exceptions.NonexistentEntityException;
  */
 public class CategoriaJpa implements Serializable {
 
-    public CategoriaJpa() {
-        this.emf = Persistence.createEntityManagerFactory("W_V_S.A.CPU");
+      public CategoriaJpa() {
+         this.emf = Persistence.createEntityManagerFactory("W_V_S.A.CPU");
     }
-
     public CategoriaJpa(EntityManagerFactory emf) {
         this.emf = emf;
     }

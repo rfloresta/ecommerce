@@ -3,7 +3,8 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 17-06-2020 a las 03:41:29
+
+-- Tiempo de generación: 08-06-2020 a las 19:10:01
 -- Versión del servidor: 10.4.11-MariaDB
 -- Versión de PHP: 7.4.5
 
@@ -77,9 +78,12 @@ DELIMITER ;
 
 CREATE TABLE `administrador` (
   `dni` char(8) NOT NULL,
-  `nombres` varchar(100) DEFAULT NULL,
+  `nombres` varchar(100) NOT NULL,
   `apellidos` varchar(100) NOT NULL,
-  `password` varchar(100) DEFAULT NULL,
+  `password` varchar(100) NOT NULL,
+
+  `email` varchar(255) DEFAULT NULL,
+
   `privilegio` char(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -87,8 +91,8 @@ CREATE TABLE `administrador` (
 -- Volcado de datos para la tabla `administrador`
 --
 
-INSERT INTO `administrador` (`dni`, `nombres`, `apellidos`, `password`, `privilegio`) VALUES
-('15489669', 'Admin', 'Admin', 'admin', 'A');
+INSERT INTO `administrador` (`dni`, `nombres`, `apellidos`, `password`, `email`,  `privilegio`) VALUES
+('15489669', 'Admin', 'Admin', 'admin','admin@gmail.com', 'A');
 
 -- --------------------------------------------------------
 
@@ -178,16 +182,16 @@ CREATE TABLE `empresa` (
   `idEmpresa` int(11) NOT NULL,
   `ruc` char(11) DEFAULT NULL,
   `razonSocial` varchar(200) DEFAULT NULL,
-  `vision` text DEFAULT NULL,
-  `mision` text DEFAULT NULL
+  `direccion` text DEFAULT NULL,
+  `logo` varhar(255)DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `empresa`
 --
 
-INSERT INTO `empresa` (`idEmpresa`, `ruc`, `razonSocial`, `vision`, `mision`) VALUES
-(1, '20100148162', 'W&V Negocios y Servicios S.A.C', 'fomentar el uso de cosmeticos', 'empresa lider a nivel lima metropolitana');
+INSERT INTO `empresa` (`idEmpresa`, `ruc`, `razonSocial`, `direccion`, `logo`) VALUES
+(1, '20100148162', 'W&V Negocios y Servicios S.A.C', 'Calle...', 'nego.jpg')
 
 -- --------------------------------------------------------
 
@@ -224,18 +228,18 @@ CREATE TABLE `pedido` (
   `total` double(10,2) DEFAULT NULL,
   `pago` varchar(10) DEFAULT NULL,
   `estado` char(1) DEFAULT NULL,
-  `idCliente` int(11) DEFAULT NULL,
-  `idEmpresa` int(11) DEFAULT NULL
+  `idCliente` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `pedido`
 --
 
-INSERT INTO `pedido` (`idPedido`, `numero`, `fecha`, `subtotal`, `igv`, `total`, `pago`, `estado`, `idCliente`, `idEmpresa`) VALUES
-(1, 1, '2020-06-14 22:28:01', 100.00, 0.18, 100.00, 'Tarjeta', 'P', 1, 1),
-(2, 2, '2020-06-14 23:50:00', 200.00, 0.18, 200.00, 'Tarjeta', 'P', 1, 1),
-(3, 3, '2020-06-15 00:24:03', 300.00, 0.18, 300.00, 'Tarjeta', 'P', 1, 1);
+INSERT INTO `pedido` (`idPedido`, `numero`, `fecha`, `subtotal`, `igv`, `total`, `pago`, `estado`, `idCliente`)
+VALUES
+(1, 1, '2020-06-14 22:28:01', 100.00, 0.18, 100.00, 'Tarjeta', '0', 1),
+(2, 2, '2020-06-14 23:50:00', 200.00, 0.18, 200.00, 'Tarjeta', '0', 1),
+(3, 3, '2020-06-15 00:24:03', 300.00, 0.18, 300.00, 'Tarjeta', '0', 1);
 
 -- --------------------------------------------------------
 
@@ -313,7 +317,6 @@ ALTER TABLE `marca`
 ALTER TABLE `pedido`
   ADD PRIMARY KEY (`idPedido`),
   ADD KEY `pedido_ibfk_1` (`idCliente`),
-  ADD KEY `pedido_ibfk_2` (`idEmpresa`);
 
 --
 -- Indices de la tabla `producto`
@@ -379,7 +382,6 @@ ALTER TABLE `detalle_pedido`
 --
 ALTER TABLE `pedido`
   ADD CONSTRAINT `pedido_ibfk_1` FOREIGN KEY (`idCliente`) REFERENCES `cliente` (`idCliente`),
-  ADD CONSTRAINT `pedido_ibfk_2` FOREIGN KEY (`idEmpresa`) REFERENCES `empresa` (`idEmpresa`);
 
 --
 -- Filtros para la tabla `producto`

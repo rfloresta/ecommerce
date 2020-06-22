@@ -28,6 +28,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Administrador.findByNombres", query = "SELECT a FROM Administrador a WHERE a.nombres = :nombres")
     , @NamedQuery(name = "Administrador.findByApellidos", query = "SELECT a FROM Administrador a WHERE a.apellidos = :apellidos")
     , @NamedQuery(name = "Administrador.findByPassword", query = "SELECT a FROM Administrador a WHERE a.password = :password")
+    , @NamedQuery(name = "Administrador.findByEmail", query = "SELECT a FROM Administrador a WHERE a.email = :email")
     , @NamedQuery(name = "Administrador.findByPrivilegio", query = "SELECT a FROM Administrador a WHERE a.privilegio = :privilegio")})
 public class Administrador implements Serializable {
 
@@ -43,6 +44,8 @@ public class Administrador implements Serializable {
     private String apellidos;
     @Column(name = "password")
     private String password;
+    @Column(name = "email")
+    private String email;
     @Basic(optional = false)
     @Column(name = "privilegio")
     private Character privilegio;
@@ -92,6 +95,17 @@ public class Administrador implements Serializable {
         this.password = password;
     }
 
+<<<<<<< HEAD
+=======
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+>>>>>>> 97edac29254a5880c5c2e5d3c6e7960383a0a617
     public Character getPrivilegio() {
         return privilegio;
     }

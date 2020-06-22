@@ -25,15 +25,18 @@ import wyv.persistencia.exceptions.PreexistingEntityException;
 
 /**
  *
- * @author Data
+ * @author Romario
  */
 public class AdministradorJpa implements Serializable {
 
     public AdministradorJpa() {
         this.emf= Persistence.createEntityManagerFactory("W_V_S.A.CPU");
     }
+<<<<<<< HEAD
 
     
+=======
+>>>>>>> 97edac29254a5880c5c2e5d3c6e7960383a0a617
     public AdministradorJpa(EntityManagerFactory emf) {
         this.emf = emf;
     }
@@ -254,5 +257,6 @@ public class AdministradorJpa implements Serializable {
         }
         return resultado;
     }
+    
     
 }

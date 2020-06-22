@@ -6,7 +6,6 @@
 package wyv.persistencia;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,14 +15,12 @@ import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Data
+ * @author Romario
  */
 @Entity
 @Table(name = "empresa")
@@ -32,7 +29,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Empresa.findAll", query = "SELECT e FROM Empresa e")
     , @NamedQuery(name = "Empresa.findByIdEmpresa", query = "SELECT e FROM Empresa e WHERE e.idEmpresa = :idEmpresa")
     , @NamedQuery(name = "Empresa.findByRuc", query = "SELECT e FROM Empresa e WHERE e.ruc = :ruc")
-    , @NamedQuery(name = "Empresa.findByRazonSocial", query = "SELECT e FROM Empresa e WHERE e.razonSocial = :razonSocial")})
+    , @NamedQuery(name = "Empresa.findByRazonSocial", query = "SELECT e FROM Empresa e WHERE e.razonSocial = :razonSocial")
+    , @NamedQuery(name = "Empresa.findByLogo", query = "SELECT e FROM Empresa e WHERE e.logo = :logo")})
 public class Empresa implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -45,20 +43,23 @@ public class Empresa implements Serializable {
     private String ruc;
     @Column(name = "razonSocial")
     private String razonSocial;
+    @Basic(optional = false)
     @Lob
-    @Column(name = "vision")
-    private String vision;
-    @Lob
-    @Column(name = "mision")
-    private String mision;
-    @OneToMany(mappedBy = "idEmpresa")
-    private List<Pedido> pedidoList;
+    @Column(name = "direccion")
+    private String direccion;
+    @Column(name = "logo")
+    private String logo;
 
     public Empresa() {
     }
 
     public Empresa(Integer idEmpresa) {
         this.idEmpresa = idEmpresa;
+    }
+
+    public Empresa(Integer idEmpresa, String direccion) {
+        this.idEmpresa = idEmpresa;
+        this.direccion = direccion;
     }
 
     public Integer getIdEmpresa() {
@@ -85,29 +86,20 @@ public class Empresa implements Serializable {
         this.razonSocial = razonSocial;
     }
 
-    public String getVision() {
-        return vision;
+    public String getDireccion() {
+        return direccion;
     }
 
-    public void setVision(String vision) {
-        this.vision = vision;
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
     }
 
-    public String getMision() {
-        return mision;
+    public String getLogo() {
+        return logo;
     }
 
-    public void setMision(String mision) {
-        this.mision = mision;
-    }
-
-    @XmlTransient
-    public List<Pedido> getPedidoList() {
-        return pedidoList;
-    }
-
-    public void setPedidoList(List<Pedido> pedidoList) {
-        this.pedidoList = pedidoList;
+    public void setLogo(String logo) {
+        this.logo = logo;
     }
 
     @Override

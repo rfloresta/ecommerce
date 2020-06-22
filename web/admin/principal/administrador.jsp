@@ -45,7 +45,9 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="inputPassword">Password</label>
-                                    <s:textfield  name="admin.password" cssClass="form-control" placeholder="Ingrese Password"/>
+                                    <s:password  name="admin.password" cssClass="form-control" placeholder="Ingrese Password"/>
+
+                                 
                                 </div>
                                 <div class="form-group">
                                     <label for="inputPrivilegio">Privilegio</label>
@@ -85,7 +87,11 @@
                                             <tr>
 
                                                 <s:if test="adminLog.dni.equals(dni)">
-
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
                                                 </s:if>
                                                 <s:else>
                                                     <td><s:property value="dni"/> </td>
@@ -94,7 +100,7 @@
                                                     <td><s:property value="privilegio"/></td>
 
                                                     <td>
-                                                        <s:if test='privilegio.equals("2")'>
+                                                        <s:if test='privilegio.equals("M")'>
                                                             <s:url id="lnkEditar" action="editarAdmin">
                                                                 <s:param value="dni" name="admin.dni" />
                                                             </s:url>

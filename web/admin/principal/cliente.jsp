@@ -5,12 +5,12 @@
         <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="font-weight-bold ">Mantenimiento Cliente</h1>
+                <h1 class="font-weight-bold ">Clientes Registrados</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-                    <li class="breadcrumb-item active">Categorias</li>
+                    <li class="breadcrumb-item active">Clientes</li>
                 </ol>
             </div>  
         </div>
@@ -40,7 +40,6 @@
                                             <th>N° Celular</th>
                                             <th>Direccion</th>
                                             <th>Email</th>
-                                            <th>Password</th>
                                             
                                             
                                         </tr> 
@@ -54,8 +53,6 @@
                                                 <td><s:property value="numCelular"/></td> 
                                                 <td><s:property value="direccion"/></td> 
                                                 <td><s:property value="email"/></td> 
-                                                <td><s:property value="password"/></td> 
-                                                
 
                                             </s:iterator>	
                                     </tbody>
@@ -66,8 +63,7 @@
                                             <th>Dni</th>
                                             <th>N° Celular</th>
                                             <th>Direccion</th>
-                                            <th>Email</th>
-                                            <th>Password</th>              
+                                            <th>Email</th>             
                                     </tfoot>
 
                                 </table>

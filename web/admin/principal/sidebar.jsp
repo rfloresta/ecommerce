@@ -18,7 +18,7 @@
         </div>
         <div class="info">
             
-            <s:label  name="#session.NombreCompleto" cssClass="text-light" />
+            <s:label  name="#session.nombreCompleto" cssClass="text-light" />
             
             </div>
       </div>
@@ -28,6 +28,14 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
+          <li class="nav-item has-treeview">
+              <a href="cargarEmpresa" href="#" class="nav-link">
+              <i class="nav-icon fas fa-building"></i>
+              <p>
+                Empresa
+              </p>
+            </a>
+          </li>
           <li class="nav-item has-treeview">
              <a href="listarPedido" class="nav-link">
                  <i class="nav-icon fas fa-cash-register"></i>
@@ -74,8 +82,13 @@
             </a>
             
           </li>
+<<<<<<< HEAD
           <s:hidden name="#session.privilegio" />
            <s:if  test="#session.privilegio == 'A'">
+=======
+          
+           <s:if  test='#session.privilegio.equals("A")'>
+>>>>>>> 97edac29254a5880c5c2e5d3c6e7960383a0a617
           <li class="nav-item has-treeview">
               <a  href="listarAdmin" class="nav-link menu">
               <i class="nav-icon fas fa-users"></i>

@@ -47,6 +47,11 @@ public class Categoria implements Serializable {
     private String nombre;
     @Column(name = "categoriaSuperior")
     private Integer categoriaSuperior;
+<<<<<<< HEAD
+=======
+    @OneToMany(mappedBy = "idCategoria")
+    private List<Producto> productoList;
+>>>>>>> 97edac29254a5880c5c2e5d3c6e7960383a0a617
 
     public Categoria() {
     }
@@ -73,6 +78,18 @@ public class Categoria implements Serializable {
 
     public Integer getCategoriaSuperior() {
         return categoriaSuperior;
+<<<<<<< HEAD
+=======
+    }
+
+    public void setCategoriaSuperior(Integer categoriaSuperior) {
+        this.categoriaSuperior = categoriaSuperior;
+    }
+
+    @XmlTransient
+    public List<Producto> getProductoList() {
+        return productoList;
+>>>>>>> 97edac29254a5880c5c2e5d3c6e7960383a0a617
     }
 
     public void setCategoriaSuperior(Integer categoriaSuperior) {
@@ -102,6 +119,7 @@ public class Categoria implements Serializable {
     @Override
     public String toString() {
         return "wyv.persistencia.Categoria[ idCategoria=" + idCategoria + " ]";
+<<<<<<< HEAD
     }
 
     @XmlTransient
@@ -111,6 +129,8 @@ public class Categoria implements Serializable {
 
     public void setProductoList(List<Producto> productoList) {
         this.productoList = productoList;
+=======
+>>>>>>> 97edac29254a5880c5c2e5d3c6e7960383a0a617
     }
     
 }

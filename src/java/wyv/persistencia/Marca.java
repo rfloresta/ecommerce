@@ -91,6 +91,7 @@ public class Marca implements Serializable {
     @Override
     public String toString() {
         return "wyv.persistencia.Marca[ idMarca=" + idMarca + " ]";
+<<<<<<< HEAD
     }
 
     @XmlTransient
@@ -100,6 +101,8 @@ public class Marca implements Serializable {
 
     public void setProductoList(List<Producto> productoList) {
         this.productoList = productoList;
+=======
+>>>>>>> 97edac29254a5880c5c2e5d3c6e7960383a0a617
     }
     
 }
