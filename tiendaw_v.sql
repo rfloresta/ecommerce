@@ -107,8 +107,8 @@ CREATE TABLE `empresa` (
   `idEmpresa` int(11) NOT NULL,
   `ruc` char(11) DEFAULT NULL,
   `razonSocial` varchar(200) DEFAULT NULL,
-  `vision` text,
-  `mision` text
+  `direccion` text DEFAULT NULL,
+  `logo` varhar(255)DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
