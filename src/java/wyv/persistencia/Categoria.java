@@ -109,7 +109,7 @@ public class Categoria implements Serializable {
 
     @Override
     public String toString() {
-        return nombre;
+        return "wyv.persistencia.Categoria[ idCategoria=" + idCategoria + " ]";
     }
     
 }

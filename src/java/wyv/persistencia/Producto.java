@@ -6,7 +6,9 @@
 package wyv.persistencia;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,8 +19,10 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -61,6 +65,8 @@ public class Producto implements Serializable {
     @Lob
     @Column(name = "imagen")
     private String imagen;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "producto")
+    private List<DetallePedido> detallePedidoList;
     @JoinColumn(name = "idCategoria", referencedColumnName = "idCategoria")
     @ManyToOne
     private Categoria idCategoria;
@@ -142,6 +148,15 @@ public class Producto implements Serializable {
 
     public void setImagen(String imagen) {
         this.imagen = imagen;
+    }
+
+    @XmlTransient
+    public List<DetallePedido> getDetallePedidoList() {
+        return detallePedidoList;
+    }
+
+    public void setDetallePedidoList(List<DetallePedido> detallePedidoList) {
+        this.detallePedidoList = detallePedidoList;
     }
 
     public Categoria getIdCategoria() {

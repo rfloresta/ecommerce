@@ -46,6 +46,8 @@
                                 <div class="form-group">
                                     <label for="inputPassword">Password</label>
                                     <s:password  name="admin.password" cssClass="form-control" placeholder="Ingrese Password"/>
+
+                                 
                                 </div>
                                 <div class="form-group">
                                     <label for="inputPrivilegio">Privilegio</label>

@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package wyv.persistencia;
 
 import java.io.Serializable;
@@ -42,7 +47,6 @@ public class Empresa implements Serializable {
     @Lob
     @Column(name = "direccion")
     private String direccion;
-    @Basic(optional = false)
     @Column(name = "logo")
     private String logo;
 
@@ -53,10 +57,9 @@ public class Empresa implements Serializable {
         this.idEmpresa = idEmpresa;
     }
 
-    public Empresa(Integer idEmpresa, String direccion, String logo) {
+    public Empresa(Integer idEmpresa, String direccion) {
         this.idEmpresa = idEmpresa;
         this.direccion = direccion;
-        this.logo = logo;
     }
 
     public Integer getIdEmpresa() {

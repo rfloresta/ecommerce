@@ -23,13 +23,13 @@
   <!-- Ionicons -->
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
   <!-- overlayScrollbars -->
- 
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
   <!-- Mis Estilos -->
   <link href="../css/main.css" rel="stylesheet" type="text/css"/>
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
   
-
+<link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
 </head>
 <body class="hold-transition sidebar-mini">
 <!-- Site wrapper -->
@@ -67,12 +67,12 @@
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" data-toggle="dropdown"  
            id="cerrarsesion" aria-haspopup="true" aria-expanded="false">
-         Administrador: <s:label  name="adminLog.nombres"  />
+         Administrador: <s:label  name="#session.nombre"  />
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right"
              aria-labelledby="#cerrarsesion" >
+            <a  href="cargarPerfilAdmin" class="dropdown-item">Perfil</a>
             <a  href="login.jsp" class="dropdown-item">Cerrar Sesion</a>
-            <a  href="editarDatos.jsp" class="dropdown-item">Editar Datos</a>
           
         </div>
       </li>

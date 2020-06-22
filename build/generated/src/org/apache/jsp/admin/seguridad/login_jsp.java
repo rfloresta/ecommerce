@@ -81,7 +81,7 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("        <link href=\"../css/main.css\" rel=\"stylesheet\" type=\"text/css\"/>\r\n");
       out.write("        <!-- Ionicons -->\r\n");
       out.write("        <link rel=\"stylesheet\" href=\"https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css\">\r\n");
-      out.write("\r\n");
+      out.write("        <link href=\"../css/toastr.min.css\" rel=\"stylesheet\" type=\"text/css\"/>\r\n");
       out.write("        <!-- Theme style -->\r\n");
       out.write("        <link rel=\"stylesheet\" href=\"../css/adminlte.min.css\">\r\n");
       out.write("        <!-- Google Font: Source Sans Pro -->\r\n");
@@ -125,9 +125,10 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("        <script src=\"https://cdn.jsdelivr.net/npm/sweetalert2@9\"></script>\r\n");
       out.write("        <script src=\"../js/funciones.js\" type=\"text/javascript\"></script>\r\n");
       out.write("        \r\n");
+      out.write("        <script src=\"../plugins/toastr/toastr.min.js\"></script>\r\n");
       out.write("        <!--mi script-->\r\n");
       out.write("        <script src=\"../js/main.js\" type=\"text/javascript\"></script>\r\n");
-      out.write("\r\n");
+      out.write("        <script src=\"../js/toastr.min.js\" type=\"text/javascript\"></script>\r\n");
       out.write("\r\n");
       out.write("    </body>\r\n");
       out.write("</html>");
@@ -201,7 +202,6 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
         out.write("                                </div>\r\n");
         out.write("                                <!-- /.col -->\r\n");
         out.write("                                <div class=\"col-12 my-4\">\r\n");
-        out.write("\r\n");
         out.write("                                ");
         if (_jspx_meth_s_submit_0((javax.servlet.jsp.tagext.JspTag) _jspx_th_s_form_0, _jspx_page_context))
           return true;
@@ -210,7 +210,7 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
         if (_jspx_meth_s_text_0((javax.servlet.jsp.tagext.JspTag) _jspx_th_s_form_0, _jspx_page_context))
           return true;
         out.write("</div>\r\n");
-        out.write("                             \r\n");
+        out.write("   \r\n");
         out.write("                            </div>\r\n");
         out.write("                            <!-- /.col -->\r\n");
         out.write("                        </div>\r\n");
@@ -243,7 +243,7 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
     _jspx_th_s_textfield_0.setPageContext(_jspx_page_context);
     _jspx_th_s_textfield_0.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_s_form_0);
     _jspx_th_s_textfield_0.setId("dni");
-    _jspx_th_s_textfield_0.setName("adminLog.dni");
+    _jspx_th_s_textfield_0.setName("admin.dni");
     _jspx_th_s_textfield_0.setDynamicAttribute(null, "styleId", new String("dni"));
     _jspx_th_s_textfield_0.setCssClass("form-control");
     _jspx_th_s_textfield_0.setDynamicAttribute(null, "placeholder", new String("Ingrese DNI"));
@@ -265,7 +265,7 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
     _jspx_th_s_password_0.setPageContext(_jspx_page_context);
     _jspx_th_s_password_0.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_s_form_0);
     _jspx_th_s_password_0.setId("password");
-    _jspx_th_s_password_0.setName("adminLog.password");
+    _jspx_th_s_password_0.setName("admin.password");
     _jspx_th_s_password_0.setDynamicAttribute(null, "styleId", new String("pass"));
     _jspx_th_s_password_0.setCssClass("form-control");
     _jspx_th_s_password_0.setDynamicAttribute(null, "placeholder", new String("Ingrese contraseña"));
@@ -288,7 +288,7 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
     _jspx_th_s_submit_0.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_s_form_0);
     _jspx_th_s_submit_0.setId("ingresar");
     _jspx_th_s_submit_0.setDynamicAttribute(null, "styleId", new String("btnreg"));
-    _jspx_th_s_submit_0.setCssClass("btn btn-primary btn-block");
+    _jspx_th_s_submit_0.setCssClass("btn btn-primary btn-block toastrDefaultError");
     _jspx_th_s_submit_0.setValue("Iniciar Sesión");
     int _jspx_eval_s_submit_0 = _jspx_th_s_submit_0.doStartTag();
     if (_jspx_th_s_submit_0.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {

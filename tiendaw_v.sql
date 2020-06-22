@@ -1,13 +1,18 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.5.2
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
+<<<<<<< HEAD
 -- Tiempo de generación: 08-06-2020 a las 19:10:01
+=======
+-- Tiempo de generación: 17-06-2020 a las 03:41:29
+>>>>>>> e331289fcacacd06d87c5edbbb0642d73fe2be44
 -- Versión del servidor: 10.4.11-MariaDB
 -- Versión de PHP: 7.4.5
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -19,6 +24,54 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `tiendaw_v`
 --
+
+DELIMITER $$
+--
+-- Procedimientos
+--
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_actualizarcantidadproducto` (IN `cantidad` INT, IN `precioVenta` DOUBLE(10,2), IN `idProducto` INT)  BEGIN
+
+    update producto 
+    set stock = stock + cantidad, 
+    precioVenta= precioVenta 
+    where producto.idProducto=idProducto;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_contarproductoMarca` (IN `marca` INT)  BEGIN
+select count(*) as cantidad from producto where idMarca=marca;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_listarcategoria` ()  BEGIN
+	SELECT idCategoria, nombre from categoria
+    where idCategoria=categoriaSuperior;
+end$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_listarmarca` ()  BEGIN
+	SELECT idMarca, nombre from marca;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_listarproducto` ()  BEGIN
+	SELECT idProducto, nombre, descripcion, stock, precioCompra, precioVenta, descuento, imagen, idCategoria, idMarca from producto;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_listarproductoCategoria` (IN `categoria` INT)  BEGIN
+	select p.* from producto p 
+    inner join categoria c on c.idCategoria=p.idCategoria
+    and p.idCategoria=categoria;
+end$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_listarproductoMarca` (`marca` INT)  BEGIN
+	select p.* from producto p 
+    inner join marca m on m.idMarca=p.idMarca
+    and p.idMarca=marca;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_listarsubCategoria` (`csuperior` INT)  BEGIN
+	select idCategoria,nombre from categoria
+    where idCategoria<>categoriaSuperior and categoriaSuperior=csuperior;
+end$$
+
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -39,13 +92,7 @@ CREATE TABLE `administrador` (
 --
 
 INSERT INTO `administrador` (`dni`, `nombres`, `apellidos`, `password`, `privilegio`) VALUES
-('12322', 'prueba', 'prueba', NULL, 'M'),
-('12345678', '12', '21', '1212', 'M'),
-('212', '1212', '1212', '1212', 'M'),
-('221', '212', '121', '12', 'M'),
-('44444444', 'Maria', 'Cardenas', '1234', 'M'),
-('48887174', 'Romario ', 'Flores Taipe', '1234', 'A'),
-('8888888', 'heheh', 'eheheh1', '1234', 'A');
+('15489669', 'Admin', 'Admin', 'admin', 'A');
 
 -- --------------------------------------------------------
 
@@ -56,15 +103,17 @@ INSERT INTO `administrador` (`dni`, `nombres`, `apellidos`, `password`, `privile
 CREATE TABLE `categoria` (
   `idCategoria` int(11) NOT NULL,
   `nombre` varchar(150) DEFAULT NULL,
-  `descripcion` text
+  `categoriaSuperior` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `categoria`
 --
 
-INSERT INTO `categoria` (`idCategoria`, `nombre`, `descripcion`) VALUES
-(1, 'Perfume', 'Perfume grande');
+INSERT INTO `categoria` (`idCategoria`, `nombre`, `categoriaSuperior`) VALUES
+(1, 'Perfumes', 1),
+(2, 'Hombre', 1),
+(3, 'Mujer', 1);
 
 -- --------------------------------------------------------
 
@@ -83,6 +132,13 @@ CREATE TABLE `cliente` (
   `password` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Volcado de datos para la tabla `cliente`
+--
+
+INSERT INTO `cliente` (`idCliente`, `nombres`, `apellidos`, `dni`, `numCelular`, `direccion`, `email`, `password`) VALUES
+(1, 'maria', 'fernandez', '48568968', '948049745', 'VES', 'maria@gmail.com', '123');
+
 -- --------------------------------------------------------
 
 --
@@ -90,12 +146,31 @@ CREATE TABLE `cliente` (
 --
 
 CREATE TABLE `detalle_pedido` (
-  `idDetalle` int(11) NOT NULL,
   `cantidad` int(3) DEFAULT NULL,
   `precio` double(10,2) DEFAULT NULL,
-  `idProducto` int(11) DEFAULT NULL,
-  `idPedido` int(11) DEFAULT NULL
+  `descuento` double(10,2) NOT NULL,
+  `idProducto` int(11) NOT NULL,
+  `idPedido` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `detalle_pedido`
+--
+
+INSERT INTO `detalle_pedido` (`cantidad`, `precio`, `descuento`, `idProducto`, `idPedido`) VALUES
+(1, 100.00, 0.00, 3, 1),
+(2, 100.00, 0.00, 3, 2),
+(3, 100.00, 0.00, 3, 3);
+
+--
+-- Disparadores `detalle_pedido`
+--
+DELIMITER $$
+CREATE TRIGGER `actualizarstock` AFTER INSERT ON `detalle_pedido` FOR EACH ROW update producto
+set producto.stock = producto.stock - new.cantidad
+where producto.idProducto = new.idProducto
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -107,9 +182,21 @@ CREATE TABLE `empresa` (
   `idEmpresa` int(11) NOT NULL,
   `ruc` char(11) DEFAULT NULL,
   `razonSocial` varchar(200) DEFAULT NULL,
+<<<<<<< HEAD
   `direccion` text DEFAULT NULL,
   `logo` varhar(255)DEFAULT NULL
+=======
+  `vision` text DEFAULT NULL,
+  `mision` text DEFAULT NULL
+>>>>>>> e331289fcacacd06d87c5edbbb0642d73fe2be44
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `empresa`
+--
+
+INSERT INTO `empresa` (`idEmpresa`, `ruc`, `razonSocial`, `vision`, `mision`) VALUES
+(1, '20100148162', 'W&V Negocios y Servicios S.A.C', 'fomentar el uso de cosmeticos', 'empresa lider a nivel lima metropolitana');
 
 -- --------------------------------------------------------
 
@@ -127,7 +214,9 @@ CREATE TABLE `marca` (
 --
 
 INSERT INTO `marca` (`idMarca`, `nombre`) VALUES
-(1, 'Esika');
+(1, 'Esika'),
+(2, 'Cyzone'),
+(3, 'Unique');
 
 -- --------------------------------------------------------
 
@@ -137,16 +226,24 @@ INSERT INTO `marca` (`idMarca`, `nombre`) VALUES
 
 CREATE TABLE `pedido` (
   `idPedido` int(11) NOT NULL,
-  `numero` char(10) DEFAULT NULL,
+  `numero` int(11) DEFAULT NULL,
   `fecha` datetime DEFAULT NULL,
   `subtotal` double(10,2) DEFAULT NULL,
-  `totalDescuento` double(10,2) DEFAULT NULL,
   `igv` double(10,2) DEFAULT NULL,
   `total` double(10,2) DEFAULT NULL,
-  `pago` double(10,2) DEFAULT NULL,
+  `pago` varchar(10) DEFAULT NULL,
   `estado` char(1) DEFAULT NULL,
   `idCliente` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `pedido`
+--
+
+INSERT INTO `pedido` (`idPedido`, `numero`, `fecha`, `subtotal`, `igv`, `total`, `pago`, `estado`, `idCliente`, `idEmpresa`) VALUES
+(1, 1, '2020-06-14 22:28:01', 100.00, 0.18, 100.00, 'Tarjeta', 'P', 1, 1),
+(2, 2, '2020-06-14 23:50:00', 200.00, 0.18, 200.00, 'Tarjeta', 'P', 1, 1),
+(3, 3, '2020-06-15 00:24:03', 300.00, 0.18, 300.00, 'Tarjeta', 'P', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -162,7 +259,7 @@ CREATE TABLE `producto` (
   `precioCompra` double(10,2) DEFAULT NULL,
   `precioVenta` double(10,2) DEFAULT NULL,
   `descuento` double(10,2) DEFAULT NULL,
-  `imagen` text,
+  `imagen` text DEFAULT NULL,
   `idCategoria` int(11) DEFAULT NULL,
   `idMarca` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -172,9 +269,9 @@ CREATE TABLE `producto` (
 --
 
 INSERT INTO `producto` (`idProducto`, `nombre`, `descripcion`, `stock`, `precioCompra`, `precioVenta`, `descuento`, `imagen`, `idCategoria`, `idMarca`) VALUES
-(9, 'Prueba', 'Prueba', 1, 50.00, 60.00, 0.00, NULL, 1, 1),
-(10, 'www', 'www', 123, 140.00, 150.00, 0.00, NULL, 1, 1),
-(11, 'www', 'www', 123, 140.00, 150.00, 0.00, NULL, 1, 1);
+(1, 'Altheus', 'perfume con aroma deportivo', 900, 50.00, 65.00, 0.00, 'altheus.jpg', 2, 1),
+(2, 'Cardigan', 'perfume con aroma seductor', 648, 70.00, 80.00, 0.00, 'cardigan.jpg', 2, 1),
+(3, 'Glamour', 'perfume con aroma seductor', 286, 80.00, 100.00, 0.00, 'glamour.jpg', 3, 2);
 
 --
 -- Índices para tablas volcadas
@@ -202,9 +299,9 @@ ALTER TABLE `cliente`
 -- Indices de la tabla `detalle_pedido`
 --
 ALTER TABLE `detalle_pedido`
-  ADD PRIMARY KEY (`idDetalle`),
-  ADD KEY `detallepedido_ibfk_1` (`idProducto`),
-  ADD KEY `detallepedido_ibfk_2` (`idPedido`);
+  ADD PRIMARY KEY (`idProducto`,`idPedido`),
+  ADD KEY `idProducto` (`idProducto`),
+  ADD KEY `idPedico` (`idPedido`);
 
 --
 -- Indices de la tabla `empresa`
@@ -241,37 +338,38 @@ ALTER TABLE `producto`
 -- AUTO_INCREMENT de la tabla `categoria`
 --
 ALTER TABLE `categoria`
-  MODIFY `idCategoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idCategoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
 --
 -- AUTO_INCREMENT de la tabla `cliente`
 --
 ALTER TABLE `cliente`
-  MODIFY `idCliente` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT de la tabla `detalle_pedido`
---
-ALTER TABLE `detalle_pedido`
-  MODIFY `idDetalle` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idCliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
 --
 -- AUTO_INCREMENT de la tabla `empresa`
 --
 ALTER TABLE `empresa`
-  MODIFY `idEmpresa` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idEmpresa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
 --
 -- AUTO_INCREMENT de la tabla `marca`
 --
 ALTER TABLE `marca`
-  MODIFY `idMarca` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idMarca` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
 --
 -- AUTO_INCREMENT de la tabla `pedido`
 --
 ALTER TABLE `pedido`
-  MODIFY `idPedido` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idPedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
 --
 -- AUTO_INCREMENT de la tabla `producto`
 --
 ALTER TABLE `producto`
-  MODIFY `idProducto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `idProducto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
 --
 -- Restricciones para tablas volcadas
 --
@@ -295,6 +393,7 @@ ALTER TABLE `pedido`
 ALTER TABLE `producto`
   ADD CONSTRAINT `producto_ibfk_1` FOREIGN KEY (`idCategoria`) REFERENCES `categoria` (`idCategoria`),
   ADD CONSTRAINT `producto_ibfk_2` FOREIGN KEY (`idMarca`) REFERENCES `marca` (`idMarca`);
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

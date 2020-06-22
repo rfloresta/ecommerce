@@ -20,7 +20,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author Romario
  */
 @Entity
-@Table(name = "administrador", catalog = "tiendaw_v", schema = "")
+@Table(name = "administrador")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Administrador.findAll", query = "SELECT a FROM Administrador a")
@@ -28,6 +28,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Administrador.findByNombres", query = "SELECT a FROM Administrador a WHERE a.nombres = :nombres")
     , @NamedQuery(name = "Administrador.findByApellidos", query = "SELECT a FROM Administrador a WHERE a.apellidos = :apellidos")
     , @NamedQuery(name = "Administrador.findByPassword", query = "SELECT a FROM Administrador a WHERE a.password = :password")
+    , @NamedQuery(name = "Administrador.findByEmail", query = "SELECT a FROM Administrador a WHERE a.email = :email")
     , @NamedQuery(name = "Administrador.findByPrivilegio", query = "SELECT a FROM Administrador a WHERE a.privilegio = :privilegio")})
 public class Administrador implements Serializable {
 
@@ -43,9 +44,11 @@ public class Administrador implements Serializable {
     private String apellidos;
     @Column(name = "password")
     private String password;
+    @Column(name = "email")
+    private String email;
     @Basic(optional = false)
     @Column(name = "privilegio")
-    private String privilegio;
+    private Character privilegio;
 
     public Administrador() {
     }
@@ -54,7 +57,7 @@ public class Administrador implements Serializable {
         this.dni = dni;
     }
 
-    public Administrador(String dni, String apellidos, String privilegio) {
+    public Administrador(String dni, String apellidos, Character privilegio) {
         this.dni = dni;
         this.apellidos = apellidos;
         this.privilegio = privilegio;
@@ -92,11 +95,19 @@ public class Administrador implements Serializable {
         this.password = password;
     }
 
-    public String getPrivilegio() {
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Character getPrivilegio() {
         return privilegio;
     }
 
-    public void setPrivilegio(String privilegio) {
+    public void setPrivilegio(Character privilegio) {
         this.privilegio = privilegio;
     }
 

@@ -17,8 +17,10 @@
             <img src="../imagenes/8.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-            <a href="#" class="d-block"><s:label  name="adminLog.nombres"  /> <s:label  name="adminLog.apellidos"  /></a>
-        </div>
+            
+            <s:label  name="#session.nombreCompleto" cssClass="text-light" />
+            
+            </div>
       </div>
 
       <!-- Sidebar Menu -->
@@ -35,7 +37,7 @@
             </a>
           </li>
           <li class="nav-item has-treeview">
-             <a href="RedireccionVentas" class="nav-link">
+             <a href="listarPedido" class="nav-link">
                  <i class="nav-icon fas fa-cash-register"></i>
                   <p>Pedidos</p>
                 </a>
@@ -72,7 +74,7 @@
             </ul>
           </li>
           <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
+            <a href="listarClie" class="nav-link">
               <i class="nav-icon fas fa-people-arrows"></i>
               <p>
                 Clientes
@@ -80,7 +82,8 @@
             </a>
             
           </li>
-           <s:if  test='adminLog.privilegio.equals("A")'>
+          
+           <s:if  test='#session.privilegio.equals("A")'>
           <li class="nav-item has-treeview">
               <a  href="listarAdmin" class="nav-link menu">
               <i class="nav-icon fas fa-users"></i>

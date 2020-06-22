@@ -6,7 +6,13 @@
 package wyv.persistencia;
 
 import java.io.Serializable;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
@@ -24,7 +30,7 @@ import wyv.persistencia.exceptions.PreexistingEntityException;
 public class AdministradorJpa implements Serializable {
 
     public AdministradorJpa() {
-        this.emf = Persistence.createEntityManagerFactory("W_V_S.A.CPU");
+         this.emf = Persistence.createEntityManagerFactory("W_V_S.A.CPU");
     }
     public AdministradorJpa(EntityManagerFactory emf) {
         this.emf = emf;
@@ -143,5 +149,109 @@ public class AdministradorJpa implements Serializable {
             em.close();
         }
     }
+    
+    // Mis metodos Personalizados
+    public  List<Map<String, String>> ventaMes()
+    {
+        Connection cn;
+        PreparedStatement pstmt;
+        ResultSet rs;
+
+        List<Map<String, String>> venMes =new ArrayList<>();
+        try {
+
+            cn = Util.getConexionBD();
+            pstmt = cn.prepareStatement("SELECT monthname(fecha) as fecha,sum(total) as Total FROM pedido WHERE estado=1 GROUP BY monthname (fecha) ORDER BY date(fecha)");
+            rs = pstmt.executeQuery();
+            Map<String, String> mapa=null;
+            while(rs.next())
+            {
+                mapa=new HashMap<String, String>();
+                String Mes = rs.getString("fecha");
+                String Total = rs.getString("Total");
+                mapa.put("Fecha", Mes);
+                mapa.put("Total", Total);
+                venMes.add(mapa);
+
+
+            }
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+        return venMes;
+
+    }
+
+
+    public int ContarClientes()
+    {
+        Connection cn;
+        PreparedStatement pstmt;
+        ResultSet rs;
+        int resultado = 0;
+
+        try {
+            cn = Util.getConexionBD();
+            pstmt = cn.prepareStatement("SELECT COUNT(idCliente) FROM cliente");
+            rs = pstmt.executeQuery();
+            while(rs.next())
+            {
+                resultado = rs.getInt(1);
+            }
+
+        } catch (Exception e) {
+            e.getMessage();
+        }
+        return resultado;
+    }
+
+     public int ContarAdministrador()
+    {
+        Connection cn;
+        PreparedStatement pstmt;
+        ResultSet rs;
+        int resultado = 0;
+
+        try {
+            cn = Util.getConexionBD();
+            pstmt = cn.prepareStatement("select COUNT(dni) from administrador");
+            rs = pstmt.executeQuery();
+            while(rs.next())
+            {
+                resultado = rs.getInt(1);
+            }
+
+        } catch (Exception e) {
+            e.getMessage();
+        }
+        return resultado;
+    }
+
+      public int ContarPedido()
+    {
+        Connection cn;
+        PreparedStatement pstmt;
+        ResultSet rs;
+        int resultado = 0;
+
+        try {
+            cn = Util.getConexionBD();
+            pstmt = cn.prepareStatement("SELECT COUNT(idPedido) from pedido");
+            rs = pstmt.executeQuery();
+            while(rs.next())
+            {
+                resultado = rs.getInt(1);
+            }
+
+        } catch (Exception e) {
+            e.getMessage();
+        }
+        return resultado;
+    }
+    
     
 }

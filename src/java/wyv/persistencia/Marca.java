@@ -98,7 +98,7 @@ public class Marca implements Serializable {
 
     @Override
     public String toString() {
-        return nombre;
+        return "wyv.persistencia.Marca[ idMarca=" + idMarca + " ]";
     }
     
 }
