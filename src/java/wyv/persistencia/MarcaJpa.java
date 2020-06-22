@@ -23,10 +23,9 @@ import wyv.persistencia.exceptions.NonexistentEntityException;
  */
 public class MarcaJpa implements Serializable {
 
-    public MarcaJpa() {
+     public MarcaJpa() {
         this.emf = Persistence.createEntityManagerFactory("W_V_S.A.CPU");
     }
-
     public MarcaJpa(EntityManagerFactory emf) {
         this.emf = emf;
     }
@@ -189,5 +188,5 @@ public class MarcaJpa implements Serializable {
             em.close();
         }
     }
-
+    
 }

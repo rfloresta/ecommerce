@@ -28,8 +28,8 @@
                         <div class="card-header">
                             <h3 class="card-title font-weight-bold">Editar</h3>
                         </div>
-                        <s:form id="form_mante" action="actualizarEmpresa" theme="simple" >
-
+                        <s:form enctype="multipart/form-data" id="form_mante" action="actualizarEmpresa" theme="simple" >
+                            <s:hidden  name="empresa.idEmpresa" cssClass="form-control" placeholder="Ingrese Nombre" />
                             <div class="card-body">
                                 <div class="row ">
                                     <div class="col-md-6">
@@ -41,28 +41,32 @@
                                 <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="inputRazSocial">Razón Social</label>
-                                    <s:textfield  name="empresa.razSocial" cssClass="form-control" placeholder="Ingrese Razón Social" />
+                                    <s:textfield  name="empresa.razonSocial" cssClass="form-control" placeholder="Ingrese Razón Social" />
                                 </div>
                                 </div>
                                 
                                 <div class="col-md-6">
                                 <div class="form-group">
-                                     <label for="inputMision">Misión</label>
-                                     <s:textarea  name="admin.mision" cssClass="form-control" placeholder="Ingrese la Misión"/>
+                                     <label for="inputDireccion">Dirección</label>
+                                     <s:textarea  name="empresa.direccion" cssClass="form-control" placeholder="Ingrese la Misión"/>
                                 </div> 
                                 </div>
                                 <div class="col-md-6">
                                 <div class="form-group">
-                                     <label for="inputVision">Visión</label>
-                                     <s:textarea  name="admin.vision" cssClass="form-control" placeholder="Ingrese la Visión"/>
-                                </div> 
+                                   <label for="inputLogo">Logo</label>
+                                    
+                                     <img class="profile-user-img img-responsive" src="<%=request.getContextPath()%>/admin/imagenes/<s:property value="empresa.logo"/>" height="120" width="1000"/>
                                 </div>
-                                <div class="col-md-4 mx-auto">
+                                </div>
+                                    <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="inputLogo">Logo</label>
-                                    <s:file  name="logo" cssClass="form-control" placeholder="Subir Logo"/>
+                                     
+                                     <label for="inputLogo">Cargar Nuevo Logo</label>
+                                     <s:file  name="logo" cssClass="form-control" placeholder="Subir Logo"/>
+                                   
                                 </div>
                                 </div>
+                                   
                                 </div>
                             </div>
 

@@ -3,14 +3,11 @@ package wyv.action;
 import com.opensymphony.xwork2.ActionSupport;
 import java.io.File;
 import java.util.List;
-import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.io.FileUtils;
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.InterceptorRef;
-import org.apache.struts2.convention.annotation.InterceptorRefs;
 import org.apache.struts2.convention.annotation.Result;
-import org.apache.struts2.interceptor.ServletRequestAware;
 import wyv.servicios.ProductoServicio;
 import wyv.persistencia.Producto;
 import wyv.persistencia.Categoria;
@@ -19,7 +16,7 @@ import wyv.servicios.CategoriaServicio;
 import wyv.servicios.MarcaServicio;
 
 @SuppressWarnings("serial")
-public class ProductoAction extends ActionSupport implements ServletRequestAware {
+public class ProductoAction extends ActionSupport{
 
     ProductoServicio proSer;
     private String resultado;
@@ -57,17 +54,6 @@ public class ProductoAction extends ActionSupport implements ServletRequestAware
         this.imagenFileName = imagenFileName;
     }
 
-    HttpServletRequest request;
-
-    @Override
-    public void setServletRequest(HttpServletRequest hsr) {
-        this.request = hsr;
-
-    }
-
-    public HttpServletRequest getServletRequest() {
-        return this.request;
-    }
 
     public String getResultado() {
         return resultado;

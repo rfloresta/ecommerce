@@ -13,7 +13,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Lob;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -31,7 +30,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Categoria.findAll", query = "SELECT c FROM Categoria c")
     , @NamedQuery(name = "Categoria.findByIdCategoria", query = "SELECT c FROM Categoria c WHERE c.idCategoria = :idCategoria")
-    , @NamedQuery(name = "Categoria.findByNombre", query = "SELECT c FROM Categoria c WHERE c.nombre = :nombre")})
+    , @NamedQuery(name = "Categoria.findByNombre", query = "SELECT c FROM Categoria c WHERE c.nombre = :nombre")
+    , @NamedQuery(name = "Categoria.findByCategoriaSuperior", query = "SELECT c FROM Categoria c WHERE c.categoriaSuperior = :categoriaSuperior")})
 public class Categoria implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -42,9 +42,8 @@ public class Categoria implements Serializable {
     private Integer idCategoria;
     @Column(name = "nombre")
     private String nombre;
-    @Lob
-    @Column(name = "descripcion")
-    private String descripcion;
+    @Column(name = "categoriaSuperior")
+    private Integer categoriaSuperior;
     @OneToMany(mappedBy = "idCategoria")
     private List<Producto> productoList;
 
@@ -71,12 +70,12 @@ public class Categoria implements Serializable {
         this.nombre = nombre;
     }
 
-    public String getDescripcion() {
-        return descripcion;
+    public Integer getCategoriaSuperior() {
+        return categoriaSuperior;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+    public void setCategoriaSuperior(Integer categoriaSuperior) {
+        this.categoriaSuperior = categoriaSuperior;
     }
 
     @XmlTransient

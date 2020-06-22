@@ -27,7 +27,7 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item has-treeview">
-              <a href="<%=request.getContextPath()%>/admin/principal/empresa.jsp" href="#" class="nav-link">
+              <a href="cargarEmpresa" href="#" class="nav-link">
               <i class="nav-icon fas fa-building"></i>
               <p>
                 Empresa

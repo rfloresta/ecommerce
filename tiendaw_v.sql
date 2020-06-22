@@ -3,15 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
-<<<<<<< HEAD
 -- Tiempo de generación: 08-06-2020 a las 19:10:01
 -- Versión del servidor: 10.4.11-MariaDB
 -- Versión de PHP: 7.4.5
-=======
--- Tiempo de generación: 08-06-2020 a las 08:42:32
--- Versión del servidor: 10.1.21-MariaDB
--- Versión de PHP: 5.6.30
->>>>>>> ec461f1a3ec77895c6bec525ac6c23653e4fcd01
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -151,8 +145,7 @@ CREATE TABLE `pedido` (
   `total` double(10,2) DEFAULT NULL,
   `pago` double(10,2) DEFAULT NULL,
   `estado` char(1) DEFAULT NULL,
-  `idCliente` int(11) DEFAULT NULL,
-  `idEmpresa` int(11) DEFAULT NULL
+  `idCliente` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -231,7 +224,6 @@ ALTER TABLE `marca`
 ALTER TABLE `pedido`
   ADD PRIMARY KEY (`idPedido`),
   ADD KEY `pedido_ibfk_1` (`idCliente`),
-  ADD KEY `pedido_ibfk_2` (`idEmpresa`);
 
 --
 -- Indices de la tabla `producto`
@@ -296,7 +288,6 @@ ALTER TABLE `detalle_pedido`
 --
 ALTER TABLE `pedido`
   ADD CONSTRAINT `pedido_ibfk_1` FOREIGN KEY (`idCliente`) REFERENCES `cliente` (`idCliente`),
-  ADD CONSTRAINT `pedido_ibfk_2` FOREIGN KEY (`idEmpresa`) REFERENCES `empresa` (`idEmpresa`);
 
 --
 -- Filtros para la tabla `producto`
