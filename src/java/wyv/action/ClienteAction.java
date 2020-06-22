@@ -7,8 +7,10 @@ package wyv.action;
 
 import com.opensymphony.xwork2.ActionSupport;
 import java.util.List;
+import java.util.Map;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Result;
+import org.apache.struts2.interceptor.SessionAware;
 import wyv.persistencia.Cliente;
 import wyv.servicios.ClienteServicio;
 
@@ -18,14 +20,17 @@ import wyv.servicios.ClienteServicio;
  * @author Data
  */
 @SuppressWarnings("serial")
-public class ClienteAction extends ActionSupport {
+public class ClienteAction extends ActionSupport implements SessionAware{
     
     ClienteServicio clieSer;
     private String resultado;
     private Cliente cliente;
+    private Cliente clienteLog;
     private List<Cliente> lstClie;
     private int edit;
-
+    private int inicio;
+    private Map<String, Object> sesion;
+    
     public String getResultado() {
         return resultado;
     }
@@ -40,6 +45,15 @@ public class ClienteAction extends ActionSupport {
         this.cliente = cliente;
     }
 
+    public Cliente getClienteLog() {
+        return clienteLog;
+    }
+
+    public void setClienteLog(Cliente clienteLog) {
+        this.clienteLog = clienteLog;
+    }
+
+    
     public List<Cliente> getLstClie() {
         return lstClie;
     }
@@ -48,8 +62,57 @@ public class ClienteAction extends ActionSupport {
         return edit;
     }
 
+    public int getInicio() {
+        return inicio;
+    }
+    
+
     public void setClieSer(ClienteServicio clieSer) {
         this.clieSer = clieSer;
+    }
+    
+     @Override
+    public void setSession(Map<String, Object> map) {
+     this.sesion = map;
+    }
+    
+    
+     @Action(value = "ingresoCliente", results = {
+        @Result(name = "ok", location = "/principal.jsp")
+        ,
+        @Result(name = "incorrecto", location = "/principal.jsp")
+        ,
+	@Result(name = "error", location = "/error.jsp"),})
+    public String ingresoCliente() {
+        try {
+            String nombreClie="";
+             String apellidoClie="";
+             int idCliente=0;
+            clieSer = new ClienteServicio();
+            lstClie = clieSer.listar();
+            for(Cliente c: lstClie)
+            {
+                if(c.getEmail().equals(clienteLog.getEmail()) && c.getPassword().equals(clienteLog.getPassword()))
+                {
+                    nombreClie=c.getNombres();
+                    apellidoClie= c.getApellidos();
+                    idCliente = c.getIdCliente();
+                    
+                    inicio=1;
+                }else
+                {
+                    addActionError("Email o password incorectos");
+                    inicio=0;
+                }
+            }
+           
+            sesion.put("NombreClienteCompleto", nombreClie + " " + apellidoClie);
+            sesion.put("idClie", idCliente);
+            return "ok";
+        } catch (Exception e) {
+            resultado = "Error en: ingresoClie :: " + e.getMessage();
+            return "error";
+        }
     }
     
      @Action(value = "listarClie", results = {
@@ -103,6 +166,23 @@ public class ClienteAction extends ActionSupport {
 		}
 	}
         
+         @Action(value="buscarClie",results= {
+			@Result(name="ok",location="/clientePerfil.jsp"),
+			@Result(name="error",location="/error.jsp")
+	})
+	public String buscarClie() {
+		
+		try {
+			cliente =new ClienteServicio().buscar(String.valueOf(cliente.getIdCliente()));
+			
+                        
+			return "ok";
+		} catch (Exception e) {
+			resultado="Error en: editarAdmin :: "+e.getMessage();
+			return "error";
+		}
+	}
+        
         
         @Action(value="actualizarClie",results= {
 			@Result(name="ok",location="/admin/principal/cliente.jsp"),
@@ -136,5 +216,6 @@ public class ClienteAction extends ActionSupport {
 			return "error";
 		}
 	}
-    
+
+   
 }

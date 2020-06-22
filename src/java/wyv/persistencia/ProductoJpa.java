@@ -18,12 +18,14 @@ import wyv.persistencia.exceptions.NonexistentEntityException;
 
 /**
  *
- * @author Romario
+ * @author Data
  */
 public class ProductoJpa implements Serializable {
+
     public ProductoJpa() {
-        this.emf = Persistence.createEntityManagerFactory("W_V_S.A.CPU");
+        this.emf= Persistence.createEntityManagerFactory("W_V_S.A.CPU");
     }
+
     public ProductoJpa(EntityManagerFactory emf) {
         this.emf = emf;
     }

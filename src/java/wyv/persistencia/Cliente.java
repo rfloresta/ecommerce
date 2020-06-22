@@ -42,7 +42,6 @@ public class Cliente implements Serializable {
     @OneToMany(mappedBy = "idCliente")
     private List<Pedido> pedidoList;
 
-   
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -168,7 +167,5 @@ public class Cliente implements Serializable {
     public void setPedidoList(List<Pedido> pedidoList) {
         this.pedidoList = pedidoList;
     }
-
-   
     
 }

@@ -13,7 +13,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Lob;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -23,7 +22,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Romario
+ * @author Data
  */
 @Entity
 @Table(name = "categoria")
@@ -31,8 +30,12 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Categoria.findAll", query = "SELECT c FROM Categoria c")
     , @NamedQuery(name = "Categoria.findByIdCategoria", query = "SELECT c FROM Categoria c WHERE c.idCategoria = :idCategoria")
-    , @NamedQuery(name = "Categoria.findByNombre", query = "SELECT c FROM Categoria c WHERE c.nombre = :nombre")})
+    , @NamedQuery(name = "Categoria.findByNombre", query = "SELECT c FROM Categoria c WHERE c.nombre = :nombre")
+    , @NamedQuery(name = "Categoria.findByCategoriaSuperior", query = "SELECT c FROM Categoria c WHERE c.categoriaSuperior = :categoriaSuperior")})
 public class Categoria implements Serializable {
+
+    @OneToMany(mappedBy = "idCategoria")
+    private List<Producto> productoList;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -42,11 +45,8 @@ public class Categoria implements Serializable {
     private Integer idCategoria;
     @Column(name = "nombre")
     private String nombre;
-    @Lob
-    @Column(name = "descripcion")
-    private String descripcion;
-    @OneToMany(mappedBy = "idCategoria")
-    private List<Producto> productoList;
+    @Column(name = "categoriaSuperior")
+    private Integer categoriaSuperior;
 
     public Categoria() {
     }
@@ -71,21 +71,12 @@ public class Categoria implements Serializable {
         this.nombre = nombre;
     }
 
-    public String getDescripcion() {
-        return descripcion;
+    public Integer getCategoriaSuperior() {
+        return categoriaSuperior;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
-    @XmlTransient
-    public List<Producto> getProductoList() {
-        return productoList;
-    }
-
-    public void setProductoList(List<Producto> productoList) {
-        this.productoList = productoList;
+    public void setCategoriaSuperior(Integer categoriaSuperior) {
+        this.categoriaSuperior = categoriaSuperior;
     }
 
     @Override
@@ -110,7 +101,16 @@ public class Categoria implements Serializable {
 
     @Override
     public String toString() {
-        return nombre;
+        return "wyv.persistencia.Categoria[ idCategoria=" + idCategoria + " ]";
+    }
+
+    @XmlTransient
+    public List<Producto> getProductoList() {
+        return productoList;
+    }
+
+    public void setProductoList(List<Producto> productoList) {
+        this.productoList = productoList;
     }
     
 }

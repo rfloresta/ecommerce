@@ -26,7 +26,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Romario
+ * @author Data
  */
 @Entity
 @Table(name = "producto")
@@ -43,7 +43,6 @@ public class Producto implements Serializable {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "producto")
     private List<DetallePedido> detallePedidoList;
-
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -201,7 +200,5 @@ public class Producto implements Serializable {
     public void setDetallePedidoList(List<DetallePedido> detallePedidoList) {
         this.detallePedidoList = detallePedidoList;
     }
-
-    
     
 }

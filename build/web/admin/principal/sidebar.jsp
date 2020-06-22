@@ -74,8 +74,8 @@
             </a>
             
           </li>
-        
-           <s:if  test='#session.privilegio == "A"'>
+          <s:hidden name="#session.privilegio" />
+           <s:if  test="#session.privilegio == 'A'">
           <li class="nav-item has-treeview">
               <a  href="listarAdmin" class="nav-link menu">
               <i class="nav-icon fas fa-users"></i>

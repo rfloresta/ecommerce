@@ -11,10 +11,56 @@ public final class principal_jsp extends org.apache.jasper.runtime.HttpJspBase
 
   private static java.util.List<String> _jspx_dependants;
 
+  static {
+    _jspx_dependants = new java.util.ArrayList<String>(2);
+    _jspx_dependants.add("/templastes/header.jsp");
+    _jspx_dependants.add("/templastes/footer.jsp");
+  }
+
+  private org.apache.jasper.runtime.TagHandlerPool _jspx_tagPool_s_a_href_cssClass;
+  private org.apache.jasper.runtime.TagHandlerPool _jspx_tagPool_s_actionerror_nobody;
+  private org.apache.jasper.runtime.TagHandlerPool _jspx_tagPool_s_label_name_nobody;
+  private org.apache.jasper.runtime.TagHandlerPool _jspx_tagPool_s_submit_value_styleId_id_cssClass_nobody;
+  private org.apache.jasper.runtime.TagHandlerPool _jspx_tagPool_s_elseif_test;
+  private org.apache.jasper.runtime.TagHandlerPool _jspx_tagPool_s_param_value_name_nobody;
+  private org.apache.jasper.runtime.TagHandlerPool _jspx_tagPool_s_textfield_placeholder_name_id_cssClass_nobody;
+  private org.apache.jasper.runtime.TagHandlerPool _jspx_tagPool_s_form_theme_styleId_id_action;
+  private org.apache.jasper.runtime.TagHandlerPool _jspx_tagPool_s_if_test;
+  private org.apache.jasper.runtime.TagHandlerPool _jspx_tagPool_s_url_id_action;
+  private org.apache.jasper.runtime.TagHandlerPool _jspx_tagPool_s_else;
+
   private org.glassfish.jsp.api.ResourceInjector _jspx_resourceInjector;
 
   public java.util.List<String> getDependants() {
     return _jspx_dependants;
+  }
+
+  public void _jspInit() {
+    _jspx_tagPool_s_a_href_cssClass = org.apache.jasper.runtime.TagHandlerPool.getTagHandlerPool(getServletConfig());
+    _jspx_tagPool_s_actionerror_nobody = org.apache.jasper.runtime.TagHandlerPool.getTagHandlerPool(getServletConfig());
+    _jspx_tagPool_s_label_name_nobody = org.apache.jasper.runtime.TagHandlerPool.getTagHandlerPool(getServletConfig());
+    _jspx_tagPool_s_submit_value_styleId_id_cssClass_nobody = org.apache.jasper.runtime.TagHandlerPool.getTagHandlerPool(getServletConfig());
+    _jspx_tagPool_s_elseif_test = org.apache.jasper.runtime.TagHandlerPool.getTagHandlerPool(getServletConfig());
+    _jspx_tagPool_s_param_value_name_nobody = org.apache.jasper.runtime.TagHandlerPool.getTagHandlerPool(getServletConfig());
+    _jspx_tagPool_s_textfield_placeholder_name_id_cssClass_nobody = org.apache.jasper.runtime.TagHandlerPool.getTagHandlerPool(getServletConfig());
+    _jspx_tagPool_s_form_theme_styleId_id_action = org.apache.jasper.runtime.TagHandlerPool.getTagHandlerPool(getServletConfig());
+    _jspx_tagPool_s_if_test = org.apache.jasper.runtime.TagHandlerPool.getTagHandlerPool(getServletConfig());
+    _jspx_tagPool_s_url_id_action = org.apache.jasper.runtime.TagHandlerPool.getTagHandlerPool(getServletConfig());
+    _jspx_tagPool_s_else = org.apache.jasper.runtime.TagHandlerPool.getTagHandlerPool(getServletConfig());
+  }
+
+  public void _jspDestroy() {
+    _jspx_tagPool_s_a_href_cssClass.release();
+    _jspx_tagPool_s_actionerror_nobody.release();
+    _jspx_tagPool_s_label_name_nobody.release();
+    _jspx_tagPool_s_submit_value_styleId_id_cssClass_nobody.release();
+    _jspx_tagPool_s_elseif_test.release();
+    _jspx_tagPool_s_param_value_name_nobody.release();
+    _jspx_tagPool_s_textfield_placeholder_name_id_cssClass_nobody.release();
+    _jspx_tagPool_s_form_theme_styleId_id_action.release();
+    _jspx_tagPool_s_if_test.release();
+    _jspx_tagPool_s_url_id_action.release();
+    _jspx_tagPool_s_else.release();
   }
 
   public void _jspService(HttpServletRequest request, HttpServletResponse response)
@@ -41,10 +87,13 @@ public final class principal_jsp extends org.apache.jasper.runtime.HttpJspBase
       _jspx_out = out;
       _jspx_resourceInjector = (org.glassfish.jsp.api.ResourceInjector) application.getAttribute("com.sun.appserv.jsp.resource.injector");
 
+      out.write('\n');
+      out.write("\n");
+      out.write("\n");
       out.write("<!DOCTYPE html>\n");
       out.write("<html lang=\"en\">\n");
       out.write("    <head>\n");
-      out.write("        <title>Home 02</title>\n");
+      out.write("        <title>W&V</title>\n");
       out.write("        <meta charset=\"UTF-8\">\n");
       out.write("        <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n");
       out.write("        <!--===============================================================================================-->\n");
@@ -77,7 +126,7 @@ public final class principal_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("        <link rel=\"stylesheet\" type=\"text/css\" href=\"css/util.css\">\n");
       out.write("        <link rel=\"stylesheet\" type=\"text/css\" href=\"css/main.css\">\n");
       out.write("        <!--===============================================================================================-->\n");
-      out.write("\n");
+      out.write("        <link href=\"css/toastr.min.css\" rel=\"stylesheet\" type=\"text/css\"/>\n");
       out.write("    </head>\n");
       out.write("    <body class=\"\">\n");
       out.write("\n");
@@ -94,15 +143,23 @@ public final class principal_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                        <a href=\"#\" class=\"topbar-social-item fa fa-youtube-play\"></a>\n");
       out.write("                    </div>\n");
       out.write("                    <div class=\"col-6 col-md-4 text-center\">\n");
-      out.write("                        <a href=\"index.html\" class=\"logo2 \">\n");
-      out.write("                            <img src=\"imagenes/logo.png\" alt=\"IMG-LOGO\">\n");
+      out.write("                        <a href=\"index.html\" class=\"logo2 font-weight-bold  \">\n");
+      out.write("                            W&V Negocios y Servicios S.A.C\n");
       out.write("                        </a>\n");
       out.write("                    </div>\n");
       out.write("\n");
       out.write("                    <div class=\"col-4  col-md-4\">\n");
       out.write("                        <div class=\"topbar-child2\">\n");
       out.write("                            <span class=\"topbar-email\">\n");
-      out.write("                                fashe@example.com\n");
+      out.write("                                ");
+      if (_jspx_meth_s_if_0(_jspx_page_context))
+        return;
+      out.write("\n");
+      out.write("                                ");
+      if (_jspx_meth_s_else_0(_jspx_page_context))
+        return;
+      out.write("\n");
+      out.write("\n");
       out.write("                            </span>\n");
       out.write("\n");
       out.write("                            <div class=\"dropdown ml-md-3\">\n");
@@ -110,8 +167,21 @@ public final class principal_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                                    <img src=\"imagenes/icon-header-01.png\" class=\"header-icon1\" alt=\"ICON\">\n");
       out.write("                                </button>\n");
       out.write("                                <div class=\"dropdown-menu \" aria-labelledby=\"dropdownUsuario\" >\n");
-      out.write("                                    <button type=\"button\" class=\"dropdown-item\" data-toggle=\"modal\" data-target=\"#loginModal\">Iniciar Sesión</button>\n");
-      out.write("                                    <button type=\"button\" class=\"dropdown-item\" data-toggle=\"modal\" data-target=\"#registrarseModal\">Registrarse</button>\n");
+      out.write("                                    ");
+      if (_jspx_meth_s_if_1(_jspx_page_context))
+        return;
+      out.write("\n");
+      out.write("                                    ");
+      if (_jspx_meth_s_elseif_0(_jspx_page_context))
+        return;
+      out.write("\n");
+      out.write("                                    ");
+      if (_jspx_meth_s_else_1(_jspx_page_context))
+        return;
+      out.write("\n");
+      out.write("\n");
+      out.write("\n");
+      out.write("\n");
       out.write("                                </div>\n");
       out.write("                            </div>\n");
       out.write("\n");
@@ -211,19 +281,25 @@ public final class principal_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\n");
       out.write("\n");
       out.write("                        <a href=\"index.html\" class=\"nav-link\">Home</a>\n");
-      out.write("                        <ul class=\"sub_menu\">\n");
-      out.write("                            <li><a href=\"index.html\">Homepage V1</a></li>\n");
-      out.write("                            <li><a href=\"home-02.html\">Homepage V2</a></li>\n");
-      out.write("                            <li><a href=\"home-03.html\">Homepage V3</a></li>\n");
-      out.write("                        </ul>\n");
       out.write("\n");
+      out.write("                        <div class=\"dropdown drophover\">\n");
+      out.write("                            <a href=\"#\" class=\"nav-link\" id=\"dropCate\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">Categoría</a>\n");
       out.write("\n");
+      out.write("                            <div class=\"dropdown-menu\" aria-labelledby=\"dropCate\">\n");
+      out.write("                                <a class=\"dropdown-item\" href=\"#\">Action</a>\n");
+      out.write("                                <a class=\"dropdown-item\" href=\"#\">Another action</a>\n");
+      out.write("                                <a class=\"dropdown-item\" href=\"#\">Something else here</a>\n");
+      out.write("                            </div>\n");
+      out.write("                        </div>\n");
+      out.write("                        <div class=\"dropdown drophover\">\n");
+      out.write("                            <a href=\"#\" class=\"nav-link\" id=\"dropMarca\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">Marca</a>\n");
       out.write("\n");
-      out.write("                        <a href=\"product.html\" class=\"nav-link\">Tienda</a>\n");
-      out.write("\n");
-      out.write("\n");
-      out.write("\n");
-      out.write("                        <a href=\"product.html\" class=\"nav-link\">Rebaja</a>\n");
+      out.write("                            <div class=\"dropdown-menu\" aria-labelledby=\"dropMarca\">\n");
+      out.write("                                <a class=\"dropdown-item\" href=\"#\">Action</a>\n");
+      out.write("                                <a class=\"dropdown-item\" href=\"#\">Another action</a>\n");
+      out.write("                                <a class=\"dropdown-item\" href=\"#\">Something else here</a>\n");
+      out.write("                            </div>\n");
+      out.write("                        </div>\n");
       out.write("\n");
       out.write("\n");
       out.write("\n");
@@ -254,7 +330,7 @@ public final class principal_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("            <div class=\"modal-dialog\">\n");
       out.write("                <div class=\"modal-content\">\n");
       out.write("                    <div class=\"modal-header justify-content-center border-bottom-0\">\n");
-      out.write("                        <div class=\"social-auth-links text-center  mb-3\">\n");
+      out.write("                        <div class=\"social-auth-links text-center  mb-3 mt-4\">\n");
       out.write("                            <a href=\"#\" class=\"btn  btn-primary my-3 my-md-0\">\n");
       out.write("                                <i class=\"fa fa-facebook mr-2\"></i> Sign in using Facebook\n");
       out.write("                            </a>\n");
@@ -266,25 +342,10 @@ public final class principal_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                    </div>\n");
       out.write("                    <div class=\"modal-body pt-0\">\n");
       out.write("                        <p class=\"text-center\">- OR -</p>\n");
-      out.write("                        <form class=\"px-4 py-3\">\n");
-      out.write("                            <div class=\"form-group\">\n");
-      out.write("                                <label for=\"Email\">Correo Electronico</label>\n");
-      out.write("                                <input type=\"text\" class=\"form-control\" placeholder=\"Ingrese Nombre\">\n");
-      out.write("                            </div>\n");
-      out.write("                            <div class=\"form-group\">\n");
-      out.write("                                <label for=\"Email\">Password</label>\n");
-      out.write("                                <input type=\"text\" class=\"form-control\" placeholder=\"Ingrese Password\">\n");
-      out.write("                            </div>\n");
-      out.write("                            <div class=\"form-group\">\n");
-      out.write("                                <div class=\"form-check\">\n");
-      out.write("                                    <input type=\"checkbox\" class=\"form-check-input ml-0\" id=\"dropdownCheck\">\n");
-      out.write("                                    <label class=\"form-check-label\" for=\"Check\">\n");
-      out.write("                                        Recordar Contraseña\n");
-      out.write("                                    </label>\n");
-      out.write("                                </div>\n");
-      out.write("                            </div>\n");
-      out.write("                            <button type=\"submit\" class=\"btn btn-primary\">Sign in</button>\n");
-      out.write("                        </form>\n");
+      out.write("                        ");
+      if (_jspx_meth_s_form_0(_jspx_page_context))
+        return;
+      out.write("\n");
       out.write("                        <div class=\"dropdown-divider\"></div>\n");
       out.write("                        <a class=\"dropdown-item\" href=\"#\">Olvidaste tu contraseña?</a>\n");
       out.write("                    </div>\n");
@@ -302,7 +363,7 @@ public final class principal_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("            <div class=\"modal-dialog\">\n");
       out.write("                <div class=\"modal-content\">\n");
       out.write("                    <div class=\"modal-header justify-content-center border-bottom-0\">\n");
-      out.write("                        <div class=\"social-auth-links text-center  mb-3\">\n");
+      out.write("                        <div class=\"social-auth-links text-center  mb-3 mt-4\">\n");
       out.write("                            <a href=\"#\" class=\"btn  btn-primary my-3 my-md-0\">\n");
       out.write("                                <i class=\"fa fa-facebook mr-2\"></i> Sign in using Facebook\n");
       out.write("                            </a>\n");
@@ -317,19 +378,19 @@ public final class principal_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                        <form action=\"#\" method=\"post\">\n");
       out.write("                            <div class=\"input-group mb-3 mt-3\">\n");
       out.write("                                <input type=\"text\" class=\"form-control\" placeholder=\"Full name\">\n");
-      out.write("                                \n");
+      out.write("\n");
       out.write("                            </div>\n");
       out.write("                            <div class=\"input-group mb-3\">\n");
       out.write("                                <input type=\"email\" class=\"form-control\" placeholder=\"Email\">\n");
-      out.write("                               \n");
+      out.write("\n");
       out.write("                            </div>\n");
       out.write("                            <div class=\"input-group mb-3\">\n");
       out.write("                                <input type=\"password\" class=\"form-control\" placeholder=\"Password\">\n");
-      out.write("                                \n");
+      out.write("\n");
       out.write("                            </div>\n");
       out.write("                            <div class=\"input-group mb-3\">\n");
       out.write("                                <input type=\"password\" class=\"form-control\" placeholder=\"Retype password\">\n");
-      out.write("                               \n");
+      out.write("\n");
       out.write("                            </div>\n");
       out.write("                            <div class=\"row\">\n");
       out.write("                                <div class=\"col-8\">\n");
@@ -352,7 +413,7 @@ public final class principal_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("            </div>\n");
       out.write("        </div>\n");
       out.write("\n");
-      out.write("        <!--Fin Modal Para Registrarse -->\n");
+      out.write("        <!--Fin Modal Para Registrarse -->");
       out.write("\n");
       out.write("\n");
       out.write("        <!-- Slide1 -->\n");
@@ -778,7 +839,7 @@ public final class principal_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                                </div>\n");
       out.write("                            </div>\n");
       out.write("                        </div>\n");
-      out.write("\n");
+      out.write("                                \n");
       out.write("                        <!-- - -->\n");
       out.write("                        <div class=\"tab-pane fade\" id=\"featured\" role=\"tabpanel\">\n");
       out.write("                            <div class=\"row\">\n");
@@ -799,8 +860,8 @@ public final class principal_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                                                    <button class=\"flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4\">\n");
       out.write("                                                        Agregar al carro\n");
       out.write("                                                    </button>\n");
-      out.write("                                                </div>\n");
-      out.write("                                            </div>\n");
+      out.write("                            </div>\n");
+      out.write("                        </div>\n");
       out.write("                                        </div>\n");
       out.write("\n");
       out.write("                                        <div class=\"block2-txt p-t-20\">\n");
@@ -815,10 +876,10 @@ public final class principal_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                                            <span class=\"block2-newprice m-text8 p-r-5\">\n");
       out.write("                                                $15.90\n");
       out.write("                                            </span>\n");
-      out.write("                                        </div>\n");
-      out.write("                                    </div>\n");
-      out.write("                                </div>\n");
-      out.write("\n");
+      out.write("                                                 </div>\n");
+      out.write("                        </div>\n");
+      out.write("                    </div>\n");
+      out.write("         \n");
       out.write("                                <div class=\"col-sm-6 col-md-4 col-lg-3 p-b-50\">\n");
       out.write("                                    <!-- Block2 -->\n");
       out.write("                                    <div class=\"block2\">\n");
@@ -1624,6 +1685,7 @@ public final class principal_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                </div>\n");
       out.write("            </div>\n");
       out.write("        </section>\n");
+      out.write("        ");
       out.write("        <!-- Footer -->\n");
       out.write("        <footer class=\"bg6 p-t-45 p-b-43 p-l-45 p-r-45\">\n");
       out.write("            <div class=\"flex-w p-b-90\">\n");
@@ -1780,22 +1842,6 @@ public final class principal_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("        </div>\n");
       out.write("\n");
       out.write("        <!-- Container Selection1 -->\n");
-      out.write("        <div id=\"dropDownSelect1\"></div>\n");
-      out.write("\n");
-      out.write("        <!-- Modal Video 01-->\n");
-      out.write("        <div class=\"modal fade\" id=\"modal-video-01\" tabindex=\"-1\" role=\"dialog\" aria-hidden=\"true\">\n");
-      out.write("\n");
-      out.write("            <div class=\"modal-dialog\" role=\"document\" data-dismiss=\"modal\">\n");
-      out.write("                <div class=\"close-mo-video-01 trans-0-4\" data-dismiss=\"modal\" aria-label=\"Close\">&times;</div>\n");
-      out.write("\n");
-      out.write("                <div class=\"wrap-video-mo-01\">\n");
-      out.write("                    <div class=\"w-full wrap-pic-w op-0-0\"><img src=\"imagenes/icons/video-16-9.jpg\" alt=\"IMG\"></div>\n");
-      out.write("                    <div class=\"video-mo-01\">\n");
-      out.write("                        <iframe src=\"https://www.youtube.com/embed/Nt8ZrWY2Cmk?rel=0&amp;showinfo=0\" allowfullscreen></iframe>\n");
-      out.write("                    </div>\n");
-      out.write("                </div>\n");
-      out.write("            </div>\n");
-      out.write("        </div>\n");
       out.write("\n");
       out.write("        <!--===============================================================================================-->\n");
       out.write("        <script type=\"text/javascript\" src=\"js/jquery-3.2.1.min.js\"></script>\n");
@@ -1819,8 +1865,12 @@ public final class principal_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("        <script type=\"text/javascript\" src=\"js/countdowntime.js\"></script>\n");
       out.write("        <!--===============================================================================================-->\n");
       out.write("        <script type=\"text/javascript\" src=\"js/lightbox.min.js\"></script>\n");
+      out.write("        <script src=\"js/funciones.js\" type=\"text/javascript\"></script>\n");
       out.write("        <!--===============================================================================================-->\n");
       out.write("        <script type=\"text/javascript\" src=\"js/sweetalert.min.js\"></script>\n");
+      out.write("        <script src=\"js/toastr.min.js\" type=\"text/javascript\"></script>\n");
+      out.write("        <script src=\"https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js\"></script>\n");
+      out.write("        <script src=\"js/bootstrap-dropdownhover.min.js\" type=\"text/javascript\"></script>\n");
       out.write("        <script type=\"text/javascript\">\n");
       out.write("            $('.block2-btn-addcart').each(function () {\n");
       out.write("                var nameProduct = $(this).parent().parent().parent().find('.block2-name').html();\n");
@@ -1858,5 +1908,455 @@ public final class principal_jsp extends org.apache.jasper.runtime.HttpJspBase
     } finally {
       _jspxFactory.releasePageContext(_jspx_page_context);
     }
+  }
+
+  private boolean _jspx_meth_s_if_0(PageContext _jspx_page_context)
+          throws Throwable {
+    PageContext pageContext = _jspx_page_context;
+    JspWriter out = _jspx_page_context.getOut();
+    //  s:if
+    org.apache.struts2.views.jsp.IfTag _jspx_th_s_if_0 = (org.apache.struts2.views.jsp.IfTag) _jspx_tagPool_s_if_test.get(org.apache.struts2.views.jsp.IfTag.class);
+    _jspx_th_s_if_0.setPageContext(_jspx_page_context);
+    _jspx_th_s_if_0.setParent(null);
+    _jspx_th_s_if_0.setTest("hasActionErrors()");
+    int _jspx_eval_s_if_0 = _jspx_th_s_if_0.doStartTag();
+    if (_jspx_eval_s_if_0 != javax.servlet.jsp.tagext.Tag.SKIP_BODY) {
+      if (_jspx_eval_s_if_0 != javax.servlet.jsp.tagext.Tag.EVAL_BODY_INCLUDE) {
+        out = _jspx_page_context.pushBody();
+        _jspx_th_s_if_0.setBodyContent((javax.servlet.jsp.tagext.BodyContent) out);
+        _jspx_th_s_if_0.doInitBody();
+      }
+      do {
+        out.write("\n");
+        out.write("                                    <div class=\"errorDiv\" >\n");
+        out.write("                                        ");
+        if (_jspx_meth_s_actionerror_0((javax.servlet.jsp.tagext.JspTag) _jspx_th_s_if_0, _jspx_page_context))
+          return true;
+        out.write("\n");
+        out.write("                                    </div>\n");
+        out.write("                                ");
+        int evalDoAfterBody = _jspx_th_s_if_0.doAfterBody();
+        if (evalDoAfterBody != javax.servlet.jsp.tagext.BodyTag.EVAL_BODY_AGAIN)
+          break;
+      } while (true);
+      if (_jspx_eval_s_if_0 != javax.servlet.jsp.tagext.Tag.EVAL_BODY_INCLUDE)
+        out = _jspx_page_context.popBody();
+    }
+    if (_jspx_th_s_if_0.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
+      _jspx_tagPool_s_if_test.reuse(_jspx_th_s_if_0);
+      return true;
+    }
+    _jspx_tagPool_s_if_test.reuse(_jspx_th_s_if_0);
+    return false;
+  }
+
+  private boolean _jspx_meth_s_actionerror_0(javax.servlet.jsp.tagext.JspTag _jspx_th_s_if_0, PageContext _jspx_page_context)
+          throws Throwable {
+    PageContext pageContext = _jspx_page_context;
+    JspWriter out = _jspx_page_context.getOut();
+    //  s:actionerror
+    org.apache.struts2.views.jsp.ui.ActionErrorTag _jspx_th_s_actionerror_0 = (org.apache.struts2.views.jsp.ui.ActionErrorTag) _jspx_tagPool_s_actionerror_nobody.get(org.apache.struts2.views.jsp.ui.ActionErrorTag.class);
+    _jspx_th_s_actionerror_0.setPageContext(_jspx_page_context);
+    _jspx_th_s_actionerror_0.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_s_if_0);
+    int _jspx_eval_s_actionerror_0 = _jspx_th_s_actionerror_0.doStartTag();
+    if (_jspx_th_s_actionerror_0.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
+      _jspx_tagPool_s_actionerror_nobody.reuse(_jspx_th_s_actionerror_0);
+      return true;
+    }
+    _jspx_tagPool_s_actionerror_nobody.reuse(_jspx_th_s_actionerror_0);
+    return false;
+  }
+
+  private boolean _jspx_meth_s_else_0(PageContext _jspx_page_context)
+          throws Throwable {
+    PageContext pageContext = _jspx_page_context;
+    JspWriter out = _jspx_page_context.getOut();
+    //  s:else
+    org.apache.struts2.views.jsp.ElseTag _jspx_th_s_else_0 = (org.apache.struts2.views.jsp.ElseTag) _jspx_tagPool_s_else.get(org.apache.struts2.views.jsp.ElseTag.class);
+    _jspx_th_s_else_0.setPageContext(_jspx_page_context);
+    _jspx_th_s_else_0.setParent(null);
+    int _jspx_eval_s_else_0 = _jspx_th_s_else_0.doStartTag();
+    if (_jspx_eval_s_else_0 != javax.servlet.jsp.tagext.Tag.SKIP_BODY) {
+      if (_jspx_eval_s_else_0 != javax.servlet.jsp.tagext.Tag.EVAL_BODY_INCLUDE) {
+        out = _jspx_page_context.pushBody();
+        _jspx_th_s_else_0.setBodyContent((javax.servlet.jsp.tagext.BodyContent) out);
+        _jspx_th_s_else_0.doInitBody();
+      }
+      do {
+        out.write("\n");
+        out.write("                                    ");
+        if (_jspx_meth_s_label_0((javax.servlet.jsp.tagext.JspTag) _jspx_th_s_else_0, _jspx_page_context))
+          return true;
+        out.write("\n");
+        out.write("\n");
+        out.write("                                ");
+        int evalDoAfterBody = _jspx_th_s_else_0.doAfterBody();
+        if (evalDoAfterBody != javax.servlet.jsp.tagext.BodyTag.EVAL_BODY_AGAIN)
+          break;
+      } while (true);
+      if (_jspx_eval_s_else_0 != javax.servlet.jsp.tagext.Tag.EVAL_BODY_INCLUDE)
+        out = _jspx_page_context.popBody();
+    }
+    if (_jspx_th_s_else_0.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
+      _jspx_tagPool_s_else.reuse(_jspx_th_s_else_0);
+      return true;
+    }
+    _jspx_tagPool_s_else.reuse(_jspx_th_s_else_0);
+    return false;
+  }
+
+  private boolean _jspx_meth_s_label_0(javax.servlet.jsp.tagext.JspTag _jspx_th_s_else_0, PageContext _jspx_page_context)
+          throws Throwable {
+    PageContext pageContext = _jspx_page_context;
+    JspWriter out = _jspx_page_context.getOut();
+    //  s:label
+    org.apache.struts2.views.jsp.ui.LabelTag _jspx_th_s_label_0 = (org.apache.struts2.views.jsp.ui.LabelTag) _jspx_tagPool_s_label_name_nobody.get(org.apache.struts2.views.jsp.ui.LabelTag.class);
+    _jspx_th_s_label_0.setPageContext(_jspx_page_context);
+    _jspx_th_s_label_0.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_s_else_0);
+    _jspx_th_s_label_0.setName("#session.NombreClienteCompleto");
+    int _jspx_eval_s_label_0 = _jspx_th_s_label_0.doStartTag();
+    if (_jspx_th_s_label_0.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
+      _jspx_tagPool_s_label_name_nobody.reuse(_jspx_th_s_label_0);
+      return true;
+    }
+    _jspx_tagPool_s_label_name_nobody.reuse(_jspx_th_s_label_0);
+    return false;
+  }
+
+  private boolean _jspx_meth_s_if_1(PageContext _jspx_page_context)
+          throws Throwable {
+    PageContext pageContext = _jspx_page_context;
+    JspWriter out = _jspx_page_context.getOut();
+    //  s:if
+    org.apache.struts2.views.jsp.IfTag _jspx_th_s_if_1 = (org.apache.struts2.views.jsp.IfTag) _jspx_tagPool_s_if_test.get(org.apache.struts2.views.jsp.IfTag.class);
+    _jspx_th_s_if_1.setPageContext(_jspx_page_context);
+    _jspx_th_s_if_1.setParent(null);
+    _jspx_th_s_if_1.setTest("inicio==0");
+    int _jspx_eval_s_if_1 = _jspx_th_s_if_1.doStartTag();
+    if (_jspx_eval_s_if_1 != javax.servlet.jsp.tagext.Tag.SKIP_BODY) {
+      if (_jspx_eval_s_if_1 != javax.servlet.jsp.tagext.Tag.EVAL_BODY_INCLUDE) {
+        out = _jspx_page_context.pushBody();
+        _jspx_th_s_if_1.setBodyContent((javax.servlet.jsp.tagext.BodyContent) out);
+        _jspx_th_s_if_1.doInitBody();
+      }
+      do {
+        out.write("\n");
+        out.write("                                        <button type=\"button\" class=\"dropdown-item\" data-toggle=\"modal\" data-target=\"#loginModal\">Iniciar Sesión</button>\n");
+        out.write("                                        <button type=\"button\" class=\"dropdown-item\" data-toggle=\"modal\" data-target=\"#registrarseModal\">Registrarse</button>\n");
+        out.write("\n");
+        out.write("\n");
+        out.write("\n");
+        out.write("                                    ");
+        int evalDoAfterBody = _jspx_th_s_if_1.doAfterBody();
+        if (evalDoAfterBody != javax.servlet.jsp.tagext.BodyTag.EVAL_BODY_AGAIN)
+          break;
+      } while (true);
+      if (_jspx_eval_s_if_1 != javax.servlet.jsp.tagext.Tag.EVAL_BODY_INCLUDE)
+        out = _jspx_page_context.popBody();
+    }
+    if (_jspx_th_s_if_1.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
+      _jspx_tagPool_s_if_test.reuse(_jspx_th_s_if_1);
+      return true;
+    }
+    _jspx_tagPool_s_if_test.reuse(_jspx_th_s_if_1);
+    return false;
+  }
+
+  private boolean _jspx_meth_s_elseif_0(PageContext _jspx_page_context)
+          throws Throwable {
+    PageContext pageContext = _jspx_page_context;
+    JspWriter out = _jspx_page_context.getOut();
+    //  s:elseif
+    org.apache.struts2.views.jsp.ElseIfTag _jspx_th_s_elseif_0 = (org.apache.struts2.views.jsp.ElseIfTag) _jspx_tagPool_s_elseif_test.get(org.apache.struts2.views.jsp.ElseIfTag.class);
+    _jspx_th_s_elseif_0.setPageContext(_jspx_page_context);
+    _jspx_th_s_elseif_0.setParent(null);
+    _jspx_th_s_elseif_0.setTest("inicio==1");
+    int _jspx_eval_s_elseif_0 = _jspx_th_s_elseif_0.doStartTag();
+    if (_jspx_eval_s_elseif_0 != javax.servlet.jsp.tagext.Tag.SKIP_BODY) {
+      if (_jspx_eval_s_elseif_0 != javax.servlet.jsp.tagext.Tag.EVAL_BODY_INCLUDE) {
+        out = _jspx_page_context.pushBody();
+        _jspx_th_s_elseif_0.setBodyContent((javax.servlet.jsp.tagext.BodyContent) out);
+        _jspx_th_s_elseif_0.doInitBody();
+      }
+      do {
+        out.write("\n");
+        out.write("                                        ");
+        if (_jspx_meth_s_url_0((javax.servlet.jsp.tagext.JspTag) _jspx_th_s_elseif_0, _jspx_page_context))
+          return true;
+        out.write("\n");
+        out.write("                                        ");
+        if (_jspx_meth_s_a_0((javax.servlet.jsp.tagext.JspTag) _jspx_th_s_elseif_0, _jspx_page_context))
+          return true;
+        out.write("\n");
+        out.write("                                        <button type=\"button\" class=\"dropdown-item\" data-toggle=\"modal\" data-target=\"#registrarseModal\">Cerrar Sesión</button>\n");
+        out.write("\n");
+        out.write("                                    ");
+        int evalDoAfterBody = _jspx_th_s_elseif_0.doAfterBody();
+        if (evalDoAfterBody != javax.servlet.jsp.tagext.BodyTag.EVAL_BODY_AGAIN)
+          break;
+      } while (true);
+      if (_jspx_eval_s_elseif_0 != javax.servlet.jsp.tagext.Tag.EVAL_BODY_INCLUDE)
+        out = _jspx_page_context.popBody();
+    }
+    if (_jspx_th_s_elseif_0.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
+      _jspx_tagPool_s_elseif_test.reuse(_jspx_th_s_elseif_0);
+      return true;
+    }
+    _jspx_tagPool_s_elseif_test.reuse(_jspx_th_s_elseif_0);
+    return false;
+  }
+
+  private boolean _jspx_meth_s_url_0(javax.servlet.jsp.tagext.JspTag _jspx_th_s_elseif_0, PageContext _jspx_page_context)
+          throws Throwable {
+    PageContext pageContext = _jspx_page_context;
+    JspWriter out = _jspx_page_context.getOut();
+    //  s:url
+    org.apache.struts2.views.jsp.URLTag _jspx_th_s_url_0 = (org.apache.struts2.views.jsp.URLTag) _jspx_tagPool_s_url_id_action.get(org.apache.struts2.views.jsp.URLTag.class);
+    _jspx_th_s_url_0.setPageContext(_jspx_page_context);
+    _jspx_th_s_url_0.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_s_elseif_0);
+    _jspx_th_s_url_0.setId("lnkbuscar");
+    _jspx_th_s_url_0.setAction("buscarClie");
+    int _jspx_eval_s_url_0 = _jspx_th_s_url_0.doStartTag();
+    if (_jspx_eval_s_url_0 != javax.servlet.jsp.tagext.Tag.SKIP_BODY) {
+      if (_jspx_eval_s_url_0 != javax.servlet.jsp.tagext.Tag.EVAL_BODY_INCLUDE) {
+        out = _jspx_page_context.pushBody();
+        _jspx_th_s_url_0.setBodyContent((javax.servlet.jsp.tagext.BodyContent) out);
+        _jspx_th_s_url_0.doInitBody();
+      }
+      do {
+        out.write("\n");
+        out.write("                                            ");
+        if (_jspx_meth_s_param_0((javax.servlet.jsp.tagext.JspTag) _jspx_th_s_url_0, _jspx_page_context))
+          return true;
+        out.write("\n");
+        out.write("                                         ");
+        int evalDoAfterBody = _jspx_th_s_url_0.doAfterBody();
+        if (evalDoAfterBody != javax.servlet.jsp.tagext.BodyTag.EVAL_BODY_AGAIN)
+          break;
+      } while (true);
+      if (_jspx_eval_s_url_0 != javax.servlet.jsp.tagext.Tag.EVAL_BODY_INCLUDE)
+        out = _jspx_page_context.popBody();
+    }
+    if (_jspx_th_s_url_0.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
+      _jspx_tagPool_s_url_id_action.reuse(_jspx_th_s_url_0);
+      return true;
+    }
+    _jspx_tagPool_s_url_id_action.reuse(_jspx_th_s_url_0);
+    return false;
+  }
+
+  private boolean _jspx_meth_s_param_0(javax.servlet.jsp.tagext.JspTag _jspx_th_s_url_0, PageContext _jspx_page_context)
+          throws Throwable {
+    PageContext pageContext = _jspx_page_context;
+    JspWriter out = _jspx_page_context.getOut();
+    //  s:param
+    org.apache.struts2.views.jsp.ParamTag _jspx_th_s_param_0 = (org.apache.struts2.views.jsp.ParamTag) _jspx_tagPool_s_param_value_name_nobody.get(org.apache.struts2.views.jsp.ParamTag.class);
+    _jspx_th_s_param_0.setPageContext(_jspx_page_context);
+    _jspx_th_s_param_0.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_s_url_0);
+    _jspx_th_s_param_0.setValue("#session.idClie");
+    _jspx_th_s_param_0.setName("cliente.idCliente");
+    int _jspx_eval_s_param_0 = _jspx_th_s_param_0.doStartTag();
+    if (_jspx_th_s_param_0.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
+      _jspx_tagPool_s_param_value_name_nobody.reuse(_jspx_th_s_param_0);
+      return true;
+    }
+    _jspx_tagPool_s_param_value_name_nobody.reuse(_jspx_th_s_param_0);
+    return false;
+  }
+
+  private boolean _jspx_meth_s_a_0(javax.servlet.jsp.tagext.JspTag _jspx_th_s_elseif_0, PageContext _jspx_page_context)
+          throws Throwable {
+    PageContext pageContext = _jspx_page_context;
+    JspWriter out = _jspx_page_context.getOut();
+    //  s:a
+    org.apache.struts2.views.jsp.ui.AnchorTag _jspx_th_s_a_0 = (org.apache.struts2.views.jsp.ui.AnchorTag) _jspx_tagPool_s_a_href_cssClass.get(org.apache.struts2.views.jsp.ui.AnchorTag.class);
+    _jspx_th_s_a_0.setPageContext(_jspx_page_context);
+    _jspx_th_s_a_0.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_s_elseif_0);
+    _jspx_th_s_a_0.setHref("%{lnkbuscar}");
+    _jspx_th_s_a_0.setCssClass("dropdown-item");
+    int _jspx_eval_s_a_0 = _jspx_th_s_a_0.doStartTag();
+    if (_jspx_eval_s_a_0 != javax.servlet.jsp.tagext.Tag.SKIP_BODY) {
+      if (_jspx_eval_s_a_0 != javax.servlet.jsp.tagext.Tag.EVAL_BODY_INCLUDE) {
+        out = _jspx_page_context.pushBody();
+        _jspx_th_s_a_0.setBodyContent((javax.servlet.jsp.tagext.BodyContent) out);
+        _jspx_th_s_a_0.doInitBody();
+      }
+      do {
+        out.write("Ver perfil");
+        int evalDoAfterBody = _jspx_th_s_a_0.doAfterBody();
+        if (evalDoAfterBody != javax.servlet.jsp.tagext.BodyTag.EVAL_BODY_AGAIN)
+          break;
+      } while (true);
+      if (_jspx_eval_s_a_0 != javax.servlet.jsp.tagext.Tag.EVAL_BODY_INCLUDE)
+        out = _jspx_page_context.popBody();
+    }
+    if (_jspx_th_s_a_0.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
+      _jspx_tagPool_s_a_href_cssClass.reuse(_jspx_th_s_a_0);
+      return true;
+    }
+    _jspx_tagPool_s_a_href_cssClass.reuse(_jspx_th_s_a_0);
+    return false;
+  }
+
+  private boolean _jspx_meth_s_else_1(PageContext _jspx_page_context)
+          throws Throwable {
+    PageContext pageContext = _jspx_page_context;
+    JspWriter out = _jspx_page_context.getOut();
+    //  s:else
+    org.apache.struts2.views.jsp.ElseTag _jspx_th_s_else_1 = (org.apache.struts2.views.jsp.ElseTag) _jspx_tagPool_s_else.get(org.apache.struts2.views.jsp.ElseTag.class);
+    _jspx_th_s_else_1.setPageContext(_jspx_page_context);
+    _jspx_th_s_else_1.setParent(null);
+    int _jspx_eval_s_else_1 = _jspx_th_s_else_1.doStartTag();
+    if (_jspx_eval_s_else_1 != javax.servlet.jsp.tagext.Tag.SKIP_BODY) {
+      if (_jspx_eval_s_else_1 != javax.servlet.jsp.tagext.Tag.EVAL_BODY_INCLUDE) {
+        out = _jspx_page_context.pushBody();
+        _jspx_th_s_else_1.setBodyContent((javax.servlet.jsp.tagext.BodyContent) out);
+        _jspx_th_s_else_1.doInitBody();
+      }
+      do {
+        out.write("\n");
+        out.write("                                         <button type=\"button\" class=\"dropdown-item\" data-toggle=\"modal\" data-target=\"#loginModal\">Iniciar Sesión</button>\n");
+        out.write("                                        <button type=\"button\" class=\"dropdown-item\" data-toggle=\"modal\" data-target=\"#registrarseModal\">Registrarse</button>\n");
+        out.write("                                    ");
+        int evalDoAfterBody = _jspx_th_s_else_1.doAfterBody();
+        if (evalDoAfterBody != javax.servlet.jsp.tagext.BodyTag.EVAL_BODY_AGAIN)
+          break;
+      } while (true);
+      if (_jspx_eval_s_else_1 != javax.servlet.jsp.tagext.Tag.EVAL_BODY_INCLUDE)
+        out = _jspx_page_context.popBody();
+    }
+    if (_jspx_th_s_else_1.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
+      _jspx_tagPool_s_else.reuse(_jspx_th_s_else_1);
+      return true;
+    }
+    _jspx_tagPool_s_else.reuse(_jspx_th_s_else_1);
+    return false;
+  }
+
+  private boolean _jspx_meth_s_form_0(PageContext _jspx_page_context)
+          throws Throwable {
+    PageContext pageContext = _jspx_page_context;
+    JspWriter out = _jspx_page_context.getOut();
+    //  s:form
+    org.apache.struts2.views.jsp.ui.FormTag _jspx_th_s_form_0 = (org.apache.struts2.views.jsp.ui.FormTag) _jspx_tagPool_s_form_theme_styleId_id_action.get(org.apache.struts2.views.jsp.ui.FormTag.class);
+    _jspx_th_s_form_0.setPageContext(_jspx_page_context);
+    _jspx_th_s_form_0.setParent(null);
+    _jspx_th_s_form_0.setAction("ingresoCliente");
+    _jspx_th_s_form_0.setId("form_login");
+    _jspx_th_s_form_0.setDynamicAttribute(null, "styleId", new String("acc"));
+    _jspx_th_s_form_0.setTheme("simple");
+    int _jspx_eval_s_form_0 = _jspx_th_s_form_0.doStartTag();
+    if (_jspx_eval_s_form_0 != javax.servlet.jsp.tagext.Tag.SKIP_BODY) {
+      if (_jspx_eval_s_form_0 != javax.servlet.jsp.tagext.Tag.EVAL_BODY_INCLUDE) {
+        out = _jspx_page_context.pushBody();
+        _jspx_th_s_form_0.setBodyContent((javax.servlet.jsp.tagext.BodyContent) out);
+        _jspx_th_s_form_0.doInitBody();
+      }
+      do {
+        out.write("\n");
+        out.write("                            <div class=\"form-group\">\n");
+        out.write("                                <label for=\"Email\">Correo Electronico</label>\n");
+        out.write("                                ");
+        if (_jspx_meth_s_textfield_0((javax.servlet.jsp.tagext.JspTag) _jspx_th_s_form_0, _jspx_page_context))
+          return true;
+        out.write("\n");
+        out.write("                                </div>\n");
+        out.write("                                <div class=\"form-group\">\n");
+        out.write("                                    <label for=\"Password\">Password</label>\n");
+        out.write("                                ");
+        if (_jspx_meth_s_textfield_1((javax.servlet.jsp.tagext.JspTag) _jspx_th_s_form_0, _jspx_page_context))
+          return true;
+        out.write("\n");
+        out.write("                                </div>\n");
+        out.write("                                <div class=\"form-group\">\n");
+        out.write("                                    <div class=\"form-check\">\n");
+        out.write("                                        <input type=\"checkbox\" class=\"form-check-input ml-0\" id=\"dropdownCheck\">\n");
+        out.write("                                        <label class=\"form-check-label\" for=\"Check\">\n");
+        out.write("                                            Recordar Contraseña\n");
+        out.write("                                        </label>\n");
+        out.write("                                    </div>\n");
+        out.write("                                </div>\n");
+        out.write("\n");
+        out.write("                            ");
+        if (_jspx_meth_s_submit_0((javax.servlet.jsp.tagext.JspTag) _jspx_th_s_form_0, _jspx_page_context))
+          return true;
+        out.write("\n");
+        out.write("                        ");
+        int evalDoAfterBody = _jspx_th_s_form_0.doAfterBody();
+        if (evalDoAfterBody != javax.servlet.jsp.tagext.BodyTag.EVAL_BODY_AGAIN)
+          break;
+      } while (true);
+      if (_jspx_eval_s_form_0 != javax.servlet.jsp.tagext.Tag.EVAL_BODY_INCLUDE)
+        out = _jspx_page_context.popBody();
+    }
+    if (_jspx_th_s_form_0.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
+      _jspx_tagPool_s_form_theme_styleId_id_action.reuse(_jspx_th_s_form_0);
+      return true;
+    }
+    _jspx_tagPool_s_form_theme_styleId_id_action.reuse(_jspx_th_s_form_0);
+    return false;
+  }
+
+  private boolean _jspx_meth_s_textfield_0(javax.servlet.jsp.tagext.JspTag _jspx_th_s_form_0, PageContext _jspx_page_context)
+          throws Throwable {
+    PageContext pageContext = _jspx_page_context;
+    JspWriter out = _jspx_page_context.getOut();
+    //  s:textfield
+    org.apache.struts2.views.jsp.ui.TextFieldTag _jspx_th_s_textfield_0 = (org.apache.struts2.views.jsp.ui.TextFieldTag) _jspx_tagPool_s_textfield_placeholder_name_id_cssClass_nobody.get(org.apache.struts2.views.jsp.ui.TextFieldTag.class);
+    _jspx_th_s_textfield_0.setPageContext(_jspx_page_context);
+    _jspx_th_s_textfield_0.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_s_form_0);
+    _jspx_th_s_textfield_0.setCssClass("form-control");
+    _jspx_th_s_textfield_0.setName("clienteLog.email");
+    _jspx_th_s_textfield_0.setId("email");
+    _jspx_th_s_textfield_0.setDynamicAttribute(null, "placeholder", new String("Ingrese Email"));
+    int _jspx_eval_s_textfield_0 = _jspx_th_s_textfield_0.doStartTag();
+    if (_jspx_th_s_textfield_0.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
+      _jspx_tagPool_s_textfield_placeholder_name_id_cssClass_nobody.reuse(_jspx_th_s_textfield_0);
+      return true;
+    }
+    _jspx_tagPool_s_textfield_placeholder_name_id_cssClass_nobody.reuse(_jspx_th_s_textfield_0);
+    return false;
+  }
+
+  private boolean _jspx_meth_s_textfield_1(javax.servlet.jsp.tagext.JspTag _jspx_th_s_form_0, PageContext _jspx_page_context)
+          throws Throwable {
+    PageContext pageContext = _jspx_page_context;
+    JspWriter out = _jspx_page_context.getOut();
+    //  s:textfield
+    org.apache.struts2.views.jsp.ui.TextFieldTag _jspx_th_s_textfield_1 = (org.apache.struts2.views.jsp.ui.TextFieldTag) _jspx_tagPool_s_textfield_placeholder_name_id_cssClass_nobody.get(org.apache.struts2.views.jsp.ui.TextFieldTag.class);
+    _jspx_th_s_textfield_1.setPageContext(_jspx_page_context);
+    _jspx_th_s_textfield_1.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_s_form_0);
+    _jspx_th_s_textfield_1.setCssClass("form-control");
+    _jspx_th_s_textfield_1.setName("clienteLog.password");
+    _jspx_th_s_textfield_1.setId("password");
+    _jspx_th_s_textfield_1.setDynamicAttribute(null, "placeholder", new String("Ingrese Password"));
+    int _jspx_eval_s_textfield_1 = _jspx_th_s_textfield_1.doStartTag();
+    if (_jspx_th_s_textfield_1.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
+      _jspx_tagPool_s_textfield_placeholder_name_id_cssClass_nobody.reuse(_jspx_th_s_textfield_1);
+      return true;
+    }
+    _jspx_tagPool_s_textfield_placeholder_name_id_cssClass_nobody.reuse(_jspx_th_s_textfield_1);
+    return false;
+  }
+
+  private boolean _jspx_meth_s_submit_0(javax.servlet.jsp.tagext.JspTag _jspx_th_s_form_0, PageContext _jspx_page_context)
+          throws Throwable {
+    PageContext pageContext = _jspx_page_context;
+    JspWriter out = _jspx_page_context.getOut();
+    //  s:submit
+    org.apache.struts2.views.jsp.ui.SubmitTag _jspx_th_s_submit_0 = (org.apache.struts2.views.jsp.ui.SubmitTag) _jspx_tagPool_s_submit_value_styleId_id_cssClass_nobody.get(org.apache.struts2.views.jsp.ui.SubmitTag.class);
+    _jspx_th_s_submit_0.setPageContext(_jspx_page_context);
+    _jspx_th_s_submit_0.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_s_form_0);
+    _jspx_th_s_submit_0.setId("ingresar");
+    _jspx_th_s_submit_0.setDynamicAttribute(null, "styleId", new String("btnreg"));
+    _jspx_th_s_submit_0.setCssClass("btn btn-primary  toastrDefaultError");
+    _jspx_th_s_submit_0.setValue("Iniciar Sesión");
+    int _jspx_eval_s_submit_0 = _jspx_th_s_submit_0.doStartTag();
+    if (_jspx_th_s_submit_0.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
+      _jspx_tagPool_s_submit_value_styleId_id_cssClass_nobody.reuse(_jspx_th_s_submit_0);
+      return true;
+    }
+    _jspx_tagPool_s_submit_value_styleId_id_cssClass_nobody.reuse(_jspx_th_s_submit_0);
+    return false;
   }
 }

@@ -6,7 +6,6 @@
 package wyv.persistencia;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -21,8 +20,6 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -39,7 +36,6 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Pedido.findByNumero", query = "SELECT p FROM Pedido p WHERE p.numero = :numero")
     , @NamedQuery(name = "Pedido.findByFecha", query = "SELECT p FROM Pedido p WHERE p.fecha = :fecha")
     , @NamedQuery(name = "Pedido.findBySubtotal", query = "SELECT p FROM Pedido p WHERE p.subtotal = :subtotal")
-    , @NamedQuery(name = "Pedido.findByTotalDescuento", query = "SELECT p FROM Pedido p WHERE p.totalDescuento = :totalDescuento")
     , @NamedQuery(name = "Pedido.findByIgv", query = "SELECT p FROM Pedido p WHERE p.igv = :igv")
     , @NamedQuery(name = "Pedido.findByTotal", query = "SELECT p FROM Pedido p WHERE p.total = :total")
     , @NamedQuery(name = "Pedido.findByPago", query = "SELECT p FROM Pedido p WHERE p.pago = :pago")
@@ -53,21 +49,18 @@ public class Pedido implements Serializable {
     @Column(name = "idPedido")
     private Integer idPedido;
     @Column(name = "numero")
-    private String numero;
+    private Integer numero;
     @Column(name = "fecha")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date fecha;
+    private String fecha;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "subtotal")
     private Double subtotal;
-    @Column(name = "totalDescuento")
-    private Double totalDescuento;
     @Column(name = "igv")
     private Double igv;
     @Column(name = "total")
     private Double total;
     @Column(name = "pago")
-    private Double pago;
+    private String pago;
     @Column(name = "estado")
     private Character estado;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "pedido")
@@ -94,19 +87,19 @@ public class Pedido implements Serializable {
         this.idPedido = idPedido;
     }
 
-    public String getNumero() {
+    public Integer getNumero() {
         return numero;
     }
 
-    public void setNumero(String numero) {
+    public void setNumero(Integer numero) {
         this.numero = numero;
     }
 
-    public Date getFecha() {
+    public String getFecha() {
         return fecha;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(String fecha) {
         this.fecha = fecha;
     }
 
@@ -116,14 +109,6 @@ public class Pedido implements Serializable {
 
     public void setSubtotal(Double subtotal) {
         this.subtotal = subtotal;
-    }
-
-    public Double getTotalDescuento() {
-        return totalDescuento;
-    }
-
-    public void setTotalDescuento(Double totalDescuento) {
-        this.totalDescuento = totalDescuento;
     }
 
     public Double getIgv() {
@@ -142,11 +127,11 @@ public class Pedido implements Serializable {
         this.total = total;
     }
 
-    public Double getPago() {
+    public String getPago() {
         return pago;
     }
 
-    public void setPago(Double pago) {
+    public void setPago(String pago) {
         this.pago = pago;
     }
 

@@ -1,4 +1,5 @@
 package wyv.persistencia;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -66,6 +67,8 @@ public class AdministradorDao implements IOperacionesBD<Administrador> {
         
         return   admJpa.ventaMes();
     }
+    
+    
     //Metodo para contar Cliente
     
      public int ContarCliente()

@@ -6,6 +6,9 @@
 package wyv.persistencia;
 
 import java.io.Serializable;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
@@ -27,8 +30,6 @@ public class PedidoJpa implements Serializable {
     public PedidoJpa() {
         this.emf = Persistence.createEntityManagerFactory("W_V_S.A.CPU");
     }
-    
-    
 
     public PedidoJpa(EntityManagerFactory emf) {
         this.emf = emf;
@@ -260,5 +261,32 @@ public class PedidoJpa implements Serializable {
             em.close();
         }
     }
+
+    public int actualizar(Pedido p) {
+        Connection cn;
+        PreparedStatement pstmt;
+        ResultSet rs;
+        int resultado = 0;
+
+        try {
+            cn = Util.getConexionBD();
+            pstmt = cn.prepareStatement("UPDATE pedido set  numero=?, fecha=?, subtotal=?, igv=?, total=?, pago=?, estado=?, idCliente=?, idEmpresa=? where idPedido=?");
+            pstmt.setInt(1, p.getNumero());
+            pstmt.setString(2, p.getFecha());
+            pstmt.setDouble(3, p.getSubtotal());
+            pstmt.setDouble(4, p.getIgv());
+            pstmt.setDouble(5, p.getTotal());
+            pstmt.setString(6, p.getPago());
+            pstmt.setString(7, String.valueOf(p.getEstado()));
+            pstmt.setInt(8, p.getIdCliente().getIdCliente());
+            pstmt.setInt(9, p.getIdEmpresa().getIdEmpresa());
+            pstmt.setInt(10, p.getIdPedido());
+            resultado = pstmt.executeUpdate();
+        } catch (Exception e) {
+            e.getMessage();
+        }
+        return resultado;
+    }
+
     
 }

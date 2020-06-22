@@ -17,10 +17,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Romario
+ * @author Data
  */
 @Entity
-@Table(name = "administrador", catalog = "tiendaw_v", schema = "")
+@Table(name = "administrador")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Administrador.findAll", query = "SELECT a FROM Administrador a")
@@ -45,7 +45,7 @@ public class Administrador implements Serializable {
     private String password;
     @Basic(optional = false)
     @Column(name = "privilegio")
-    private String privilegio;
+    private Character privilegio;
 
     public Administrador() {
     }
@@ -54,7 +54,7 @@ public class Administrador implements Serializable {
         this.dni = dni;
     }
 
-    public Administrador(String dni, String apellidos, String privilegio) {
+    public Administrador(String dni, String apellidos, Character privilegio) {
         this.dni = dni;
         this.apellidos = apellidos;
         this.privilegio = privilegio;
@@ -92,11 +92,11 @@ public class Administrador implements Serializable {
         this.password = password;
     }
 
-    public String getPrivilegio() {
+    public Character getPrivilegio() {
         return privilegio;
     }
 
-    public void setPrivilegio(String privilegio) {
+    public void setPrivilegio(Character privilegio) {
         this.privilegio = privilegio;
     }
 
