@@ -26,7 +26,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Romario
+ * @author Data
  */
 @Entity
 @Table(name = "producto")
@@ -41,6 +41,12 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Producto.findByDescuento", query = "SELECT p FROM Producto p WHERE p.descuento = :descuento")})
 public class Producto implements Serializable {
 
+<<<<<<< HEAD
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "producto")
+    private List<DetallePedido> detallePedidoList;
+
+=======
+>>>>>>> 97edac29254a5880c5c2e5d3c6e7960383a0a617
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -199,5 +205,17 @@ public class Producto implements Serializable {
     public String toString() {
         return "wyv.persistencia.Producto[ idProducto=" + idProducto + " ]";
     }
+<<<<<<< HEAD
+
+    @XmlTransient
+    public List<DetallePedido> getDetallePedidoList() {
+        return detallePedidoList;
+    }
+
+    public void setDetallePedidoList(List<DetallePedido> detallePedidoList) {
+        this.detallePedidoList = detallePedidoList;
+    }
+=======
+>>>>>>> 97edac29254a5880c5c2e5d3c6e7960383a0a617
     
 }

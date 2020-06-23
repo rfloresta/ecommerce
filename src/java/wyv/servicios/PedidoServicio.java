@@ -26,7 +26,9 @@ public class PedidoServicio implements IOperacionesBD<Pedido>{
 
     @Override
     public String actualizar(Pedido a) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("El valor de a: "+ a.getIdPedido());
+        pedidoDao=new PedidoDao();
+        return pedidoDao.actualizar(a); 
     }
 
     @Override

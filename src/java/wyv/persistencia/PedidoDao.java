@@ -14,7 +14,6 @@ import java.util.List;
 public class PedidoDao implements IOperacionesBD<Pedido> {
 
     PedidoJpa pedidoJpa=new PedidoJpa();
-    
     @Override
     public String registrar(Pedido a) {
         try {
@@ -26,7 +25,14 @@ public class PedidoDao implements IOperacionesBD<Pedido> {
 
     @Override
     public String actualizar(Pedido a) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            pedidoJpa.actualizar(a);
+             
+            return "ok";
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "error";
+        }
     }
 
     @Override

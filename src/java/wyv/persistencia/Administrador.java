@@ -17,7 +17,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Romario
+ * @author Data
  */
 @Entity
 @Table(name = "administrador")
@@ -95,6 +95,8 @@ public class Administrador implements Serializable {
         this.password = password;
     }
 
+<<<<<<< HEAD
+=======
     public String getEmail() {
         return email;
     }
@@ -103,6 +105,7 @@ public class Administrador implements Serializable {
         this.email = email;
     }
 
+>>>>>>> 97edac29254a5880c5c2e5d3c6e7960383a0a617
     public Character getPrivilegio() {
         return privilegio;
     }

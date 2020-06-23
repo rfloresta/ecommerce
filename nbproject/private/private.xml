@@ -3,6 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
+            <file>file:/C:/Users/Data/Desktop/Universidad/9no/taller_dsw/Proyecto%20Final/Software/W_V%20S.A.C/web/css/font-awesome.min.css</file>
+            <file>file:/C:/Users/Data/Desktop/Universidad/9no/taller_dsw/Proyecto%20Final/Software/W_V%20S.A.C/web/admin/principal/inicio.jsp</file>
+            <file>file:/C:/Users/Data/Desktop/Universidad/9no/taller_dsw/Proyecto%20Final/Software/W_V%20S.A.C/web/clientePerfil.jsp</file>
+            <file>file:/C:/Users/Data/Desktop/Universidad/9no/taller_dsw/Proyecto%20Final/Software/W_V%20S.A.C/web/css/main.css</file>
+            <file>file:/C:/Users/Data/Desktop/Universidad/9no/taller_dsw/Proyecto%20Final/Software/W_V%20S.A.C/web/templastes/footer.jsp</file>
+            <file>file:/C:/Users/Data/Desktop/Universidad/9no/taller_dsw/Proyecto%20Final/Software/W_V%20S.A.C/web/templastes/header.jsp</file>
+            <file>file:/C:/Users/Data/Desktop/Universidad/9no/taller_dsw/Proyecto%20Final/Software/W_V%20S.A.C/web/admin/principal/header.jsp</file>
+=======
             <file>file:/C:/Users/Romario/Desktop/Git/W-V-S.A.C/src/java/wyv/persistencia/Categoria.java</file>
             <file>file:/C:/Users/Romario/Desktop/Git/W-V-S.A.C/src/java/wyv/persistencia/EmpresaDao.java</file>
             <file>file:/C:/Users/Romario/Desktop/Git/W-V-S.A.C/web/admin/seguridad/login.jsp</file>
@@ -14,6 +23,7 @@
             <file>file:/C:/Users/Romario/Desktop/Git/W-V-S.A.C/web/admin/principal/producto.jsp</file>
             <file>file:/C:/Users/Romario/Desktop/Git/W-V-S.A.C/web/admin/principal/sidebar.jsp</file>
             <file>file:/C:/Users/Romario/Desktop/Git/W-V-S.A.C/src/java/wyv/servicios/EmpresaServicio.java</file>
+>>>>>>> 97edac29254a5880c5c2e5d3c6e7960383a0a617
         </group>
     </open-files>
 </project-private>

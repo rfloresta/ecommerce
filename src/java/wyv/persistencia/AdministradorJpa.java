@@ -30,8 +30,13 @@ import wyv.persistencia.exceptions.PreexistingEntityException;
 public class AdministradorJpa implements Serializable {
 
     public AdministradorJpa() {
-         this.emf = Persistence.createEntityManagerFactory("W_V_S.A.CPU");
+        this.emf= Persistence.createEntityManagerFactory("W_V_S.A.CPU");
     }
+<<<<<<< HEAD
+
+    
+=======
+>>>>>>> 97edac29254a5880c5c2e5d3c6e7960383a0a617
     public AdministradorJpa(EntityManagerFactory emf) {
         this.emf = emf;
     }
@@ -161,7 +166,7 @@ public class AdministradorJpa implements Serializable {
         try {
 
             cn = Util.getConexionBD();
-            pstmt = cn.prepareStatement("SELECT monthname(fecha) as fecha,sum(total) as Total FROM pedido WHERE estado=1 GROUP BY monthname (fecha) ORDER BY date(fecha)");
+            pstmt = cn.prepareStatement("SELECT fecha as fecha,sum(total) as Total FROM pedido  GROUP BY fecha ORDER BY date(fecha)");
             rs = pstmt.executeQuery();
             Map<String, String> mapa=null;
             while(rs.next())
@@ -181,7 +186,7 @@ public class AdministradorJpa implements Serializable {
             e.printStackTrace();
         }
 
-
+       
         return venMes;
 
     }

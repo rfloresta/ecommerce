@@ -10,6 +10,16 @@
     <class>wyv.persistencia.Pedido</class>
     <class>wyv.persistencia.Cliente</class>
     <class>wyv.persistencia.DetallePedido</class>
+<<<<<<< HEAD
+    <class>wyv.persistencia.Pedido</class>
+    <class>wyv.persistencia.Empresa</class>
+    <class>wyv.persistencia.Cliente_1</class>
+    <class>wyv.persistencia.Empresa_1</class>
+    <class>wyv.persistencia.Categoria_1</class>
+    <class>wyv.persistencia.Producto_1</class>
+    <class>wyv.persistencia.Marca_1</class>
+=======
+>>>>>>> 97edac29254a5880c5c2e5d3c6e7960383a0a617
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/tiendaw_v?zeroDateTimeBehavior=convertToNull"/>

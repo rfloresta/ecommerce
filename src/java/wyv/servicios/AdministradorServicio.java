@@ -73,7 +73,7 @@ public class AdministradorServicio implements IOperacionesBD<Administrador> {
             if (admin != null) {
             //Se desincrepta el password para poder validarlo con la entrada.
             String passDesencriptado= Desencriptar(admin.getPassword());
-                System.out.println(passDesencriptado);
+                
             if (passDesencriptado.equals(entrada.getPassword())) {
                 
                 return admin;
