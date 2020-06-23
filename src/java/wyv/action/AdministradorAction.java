@@ -283,7 +283,6 @@ public class AdministradorAction extends ActionSupport implements SessionAware {
 		
 		try {
                         admSer=new AdministradorServicio();
-                       
                         String dni=(String)sesion.get("dni");
 			admin=admSer.buscar(dni);
 			return "ok";

@@ -1,15 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 4.6.5.2
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
-
--- Tiempo de generación: 08-06-2020 a las 19:10:01
--- Versión del servidor: 10.4.11-MariaDB
--- Versión de PHP: 7.4.5
+-- Tiempo de generación: 23-06-2020 a las 02:21:12
+-- Versión del servidor: 10.1.21-MariaDB
+-- Versión de PHP: 5.6.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -78,21 +76,20 @@ DELIMITER ;
 
 CREATE TABLE `administrador` (
   `dni` char(8) NOT NULL,
-  `nombres` varchar(100) NOT NULL,
+  `nombres` varchar(100) DEFAULT NULL,
   `apellidos` varchar(100) NOT NULL,
-  `password` varchar(100) NOT NULL,
-
+  `password` varchar(100) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
-
-  `privilegio` char(1) NOT NULL
+  `privilegio` char(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `administrador`
 --
 
-INSERT INTO `administrador` (`dni`, `nombres`, `apellidos`, `password`, `email`,  `privilegio`) VALUES
-('15489669', 'Admin', 'Admin', 'admin','admin@gmail.com', 'A');
+INSERT INTO `administrador` (`dni`, `nombres`, `apellidos`, `password`, `email`, `privilegio`) VALUES
+('12345678', 'Juan', 'Perez', NULL, 'juan@gmail.com', NULL),
+('48887174', 'Romario', 'Flores Taipe', 'b5mTWKsLlek=', NULL, 'A');
 
 -- --------------------------------------------------------
 
@@ -182,8 +179,8 @@ CREATE TABLE `empresa` (
   `idEmpresa` int(11) NOT NULL,
   `ruc` char(11) DEFAULT NULL,
   `razonSocial` varchar(200) DEFAULT NULL,
-  `direccion` text DEFAULT NULL,
-  `logo` varhar(255)DEFAULT NULL
+  `direccion` text NOT NULL,
+  `logo` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -191,7 +188,10 @@ CREATE TABLE `empresa` (
 --
 
 INSERT INTO `empresa` (`idEmpresa`, `ruc`, `razonSocial`, `direccion`, `logo`) VALUES
-(1, '20100148162', 'W&V Negocios y Servicios S.A.C', 'Calle...', 'nego.jpg')
+(1, '20100148162', 'W&V Negocios y Servicios S.A.C', 'Calle...', 'nego.png'),
+(2, '20100148162', 'W&V Negocios y Servicios S.A.C', 'Calle Toribio', NULL),
+(3, '20100148162', 'W&V Negocios y Servicios S.A.C', 'Calle...', 'aua.jpg'),
+(4, '20100148162', 'W&V Negocios y Servicios S.A.C', 'B, Villa El Salvador', 'nego.png');
 
 -- --------------------------------------------------------
 
@@ -222,7 +222,7 @@ INSERT INTO `marca` (`idMarca`, `nombre`) VALUES
 CREATE TABLE `pedido` (
   `idPedido` int(11) NOT NULL,
   `numero` int(11) DEFAULT NULL,
-  `fecha` datetime DEFAULT NULL,
+  `fecha` varchar(50) DEFAULT NULL,
   `subtotal` double(10,2) DEFAULT NULL,
   `igv` double(10,2) DEFAULT NULL,
   `total` double(10,2) DEFAULT NULL,
@@ -235,8 +235,7 @@ CREATE TABLE `pedido` (
 -- Volcado de datos para la tabla `pedido`
 --
 
-INSERT INTO `pedido` (`idPedido`, `numero`, `fecha`, `subtotal`, `igv`, `total`, `pago`, `estado`, `idCliente`)
-VALUES
+INSERT INTO `pedido` (`idPedido`, `numero`, `fecha`, `subtotal`, `igv`, `total`, `pago`, `estado`, `idCliente`) VALUES
 (1, 1, '2020-06-14 22:28:01', 100.00, 0.18, 100.00, 'Tarjeta', '0', 1),
 (2, 2, '2020-06-14 23:50:00', 200.00, 0.18, 200.00, 'Tarjeta', '0', 1),
 (3, 3, '2020-06-15 00:24:03', 300.00, 0.18, 300.00, 'Tarjeta', '0', 1);
@@ -255,7 +254,7 @@ CREATE TABLE `producto` (
   `precioCompra` double(10,2) DEFAULT NULL,
   `precioVenta` double(10,2) DEFAULT NULL,
   `descuento` double(10,2) DEFAULT NULL,
-  `imagen` text DEFAULT NULL,
+  `imagen` text,
   `idCategoria` int(11) DEFAULT NULL,
   `idMarca` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -265,9 +264,9 @@ CREATE TABLE `producto` (
 --
 
 INSERT INTO `producto` (`idProducto`, `nombre`, `descripcion`, `stock`, `precioCompra`, `precioVenta`, `descuento`, `imagen`, `idCategoria`, `idMarca`) VALUES
-(1, 'Altheus', 'perfume con aroma deportivo', 900, 50.00, 65.00, 0.00, 'altheus.jpg', 2, 1),
-(2, 'Cardigan', 'perfume con aroma seductor', 648, 70.00, 80.00, 0.00, 'cardigan.jpg', 2, 1),
-(3, 'Glamour', 'perfume con aroma seductor', 286, 80.00, 100.00, 0.00, 'glamour.jpg', 3, 2);
+(1, 'Altheus', 'perfume con aroma deportivo', 900, 50.00, 65.00, 0.00, 'blue.png', 2, 1),
+(2, 'Cardigan', 'perfume con aroma seductor', 648, 70.00, 80.00, 0.00, 'inlove.jpg', 2, 1),
+(3, 'Glamour', 'perfume con aroma seductor', 286, 80.00, 100.00, 0.00, 'vera.jpg', 3, 2);
 
 --
 -- Índices para tablas volcadas
@@ -316,7 +315,7 @@ ALTER TABLE `marca`
 --
 ALTER TABLE `pedido`
   ADD PRIMARY KEY (`idPedido`),
-  ADD KEY `pedido_ibfk_1` (`idCliente`),
+  ADD KEY `pedido_ibfk_1` (`idCliente`);
 
 --
 -- Indices de la tabla `producto`
@@ -335,37 +334,31 @@ ALTER TABLE `producto`
 --
 ALTER TABLE `categoria`
   MODIFY `idCategoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
 --
 -- AUTO_INCREMENT de la tabla `cliente`
 --
 ALTER TABLE `cliente`
   MODIFY `idCliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
 --
 -- AUTO_INCREMENT de la tabla `empresa`
 --
 ALTER TABLE `empresa`
-  MODIFY `idEmpresa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
+  MODIFY `idEmpresa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT de la tabla `marca`
 --
 ALTER TABLE `marca`
   MODIFY `idMarca` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
 --
 -- AUTO_INCREMENT de la tabla `pedido`
 --
 ALTER TABLE `pedido`
   MODIFY `idPedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
 --
 -- AUTO_INCREMENT de la tabla `producto`
 --
 ALTER TABLE `producto`
   MODIFY `idProducto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
 --
 -- Restricciones para tablas volcadas
 --
@@ -381,7 +374,7 @@ ALTER TABLE `detalle_pedido`
 -- Filtros para la tabla `pedido`
 --
 ALTER TABLE `pedido`
-  ADD CONSTRAINT `pedido_ibfk_1` FOREIGN KEY (`idCliente`) REFERENCES `cliente` (`idCliente`),
+  ADD CONSTRAINT `pedido_ibfk_1` FOREIGN KEY (`idCliente`) REFERENCES `cliente` (`idCliente`);
 
 --
 -- Filtros para la tabla `producto`
@@ -389,7 +382,6 @@ ALTER TABLE `pedido`
 ALTER TABLE `producto`
   ADD CONSTRAINT `producto_ibfk_1` FOREIGN KEY (`idCategoria`) REFERENCES `categoria` (`idCategoria`),
   ADD CONSTRAINT `producto_ibfk_2` FOREIGN KEY (`idMarca`) REFERENCES `marca` (`idMarca`);
-COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
