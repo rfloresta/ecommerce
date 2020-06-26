@@ -12,10 +12,11 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
   private static java.util.List<String> _jspx_dependants;
 
   private org.apache.jasper.runtime.TagHandlerPool _jspx_tagPool_s_textfield_styleId_placeholder_name_id_cssClass_nobody;
+  private org.apache.jasper.runtime.TagHandlerPool _jspx_tagPool_s_actionerror_nobody;
   private org.apache.jasper.runtime.TagHandlerPool _jspx_tagPool_s_submit_value_styleId_id_cssClass_nobody;
   private org.apache.jasper.runtime.TagHandlerPool _jspx_tagPool_s_form_theme_styleId_id_action;
   private org.apache.jasper.runtime.TagHandlerPool _jspx_tagPool_s_password_styleId_placeholder_name_id_cssClass_nobody;
-  private org.apache.jasper.runtime.TagHandlerPool _jspx_tagPool_s_text_name_nobody;
+  private org.apache.jasper.runtime.TagHandlerPool _jspx_tagPool_s_if_test;
 
   private org.glassfish.jsp.api.ResourceInjector _jspx_resourceInjector;
 
@@ -25,18 +26,20 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
 
   public void _jspInit() {
     _jspx_tagPool_s_textfield_styleId_placeholder_name_id_cssClass_nobody = org.apache.jasper.runtime.TagHandlerPool.getTagHandlerPool(getServletConfig());
+    _jspx_tagPool_s_actionerror_nobody = org.apache.jasper.runtime.TagHandlerPool.getTagHandlerPool(getServletConfig());
     _jspx_tagPool_s_submit_value_styleId_id_cssClass_nobody = org.apache.jasper.runtime.TagHandlerPool.getTagHandlerPool(getServletConfig());
     _jspx_tagPool_s_form_theme_styleId_id_action = org.apache.jasper.runtime.TagHandlerPool.getTagHandlerPool(getServletConfig());
     _jspx_tagPool_s_password_styleId_placeholder_name_id_cssClass_nobody = org.apache.jasper.runtime.TagHandlerPool.getTagHandlerPool(getServletConfig());
-    _jspx_tagPool_s_text_name_nobody = org.apache.jasper.runtime.TagHandlerPool.getTagHandlerPool(getServletConfig());
+    _jspx_tagPool_s_if_test = org.apache.jasper.runtime.TagHandlerPool.getTagHandlerPool(getServletConfig());
   }
 
   public void _jspDestroy() {
     _jspx_tagPool_s_textfield_styleId_placeholder_name_id_cssClass_nobody.release();
+    _jspx_tagPool_s_actionerror_nobody.release();
     _jspx_tagPool_s_submit_value_styleId_id_cssClass_nobody.release();
     _jspx_tagPool_s_form_theme_styleId_id_action.release();
     _jspx_tagPool_s_password_styleId_placeholder_name_id_cssClass_nobody.release();
-    _jspx_tagPool_s_text_name_nobody.release();
+    _jspx_tagPool_s_if_test.release();
   }
 
   public void _jspService(HttpServletRequest request, HttpServletResponse response)
@@ -206,10 +209,10 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
         if (_jspx_meth_s_submit_0((javax.servlet.jsp.tagext.JspTag) _jspx_th_s_form_0, _jspx_page_context))
           return true;
         out.write("\r\n");
-        out.write("                                <div class=\"text-danger text-center\">");
-        if (_jspx_meth_s_text_0((javax.servlet.jsp.tagext.JspTag) _jspx_th_s_form_0, _jspx_page_context))
+        out.write("                                 ");
+        if (_jspx_meth_s_if_0((javax.servlet.jsp.tagext.JspTag) _jspx_th_s_form_0, _jspx_page_context))
           return true;
-        out.write("</div>\r\n");
+        out.write("\r\n");
         out.write("   \r\n");
         out.write("                            </div>\r\n");
         out.write("                            <!-- /.col -->\r\n");
@@ -299,21 +302,60 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
     return false;
   }
 
-  private boolean _jspx_meth_s_text_0(javax.servlet.jsp.tagext.JspTag _jspx_th_s_form_0, PageContext _jspx_page_context)
+  private boolean _jspx_meth_s_if_0(javax.servlet.jsp.tagext.JspTag _jspx_th_s_form_0, PageContext _jspx_page_context)
           throws Throwable {
     PageContext pageContext = _jspx_page_context;
     JspWriter out = _jspx_page_context.getOut();
-    //  s:text
-    org.apache.struts2.views.jsp.TextTag _jspx_th_s_text_0 = (org.apache.struts2.views.jsp.TextTag) _jspx_tagPool_s_text_name_nobody.get(org.apache.struts2.views.jsp.TextTag.class);
-    _jspx_th_s_text_0.setPageContext(_jspx_page_context);
-    _jspx_th_s_text_0.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_s_form_0);
-    _jspx_th_s_text_0.setName("resultado");
-    int _jspx_eval_s_text_0 = _jspx_th_s_text_0.doStartTag();
-    if (_jspx_th_s_text_0.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
-      _jspx_tagPool_s_text_name_nobody.reuse(_jspx_th_s_text_0);
+    //  s:if
+    org.apache.struts2.views.jsp.IfTag _jspx_th_s_if_0 = (org.apache.struts2.views.jsp.IfTag) _jspx_tagPool_s_if_test.get(org.apache.struts2.views.jsp.IfTag.class);
+    _jspx_th_s_if_0.setPageContext(_jspx_page_context);
+    _jspx_th_s_if_0.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_s_form_0);
+    _jspx_th_s_if_0.setTest("hasActionErrors()");
+    int _jspx_eval_s_if_0 = _jspx_th_s_if_0.doStartTag();
+    if (_jspx_eval_s_if_0 != javax.servlet.jsp.tagext.Tag.SKIP_BODY) {
+      if (_jspx_eval_s_if_0 != javax.servlet.jsp.tagext.Tag.EVAL_BODY_INCLUDE) {
+        out = _jspx_page_context.pushBody();
+        _jspx_th_s_if_0.setBodyContent((javax.servlet.jsp.tagext.BodyContent) out);
+        _jspx_th_s_if_0.doInitBody();
+      }
+      do {
+        out.write("\r\n");
+        out.write("                                    <div class=\"errorDiv text-center text-danger mt-3\" >\r\n");
+        out.write("                                        ");
+        if (_jspx_meth_s_actionerror_0((javax.servlet.jsp.tagext.JspTag) _jspx_th_s_if_0, _jspx_page_context))
+          return true;
+        out.write("\r\n");
+        out.write("                                    </div>\r\n");
+        out.write("                                ");
+        int evalDoAfterBody = _jspx_th_s_if_0.doAfterBody();
+        if (evalDoAfterBody != javax.servlet.jsp.tagext.BodyTag.EVAL_BODY_AGAIN)
+          break;
+      } while (true);
+      if (_jspx_eval_s_if_0 != javax.servlet.jsp.tagext.Tag.EVAL_BODY_INCLUDE)
+        out = _jspx_page_context.popBody();
+    }
+    if (_jspx_th_s_if_0.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
+      _jspx_tagPool_s_if_test.reuse(_jspx_th_s_if_0);
       return true;
     }
-    _jspx_tagPool_s_text_name_nobody.reuse(_jspx_th_s_text_0);
+    _jspx_tagPool_s_if_test.reuse(_jspx_th_s_if_0);
+    return false;
+  }
+
+  private boolean _jspx_meth_s_actionerror_0(javax.servlet.jsp.tagext.JspTag _jspx_th_s_if_0, PageContext _jspx_page_context)
+          throws Throwable {
+    PageContext pageContext = _jspx_page_context;
+    JspWriter out = _jspx_page_context.getOut();
+    //  s:actionerror
+    org.apache.struts2.views.jsp.ui.ActionErrorTag _jspx_th_s_actionerror_0 = (org.apache.struts2.views.jsp.ui.ActionErrorTag) _jspx_tagPool_s_actionerror_nobody.get(org.apache.struts2.views.jsp.ui.ActionErrorTag.class);
+    _jspx_th_s_actionerror_0.setPageContext(_jspx_page_context);
+    _jspx_th_s_actionerror_0.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_s_if_0);
+    int _jspx_eval_s_actionerror_0 = _jspx_th_s_actionerror_0.doStartTag();
+    if (_jspx_th_s_actionerror_0.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
+      _jspx_tagPool_s_actionerror_nobody.reuse(_jspx_th_s_actionerror_0);
+      return true;
+    }
+    _jspx_tagPool_s_actionerror_nobody.reuse(_jspx_th_s_actionerror_0);
     return false;
   }
 }

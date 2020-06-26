@@ -18,7 +18,7 @@ import wyv.persistencia.exceptions.NonexistentEntityException;
 
 /**
  *
- * @author Data
+ * @author bdeg_
  */
 public class CategoriaJpa implements Serializable {
 

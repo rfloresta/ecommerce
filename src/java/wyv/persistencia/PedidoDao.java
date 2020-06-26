@@ -48,7 +48,7 @@ public class PedidoDao implements IOperacionesBD<Pedido> {
     @Override
     public List<Pedido> listar() {
         try {
-            return pedidoJpa.findPedidoEntities();
+            return pedidoJpa.listarPedido();
         } catch (Exception e) {
             e.getMessage();
             return null;

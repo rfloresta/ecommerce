@@ -10,3 +10,7 @@
     color: white;
 }
 
+.errorMessage
+{
+    list-style: none;
+}

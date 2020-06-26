@@ -122,12 +122,22 @@ public class PedidoAction extends ActionSupport {
             ped.setIgv(pedido.getIgv());
             ped.setEstado(pedido.getEstado());
             cliente.getIdCliente();
-            empresa.getIdEmpresa();
             ped.setIdCliente(cliente);
-            ped.setIdEmpresa(empresa);
             new PedidoServicio().actualizar(ped);
             lstPedido = new PedidoServicio().listar();
-           
+            
+            System.out.println(ped.getIdPedido());
+            System.out.println(ped.getNumero());
+            System.out.println(ped.getSubtotal());
+            System.out.println(ped.getTotal());
+            System.out.println(ped.getFecha());
+            System.out.println(ped.getPago());
+            System.out.println(ped.getIgv());
+            System.out.println(ped.getEstado());
+            System.out.println(ped.getIdCliente());
+            
+            
+            
             
             
             return "ok";

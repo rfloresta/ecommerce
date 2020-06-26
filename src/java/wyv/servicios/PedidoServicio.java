@@ -26,7 +26,6 @@ public class PedidoServicio implements IOperacionesBD<Pedido>{
 
     @Override
     public String actualizar(Pedido a) {
-        System.out.println("El valor de a: "+ a.getIdPedido());
         pedidoDao=new PedidoDao();
         return pedidoDao.actualizar(a); 
     }

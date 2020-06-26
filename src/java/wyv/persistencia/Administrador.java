@@ -17,7 +17,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Data
+ * @author bdeg_
  */
 @Entity
 @Table(name = "administrador")
@@ -46,7 +46,6 @@ public class Administrador implements Serializable {
     private String password;
     @Column(name = "email")
     private String email;
-    @Basic(optional = false)
     @Column(name = "privilegio")
     private Character privilegio;
 
@@ -57,10 +56,9 @@ public class Administrador implements Serializable {
         this.dni = dni;
     }
 
-    public Administrador(String dni, String apellidos, Character privilegio) {
+    public Administrador(String dni, String apellidos) {
         this.dni = dni;
         this.apellidos = apellidos;
-        this.privilegio = privilegio;
     }
 
     public String getDni() {
@@ -95,8 +93,6 @@ public class Administrador implements Serializable {
         this.password = password;
     }
 
-<<<<<<< HEAD
-=======
     public String getEmail() {
         return email;
     }
@@ -105,7 +101,6 @@ public class Administrador implements Serializable {
         this.email = email;
     }
 
->>>>>>> 97edac29254a5880c5c2e5d3c6e7960383a0a617
     public Character getPrivilegio() {
         return privilegio;
     }
