@@ -86,7 +86,7 @@
                                         <s:iterator value="lstAdmin">
                                             <tr>
 
-                                                <s:if test="adminLog.dni.equals(dni)">
+                                                <s:if test="#session.dni.equals(dni)">
                                                     <td></td>
                                                     <td></td>
                                                     <td></td>

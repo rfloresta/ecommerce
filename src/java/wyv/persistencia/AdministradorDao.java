@@ -1,5 +1,4 @@
 package wyv.persistencia;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -7,7 +6,6 @@ public class AdministradorDao implements IOperacionesBD<Administrador> {
     
     AdministradorJpa admJpa=new AdministradorJpa();
     
-
     @Override
     public String registrar(Administrador a) {
         try {

@@ -14,6 +14,8 @@ import java.util.List;
 public class PedidoDao implements IOperacionesBD<Pedido> {
 
     PedidoJpa pedidoJpa=new PedidoJpa();
+    private final DetallePedidoJpa detJpa=new DetallePedidoJpa();
+
     @Override
     public String registrar(Pedido a) {
         try {
@@ -58,6 +60,10 @@ public class PedidoDao implements IOperacionesBD<Pedido> {
     @Override
     public Pedido ingresar(Pedido entrada) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    public List listarDetalle(){
+        return detJpa.findDetallePedidoEntities();
     }
     
 }

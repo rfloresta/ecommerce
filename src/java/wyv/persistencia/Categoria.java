@@ -22,7 +22,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Data
+ * @author Romario
  */
 @Entity
 @Table(name = "categoria")
@@ -34,9 +34,6 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Categoria.findByCategoriaSuperior", query = "SELECT c FROM Categoria c WHERE c.categoriaSuperior = :categoriaSuperior")})
 public class Categoria implements Serializable {
 
-    @OneToMany(mappedBy = "idCategoria")
-    private List<Producto> productoList;
-
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -47,11 +44,8 @@ public class Categoria implements Serializable {
     private String nombre;
     @Column(name = "categoriaSuperior")
     private Integer categoriaSuperior;
-<<<<<<< HEAD
-=======
     @OneToMany(mappedBy = "idCategoria")
     private List<Producto> productoList;
->>>>>>> 97edac29254a5880c5c2e5d3c6e7960383a0a617
 
     public Categoria() {
     }
@@ -78,8 +72,6 @@ public class Categoria implements Serializable {
 
     public Integer getCategoriaSuperior() {
         return categoriaSuperior;
-<<<<<<< HEAD
-=======
     }
 
     public void setCategoriaSuperior(Integer categoriaSuperior) {
@@ -89,11 +81,10 @@ public class Categoria implements Serializable {
     @XmlTransient
     public List<Producto> getProductoList() {
         return productoList;
->>>>>>> 97edac29254a5880c5c2e5d3c6e7960383a0a617
     }
 
-    public void setCategoriaSuperior(Integer categoriaSuperior) {
-        this.categoriaSuperior = categoriaSuperior;
+    public void setProductoList(List<Producto> productoList) {
+        this.productoList = productoList;
     }
 
     @Override
@@ -118,19 +109,7 @@ public class Categoria implements Serializable {
 
     @Override
     public String toString() {
-        return "wyv.persistencia.Categoria[ idCategoria=" + idCategoria + " ]";
-<<<<<<< HEAD
-    }
-
-    @XmlTransient
-    public List<Producto> getProductoList() {
-        return productoList;
-    }
-
-    public void setProductoList(List<Producto> productoList) {
-        this.productoList = productoList;
-=======
->>>>>>> 97edac29254a5880c5c2e5d3c6e7960383a0a617
+        return nombre;
     }
     
 }

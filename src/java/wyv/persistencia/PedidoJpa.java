@@ -26,13 +26,10 @@ import wyv.persistencia.exceptions.NonexistentEntityException;
  * @author Romario
  */
 public class PedidoJpa implements Serializable {
- public PedidoJpa() {
-         this.emf = Persistence.createEntityManagerFactory("W_V_S.A.CPU");
-    }
-<<<<<<< HEAD
 
-=======
->>>>>>> 97edac29254a5880c5c2e5d3c6e7960383a0a617
+    public PedidoJpa() {
+        this.emf= Persistence.createEntityManagerFactory("W_V_S.A.CPU");
+    }
     public PedidoJpa(EntityManagerFactory emf) {
         this.emf = emf;
     }
@@ -235,7 +232,7 @@ public class PedidoJpa implements Serializable {
             em.close();
         }
     }
-
+    
     public int actualizar(Pedido p) {
         Connection cn;
         PreparedStatement pstmt;
@@ -244,7 +241,7 @@ public class PedidoJpa implements Serializable {
 
         try {
             cn = Util.getConexionBD();
-            pstmt = cn.prepareStatement("UPDATE pedido set  numero=?, fecha=?, subtotal=?, igv=?, total=?, pago=?, estado=?, idCliente=?, idEmpresa=? where idPedido=?");
+            pstmt = cn.prepareStatement("UPDATE pedido set  numero=?, fecha=?, subtotal=?, igv=?, total=?, pago=?, estado=?, idCliente=? where idPedido=?");
             pstmt.setInt(1, p.getNumero());
             pstmt.setString(2, p.getFecha());
             pstmt.setDouble(3, p.getSubtotal());
@@ -253,7 +250,6 @@ public class PedidoJpa implements Serializable {
             pstmt.setString(6, p.getPago());
             pstmt.setString(7, String.valueOf(p.getEstado()));
             pstmt.setInt(8, p.getIdCliente().getIdCliente());
-            pstmt.setInt(9, p.getIdEmpresa().getIdEmpresa());
             pstmt.setInt(10, p.getIdPedido());
             resultado = pstmt.executeUpdate();
         } catch (Exception e) {
@@ -261,6 +257,5 @@ public class PedidoJpa implements Serializable {
         }
         return resultado;
     }
-
     
 }

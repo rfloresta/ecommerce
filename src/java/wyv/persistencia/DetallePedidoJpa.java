@@ -11,6 +11,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
+import javax.persistence.Persistence;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import wyv.persistencia.exceptions.NonexistentEntityException;
@@ -20,16 +21,11 @@ import wyv.persistencia.exceptions.PreexistingEntityException;
  *
  * @author Romario
  */
-public class DetallePedidoJpaController implements Serializable {
-
-<<<<<<< HEAD:src/java/wyv/persistencia/DetallePedidoJpaController.java
-    public DetallePedidoJpaController(EntityManagerFactory emf) {
-=======
-     public DetallePedidoJpa() {
-         this.emf = Persistence.createEntityManagerFactory("W_V_S.A.CPU");
+public class DetallePedidoJpa implements Serializable {
+    public DetallePedidoJpa() {
+        this.emf= Persistence.createEntityManagerFactory("W_V_S.A.CPU");
     }
     public DetallePedidoJpa(EntityManagerFactory emf) {
->>>>>>> 97edac29254a5880c5c2e5d3c6e7960383a0a617:src/java/wyv/persistencia/DetallePedidoJpa.java
         this.emf = emf;
     }
     private EntityManagerFactory emf = null;
@@ -42,8 +38,8 @@ public class DetallePedidoJpaController implements Serializable {
         if (detallePedido.getDetallePedidoPK() == null) {
             detallePedido.setDetallePedidoPK(new DetallePedidoPK());
         }
-        detallePedido.getDetallePedidoPK().setIdPedido(detallePedido.getPedido().getIdPedido());
         detallePedido.getDetallePedidoPK().setIdProducto(detallePedido.getProducto().getIdProducto());
+        detallePedido.getDetallePedidoPK().setIdPedido(detallePedido.getPedido().getIdPedido());
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -81,8 +77,8 @@ public class DetallePedidoJpaController implements Serializable {
     }
 
     public void edit(DetallePedido detallePedido) throws NonexistentEntityException, Exception {
-        detallePedido.getDetallePedidoPK().setIdPedido(detallePedido.getPedido().getIdPedido());
         detallePedido.getDetallePedidoPK().setIdProducto(detallePedido.getProducto().getIdProducto());
+        detallePedido.getDetallePedidoPK().setIdPedido(detallePedido.getPedido().getIdPedido());
         EntityManager em = null;
         try {
             em = getEntityManager();

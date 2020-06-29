@@ -82,13 +82,8 @@
             </a>
             
           </li>
-<<<<<<< HEAD
-          <s:hidden name="#session.privilegio" />
+      
            <s:if  test="#session.privilegio == 'A'">
-=======
-          
-           <s:if  test='#session.privilegio.equals("A")'>
->>>>>>> 97edac29254a5880c5c2e5d3c6e7960383a0a617
           <li class="nav-item has-treeview">
               <a  href="listarAdmin" class="nav-link menu">
               <i class="nav-icon fas fa-users"></i>

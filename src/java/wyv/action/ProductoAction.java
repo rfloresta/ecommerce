@@ -2,6 +2,7 @@ package wyv.action;
 
 import com.opensymphony.xwork2.ActionSupport;
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import org.apache.commons.io.FileUtils;
 import org.apache.struts2.ServletActionContext;
@@ -12,19 +13,24 @@ import wyv.servicios.ProductoServicio;
 import wyv.persistencia.Producto;
 import wyv.persistencia.Categoria;
 import wyv.persistencia.Marca;
+import wyv.persistencia.Pedido;
 import wyv.servicios.CategoriaServicio;
 import wyv.servicios.MarcaServicio;
+import wyv.servicios.PedidoServicio;
+
 
 @SuppressWarnings("serial")
 public class ProductoAction extends ActionSupport{
 
     ProductoServicio proSer;
+    PedidoServicio pedSer;
     private String resultado;
     private String estado = "error";
     private Producto producto;
     private List<Producto> lstProducto;
     private List<Categoria> lstCategoria;
     private List<Marca> lstMarca;
+    private List<Pedido> lstPedido;
     private int edit;
     private File imagen;
     private String imagenContentType;
@@ -99,7 +105,6 @@ public class ProductoAction extends ActionSupport{
             lstProducto = new ProductoServicio().listar();
             lstCategoria = new CategoriaServicio().listar();
             lstMarca = new MarcaServicio().listar();
-
             return "ok";
         } catch (Exception e) {
             resultado = "Error en: listarProducto :: " + e.getMessage();
@@ -172,13 +177,15 @@ public class ProductoAction extends ActionSupport{
                 FileUtils.copyFile(imagen, fileToCreate);
                 producto.setImagen(imagenFileName);
             }
+            pedSer = new PedidoServicio();
+            producto.setDetallePedidoList(pedSer.listarDetalle());
             estado = proSer.actualizar(producto);
             lstProducto = proSer.listar();
             lstCategoria = new CategoriaServicio().listar();
             lstMarca = new MarcaServicio().listar();
             producto = new Producto();
             return estado;
-        } catch (Exception e) {
+        } catch (IOException e) {
             resultado = "Error en: eliminarProducto :: " + e.getMessage();
             return estado;
         }
@@ -199,6 +206,23 @@ public class ProductoAction extends ActionSupport{
         } catch (Exception e) {
             resultado = "Error en: eliminarProducto :: " + e.getMessage();
             return estado;
+        }
+    }
+    
+    @Action(value = "cargarProductos", results = {
+        @Result(name = "ok", location = "/principal.jsp"),
+	@Result(name = "error", location = "/error.jsp")
+    })
+    public String cargarProductos() {
+        try {
+
+            lstProducto = new ProductoServicio().listar();
+            lstCategoria = new CategoriaServicio().listar();
+            lstMarca = new MarcaServicio().listar();
+            return "ok";
+        } catch (Exception e) {
+            resultado = "Error en: cargarProducto :: " + e.getMessage();
+            return "error";
         }
     }
 }

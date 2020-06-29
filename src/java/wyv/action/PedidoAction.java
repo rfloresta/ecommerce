@@ -124,7 +124,6 @@ public class PedidoAction extends ActionSupport {
             cliente.getIdCliente();
             empresa.getIdEmpresa();
             ped.setIdCliente(cliente);
-            ped.setIdEmpresa(empresa);
             new PedidoServicio().actualizar(ped);
             lstPedido = new PedidoServicio().listar();
            

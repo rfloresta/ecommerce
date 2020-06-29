@@ -39,12 +39,6 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Cliente.findByPassword", query = "SELECT c FROM Cliente c WHERE c.password = :password")})
 public class Cliente implements Serializable {
 
-<<<<<<< HEAD
-    @OneToMany(mappedBy = "idCliente")
-    private List<Pedido> pedidoList;
-
-=======
->>>>>>> 97edac29254a5880c5c2e5d3c6e7960383a0a617
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -172,17 +166,5 @@ public class Cliente implements Serializable {
     public String toString() {
         return "wyv.persistencia.Cliente[ idCliente=" + idCliente + " ]";
     }
-<<<<<<< HEAD
-
-    @XmlTransient
-    public List<Pedido> getPedidoList() {
-        return pedidoList;
-    }
-
-    public void setPedidoList(List<Pedido> pedidoList) {
-        this.pedidoList = pedidoList;
-    }
-=======
->>>>>>> 97edac29254a5880c5c2e5d3c6e7960383a0a617
     
 }

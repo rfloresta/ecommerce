@@ -44,11 +44,6 @@
                                             <th>Estado</th>
                                             <th>Cliente</th>
                                             <th>Reporte</th>
-<<<<<<< HEAD
-                                                
-
-=======
->>>>>>> 97edac29254a5880c5c2e5d3c6e7960383a0a617
                                         </tr> 
                                     </thead>     
                                     <tbody>
@@ -60,8 +55,6 @@
                                                 <td><s:property value="igv"/></td> 
                                                 <td><s:property value="total"/></td> 
                                                 <td><s:property value="pago"/></td> 
-<<<<<<< HEAD
-                                                
                                                 <td>
                                                     <s:if test="estado == '1'">
                                                         <button class="dropdown-toggle btn btn-success" type="button" id="dropPedido" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -106,7 +99,6 @@
                                                     </s:elseif>
 
                                                 </td>
-=======
                                                 <s:if test='estado.equals("1")'>
                                                     <td class="bg-success">Entregado</td>
                                                 </s:if>
@@ -119,7 +111,6 @@
                                                    <s:else >
                                                    <td class="bg-warning">s</td>
                                                 </s:else>
->>>>>>> 97edac29254a5880c5c2e5d3c6e7960383a0a617
                                                 <td><s:property value="idCliente.nombres"/></td> 
                                                 <td><i class="fas fa-eye "></i></td>
 

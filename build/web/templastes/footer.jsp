@@ -178,7 +178,7 @@
         <script type="text/javascript" src="js/countdowntime.js"></script>
         <!--===============================================================================================-->
         <script type="text/javascript" src="js/lightbox.min.js"></script>
-        <script src="js/funciones.js" type="text/javascript"></script>
+        <script src="../js/funciones.js" type="text/javascript"></script>
         <!--===============================================================================================-->
         <script type="text/javascript" src="js/sweetalert.min.js"></script>
         <script src="js/toastr.min.js" type="text/javascript"></script>

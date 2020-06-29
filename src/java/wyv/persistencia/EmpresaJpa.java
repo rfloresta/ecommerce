@@ -9,30 +9,22 @@ import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-<<<<<<< HEAD:src/java/wyv/persistencia/EmpresaJpaController.java
-=======
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.Persistence;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
->>>>>>> 97edac29254a5880c5c2e5d3c6e7960383a0a617:src/java/wyv/persistencia/EmpresaJpa.java
 import wyv.persistencia.exceptions.NonexistentEntityException;
 
 /**
  *
  * @author Romario
  */
-public class EmpresaJpaController implements Serializable {
-
-<<<<<<< HEAD:src/java/wyv/persistencia/EmpresaJpaController.java
-    public EmpresaJpaController(EntityManagerFactory emf) {
-=======
-     public EmpresaJpa(){
-        this.emf = Persistence.createEntityManagerFactory("W_V_S.A.CPU");
+public class EmpresaJpa implements Serializable {
+    public EmpresaJpa() {
+        this.emf= Persistence.createEntityManagerFactory("W_V_S.A.CPU");
     }
     public EmpresaJpa(EntityManagerFactory emf) {
->>>>>>> 97edac29254a5880c5c2e5d3c6e7960383a0a617:src/java/wyv/persistencia/EmpresaJpa.java
         this.emf = emf;
     }
     private EntityManagerFactory emf = null;

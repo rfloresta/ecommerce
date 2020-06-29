@@ -19,6 +19,7 @@ import wyv.persistencia.ProductoDao;
 public class ProductoServicio implements  IOperacionesBD<Producto>{
 
     ProductoDao proDao;
+    Producto pro;
     @Override
     public String registrar(Producto a) {
         proDao=new ProductoDao();
