@@ -6,6 +6,7 @@
 package wyv.servicios;
 
 import java.util.List;
+import wyv.persistencia.DetallePedido;
 import wyv.persistencia.IOperacionesBD;
 import wyv.persistencia.Pedido;
 import wyv.persistencia.PedidoDao;
@@ -44,6 +45,12 @@ public class PedidoServicio implements IOperacionesBD<Pedido>{
     public List<Pedido> listar() {
         pedidoDao=new PedidoDao();
         return pedidoDao.listar();
+    }
+    
+    public List<DetallePedido> listarDPedidoPorCliente(int id)
+    {
+        pedidoDao=new PedidoDao();
+        return pedidoDao.listarDPedidoPorCliente(id);
     }
 
     @Override

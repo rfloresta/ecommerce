@@ -3,10 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/bdeg_/OneDrive/Desktop/Universidad/9no/taller_dsw/Proyecto%20Final/Software/W-V-S.A.C/web/admin/principal/pedido.jsp</file>
+            <file>file:/C:/Users/bdeg_/OneDrive/Desktop/Universidad/9no/taller_dsw/Proyecto%20Final/Software/W-V-S.A.C/src/java/wyv/persistencia/DetallePedidoJpa.java</file>
             <file>file:/C:/Users/bdeg_/OneDrive/Desktop/Universidad/9no/taller_dsw/Proyecto%20Final/Software/W-V-S.A.C/src/java/wyv/action/PedidoAction.java</file>
-            <file>file:/C:/Users/bdeg_/OneDrive/Desktop/Universidad/9no/taller_dsw/Proyecto%20Final/Software/W-V-S.A.C/src/java/wyv/persistencia/PedidoJpa.java</file>
+            <file>file:/C:/Users/bdeg_/OneDrive/Desktop/Universidad/9no/taller_dsw/Proyecto%20Final/Software/W-V-S.A.C/web/css/main.css</file>
             <file>file:/C:/Users/bdeg_/OneDrive/Desktop/Universidad/9no/taller_dsw/Proyecto%20Final/Software/W-V-S.A.C/src/java/wyv/servicios/PedidoServicio.java</file>
+            <file>file:/C:/Users/bdeg_/OneDrive/Desktop/Universidad/9no/taller_dsw/Proyecto%20Final/Software/W-V-S.A.C/web/clientePerfil.jsp</file>
             <file>file:/C:/Users/bdeg_/OneDrive/Desktop/Universidad/9no/taller_dsw/Proyecto%20Final/Software/W-V-S.A.C/src/java/wyv/persistencia/PedidoDao.java</file>
         </group>
     </open-files>

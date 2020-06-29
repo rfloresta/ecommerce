@@ -2307,7 +2307,7 @@ body{
     border: 1px solid #dfdfdf;
     border-top-left-radius: .25rem;
     border-top-right-radius: .25rem;
-    background-color: #e65540;
+    background-color: #5c9199;
 }
 .encabezado-perfilCliente span
 {
@@ -2335,5 +2335,25 @@ body{
 .contenido-cliente
 {
     border: 1px solid #dfdfdf;
+}
+
+.principal
+{
+    border: 1px solid #dfdfdf;
+}
+
+.logo-perfil
+{
+    height: 80%;
+    padding-top: 1rem;   
+   filter:opacity(25%);
+}
+
+.img-pro-pefil
+{
+    max-height: 100px;
+    max-width: 100px;
+    vertical-align: top!important;
+    border: 1px solid #5c9199;
 }
 

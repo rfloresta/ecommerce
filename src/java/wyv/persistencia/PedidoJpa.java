@@ -26,10 +26,10 @@ import wyv.persistencia.exceptions.NonexistentEntityException;
  * @author bdeg_
  */
 public class PedidoJpa implements Serializable {
- public PedidoJpa() {
-         this.emf = Persistence.createEntityManagerFactory("W_V_S.A.CPU");
-    }
 
+    public PedidoJpa() {
+        this.emf = Persistence.createEntityManagerFactory("W_V_S.A.CPU");
+    }
 
     public PedidoJpa(EntityManagerFactory emf) {
         this.emf = emf;
@@ -233,7 +233,7 @@ public class PedidoJpa implements Serializable {
             em.close();
         }
     }
-    
+
     public int actualizar(Pedido p) {
         Connection cn;
         PreparedStatement pstmt;
@@ -253,27 +253,26 @@ public class PedidoJpa implements Serializable {
             pstmt.setInt(8, p.getIdCliente().getIdCliente());
             pstmt.setInt(9, p.getIdPedido());
             resultado = pstmt.executeUpdate();
-            System.out.println("resultado" +resultado);
+            System.out.println("resultado" + resultado);
         } catch (Exception e) {
             e.getMessage();
-}
+        }
         return resultado;
-        
+
     }
 
     public List<Pedido> listarPedido() {
-       PreparedStatement ptstm;
-       Connection cn;
-       ResultSet rs;
-       List<Pedido> lisPedido=new ArrayList<>();
+        PreparedStatement ptstm;
+        Connection cn;
+        ResultSet rs;
+        List<Pedido> lisPedido = new ArrayList<>();
         try {
             cn = Util.getConexionBD();
-            ptstm= cn.prepareStatement("Select p.*, c.nombres AS NombreCli From pedido AS p INNER JOIN cliente As c on p.idCliente=c.idCliente");
+            ptstm = cn.prepareStatement("Select p.*, c.nombres AS NombreCli From pedido AS p INNER JOIN cliente As c on p.idCliente=c.idCliente");
             rs = ptstm.executeQuery();
-            
-            while(rs.next())
-            {
-                Pedido pedNext= new Pedido();
+
+            while (rs.next()) {
+                Pedido pedNext = new Pedido();
                 pedNext.setIdPedido(rs.getInt(1));
                 pedNext.setNumero(rs.getInt(2));
                 pedNext.setFecha(rs.getString(3));
@@ -281,9 +280,9 @@ public class PedidoJpa implements Serializable {
                 pedNext.setIgv(rs.getDouble(5));
                 pedNext.setTotal(rs.getDouble(6));
                 pedNext.setPago(rs.getString(7));
-                char s=rs.getString(8).charAt(0);
+                char s = rs.getString(8).charAt(0);
                 pedNext.setEstado(s);
-                Cliente cli=new Cliente();
+                Cliente cli = new Cliente();
                 cli.setIdCliente(rs.getInt(9));
                 cli.setNombres(rs.getString("NombreCli"));
                 pedNext.setIdCliente(cli);
@@ -294,6 +293,7 @@ public class PedidoJpa implements Serializable {
         }
         return lisPedido;
     }
-    
+
+   
 
 }

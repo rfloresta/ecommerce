@@ -88,6 +88,7 @@
                                     <s:elseif test="inicio==1">
                                         <s:url id="lnkbuscar" action="buscarClie">
                                             <s:param value="#session.idClie" name="cliente.idCliente"/>
+                                            <s:param value="1" name="op"/>
                                          </s:url>
                                         <s:a  href="%{lnkbuscar}" cssClass="dropdown-item" >Ver perfil</s:a>
                                         <button type="button" class="dropdown-item" data-toggle="modal" data-target="#registrarseModal">Cerrar Sesión</button>
