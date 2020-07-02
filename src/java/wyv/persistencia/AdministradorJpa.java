@@ -25,7 +25,7 @@ import wyv.persistencia.exceptions.PreexistingEntityException;
 
 /**
  *
- * @author Romario
+ * @author bdeg_
  */
 public class AdministradorJpa implements Serializable {
 
@@ -174,7 +174,7 @@ public class AdministradorJpa implements Serializable {
                 venMes.add(mapa);
 
 
-            }
+}
 
 
         } catch (Exception e) {

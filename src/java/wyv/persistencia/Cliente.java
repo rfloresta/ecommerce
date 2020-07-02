@@ -22,7 +22,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Romario
+ * @author bdeg_
  */
 @Entity
 @Table(name = "cliente")
@@ -38,6 +38,9 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Cliente.findByEmail", query = "SELECT c FROM Cliente c WHERE c.email = :email")
     , @NamedQuery(name = "Cliente.findByPassword", query = "SELECT c FROM Cliente c WHERE c.password = :password")})
 public class Cliente implements Serializable {
+
+    @OneToMany(mappedBy = "idCliente")
+    private List<Pedido> pedidoList;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -59,8 +62,6 @@ public class Cliente implements Serializable {
     private String email;
     @Column(name = "password")
     private String password;
-    @OneToMany(mappedBy = "idCliente")
-    private List<Pedido> pedidoList;
 
     public Cliente() {
     }
@@ -133,15 +134,6 @@ public class Cliente implements Serializable {
         this.password = password;
     }
 
-    @XmlTransient
-    public List<Pedido> getPedidoList() {
-        return pedidoList;
-    }
-
-    public void setPedidoList(List<Pedido> pedidoList) {
-        this.pedidoList = pedidoList;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -165,6 +157,15 @@ public class Cliente implements Serializable {
     @Override
     public String toString() {
         return "wyv.persistencia.Cliente[ idCliente=" + idCliente + " ]";
+    }
+    
+    @XmlTransient
+    public List<Pedido> getPedidoList() {
+        return pedidoList;
+    }
+
+    public void setPedidoList(List<Pedido> pedidoList) {
+        this.pedidoList = pedidoList;
     }
     
 }

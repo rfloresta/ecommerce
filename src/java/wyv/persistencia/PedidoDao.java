@@ -1,25 +1,16 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package wyv.persistencia;
 
 import java.util.List;
 
-/**
- *
- * @author Data
- */
 public class PedidoDao implements IOperacionesBD<Pedido> {
 
-    PedidoJpa pedidoJpa=new PedidoJpa();
-    private final DetallePedidoJpa detJpa=new DetallePedidoJpa();
+    PedidoJpa pedidoJpa = new PedidoJpa();
+    DetallePedidoJpa detaJpa=new DetallePedidoJpa();
 
     @Override
     public String registrar(Pedido a) {
         try {
-            
+
         } catch (Exception e) {
         }
         return null;
@@ -29,7 +20,7 @@ public class PedidoDao implements IOperacionesBD<Pedido> {
     public String actualizar(Pedido a) {
         try {
             pedidoJpa.actualizar(a);
-             
+
             return "ok";
         } catch (Exception e) {
             e.printStackTrace();
@@ -50,7 +41,16 @@ public class PedidoDao implements IOperacionesBD<Pedido> {
     @Override
     public List<Pedido> listar() {
         try {
-            return pedidoJpa.findPedidoEntities();
+            return pedidoJpa.listarPedido();
+        } catch (Exception e) {
+            e.getMessage();
+            return null;
+        }
+    }
+
+    public List<DetallePedido> listarDPedidoPorCliente(int  id) {
+        try {
+            return detaJpa.listarDPedidoPorCliente(id);
         } catch (Exception e) {
             e.getMessage();
             return null;
@@ -61,9 +61,4 @@ public class PedidoDao implements IOperacionesBD<Pedido> {
     public Pedido ingresar(Pedido entrada) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
-    public List listarDetalle(){
-        return detJpa.findDetallePedidoEntities();
-    }
-    
 }

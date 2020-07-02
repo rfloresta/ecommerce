@@ -6,6 +6,10 @@
 package wyv.persistencia;
 
 import java.io.Serializable;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -19,12 +23,14 @@ import wyv.persistencia.exceptions.PreexistingEntityException;
 
 /**
  *
- * @author Romario
+ * @author bdeg_
  */
 public class DetallePedidoJpa implements Serializable {
     public DetallePedidoJpa() {
         this.emf= Persistence.createEntityManagerFactory("W_V_S.A.CPU");
     }
+
+    
     public DetallePedidoJpa(EntityManagerFactory emf) {
         this.emf = emf;
     }
@@ -205,6 +211,47 @@ public class DetallePedidoJpa implements Serializable {
         } finally {
             em.close();
         }
+    }
+    
+    
+     public List<DetallePedido> listarDPedidoPorCliente(int idClie) {
+        PreparedStatement ptstm;
+        Connection cn;
+        ResultSet rs;
+        List<DetallePedido> lisDetallePedido = new ArrayList<>();
+        
+        try {
+            cn = Util.getConexionBD();
+            ptstm = cn.prepareStatement("Select p.numero, p.fecha, p.total,de.cantidad,pro.nombre, pro.precioVenta,pro.imagen from pedido AS p inner join detalle_pedido As de ON de.idPedido= p.idPedido INNER JOIN producto As pro ON pro.idProducto= de.idProducto "
+                    + "INNER JOIN cliente AS cli on cli.idCliente=p.idCliente WHERE cli.idCliente="+idClie+"");
+            rs = ptstm.executeQuery();
+           
+            while (rs.next()) {
+                DetallePedido deta=new DetallePedido();
+                Pedido pedNext = new Pedido();
+                
+                
+                pedNext.setNumero(rs.getInt(1));
+                pedNext.setFecha(rs.getString(2));
+                pedNext.setTotal(rs.getDouble(3));
+                
+                Producto pro = new Producto();
+                pro.setNombre(rs.getString(5));
+                pro.setPrecioVenta(rs.getDouble(6));
+                pro.setImagen(rs.getString(7));
+                
+                deta.setPedido(pedNext);
+                deta.setProducto(pro);
+                deta.setCantidad(rs.getInt(4));
+
+                //Ingresamos cliente
+                lisDetallePedido.add(deta);
+                
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return lisDetallePedido;
     }
     
 }

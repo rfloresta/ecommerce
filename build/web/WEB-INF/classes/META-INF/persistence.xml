@@ -2,14 +2,18 @@
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
   <persistence-unit name="W_V_S.A.CPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>wyv.persistencia.Categoria</class>
     <class>wyv.persistencia.Administrador</class>
+    <class>wyv.persistencia.Cliente</class>
+    <class>wyv.persistencia.Marca</class>
     <class>wyv.persistencia.Empresa</class>
     <class>wyv.persistencia.Producto</class>
-    <class>wyv.persistencia.Marca</class>
     <class>wyv.persistencia.DetallePedido</class>
-    <class>wyv.persistencia.Categoria</class>
-    <class>wyv.persistencia.Cliente</class>
     <class>wyv.persistencia.Pedido</class>
+    <class>wyv.persistencia.Marca_1</class>
+    <class>wyv.persistencia.Cliente_1</class>
+    <class>wyv.persistencia.Categoria_1</class>
+    <class>wyv.persistencia.Producto_1</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/tiendaw_v?zeroDateTimeBehavior=convertToNull"/>

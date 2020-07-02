@@ -22,7 +22,11 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
+<<<<<<< HEAD
  * @author Romario
+=======
+ * @author bdeg_
+>>>>>>> f4f39a8562a2416f673e4a77a81b882ca25ce0e1
  */
 @Entity
 @Table(name = "marca")

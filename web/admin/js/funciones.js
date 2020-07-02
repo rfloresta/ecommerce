@@ -7,20 +7,7 @@ $(function () {
         var password = $("#password");
         var form = $("#form_login");
         if (dni.val() === "")
-        {
-<<<<<<< HEAD
-            toastr.error('Debe completar el campo usuario');
-            dni.focus();
-            return;
-        } else if (password.val() === "") {
-
-            toastr.error('Debe completar el campo password');
-            password.focus();
-            return;
-        } else {
-=======
-            
-        
+        {        
                    toastr.error('Debe completar el campo usuario');
                    
                 dni.focus();
@@ -31,10 +18,7 @@ $(function () {
              password.focus();
              return;
         } 
-        else {
->>>>>>> 97edac29254a5880c5c2e5d3c6e7960383a0a617
             form.submit();
-        }
     }
     );
 });
@@ -59,6 +43,30 @@ $(function () {
     );
 });
 
+//$(function () {
+//    $("#enviar").click(function (event)
+//    {
+//        event.preventDefault();
+//        var email = $("#email");
+//    var email2 = $("#email2");
+//    var password = $("#password");
+//    var password2 = $("#password2");
+//    
+//        var form = $("#form_cliente");
+//         if(email.val() !== email2.val())
+//    {
+//        toastr.error('El campo confirmar email, no coincide con el dato original');
+//      return;
+//    }else if(password.val() !== password2.val())
+//    {
+//      toastr.error('El campo confirmar contraseña, no coincide con el dato original');
+//      return;
+//    }
+//    
+//    form.submit();
+//    }
+//    );
+//});
 
 /*
  //Función para comprobar los campos de texto

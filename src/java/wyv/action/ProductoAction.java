@@ -13,24 +13,20 @@ import wyv.servicios.ProductoServicio;
 import wyv.persistencia.Producto;
 import wyv.persistencia.Categoria;
 import wyv.persistencia.Marca;
-import wyv.persistencia.Pedido;
 import wyv.servicios.CategoriaServicio;
 import wyv.servicios.MarcaServicio;
-import wyv.servicios.PedidoServicio;
 
 
 @SuppressWarnings("serial")
 public class ProductoAction extends ActionSupport{
 
     ProductoServicio proSer;
-    PedidoServicio pedSer;
     private String resultado;
     private String estado = "error";
     private Producto producto;
     private List<Producto> lstProducto;
     private List<Categoria> lstCategoria;
     private List<Marca> lstMarca;
-    private List<Pedido> lstPedido;
     private int edit;
     private File imagen;
     private String imagenContentType;
@@ -177,8 +173,6 @@ public class ProductoAction extends ActionSupport{
                 FileUtils.copyFile(imagen, fileToCreate);
                 producto.setImagen(imagenFileName);
             }
-            pedSer = new PedidoServicio();
-            producto.setDetallePedidoList(pedSer.listarDetalle());
             estado = proSer.actualizar(producto);
             lstProducto = proSer.listar();
             lstCategoria = new CategoriaServicio().listar();
@@ -209,19 +203,19 @@ public class ProductoAction extends ActionSupport{
         }
     }
     
-    @Action(value = "cargarProductos", results = {
-        @Result(name = "ok", location = "/principal.jsp"),
+    @Action(value = "verCatalogo", results = {
+        @Result(name = "ok", location = "/catalogo.jsp"),
 	@Result(name = "error", location = "/error.jsp")
     })
-    public String cargarProductos() {
+    
+    public String verCatalogo() {
         try {
-
             lstProducto = new ProductoServicio().listar();
             lstCategoria = new CategoriaServicio().listar();
             lstMarca = new MarcaServicio().listar();
             return "ok";
         } catch (Exception e) {
-            resultado = "Error en: cargarProducto :: " + e.getMessage();
+            resultado = "Error en: verCatalogo :: " + e.getMessage();
             return "error";
         }
     }

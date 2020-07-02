@@ -78,7 +78,7 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
     org.apache.struts2.views.jsp.ActionTag _jspx_th_s_action_0 = (org.apache.struts2.views.jsp.ActionTag) _jspx_tagPool_s_action_name_executeResult_nobody.get(org.apache.struts2.views.jsp.ActionTag.class);
     _jspx_th_s_action_0.setPageContext(_jspx_page_context);
     _jspx_th_s_action_0.setParent(null);
-    _jspx_th_s_action_0.setName("cargarProductos");
+    _jspx_th_s_action_0.setName("verCatalogo");
     _jspx_th_s_action_0.setExecuteResult(true);
     int _jspx_eval_s_action_0 = _jspx_th_s_action_0.doStartTag();
     if (_jspx_th_s_action_0.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {

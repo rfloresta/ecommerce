@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package wyv.persistencia;
 
 import java.io.Serializable;
@@ -16,14 +11,12 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import wyv.persistencia.exceptions.NonexistentEntityException;
 
-/**
- *
- * @author Romario
- */
 public class EmpresaJpa implements Serializable {
     public EmpresaJpa() {
-        this.emf= Persistence.createEntityManagerFactory("W_V_S.A.CPU");
+        this.emf = Persistence.createEntityManagerFactory("W_V_S.A.CPU");
     }
+
+    
     public EmpresaJpa(EntityManagerFactory emf) {
         this.emf = emf;
     }

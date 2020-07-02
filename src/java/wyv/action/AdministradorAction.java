@@ -115,10 +115,13 @@ public class AdministradorAction extends ActionSupport implements SessionAware {
         ,
 	@Result(name = "error", location = "/admin/error.jsp")})
     public String ingresoAdmin() {
+        String msj="";
         try {
 
             admSer = new AdministradorServicio();
             admin = admSer.ingresar(admin);
+            if(admin != null)
+            {
             sesion.put("privilegio", admin.getPrivilegio());
             sesion.put("nombreCompleto", admin.getNombres() + " " + admin.getApellidos());
             sesion.put("nombre", admin.getNombres());
@@ -152,9 +155,11 @@ public class AdministradorAction extends ActionSupport implements SessionAware {
              //Metodo para contar Pedidos
              contarPedidos = admSer.ContarPedido();
              //Fin metodo para contar pedidos
-            if (admin == null) {
-                resultado = "Dni y/o password incorrecto";
-                return "incorrecto";
+             msj="ok";
+             }
+            else if(admin == null) {
+                addActionError("Usuario y/o Password");
+                msj="incorrecto";
             }
 
             /*Map admSession = ActionContext.getContext().getSession();
@@ -162,7 +167,7 @@ public class AdministradorAction extends ActionSupport implements SessionAware {
              admSession.put("admSession" ,adminLog);
               System.out.println(" prueba " + admSession.values());*/
   
-            return "ok";
+            return msj;
         } catch (Exception e) {
             resultado = "Error en: ingresoAdmin :: " + e.getMessage();
             return "error";

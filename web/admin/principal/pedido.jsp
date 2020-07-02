@@ -56,27 +56,50 @@
                                                 <td><s:property value="total"/></td> 
                                                 <td><s:property value="pago"/></td> 
                                                 <td>
+
+                                                    <s:url id="lnkActuProceso" action="actualizarPedido">
+                                                        <s:param value="idPedido" name="pedido.idPedido" />
+                                                        <s:param value="numero" name="pedido.numero" />
+                                                        <s:param value="subtotal" name="pedido.subtotal" />
+                                                        <s:param value="igv" name="pedido.igv" />
+                                                        <s:param value="total" name="pedido.total" />
+                                                        <s:param value="pago" name="pedido.pago" />
+                                                        <s:param value="fecha" name="pedido.fecha"  />
+                                                        <s:param value="0" name="pedido.estado" />
+                                                        <s:param value="idCliente.idCliente" name="cliente.idCliente" />
+                                                    </s:url>
+                                                    <s:url id="lnkActuEnviado" action="actualizarPedido">
+                                                        <s:param value="idPedido" name="pedido.idPedido" />
+                                                        <s:param value="numero" name="pedido.numero" />
+                                                        <s:param value="subtotal" name="pedido.subtotal" />
+                                                        <s:param value="igv" name="pedido.igv" />
+                                                        <s:param value="total" name="pedido.total" />
+                                                        <s:param value="pago" name="pedido.pago" />
+                                                        <s:param value="fecha" name="pedido.fecha"  />
+                                                        <s:param value="2" name="pedido.estado" />
+                                                        <s:param value="idCliente.idCliente" name="cliente.idCliente" />
+                                                    </s:url>
+                                                    <s:url id="lnkActuEntregado" action="actualizarPedido">
+                                                        <s:param value="idPedido" name="pedido.idPedido" />
+                                                        <s:param value="numero" name="pedido.numero" />
+                                                        <s:param value="subtotal" name="pedido.subtotal" />
+                                                        <s:param value="igv" name="pedido.igv" />
+                                                        <s:param value="total" name="pedido.total" />
+                                                        <s:param value="pago" name="pedido.pago" />
+                                                        <s:param value="fecha" name="pedido.fecha"  />
+                                                        <s:param value="1" name="pedido.estado" />
+                                                        <s:param value="idCliente.idCliente" name="cliente.idCliente" />
+                                                    </s:url>
                                                     <s:if test="estado == '1'">
                                                         <button class="dropdown-toggle btn btn-success" type="button" id="dropPedido" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                             Entregado
                                                         </button>
                                                         <div class="dropdown-menu"  aria-labelledby="dropPedido">
-                                                            <s:url id="lnkActuProceso" action="actualizarPedido">
-                                                                <s:param value="idPedido" name="pedido.idPedido" />
-                                                                <s:param value="numero" name="pedido.numero" />
-                                                                <s:param value="subtotal" name="pedido.subtotal" />
-                                                                <s:param value="igv" name="pedido.igv" />
-                                                                <s:param value="total" name="pedido.total" />
-                                                                <s:param value="pago" name="pedido.pago" />
-                                                                <s:param value="fecha" name="pedido.fecha"  />
-                                                                <s:param value="0" name="pedido.estado" />
-                                                                <s:param value="idCliente.idCliente" name="cliente.idCliente" />
-                                                                <s:param value="idEmpresa.idEmpresa" name="empresa.idEmpresa" />
-                                                            </s:url>
+
                                                             <s:a href="%{lnkActuProceso}" cssClass="dropdown-item">En proceso</s:a>
-                                                            
-                                                            <a class="dropdown-item" href="">Enviado</a>
-                                                        </div>
+
+                                                            <s:a href="%{lnkActuEnviado}" cssClass="dropdown-item">Enviado</s:a>
+                                                            </div>
 
                                                     </s:if>
                                                     <s:elseif test="estado == '0'">
@@ -84,33 +107,21 @@
                                                             En proceso
                                                         </button>
                                                         <div class="dropdown-menu"  aria-labelledby="dropPedido">
-                                                            <a class="dropdown-item" href="">Entregado</a>
-                                                            <a class="dropdown-item" href="">Enviado</a>
-                                                        </div>
+                                                            <s:a href="%{lnkActuEntregado}" cssClass="dropdown-item">Entregado</s:a>
+                                                            <s:a href="%{lnkActuEnviado}" cssClass="dropdown-item">Enviado</s:a>
+                                                            </div>
                                                     </s:elseif>
                                                     <s:elseif test="estado == '2'">
                                                         <button class="dropdown-toggle btn btn-warning" type="button" id="dropPedido" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                             Enviado
                                                         </button>
                                                         <div class="dropdown-menu"  aria-labelledby="dropPedido">
-                                                            <a class="dropdown-item" href="">En proceso</a>
-                                                            <a class="dropdown-item" href="">Entregado</a>
-                                                        </div>
+                                                            <s:a href="%{lnkActuProceso}" cssClass="dropdown-item">En proceso</s:a>
+                                                            <s:a href="%{lnkActuEntregado}" cssClass="dropdown-item">Entregado</s:a>
+                                                            </div>
                                                     </s:elseif>
 
                                                 </td>
-                                                <s:if test='estado.equals("1")'>
-                                                    <td class="bg-success">Entregado</td>
-                                                </s:if>
-                                                <s:elseif test='#estado.equals("0")'>
-                                                <td class="bg-danger">Pendiente</td>
-                                                </s:elseif>
-                                                <s:elseif test='estado.equals("2")'>
-                                                   <td class="bg-warning">En proceso</td>
-                                                </s:elseif>
-                                                   <s:else >
-                                                   <td class="bg-warning">s</td>
-                                                </s:else>
                                                 <td><s:property value="idCliente.nombres"/></td> 
                                                 <td><i class="fas fa-eye "></i></td>
 
@@ -119,15 +130,15 @@
 
                                     <tfoot>
                                         <tr>
-                                    <th>Numero Pedido</th>
-                                    <th>Fecha</th>
-                                    <th>SubTotal</th>
-                                    <th>IGV</th>
-                                    <th>Total</th>
-                                    <th>Pago</th>
-                                    <th>Estado</th>
-                                    <th>Cliente</th>
-                                    <th>Reporte</th>
+                                            <th>Numero Pedido</th>
+                                            <th>Fecha</th>
+                                            <th>SubTotal</th>
+                                            <th>IGV</th>
+                                            <th>Total</th>
+                                            <th>Pago</th>
+                                            <th>Estado</th>
+                                            <th>Cliente</th>
+                                            <th>Reporte</th>
                                         </tr>
                                     </tfoot>
 
@@ -136,8 +147,8 @@
                         </div>
                     </div>
                 </div>
-                
-                
+
+
 
             </div>
         </div>

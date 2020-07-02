@@ -26,7 +26,11 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
+<<<<<<< HEAD
  * @author Romario
+=======
+ * @author bdeg_
+>>>>>>> f4f39a8562a2416f673e4a77a81b882ca25ce0e1
  */
 @Entity
 @Table(name = "producto")
@@ -40,6 +44,8 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Producto.findByPrecioVenta", query = "SELECT p FROM Producto p WHERE p.precioVenta = :precioVenta")
     , @NamedQuery(name = "Producto.findByDescuento", query = "SELECT p FROM Producto p WHERE p.descuento = :descuento")})
 public class Producto implements Serializable {
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "producto")
+    private List<DetallePedido> detallePedidoList;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -65,8 +71,6 @@ public class Producto implements Serializable {
     @Lob
     @Column(name = "imagen")
     private String imagen;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "producto")
-    private List<DetallePedido> detallePedidoList;
     @JoinColumn(name = "idCategoria", referencedColumnName = "idCategoria")
     @ManyToOne
     private Categoria idCategoria;
@@ -150,15 +154,6 @@ public class Producto implements Serializable {
         this.imagen = imagen;
     }
 
-    @XmlTransient
-    public List<DetallePedido> getDetallePedidoList() {
-        return detallePedidoList;
-    }
-
-    public void setDetallePedidoList(List<DetallePedido> detallePedidoList) {
-        this.detallePedidoList = detallePedidoList;
-    }
-
     public Categoria getIdCategoria() {
         return idCategoria;
     }
@@ -199,5 +194,13 @@ public class Producto implements Serializable {
     public String toString() {
         return "wyv.persistencia.Producto[ idProducto=" + idProducto + " ]";
     }
-    
+
+    @XmlTransient
+    public List<DetallePedido> getDetallePedidoList() {
+        return detallePedidoList;
+    }
+
+    public void setDetallePedidoList(List<DetallePedido> detallePedidoList) {
+        this.detallePedidoList = detallePedidoList;
+    }
 }

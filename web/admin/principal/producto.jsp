@@ -116,8 +116,8 @@
                                                 <td><img class="profile-user-img img-responsive" src="<%=request.getContextPath()%>/admin/imagenes/<s:property value="imagen"/>" height="100" width="630"/></td>   
                                                 <td><s:property value="nombre"/></td>    
                                                 <td><s:property value="stock"/> </td>
-                                                <td><s:property value="idCategoria"/> </td>
-                                                <td><s:property value="idMarca"/> </td>
+                                                <td><s:property value="idCategoria.nombre"/> </td>
+                                                <td><s:property value="idMarca.nombre"/> </td>
                                                 <td><s:property value="precioCompra"/></td> 
                                                 <td><s:property value="precioVenta"/></td>    
                                                 <td><s:property value="descuento"/></td>

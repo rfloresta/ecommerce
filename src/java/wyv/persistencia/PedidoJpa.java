@@ -23,13 +23,14 @@ import wyv.persistencia.exceptions.NonexistentEntityException;
 
 /**
  *
- * @author Romario
+ * @author bdeg_
  */
 public class PedidoJpa implements Serializable {
 
     public PedidoJpa() {
-        this.emf= Persistence.createEntityManagerFactory("W_V_S.A.CPU");
+        this.emf = Persistence.createEntityManagerFactory("W_V_S.A.CPU");
     }
+
     public PedidoJpa(EntityManagerFactory emf) {
         this.emf = emf;
     }
@@ -250,12 +251,46 @@ public class PedidoJpa implements Serializable {
             pstmt.setString(6, p.getPago());
             pstmt.setString(7, String.valueOf(p.getEstado()));
             pstmt.setInt(8, p.getIdCliente().getIdCliente());
-            pstmt.setInt(10, p.getIdPedido());
+            pstmt.setInt(9, p.getIdPedido());
             resultado = pstmt.executeUpdate();
+            System.out.println("resultado" + resultado);
         } catch (Exception e) {
             e.getMessage();
         }
         return resultado;
+
     }
-    
+    public List<Pedido> listarPedido() {
+        PreparedStatement ptstm;
+        Connection cn;
+        ResultSet rs;
+        List<Pedido> lisPedido = new ArrayList<>();
+        try {
+            cn = Util.getConexionBD();
+            ptstm = cn.prepareStatement("Select p.*, c.nombres AS NombreCli From pedido AS p INNER JOIN cliente As c on p.idCliente=c.idCliente");
+            rs = ptstm.executeQuery();
+
+            while (rs.next()) {
+                Pedido pedNext = new Pedido();
+                pedNext.setIdPedido(rs.getInt(1));
+                pedNext.setNumero(rs.getInt(2));
+                pedNext.setFecha(rs.getString(3));
+                pedNext.setSubtotal(rs.getDouble(4));
+                pedNext.setIgv(rs.getDouble(5));
+                pedNext.setTotal(rs.getDouble(6));
+                pedNext.setPago(rs.getString(7));
+                char s = rs.getString(8).charAt(0);
+                pedNext.setEstado(s);
+                Cliente cli = new Cliente();
+                cli.setIdCliente(rs.getInt(9));
+                cli.setNombres(rs.getString("NombreCli"));
+                pedNext.setIdCliente(cli);
+                lisPedido.add(pedNext);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return lisPedido;
+    }
+
 }

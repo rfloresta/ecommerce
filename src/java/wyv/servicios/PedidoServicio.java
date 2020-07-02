@@ -6,6 +6,7 @@
 package wyv.servicios;
 
 import java.util.List;
+import wyv.persistencia.DetallePedido;
 import wyv.persistencia.IOperacionesBD;
 import wyv.persistencia.Pedido;
 import wyv.persistencia.PedidoDao;
@@ -27,7 +28,6 @@ public class PedidoServicio implements IOperacionesBD<Pedido>{
 
     @Override
     public String actualizar(Pedido a) {
-        System.out.println("El valor de a: "+ a.getIdPedido());
         pedidoDao=new PedidoDao();
         return pedidoDao.actualizar(a); 
     }
@@ -47,15 +47,16 @@ public class PedidoServicio implements IOperacionesBD<Pedido>{
         pedidoDao=new PedidoDao();
         return pedidoDao.listar();
     }
+    
+    public List<DetallePedido> listarDPedidoPorCliente(int id)
+    {
+        pedidoDao=new PedidoDao();
+        return pedidoDao.listarDPedidoPorCliente(id);
+    }
 
     @Override
     public Pedido ingresar(Pedido entrada) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    public List listarDetalle(){
-    
-        return pedidoDao.listarDetalle();
     }
     
  

@@ -64,4 +64,10 @@ public class ClienteServicio implements  IOperacionesBD<Cliente>{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
+    public String registrarse(Cliente a) {
+        clieDao=new ClienteDao();
+        clieDao.registrar(a);
+        return "ok";
+        
+    }
 }

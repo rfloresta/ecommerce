@@ -1,5 +1,4 @@
-
-<%@include file="templastes/header.jsp" %>
+<%@include file="header.jsp" %>
 
         <!-- Slide1 -->
         <section class="slide1">
@@ -137,16 +136,16 @@
                     <!-- Nav tabs -->
                     <ul class="nav nav-tabs" role="tablist">
                         <li class="nav-item">
-                            <a class="nav-link active" data-toggle="tab" href="#best-seller" role="tab">Best Seller</a>
+                            <a class="nav-link active" data-toggle="tab" href="#best-seller" role="tab">Más vendido</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#featured" role="tab">Featured</a>
+                            <a class="nav-link" data-toggle="tab" href="#featured" role="tab">Destacados</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#sale" role="tab">Sale</a>
+                            <a class="nav-link" data-toggle="tab" href="#sale" role="tab">Rebaja</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#top-rate" role="tab">Top Rate</a>
+                            <a class="nav-link" data-toggle="tab" href="#top-rate" role="tab">Los más valorados</a>
                         </li>
                     </ul>
 
@@ -184,7 +183,7 @@
                                             </a>
 
                                             <span class="block2-price m-text6 p-r-5">
-                                                <s:property value="precioVenta"/>
+                                                S/<s:property value="precioVenta"/>
                                             </span>
                                         </div>
                                     </div>
@@ -1038,4 +1037,4 @@
                 </div>
             </div>
         </section>
-        <%@include file="templastes/footer.jsp" %>
+        <%@include file="footer.jsp" %>

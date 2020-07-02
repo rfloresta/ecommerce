@@ -67,7 +67,11 @@
                                 <!-- /.col -->
                                 <div class="col-12 my-4">
                                 <s:submit id="ingresar" styleId="btnreg" cssClass="btn btn-primary btn-block toastrDefaultError" value="Iniciar Sesión" />
-                                <div class="text-danger text-center"><s:text name="resultado"/></div>
+                                 <s:if test="hasActionErrors()">
+                                    <div class="errorDiv text-center text-danger mt-3" >
+                                        <s:actionerror />
+                                    </div>
+                                </s:if>
    
                             </div>
                             <!-- /.col -->

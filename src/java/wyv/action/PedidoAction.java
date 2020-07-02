@@ -38,6 +38,8 @@ public class PedidoAction extends ActionSupport {
     private List<Pedido> lstPedido;
     private List<DetallePedido> lstDetalle;
     private int edit;
+    private int op;
+    
 
     public String getResultado() {
         return resultado;
@@ -54,8 +56,6 @@ public class PedidoAction extends ActionSupport {
     public List<Pedido> getLstPedido() {
         return lstPedido;
     }
-
-
 
     public int getEdit() {
         return edit;
@@ -81,6 +81,23 @@ public class PedidoAction extends ActionSupport {
         this.pedSer = pedSer;
     }
 
+    public int getOp() {
+        return op;
+    }
+
+    public void setOp(int op) {
+        this.op = op;
+    }
+
+    public List<DetallePedido> getLstDetalle() {
+        return lstDetalle;
+    }
+
+    public void setLstDetalle(List<DetallePedido> lstDetalle) {
+        this.lstDetalle = lstDetalle;
+    }
+    
+
     @Action(value = "listarPedido", results = {
         @Result(name = "ok", location = "/admin/principal/pedido.jsp")
         ,
@@ -92,6 +109,25 @@ public class PedidoAction extends ActionSupport {
            
             lstPedido = new PedidoServicio().listar();
             
+            System.out.println("Error: " + lstPedido);
+            return "ok";
+        } catch (Exception e) {
+            resultado = "Error en: listarCate :: " + e.getMessage();
+            return "error";
+        }
+    }
+    
+    @Action(value = "listarPedidoPorCliente", results = {
+        @Result(name = "ok", location = "/clientePerfil.jsp")
+        ,
+	@Result(name = "error", location = "admin/error.jsp")
+
+    })
+    public String listarPedidoPorCliente() {
+        try {
+
+            lstDetalle = new PedidoServicio().listarDPedidoPorCliente(cliente.getIdCliente());
+            op=3;
             System.out.println("Error: " + lstPedido);
             return "ok";
         } catch (Exception e) {
@@ -122,12 +158,19 @@ public class PedidoAction extends ActionSupport {
             ped.setIgv(pedido.getIgv());
             ped.setEstado(pedido.getEstado());
             cliente.getIdCliente();
-            empresa.getIdEmpresa();
             ped.setIdCliente(cliente);
             new PedidoServicio().actualizar(ped);
             lstPedido = new PedidoServicio().listar();
-           
             
+            System.out.println(ped.getIdPedido());
+            System.out.println(ped.getNumero());
+            System.out.println(ped.getSubtotal());
+            System.out.println(ped.getTotal());
+            System.out.println(ped.getFecha());
+            System.out.println(ped.getPago());
+            System.out.println(ped.getIgv());
+            System.out.println(ped.getEstado());
+            System.out.println(ped.getIdCliente());
             
             return "ok";
         } catch (Exception e) {
