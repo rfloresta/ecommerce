@@ -6,6 +6,11 @@
 package wyv.persistencia;
 
 import java.io.Serializable;
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -138,5 +143,7 @@ public class MarcaJpa implements Serializable {
             em.close();
         }
     }
+    
+    
     
 }

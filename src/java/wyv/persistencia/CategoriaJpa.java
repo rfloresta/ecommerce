@@ -6,6 +6,10 @@
 package wyv.persistencia;
 
 import java.io.Serializable;
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -136,6 +140,52 @@ public class CategoriaJpa implements Serializable {
         } finally {
             em.close();
         }
+    }
+    
+    public List<Categoria> listarCategoria()
+    {
+        Connection cn;
+        CallableStatement cstmt;
+        ResultSet rs;
+        List<Categoria> lstCate=new ArrayList<>();
+        try {
+            cn = Util.getConexionBD();
+            cstmt = cn.prepareCall("call sp_listarcategoria()");
+            rs = cstmt.executeQuery();
+            while(rs.next())
+            {
+                Categoria cat=new Categoria();
+                cat.setIdCategoria(rs.getInt(1));
+                cat.setNombre(rs.getString(2));
+                lstCate.add(cat);
+            }
+        } catch (Exception e) {
+            e.getMessage();
+        }
+        return lstCate;
+    }
+    
+    public List<Categoria> listarsubCategoria(int id)
+    {
+        Connection cn;
+        CallableStatement cstmt;
+        ResultSet rs;
+        List<Categoria> lstCate=new ArrayList<>();
+        try {
+            cn = Util.getConexionBD();
+            cstmt = cn.prepareCall("call sp_listarsubCategoria("+id+")");
+            rs = cstmt.executeQuery();
+            while(rs.next())
+            {
+                Categoria cat=new Categoria();
+                cat.setIdCategoria(rs.getInt(1));
+                cat.setNombre(rs.getString(2));
+                lstCate.add(cat);
+            }
+        } catch (Exception e) {
+            e.getMessage();
+        }
+        return lstCate;
     }
     
 }

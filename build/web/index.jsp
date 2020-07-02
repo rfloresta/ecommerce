@@ -6,4 +6,5 @@ This JSP is here to provide a redirect to the dispatcher
 servlet but should be the only JSP outside of WEB-INF.
 --%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<% response.sendRedirect("admin/login.jsp"); %>
+<%@ taglib uri="/struts-tags" prefix="s"%>
+<s:action name="listarCateCliente" executeResult="true" />

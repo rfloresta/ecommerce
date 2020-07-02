@@ -184,6 +184,7 @@
         <script src="js/toastr.min.js" type="text/javascript"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
         <script src="js/bootstrap-dropdownhover.min.js" type="text/javascript"></script>
+        
         <script type="text/javascript">
             $('.block2-btn-addcart').each(function () {
                 var nameProduct = $(this).parent().parent().parent().find('.block2-name').html();

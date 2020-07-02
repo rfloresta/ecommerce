@@ -1,17 +1,20 @@
- /* Prueba 
- $("#DatosP").on('click',function(){
-     $.ajax({
-            url: 'buscarCliePerfil?cliente.idCliente='+$("#idClie").val()+'',
-            type: 'POST',
-            dataType: 'json',           
-            success:function(response){
-               alert(response.jsonPerfil);          
-            },
-            error:function(jqXhr, textStatus, errorThrown){
-                alert(textStatus);
-            }
-        });    
-    
- })
+$(document).ready(function () {
+
+   $( window ).on("load", function() {
+         var form = $('#form-clie');
+        if($('.drop-nav').children().length == 0)
+        {
+         form.submit();
+          
+            
+        }else
+        {
+            console.log('tiene hijos');
+        }
+        
+        
+        
+    });
+  
+});
  
-*/

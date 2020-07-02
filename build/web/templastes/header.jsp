@@ -1,11 +1,13 @@
 
 <%@ taglib uri="/struts-tags" prefix="s"%>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <title>W&V</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        
         <!--===============================================================================================-->
         <link rel="icon" type="image/png" href="imagenes/favicon.png"/>
         <!--===============================================================================================-->
@@ -53,7 +55,7 @@
                         <a href="#" class="topbar-social-item fa fa-youtube-play"></a>
                     </div>
                     <div class="col-6 col-md-4 text-center">
-                        <a href="index.html" class="logo2 font-weight-bold  ">
+                        <a href="#" class="logo2 font-weight-bold  ">
                             W&V Negocios y Servicios S.A.C
                         </a>
                     </div>
@@ -89,13 +91,13 @@
                                         <s:url id="lnkbuscar" action="buscarClie">
                                             <s:param value="#session.idClie" name="cliente.idCliente"/>
                                             <s:param value="1" name="op"/>
-                                         </s:url>
+                                        </s:url>
                                         <s:a  href="%{lnkbuscar}" cssClass="dropdown-item" >Ver perfil</s:a>
-                                        <button type="button" class="dropdown-item" data-toggle="modal" data-target="#registrarseModal">Cerrar Sesión</button>
+                                            <button type="button" class="dropdown-item" data-toggle="modal" data-target="#registrarseModal">Cerrar Sesión</button>
 
                                     </s:elseif>
                                     <s:else>
-                                         <button type="button" class="dropdown-item" data-toggle="modal" data-target="#loginModal">Iniciar Sesión</button>
+                                        <button type="button" class="dropdown-item" data-toggle="modal" data-target="#loginModal">Iniciar Sesión</button>
                                         <button type="button" class="dropdown-item" data-toggle="modal" data-target="#registrarseModal">Registrarse</button>
                                     </s:else>
 
@@ -202,15 +204,21 @@
                         <a href="index.html" class="nav-link">Home</a>
 
                         <div class="dropdown drophover">
+                            
                             <a href="#" class="nav-link" id="dropCate" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categoría</a>
+                             
+                            <div class="dropdown-menu drop-nav" aria-labelledby="dropCate">
+                                
+                                
+                                    
+                                
+                                <s:iterator value="lstCate" >
+                                    <s:a cssClass="dropdown-item"><s:property value="nombre"/></s:a>
+                                </s:iterator>
 
-                            <div class="dropdown-menu" aria-labelledby="dropCate">
-                                <a class="dropdown-item" href="#">Action</a>
-                                <a class="dropdown-item" href="#">Another action</a>
-                                <a class="dropdown-item" href="#">Something else here</a>
                             </div>
                         </div>
-                        <div class="dropdown drophover">
+                      <!--  <div class="dropdown drophover">
                             <a href="#" class="nav-link" id="dropMarca" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Marca</a>
 
                             <div class="dropdown-menu" aria-labelledby="dropMarca">
@@ -219,7 +227,7 @@
                                 <a class="dropdown-item" href="#">Something else here</a>
                             </div>
                         </div>
-
+-->
 
 
                         <a href="cart.html" class="nav-link">Caracteristicas</a>
@@ -268,7 +276,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="Password">Password</label>
-                                <s:textfield cssClass="form-control" name="clienteLog.password" id="password" placeholder="Ingrese Password"></s:textfield>
+                                <s:password cssClass="form-control" name="clienteLog.password" id="password" placeholder="Ingrese Password"></s:password>
                                 </div>
                                 <div class="form-group">
                                     <div class="form-check">

@@ -63,6 +63,24 @@ public class CategoriaAction extends ActionSupport{
         }
     }
     
+     @Action(value = "listarCateCliente", results = {
+        @Result(name = "ok", location = "/principal.jsp"),
+	@Result(name = "error", location = "admin/error.jsp")
+
+    })
+    public String listarCateCliente() {
+        try {
+            catSer=new CategoriaServicio();
+            lstCate = catSer.listarCategoria();
+            return "ok";
+        } catch (Exception e) {
+            resultado = "Error en: listarCate :: " + e.getMessage();
+            return "error";
+        }
+    }
+    
+    
+    
     @Action(value="registrarCate",results= {
 			@Result(name="ok",location="/admin/principal/categoria.jsp"),
 			@Result(name="error",location="/error.jsp")
