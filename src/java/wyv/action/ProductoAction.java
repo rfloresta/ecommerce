@@ -2,6 +2,7 @@ package wyv.action;
 
 import com.opensymphony.xwork2.ActionSupport;
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import org.apache.commons.io.FileUtils;
 import org.apache.struts2.ServletActionContext;
@@ -14,6 +15,7 @@ import wyv.persistencia.Categoria;
 import wyv.persistencia.Marca;
 import wyv.servicios.CategoriaServicio;
 import wyv.servicios.MarcaServicio;
+
 
 @SuppressWarnings("serial")
 public class ProductoAction extends ActionSupport{
@@ -99,7 +101,6 @@ public class ProductoAction extends ActionSupport{
             lstProducto = new ProductoServicio().listar();
             lstCategoria = new CategoriaServicio().listar();
             lstMarca = new MarcaServicio().listar();
-
             return "ok";
         } catch (Exception e) {
             resultado = "Error en: listarProducto :: " + e.getMessage();
@@ -178,7 +179,7 @@ public class ProductoAction extends ActionSupport{
             lstMarca = new MarcaServicio().listar();
             producto = new Producto();
             return estado;
-        } catch (Exception e) {
+        } catch (IOException e) {
             resultado = "Error en: eliminarProducto :: " + e.getMessage();
             return estado;
         }
@@ -199,6 +200,23 @@ public class ProductoAction extends ActionSupport{
         } catch (Exception e) {
             resultado = "Error en: eliminarProducto :: " + e.getMessage();
             return estado;
+        }
+    }
+    
+    @Action(value = "verCatalogo", results = {
+        @Result(name = "ok", location = "/catalogo.jsp"),
+	@Result(name = "error", location = "/error.jsp")
+    })
+    
+    public String verCatalogo() {
+        try {
+            lstProducto = new ProductoServicio().listar();
+            lstCategoria = new CategoriaServicio().listar();
+            lstMarca = new MarcaServicio().listar();
+            return "ok";
+        } catch (Exception e) {
+            resultado = "Error en: verCatalogo :: " + e.getMessage();
+            return "error";
         }
     }
 }

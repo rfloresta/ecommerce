@@ -65,13 +65,12 @@
                             <span class="topbar-email">
                                 <s:if test="hasActionErrors()">
                                     <div class="errorDiv" >
-                                        <s:actionerror />
+                                        <Cate />
                                     </div>
                                 </s:if>
                                 <s:else>
                                     <s:label name="#session.NombreClienteCompleto" />
-
-                                </s:else>
+                            </s:else>
 
                             </span>
 
@@ -83,17 +82,20 @@
                                     <s:if test="inicio==0">
                                         <button type="button" class="dropdown-item" data-toggle="modal" data-target="#loginModal">Iniciar Sesión</button>
                                         <button type="button" class="dropdown-item" data-toggle="modal" data-target="#registrarseModal">Registrarse</button>
-
-
-
                                     </s:if>
-                                    <s:elseif test="inicio==1">
+                                    <s:elseif test="session.seccion==1">
                                         <s:url id="lnkbuscar" action="buscarClie">
                                             <s:param value="#session.idClie" name="cliente.idCliente"/>
                                             <s:param value="1" name="op"/>
+<<<<<<< HEAD:build/web/templastes/header.jsp
                                         </s:url>
                                         <s:a  href="%{lnkbuscar}" cssClass="dropdown-item" >Ver perfil</s:a>
                                             <button type="button" class="dropdown-item" data-toggle="modal" data-target="#registrarseModal">Cerrar Sesión</button>
+=======
+                                         </s:url>
+                                        <s:a  href="%{lnkbuscar}" cssClass="dropdown-item">Mi cuenta</s:a>
+                                        <button type="button" class="dropdown-item">Cerrar Sesión</button>
+>>>>>>> 5bd843f1d468459a1d0d208020b39eae7b3e01df:build/web/header.jsp
 
                                     </s:elseif>
                                     <s:else>
@@ -216,15 +218,22 @@
                                     <s:a cssClass="dropdown-item"><s:property value="nombre"/></s:a>
                                 </s:iterator>
 
+<<<<<<< HEAD:build/web/templastes/header.jsp
+=======
+                            <div class="dropdown-menu" aria-labelledby="dropCate">
+                                <s:iterator value="lstCategoria">
+                                    <a class="dropdown-item" href="#"><s:property value="nombre"/></a>
+                                </s:iterator>
+>>>>>>> 5bd843f1d468459a1d0d208020b39eae7b3e01df:build/web/header.jsp
                             </div>
                         </div>
                       <!--  <div class="dropdown drophover">
                             <a href="#" class="nav-link" id="dropMarca" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Marca</a>
 
                             <div class="dropdown-menu" aria-labelledby="dropMarca">
-                                <a class="dropdown-item" href="#">Action</a>
-                                <a class="dropdown-item" href="#">Another action</a>
-                                <a class="dropdown-item" href="#">Something else here</a>
+                                <s:iterator value="lstMarca">
+                                    <a class="dropdown-item" href="#"><s:property value="nombre"/></a>
+                                </s:iterator>
                             </div>
                         </div>
 -->
@@ -272,11 +281,15 @@
                         <s:form  action="ingresoCliente" id="form_login"  styleId="acc" theme="simple">
                             <div class="form-group">
                                 <label for="Email">Correo Electronico</label>
-                                <s:textfield cssClass="form-control" name="clienteLog.email" id="email" placeholder="Ingrese Email"></s:textfield>
+                                <s:textfield cssClass="form-control" name="cliente.email" id="email" placeholder="Ingrese Email"/>
                                 </div>
                                 <div class="form-group">
                                     <label for="Password">Password</label>
+<<<<<<< HEAD:build/web/templastes/header.jsp
                                 <s:password cssClass="form-control" name="clienteLog.password" id="password" placeholder="Ingrese Password"></s:password>
+=======
+                                <s:password cssClass="form-control" name="cliente.password" id="password" placeholder="Ingrese Password"/>
+>>>>>>> 5bd843f1d468459a1d0d208020b39eae7b3e01df:build/web/header.jsp
                                 </div>
                                 <div class="form-group">
                                     <div class="form-check">
@@ -318,25 +331,30 @@
                     </div>
                     <div class="modal-body pt-0">
                         <p class="text-center">- OR -</p>
-                        <form action="#" method="post">
+                        
+                         <s:form action="registrarse" theme="simple">
                             <div class="input-group mb-3 mt-3">
-                                <input type="text" class="form-control" placeholder="Full name">
+                                <s:textfield cssClass="form-control" name="cliente.nombres" id="nombres" placeholder="Ingrese Nombres"/>
+                            </div>
+                            <div class="input-group mb-3">
+                            <s:textfield cssClass="form-control" name="cliente.apellidos" id="apellidos" placeholder="Ingrese Apellidos"/>
+
+                            </div>
+                           <div class="input-group mb-3">
+                            <s:textfield  cssClass="form-control" name="cliente.email" id="email" placeholder="Ingrese Email"/>
 
                             </div>
                             <div class="input-group mb-3">
-                                <input type="email" class="form-control" placeholder="Email">
+                            <s:password cssClass="form-control" name="cliente.password" id="password" placeholder="Ingrese Password"/>
 
                             </div>
                             <div class="input-group mb-3">
-                                <input type="password" class="form-control" placeholder="Password">
-
-                            </div>
-                            <div class="input-group mb-3">
-                                <input type="password" class="form-control" placeholder="Retype password">
+                            <s:password cssClass="form-control" name="password2" id="password2" placeholder="Confirmar Password"/>
 
                             </div>
                             <div class="row">
-                                <div class="col-8">
+                                <!-- /.col -->
+                                 <div class="col-8">
                                     <div class="icheck-primary">
                                         <input type="checkbox" id="agreeTerms" name="terms" value="agree">
                                         <label for="agreeTerms">
@@ -344,13 +362,14 @@
                                         </label>
                                     </div>
                                 </div>
-                                <!-- /.col -->
                                 <div class="col-4">
-                                    <button type="submit" class="btn btn-primary btn-block">Enviar</button>
+                                <s:submit id="enviar"  cssClass="btn btn-primary btn-block toastrDefaultError" value="Enviar"/>
                                 </div>
                                 <!-- /.col -->
                             </div>
-                        </form>
+                        </s:form>
+                        
+                           
                     </div>
                 </div>
             </div>

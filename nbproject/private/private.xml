@@ -3,11 +3,29 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/Users/bdeg_/OneDrive/Desktop/Universidad/9no/taller_dsw/Proyecto%20Final/Software/W-V-S.A.C/web/index.jsp</file>
             <file>file:/C:/Users/bdeg_/OneDrive/Desktop/Universidad/9no/taller_dsw/Proyecto%20Final/Software/W-V-S.A.C/src/java/wyv/action/ProductoAction.java</file>
             <file>file:/C:/Users/bdeg_/OneDrive/Desktop/Universidad/9no/taller_dsw/Proyecto%20Final/Software/W-V-S.A.C/src/java/wyv/persistencia/ProductoJpa.java</file>
             <file>file:/C:/Users/bdeg_/OneDrive/Desktop/Universidad/9no/taller_dsw/Proyecto%20Final/Software/W-V-S.A.C/web/clientePerfil.jsp</file>
             <file>file:/C:/Users/bdeg_/OneDrive/Desktop/Universidad/9no/taller_dsw/Proyecto%20Final/Software/W-V-S.A.C/web/principal.jsp</file>
+=======
+            <file>file:/C:/Users/Romario/Desktop/Git/W-V-S.A.C/web/admin/principal/administrador.jsp</file>
+            <file>file:/C:/Users/Romario/Desktop/Git/W-V-S.A.C/web/admin/principal/pedido.jsp</file>
+            <file>file:/C:/Users/Romario/Desktop/Git/W-V-S.A.C/web/index.jsp</file>
+            <file>file:/C:/Users/Romario/Desktop/Git/W-V-S.A.C/web/perfil.jsp</file>
+            <file>file:/C:/Users/Romario/Desktop/Git/W-V-S.A.C/src/java/wyv/action/PedidoAction.java</file>
+            <file>file:/C:/Users/Romario/Desktop/Git/W-V-S.A.C/src/java/wyv/action/ProductoAction.java</file>
+            <file>file:/C:/Users/Romario/Desktop/Git/W-V-S.A.C/src/java/wyv/servicios/ProductoServicio.java</file>
+            <file>file:/C:/Users/Romario/Desktop/Git/W-V-S.A.C/src/java/wyv/servicios/ClienteServicio.java</file>
+            <file>file:/C:/Users/Romario/Desktop/Git/W-V-S.A.C/src/java/wyv/servicios/CategoriaServicio.java</file>
+            <file>file:/C:/Users/Romario/Desktop/Git/W-V-S.A.C/src/java/wyv/persistencia/Cliente.java</file>
+            <file>file:/C:/Users/Romario/Desktop/Git/W-V-S.A.C/src/java/wyv/persistencia/ClienteDao.java</file>
+            <file>file:/C:/Users/Romario/Desktop/Git/W-V-S.A.C/web/cambiar_password.jsp</file>
+            <file>file:/C:/Users/Romario/Desktop/Git/W-V-S.A.C/src/java/wyv/action/ClienteAction.java</file>
+            <file>file:/C:/Users/Romario/Desktop/Git/W-V-S.A.C/web/header.jsp</file>
+            <file>file:/C:/Users/Romario/Desktop/Git/W-V-S.A.C/src/java/wyv/persistencia/ClienteJpa.java</file>
+>>>>>>> 5bd843f1d468459a1d0d208020b39eae7b3e01df
         </group>
     </open-files>
 </project-private>

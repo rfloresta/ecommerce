@@ -32,7 +32,6 @@ public class AdministradorJpa implements Serializable {
     public AdministradorJpa() {
         this.emf= Persistence.createEntityManagerFactory("W_V_S.A.CPU");
     }
-
     public AdministradorJpa(EntityManagerFactory emf) {
         this.emf = emf;
     }

@@ -44,7 +44,6 @@
                                             <th>Estado</th>
                                             <th>Cliente</th>
                                             <th>Reporte</th>
-
                                         </tr> 
                                     </thead>     
                                     <tbody>
@@ -56,7 +55,6 @@
                                                 <td><s:property value="igv"/></td> 
                                                 <td><s:property value="total"/></td> 
                                                 <td><s:property value="pago"/></td> 
-
                                                 <td>
 
                                                     <s:url id="lnkActuProceso" action="actualizarPedido">
@@ -124,7 +122,6 @@
                                                     </s:elseif>
 
                                                 </td>
-
                                                 <td><s:property value="idCliente.nombres"/></td> 
                                                 <td><i class="fas fa-eye "></i></td>
 

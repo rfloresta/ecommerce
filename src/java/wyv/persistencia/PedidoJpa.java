@@ -233,7 +233,7 @@ public class PedidoJpa implements Serializable {
             em.close();
         }
     }
-
+    
     public int actualizar(Pedido p) {
         Connection cn;
         PreparedStatement pstmt;
@@ -260,7 +260,6 @@ public class PedidoJpa implements Serializable {
         return resultado;
 
     }
-
     public List<Pedido> listarPedido() {
         PreparedStatement ptstm;
         Connection cn;
@@ -293,7 +292,5 @@ public class PedidoJpa implements Serializable {
         }
         return lisPedido;
     }
-
-   
 
 }

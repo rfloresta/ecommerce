@@ -32,7 +32,9 @@ $(function () {
                             {
                                 toastr.error('Email y/o password incorrecto');
                             }
-                        });
+});
+
+
 /*
 $(function () {
     $("#grabar").click(function (event)

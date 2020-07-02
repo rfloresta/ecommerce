@@ -158,7 +158,7 @@ public class Cliente implements Serializable {
     public String toString() {
         return "wyv.persistencia.Cliente[ idCliente=" + idCliente + " ]";
     }
-
+    
     @XmlTransient
     public List<Pedido> getPedidoList() {
         return pedidoList;

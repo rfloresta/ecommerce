@@ -1,5 +1,4 @@
-
-<%@include file="templastes/header.jsp" %>
+<%@include file="header.jsp" %>
 
         <!-- Slide1 -->
         <section class="slide1">
@@ -137,16 +136,16 @@
                     <!-- Nav tabs -->
                     <ul class="nav nav-tabs" role="tablist">
                         <li class="nav-item">
-                            <a class="nav-link active" data-toggle="tab" href="#best-seller" role="tab">Best Seller</a>
+                            <a class="nav-link active" data-toggle="tab" href="#best-seller" role="tab">Más vendido</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#featured" role="tab">Featured</a>
+                            <a class="nav-link" data-toggle="tab" href="#featured" role="tab">Destacados</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#sale" role="tab">Sale</a>
+                            <a class="nav-link" data-toggle="tab" href="#sale" role="tab">Rebaja</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#top-rate" role="tab">Top Rate</a>
+                            <a class="nav-link" data-toggle="tab" href="#top-rate" role="tab">Los más valorados</a>
                         </li>
                     </ul>
 
@@ -155,11 +154,13 @@
                         <!-- - -->
                         <div class="tab-pane fade show active" id="best-seller" role="tabpanel">
                             <div class="row">
+                                
+                                <s:iterator value="lstProducto">
                                 <div class="col-sm-6 col-md-4 col-lg-3 p-b-50">
                                     <!-- Block2 -->
                                     <div class="block2">
                                         <div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelnew">
-                                            <img src="imagenes/Otro_productos_Locion_hidratante_ozygem_supreme.jpg" alt="IMG-PRODUCT">
+                                            <img src="<%=request.getContextPath()%>/admin/imagenes/<s:property value="imagen"/>" alt="IMG-PRODUCT">
 
                                             <div class="block2-overlay trans-0-4">
                                                 <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
@@ -178,250 +179,16 @@
 
                                         <div class="block2-txt p-t-20">
                                             <a href="product-detail.html" class="block2-name dis-block s-text3 p-b-5">
-                                                LOCIÓN HIDRATANTE OXYGEN SUPREME 30+
+                                                <s:property value="nombre"/>
                                             </a>
 
                                             <span class="block2-price m-text6 p-r-5">
-                                                $45.90
+                                                S/<s:property value="precioVenta"/>
                                             </span>
                                         </div>
                                     </div>
                                 </div>
-
-                                <div class="col-sm-6 col-md-4 col-lg-3 p-b-50">
-                                    <!-- Block2 -->
-                                    <div class="block2">
-                                        <div class="block2-img wrap-pic-w of-hidden pos-relative">
-                                            <img src="imagenes/Otros_Productos_Corrector_OjosOS.jpg" alt="IMG-PRODUCT">
-
-                                            <div class="block2-overlay trans-0-4">
-                                                <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
-                                                    <i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
-                                                    <i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
-                                                </a>
-
-                                                <div class="block2-btn-addcart w-size1 trans-0-4">
-                                                    <!-- Button -->
-                                                    <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
-                                                        Agregar al carro
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="block2-txt p-t-20">
-                                            <a href="product-detail.html" class="block2-name dis-block s-text3 p-b-5">
-                                                CONTORNO DE OJOS OXYGEN SUPREME
-                                            </a>
-
-                                            <span class="block2-price m-text6 p-r-5">
-                                                $87.90
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-sm-6 col-md-4 col-lg-3 p-b-50">
-                                    <!-- Block2 -->
-                                    <div class="block2">
-                                        <div class="block2-img wrap-pic-w of-hidden pos-relative">
-                                            <img src="imagenes/Otros_Productos_Crema_Facila_Restauradora_Oxygen_Supreme.jpg" alt="IMG-PRODUCT">
-
-                                            <div class="block2-overlay trans-0-4">
-                                                <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
-                                                    <i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
-                                                    <i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
-                                                </a>
-
-                                                <div class="block2-btn-addcart w-size1 trans-0-4">
-                                                    <!-- Button -->
-                                                    <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
-                                                        Agregar al carro
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="block2-txt p-t-20">
-                                            <a href="product-detail.html" class="block2-name dis-block s-text3 p-b-5">
-                                                CREMA FACIAL RESTAURADORA OXYGEN SUPREME 45+
-                                            </a>
-
-                                            <span class="block2-price m-text6 p-r-5">
-                                                $148.90
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-sm-6 col-md-4 col-lg-3 p-b-50">
-                                    <!-- Block2 -->
-                                    <div class="block2">
-                                        <div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelsale">
-                                            <img src="imagenes/Otros_Productos_Desodorante_ROll-On.jpg" alt="IMG-PRODUCT">
-
-                                            <div class="block2-overlay trans-0-4">
-                                                <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
-                                                    <i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
-                                                    <i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
-                                                </a>
-
-                                                <div class="block2-btn-addcart w-size1 trans-0-4">
-                                                    <!-- Button -->
-                                                    <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
-                                                        Agregar al carro
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="block2-txt p-t-20">
-                                            <a href="product-detail.html" class="block2-name dis-block s-text3 p-b-5">
-                                                DESODORANTE ROLL-ON D'ORSAY
-                                            </a>
-
-                                            <span class="block2-price m-text6 p-r-5">
-                                                $14.90
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-sm-6 col-md-4 col-lg-3 p-b-50">
-                                    <!-- Block2 -->
-                                    <div class="block2">
-                                        <div class="block2-img wrap-pic-w of-hidden pos-relative">
-                                            <img src="imagenes/Otros_Productos_Instant_Cover.jpg" alt="IMG-PRODUCT">
-
-                                            <div class="block2-overlay trans-0-4">
-                                                <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
-                                                    <i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
-                                                    <i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
-                                                </a>
-
-                                                <div class="block2-btn-addcart w-size1 trans-0-4">
-                                                    <!-- Button -->
-                                                    <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
-                                                        Agregar al carro
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="block2-txt p-t-20">
-                                            <a href="product-detail.html" class="block2-name dis-block s-text3 p-b-5">
-                                                INSTANT COVER
-                                            </a>
-
-                                            <span class="block2-price m-text6 p-r-5">
-                                                $44.90
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-sm-6 col-md-4 col-lg-3 p-b-50">
-                                    <!-- Block2 -->
-                                    <div class="block2">
-                                        <div class="block2-img wrap-pic-w of-hidden pos-relative">
-                                            <img src="imagenes/Otros_Productos_Labial_HD_Longwear.jpg" alt="IMG-PRODUCT">
-
-                                            <div class="block2-overlay trans-0-4">
-                                                <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
-                                                    <i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
-                                                    <i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
-                                                </a>
-
-                                                <div class="block2-btn-addcart w-size1 trans-0-4">
-                                                    <!-- Button -->
-                                                    <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
-                                                        Agregar al carro
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="block2-txt p-t-20">
-                                            <a href="product-detail.html" class="block2-name dis-block s-text3 p-b-5">
-                                                LABIAL HD LONGWEAR
-                                            </a>
-
-                                            <span class="block2-price m-text6 p-r-5">
-                                                $29.90
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-sm-6 col-md-4 col-lg-3 p-b-50">
-                                    <!-- Block2 -->
-                                    <div class="block2">
-                                        <div class="block2-img wrap-pic-w of-hidden pos-relative">
-                                            <img src="imagenes/Otros_productos_Brocha_DualOjo.jpg" alt="IMG-PRODUCT">
-
-                                            <div class="block2-overlay trans-0-4">
-                                                <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
-                                                    <i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
-                                                    <i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
-                                                </a>
-
-                                                <div class="block2-btn-addcart w-size1 trans-0-4">
-                                                    <!-- Button -->
-                                                    <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
-                                                        Agregar al carro
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="block2-txt p-t-20">
-                                            <a href="product-detail.html" class="block2-name dis-block s-text3 p-b-5">
-                                                BROCHA DUAL OJOS
-                                            </a>
-
-                                            <span class="block2-price m-text6 p-r-5">
-                                                $22.90
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-sm-6 col-md-4 col-lg-3 p-b-50">
-                                    <!-- Block2 -->
-                                    <div class="block2">
-                                        <div class="block2-img wrap-pic-w of-hidden pos-relative">
-                                            <img src="imagenes/Otros_productos_Esmalte_Smart_Color.jpg" alt="IMG-PRODUCT">
-
-                                            <div class="block2-overlay trans-0-4">
-                                                <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
-                                                    <i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
-                                                    <i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
-                                                </a>
-
-                                                <div class="block2-btn-addcart w-size1 trans-0-4">
-                                                    <!-- Button -->
-                                                    <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
-                                                        Agregar al carro
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="block2-txt p-t-20">
-                                            <a href="product-detail.html" class="block2-name dis-block s-text3 p-b-5">
-                                                ESMALTE SMART COLOR
-                                            </a>
-
-                                            <span class="block2-oldprice m-text7 p-r-5">
-                                                $15.50
-                                            </span>
-
-                                            <span class="block2-newprice m-text8 p-r-5">
-                                                $11.90
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
+                                </s:iterator>
                             </div>
                         </div>
                                 
@@ -1270,4 +1037,4 @@
                 </div>
             </div>
         </section>
-        <%@include file="templastes/footer.jsp" %>
+        <%@include file="footer.jsp" %>

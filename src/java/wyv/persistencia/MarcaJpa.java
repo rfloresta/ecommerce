@@ -6,6 +6,7 @@
 package wyv.persistencia;
 
 import java.io.Serializable;
+<<<<<<< HEAD
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -14,17 +15,19 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+=======
+>>>>>>> 5bd843f1d468459a1d0d208020b39eae7b3e01df
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
-import javax.persistence.Persistence;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import wyv.persistencia.exceptions.NonexistentEntityException;
 
-/**
- *
- * @author bdeg_
- */
 public class MarcaJpa implements Serializable {
 
     public MarcaJpa() {
@@ -41,11 +44,29 @@ public class MarcaJpa implements Serializable {
     }
 
     public void create(Marca marca) {
+        if (marca.getProductoList() == null) {
+            marca.setProductoList(new ArrayList<Producto>());
+        }
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
+            List<Producto> attachedProductoList = new ArrayList<Producto>();
+            for (Producto productoListProductoToAttach : marca.getProductoList()) {
+                productoListProductoToAttach = em.getReference(productoListProductoToAttach.getClass(), productoListProductoToAttach.getIdProducto());
+                attachedProductoList.add(productoListProductoToAttach);
+            }
+            marca.setProductoList(attachedProductoList);
             em.persist(marca);
+            for (Producto productoListProducto : marca.getProductoList()) {
+                Marca oldIdMarcaOfProductoListProducto = productoListProducto.getIdMarca();
+                productoListProducto.setIdMarca(marca);
+                productoListProducto = em.merge(productoListProducto);
+                if (oldIdMarcaOfProductoListProducto != null) {
+                    oldIdMarcaOfProductoListProducto.getProductoList().remove(productoListProducto);
+                    oldIdMarcaOfProductoListProducto = em.merge(oldIdMarcaOfProductoListProducto);
+                }
+            }
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -59,7 +80,34 @@ public class MarcaJpa implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
+            Marca persistentMarca = em.find(Marca.class, marca.getIdMarca());
+            List<Producto> productoListOld = persistentMarca.getProductoList();
+            List<Producto> productoListNew = marca.getProductoList();
+            List<Producto> attachedProductoListNew = new ArrayList<Producto>();
+            for (Producto productoListNewProductoToAttach : productoListNew) {
+                productoListNewProductoToAttach = em.getReference(productoListNewProductoToAttach.getClass(), productoListNewProductoToAttach.getIdProducto());
+                attachedProductoListNew.add(productoListNewProductoToAttach);
+            }
+            productoListNew = attachedProductoListNew;
+            marca.setProductoList(productoListNew);
             marca = em.merge(marca);
+            for (Producto productoListOldProducto : productoListOld) {
+                if (!productoListNew.contains(productoListOldProducto)) {
+                    productoListOldProducto.setIdMarca(null);
+                    productoListOldProducto = em.merge(productoListOldProducto);
+                }
+            }
+            for (Producto productoListNewProducto : productoListNew) {
+                if (!productoListOld.contains(productoListNewProducto)) {
+                    Marca oldIdMarcaOfProductoListNewProducto = productoListNewProducto.getIdMarca();
+                    productoListNewProducto.setIdMarca(marca);
+                    productoListNewProducto = em.merge(productoListNewProducto);
+                    if (oldIdMarcaOfProductoListNewProducto != null && !oldIdMarcaOfProductoListNewProducto.equals(marca)) {
+                        oldIdMarcaOfProductoListNewProducto.getProductoList().remove(productoListNewProducto);
+                        oldIdMarcaOfProductoListNewProducto = em.merge(oldIdMarcaOfProductoListNewProducto);
+                    }
+                }
+            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
@@ -88,6 +136,11 @@ public class MarcaJpa implements Serializable {
                 marca.getIdMarca();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The marca with id " + id + " no longer exists.", enfe);
+            }
+            List<Producto> productoList = marca.getProductoList();
+            for (Producto productoListProducto : productoList) {
+                productoListProducto.setIdMarca(null);
+                productoListProducto = em.merge(productoListProducto);
             }
             em.remove(marca);
             em.getTransaction().commit();

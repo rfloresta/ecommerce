@@ -26,7 +26,6 @@ import wyv.persistencia.exceptions.PreexistingEntityException;
  * @author bdeg_
  */
 public class DetallePedidoJpa implements Serializable {
-
     public DetallePedidoJpa() {
         this.emf= Persistence.createEntityManagerFactory("W_V_S.A.CPU");
     }

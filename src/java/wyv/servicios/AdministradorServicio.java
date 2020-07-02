@@ -82,7 +82,6 @@ public class AdministradorServicio implements IOperacionesBD<Administrador> {
         } catch (Exception e) {
              return null;
         }
-       
         return null;
     }
 

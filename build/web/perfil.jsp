@@ -1,10 +1,10 @@
-<%@include file="templastes/header.jsp" %>
+<%@include file="header.jsp" %>
 
 
 <div class="container mb-5">
     <div class="row">
         <div class="col-12 encabezado-perfilCliente mt-5 py-4 px-3 ">
-            <h1 class="text-light">Mi cuenta : <s:label name="cliente.nombres" /> <s:label name="cliente.apellidos" /></h1>
+            <h1 class="text-light">Mi cuenta: <s:label name="#session.NombreClienteCompleto" /></h1>
             <span>Datos y preferencias</span>
         </div>
         <div class="col-4 list-group pr-0 barra-lateral-perfilC">
@@ -20,13 +20,14 @@
             </s:url>
             <s:a href="%{lnkbuscar}" cssClass="list-group-item list-group-item-action"><i class="fa fa-user-cog"></i> Datos Personales</s:a>
 
+            <a href="cambiar_password.jsp" Class="list-group-item list-group-item-action"><i class="fa fa-lock"></i> Cambiar Contraseña</a>
             </div>
 
 
 
         <s:if test="op==2">
             <div class="col-8 contenido-cliente pt-3">
-                <h3 class="mb-5">Editar Datos Personales</h3>
+                <h3 class="mb-5">Datos Personales</h3>
                 <s:form theme="simple" action="actualizarClie" method="POST">
                     <div class="row" >
                         <div class="col-6">
@@ -45,26 +46,17 @@
                             <s:textfield name="cliente.numCelular" cssClass="form-control mb-5" />
                         </div>
                         <div class="col-6">
-
                             <label>Dirección</label>
                             <s:textfield name="cliente.direccion" cssClass="form-control mb-5" />
-                            <label>Password</label>
-                            <s:textfield name="cliente.password" cssClass="form-control mb-5" />
+                            
                         </div>
                         <div class="col-6">
-
-
                             <label>Email</label>
                             <s:textfield name="cliente.email" cssClass="form-control mb-5" />
-                            <label>Repetir password</label>
-                            <s:textfield name="" cssClass="form-control mb-5" />
                         </div>
                         <div class="col-12 text-center pb-4">
-                            <s:submit cssClass="btn btn-warning " value="Editar" />
+                            <s:submit cssClass="btn btn-warning " value="Actualizar" />
                         </div>
-
-
-
                     </div>
                 </s:form>
             </div> 
@@ -99,9 +91,8 @@
                     </div>
                 </s:iterator>
             </div>
-
         </s:elseif>
-
+            
         <s:else>
             <div class="col-8 text-center principal">
 
@@ -114,5 +105,5 @@
 </div>
 
 <div id="prueba"></div>
-<%@include file="templastes/footer.jsp" %>
+<%@include file="footer.jsp" %>
 <script src="js/ajax.js" type="text/javascript"></script>

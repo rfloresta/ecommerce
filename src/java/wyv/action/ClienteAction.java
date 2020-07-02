@@ -25,13 +25,13 @@ public class ClienteAction extends ActionSupport implements SessionAware {
     ClienteServicio clieSer;
     private String resultado;
     private Cliente cliente;
-    private Cliente clienteLog;
     private List<Cliente> lstClie;
     private int edit;
     private int inicio;
     private String jsonPerfil;
     private int op;
     private Map<String, Object> sesion;
+    private String estado="error";
 
     public String getResultado() {
         return resultado;
@@ -60,15 +60,6 @@ public class ClienteAction extends ActionSupport implements SessionAware {
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
-
-    public Cliente getClienteLog() {
-        return clienteLog;
-    }
-
-    public void setClienteLog(Cliente clienteLog) {
-        this.clienteLog = clienteLog;
-    }
-
     public List<Cliente> getLstClie() {
         return lstClie;
     }
@@ -91,31 +82,31 @@ public class ClienteAction extends ActionSupport implements SessionAware {
     }
 
     @Action(value = "ingresoCliente", results = {
-        @Result(name = "ok", location = "/principal.jsp")
+        @Result(name = "ok", location = "/catalogo.jsp")
         ,
-        @Result(name = "incorrecto", location = "/principal.jsp")
+        @Result(name = "incorrecto", location = "/catalogo.jsp")
         ,
 	@Result(name = "error", location = "/error.jsp"),})
     public String ingresoCliente() {
         try {
+            
+            clieSer = new ClienteServicio();
+            lstClie = clieSer.listar();
             String nombreClie = "";
             String apellidoClie = "";
             int idCliente = 0;
-            clieSer = new ClienteServicio();
-            lstClie = clieSer.listar();
+            
             for (Cliente c : lstClie) {
-                if (c.getEmail().equals(clienteLog.getEmail()) && c.getPassword().equals(clienteLog.getPassword())) {
+                if (c.getEmail().equals(cliente.getEmail()) && c.getPassword().equals(cliente.getPassword())) {
                     nombreClie = c.getNombres();
                     apellidoClie = c.getApellidos();
                     idCliente = c.getIdCliente();
-
-                    inicio = 1;
+                    sesion.put("seccion", 1);
                 } else {
                     addActionError("Email o password incorectos");
-                    inicio = 0;
+                    sesion.put("seccion", 0);
                 }
             }
-
             sesion.put("NombreClienteCompleto", nombreClie + " " + apellidoClie);
             sesion.put("idClie", idCliente);
             return "ok";
@@ -135,7 +126,6 @@ public class ClienteAction extends ActionSupport implements SessionAware {
         try {
             clieSer = new ClienteServicio();
             lstClie = clieSer.listar();
-
             return "ok";
         } catch (Exception e) {
             resultado = "Error en: listarCate :: " + e.getMessage();
@@ -179,7 +169,7 @@ public class ClienteAction extends ActionSupport implements SessionAware {
     }
 
     @Action(value = "buscarClie", results = {
-        @Result(name = "ok", location = "/clientePerfil.jsp")
+        @Result(name = "ok", location = "/perfil.jsp")
         ,
 			@Result(name = "error", location = "/error.jsp")
     })
@@ -200,7 +190,7 @@ public class ClienteAction extends ActionSupport implements SessionAware {
 
             return "ok";
         } catch (Exception e) {
-            resultado = "Error en: editarAdmin :: " + e.getMessage();
+            resultado = "Error en: buscarClie :: " + e.getMessage();
             return "error";
         }
     }
@@ -224,7 +214,7 @@ public class ClienteAction extends ActionSupport implements SessionAware {
 	}
      */
     @Action(value = "actualizarClie", results = {
-        @Result(name = "ok", location = "/clientePerfil.jsp")
+        @Result(name = "ok", location = "/perfil.jsp")
         ,
 			@Result(name = "error", location = "/error.jsp")
     })
@@ -235,6 +225,7 @@ public class ClienteAction extends ActionSupport implements SessionAware {
             cliente = new ClienteServicio().buscar(String.valueOf(cliente.getIdCliente()));
             op = 2;
             sesion.put("NombreClienteCompleto", cliente.getNombres() + " " + cliente.getApellidos());
+            inicio = 1;
             return "ok";
         } catch (Exception e) {
             resultado = "Error en: eliminarMarca :: " + e.getMessage();
@@ -256,6 +247,38 @@ public class ClienteAction extends ActionSupport implements SessionAware {
         } catch (Exception e) {
             resultado = "Error en: eliminarMarca :: " + e.getMessage();
             return "error";
+        }
+    }
+    
+    @Action(value = "registrarse", results = {
+        @Result(name = "ok", location = "/catalogo.jsp")
+        ,
+			@Result(name = "error", location = "/error.jsp")
+    })
+    public String registrarse() {
+        try {
+            clieSer=new ClienteServicio();
+            estado=clieSer.registrar(cliente);
+            lstClie = clieSer.listar();
+            String nombreClie = "";
+            String apellidoClie = "";
+            int idCliente = 0;
+            for (Cliente c : lstClie) {
+                if (c.getEmail().equals(cliente.getEmail())) {
+                    nombreClie = c.getNombres();
+                    apellidoClie = c.getApellidos();
+                    idCliente = c.getIdCliente();
+                    sesion.put("seccion", 1);
+                } 
+            }
+
+            sesion.put("NombreClienteCompleto", nombreClie + " " + apellidoClie);
+            sesion.put("idClie", idCliente);
+            resultado="¡Gracias por registrarte!";
+            return estado;
+        } catch (Exception e) {
+            resultado = "Error en: registrarCate :: " + e.getMessage();
+            return estado;
         }
     }
 

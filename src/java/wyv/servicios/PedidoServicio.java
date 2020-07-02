@@ -20,6 +20,7 @@ public class PedidoServicio implements IOperacionesBD<Pedido>{
      PedidoDao pedidoDao;
     
   
+     
     @Override
     public String registrar(Pedido a) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -57,5 +58,6 @@ public class PedidoServicio implements IOperacionesBD<Pedido>{
     public Pedido ingresar(Pedido entrada) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
  
 }

@@ -122,8 +122,6 @@ public class AdministradorAction extends ActionSupport implements SessionAware {
             admin = admSer.ingresar(admin);
             if(admin != null)
             {
-                
-            
             sesion.put("privilegio", admin.getPrivilegio());
             sesion.put("nombreCompleto", admin.getNombres() + " " + admin.getApellidos());
             sesion.put("nombre", admin.getNombres());

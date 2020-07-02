@@ -125,8 +125,7 @@ public class PedidoAction extends ActionSupport {
     })
     public String listarPedidoPorCliente() {
         try {
-           
-            
+
             lstDetalle = new PedidoServicio().listarDPedidoPorCliente(cliente.getIdCliente());
             op=3;
             System.out.println("Error: " + lstPedido);
@@ -172,10 +171,6 @@ public class PedidoAction extends ActionSupport {
             System.out.println(ped.getIgv());
             System.out.println(ped.getEstado());
             System.out.println(ped.getIdCliente());
-            
-            
-            
-            
             
             return "ok";
         } catch (Exception e) {
