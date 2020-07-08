@@ -1,13 +1,10 @@
-
 <%@ taglib uri="/struts-tags" prefix="s"%>
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <title>W&V</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        
         <!--===============================================================================================-->
         <link rel="icon" type="image/png" href="imagenes/favicon.png"/>
         <!--===============================================================================================-->
@@ -37,6 +34,7 @@
         <!--===============================================================================================-->
         <link rel="stylesheet" type="text/css" href="css/util.css">
         <link rel="stylesheet" type="text/css" href="css/main.css">
+        <link href="css/icheck-bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <!--===============================================================================================-->
         <link href="css/toastr.min.css" rel="stylesheet" type="text/css"/>
     </head>
@@ -55,23 +53,22 @@
                         <a href="#" class="topbar-social-item fa fa-youtube-play"></a>
                     </div>
                     <div class="col-6 col-md-4 text-center">
-                        <a href="#" class="logo2 font-weight-bold  ">
+                        <a href="index.html" class="logo2 font-weight-bold  ">
                             W&V Negocios y Servicios S.A.C
+
                         </a>
                     </div>
 
                     <div class="col-4  col-md-4">
                         <div class="topbar-child2">
                             <span class="topbar-email">
-                                <s:if test="hasActionErrors()">
-                                    <div class="errorDiv" >
-                                        <Cate />
-                                    </div>
+                                <s:if test="mensajeError!=''">
+                                    <s:label name="mensajeError" cssClass="msgError"/>
                                 </s:if>
                                 <s:else>
                                     <s:label name="#session.NombreClienteCompleto" />
-                            </s:else>
-
+                                </s:else>
+                                <s:hidden name="resultado" />
                             </span>
 
                             <div class="dropdown ml-md-3">
@@ -79,23 +76,17 @@
                                     <img src="imagenes/icon-header-01.png" class="header-icon1" alt="ICON">
                                 </button>
                                 <div class="dropdown-menu " aria-labelledby="dropdownUsuario" >
-                                    <s:if test="inicio==0">
+                                    <s:if test="#session.seccion==0">
                                         <button type="button" class="dropdown-item" data-toggle="modal" data-target="#loginModal">Iniciar Sesión</button>
                                         <button type="button" class="dropdown-item" data-toggle="modal" data-target="#registrarseModal">Registrarse</button>
                                     </s:if>
-                                    <s:elseif test="session.seccion==1">
+                                    <s:elseif test="#session.seccion==1">
                                         <s:url id="lnkbuscar" action="buscarClie">
                                             <s:param value="#session.idClie" name="cliente.idCliente"/>
                                             <s:param value="1" name="op"/>
-<<<<<<< HEAD:build/web/templastes/header.jsp
                                         </s:url>
-                                        <s:a  href="%{lnkbuscar}" cssClass="dropdown-item" >Ver perfil</s:a>
-                                            <button type="button" class="dropdown-item" data-toggle="modal" data-target="#registrarseModal">Cerrar Sesión</button>
-=======
-                                         </s:url>
                                         <s:a  href="%{lnkbuscar}" cssClass="dropdown-item">Mi cuenta</s:a>
-                                        <button type="button" class="dropdown-item">Cerrar Sesión</button>
->>>>>>> 5bd843f1d468459a1d0d208020b39eae7b3e01df:build/web/header.jsp
+                                            <button type="button" class="dropdown-item">Cerrar Sesión</button>
 
                                     </s:elseif>
                                     <s:else>
@@ -116,72 +107,55 @@
 
                                 <!--Contenido de Carrito de compras-->
                                 <div class="header-cart header-dropdown">
+
                                     <ul class="header-cart-wrapitem">
-                                        <li class="header-cart-item">
-                                            <div class="d-none d-md-block header-cart-item-img">
-                                                <img src="imagenes/item-cart-01.jpg" alt="IMG">
-                                            </div>
+                                        <s:iterator value="#session.lstLinea">
+                                            <li class="header-cart-item">
+                                                <div class="d-none d-md-block header-cart-item-img">
+                                                    <img src="admin/imagenes/<s:property value="proObj.imagen" />" alt="IMG">
+                                                </div>
 
-                                            <div class="header-cart-item-txt">
-                                                <a href="#" class="header-cart-item-name">
-                                                    White Shirt With Pleat Detail Back
-                                                </a>
+                                                <div class="header-cart-item-txt w-50">
+                                                    <a href="#" class="header-cart-item-name">
+                                                        <s:property value="proObj.nombre" />
+                                                    </a>
 
-                                                <span class="header-cart-item-info">
-                                                    1 x $19.00
-                                                </span>
-                                            </div>
-                                        </li>
+                                                    <span class="header-cart-item-info">
+                                                        <s:property value="can" /> x <s:property value="proObj.precioVenta" />
+                                                    </span>
+                                                </div>
+                                                    
+                                                    <div>
+                                                         <s:url var="LnkQuitar" action="QuitarDelCarro" >
+                                                            <s:param value="proObj.idProducto" name="proObj.idProducto" /> 
+                                                        </s:url>
+                                                        <s:a href="%{LnkQuitar}">
+                                                            <i class="fas fa-times"></i>
+                                                        </s:a>
+                                                    
+                                                    
+                                                    </div>
+                                            </li>   
 
-                                        <li class="header-cart-item">
-                                            <div class="d-none d-md-block header-cart-item-img">
-                                                <img src="imagenes/item-cart-02.jpg" alt="IMG">
-                                            </div>
-
-                                            <div class="header-cart-item-txt">
-                                                <a href="#" class="header-cart-item-name">
-                                                    Converse All Star Hi Black Canvas
-                                                </a>
-
-                                                <span class="header-cart-item-info">
-                                                    1 x $39.00
-                                                </span>
-                                            </div>
-                                        </li>
-
-                                        <li class="header-cart-item">
-                                            <div class="d-none d-md-block header-cart-item-img">
-                                                <img src="imagenes/item-cart-03.jpg" alt="IMG">
-                                            </div>
-
-                                            <div class="header-cart-item-txt">
-                                                <a href="#" class="header-cart-item-name">
-                                                    Nixon Porter Leather Watch In Tan
-                                                </a>
-
-                                                <span class="header-cart-item-info">
-                                                    1 x $17.00
-                                                </span>
-                                            </div>
-                                        </li>
+                                        </s:iterator>
                                     </ul>
 
                                     <div class="header-cart-total">
-                                        Total: $75.00
+                                        Total: <s:property value="#session.total" />
                                     </div>
 
                                     <div class="header-cart-buttons">
                                         <div class="header-cart-wrapbtn">
-                                            Button 
-                                            <a href="cart.html" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
-                                                View Cart
+
+                                            <a href="carro.jsp" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
+                                                Ver Carro
                                             </a>
                                         </div>
 
                                         <div class="header-cart-wrapbtn">
-                                            Button 
-                                            <a href="#" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
-                                                Check Out
+
+                                            <a href="#" id="btn-quitar" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
+                                                Quitar
                                             </a>
                                         </div>
                                     </div>
@@ -205,29 +179,37 @@
 
                         <a href="index.html" class="nav-link">Home</a>
 
-                        <div class="dropdown drophover">
-                            
-                            <a href="#" class="nav-link" id="dropCate" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categoría</a>
-                             
-                            <div class="dropdown-menu drop-nav" aria-labelledby="dropCate">
-                                
-                                
-                                    
-                                
-                                <s:iterator value="lstCate" >
-                                    <s:a cssClass="dropdown-item"><s:property value="nombre"/></s:a>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Categoría
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <s:iterator value="lstCategoria">
+                                    <s:if test="idCategoria==categoriaSuperior">
+                                        <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" data-toggle="dropdown" href="#"><s:property value="nombre"/></a>
+                                            <s:set var="idCat" value="idCategoria"></s:set> 
+                                        </s:if>
+
+                                        <ul class="dropdown-menu">
+
+                                            <s:iterator value="lstCategoria">
+                                                <s:if test="idCategoria!=categoriaSuperior&&categoriaSuperior==#idCat">
+                                                    <a class="dropdown-item" href="#"><s:property value="nombre"/></a>
+                                                </s:if>
+
+                                            </s:iterator>
+
+                                        </ul>
+                                    </li>
+
                                 </s:iterator>
 
-<<<<<<< HEAD:build/web/templastes/header.jsp
-=======
-                            <div class="dropdown-menu" aria-labelledby="dropCate">
-                                <s:iterator value="lstCategoria">
-                                    <a class="dropdown-item" href="#"><s:property value="nombre"/></a>
-                                </s:iterator>
->>>>>>> 5bd843f1d468459a1d0d208020b39eae7b3e01df:build/web/header.jsp
-                            </div>
-                        </div>
-                      <!--  <div class="dropdown drophover">
+                            </ul>
+                        </li>
+
+
+                        <div class="dropdown drophover">
                             <a href="#" class="nav-link" id="dropMarca" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Marca</a>
 
                             <div class="dropdown-menu" aria-labelledby="dropMarca">
@@ -236,7 +218,8 @@
                                 </s:iterator>
                             </div>
                         </div>
--->
+
+
 
 
                         <a href="cart.html" class="nav-link">Caracteristicas</a>
@@ -282,23 +265,19 @@
                             <div class="form-group">
                                 <label for="Email">Correo Electronico</label>
                                 <s:textfield cssClass="form-control" name="cliente.email" id="email" placeholder="Ingrese Email"/>
-                                </div>
-                                <div class="form-group">
-                                    <label for="Password">Password</label>
-<<<<<<< HEAD:build/web/templastes/header.jsp
-                                <s:password cssClass="form-control" name="clienteLog.password" id="password" placeholder="Ingrese Password"></s:password>
-=======
+                            </div>
+                            <div class="form-group">
+                                <label for="Password">Password</label>
                                 <s:password cssClass="form-control" name="cliente.password" id="password" placeholder="Ingrese Password"/>
->>>>>>> 5bd843f1d468459a1d0d208020b39eae7b3e01df:build/web/header.jsp
+                            </div>
+                            <div class="form-group">
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input ml-0" id="dropdownCheck">
+                                    <label class="form-check-label" for="Check">
+                                        Recordar Contraseña
+                                    </label>
                                 </div>
-                                <div class="form-group">
-                                    <div class="form-check">
-                                        <input type="checkbox" class="form-check-input ml-0" id="dropdownCheck">
-                                        <label class="form-check-label" for="Check">
-                                            Recordar Contraseña
-                                        </label>
-                                    </div>
-                                </div>
+                            </div>
 
                             <s:submit id="ingresar" styleId="btnreg" cssClass="btn btn-primary  toastrDefaultError" value="Iniciar Sesión" />
                         </s:form>
@@ -331,30 +310,30 @@
                     </div>
                     <div class="modal-body pt-0">
                         <p class="text-center">- OR -</p>
-                        
-                         <s:form action="registrarse" theme="simple">
+
+                        <s:form action="registrarse" theme="simple">
                             <div class="input-group mb-3 mt-3">
                                 <s:textfield cssClass="form-control" name="cliente.nombres" id="nombres" placeholder="Ingrese Nombres"/>
                             </div>
                             <div class="input-group mb-3">
-                            <s:textfield cssClass="form-control" name="cliente.apellidos" id="apellidos" placeholder="Ingrese Apellidos"/>
-
-                            </div>
-                           <div class="input-group mb-3">
-                            <s:textfield  cssClass="form-control" name="cliente.email" id="email" placeholder="Ingrese Email"/>
+                                <s:textfield cssClass="form-control" name="cliente.apellidos" id="apellidos" placeholder="Ingrese Apellidos"/>
 
                             </div>
                             <div class="input-group mb-3">
-                            <s:password cssClass="form-control" name="cliente.password" id="password" placeholder="Ingrese Password"/>
+                                <s:textfield  cssClass="form-control" name="cliente.email" id="email" placeholder="Ingrese Email"/>
 
                             </div>
                             <div class="input-group mb-3">
-                            <s:password cssClass="form-control" name="password2" id="password2" placeholder="Confirmar Password"/>
+                                <s:password cssClass="form-control" name="cliente.password" id="password" placeholder="Ingrese Password"/>
+
+                            </div>
+                            <div class="input-group mb-3">
+                                <s:password cssClass="form-control" name="password2" id="password2" placeholder="Confirmar Password"/>
 
                             </div>
                             <div class="row">
                                 <!-- /.col -->
-                                 <div class="col-8">
+                                <div class="col-8">
                                     <div class="icheck-primary">
                                         <input type="checkbox" id="agreeTerms" name="terms" value="agree">
                                         <label for="agreeTerms">
@@ -363,13 +342,13 @@
                                     </div>
                                 </div>
                                 <div class="col-4">
-                                <s:submit id="enviar"  cssClass="btn btn-primary btn-block toastrDefaultError" value="Enviar"/>
+                                    <s:submit id="enviar"  cssClass="btn btn-primary btn-block toastrDefaultError" value="Enviar"/>
                                 </div>
                                 <!-- /.col -->
                             </div>
                         </s:form>
-                        
-                           
+
+
                     </div>
                 </div>
             </div>

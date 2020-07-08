@@ -15,20 +15,25 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Result;
+import org.apache.struts2.interceptor.SessionAware;
+import wyv.negocio.Linea;
+import wyv.negocio.VentaObj;
 import wyv.servicios.PedidoServicio;
 import wyv.persistencia.Pedido;
 import wyv.persistencia.DetallePedido;
 import wyv.persistencia.Cliente;
 import wyv.persistencia.Empresa;
+import wyv.negocio.ProductoObj;
 
 /**
  *
  * @author Data
  */
 @SuppressWarnings("serial")
-public class PedidoAction extends ActionSupport {
+public class PedidoAction extends ActionSupport implements SessionAware {
 
     PedidoServicio pedSer;
     private String resultado;
@@ -37,9 +42,41 @@ public class PedidoAction extends ActionSupport {
     private Empresa empresa;
     private List<Pedido> lstPedido;
     private List<DetallePedido> lstDetalle;
+    private List<Linea> lstLinea;
     private int edit;
     private int op;
-    
+    private  ProductoObj proObj;
+    private Double total;
+    private Map<String, Object> sesion;
+
+
+    public Double getTotal() {
+        return total;
+    }
+
+    public void setTotal(Double total) {
+        this.total = total;
+    }
+
+    public ProductoObj getProObj() {
+        return proObj;
+    }
+
+    public void setProObj(ProductoObj proObj) {
+        this.proObj = proObj;
+    }
+
+    public List<Linea> getLstLinea() {
+        return lstLinea;
+    }
+
+    public Map<String, Object> getSesion() {
+        return sesion;
+    }
+
+    public void setSesion(Map<String, Object> sesion) {
+        this.sesion = sesion;
+    }
 
     public String getResultado() {
         return resultado;
@@ -96,6 +133,11 @@ public class PedidoAction extends ActionSupport {
     public void setLstDetalle(List<DetallePedido> lstDetalle) {
         this.lstDetalle = lstDetalle;
     }
+     @Override
+    public void setSession(Map<String, Object> map) {
+        this.sesion = map;
+    }
+
     
 
     @Action(value = "listarPedido", results = {
@@ -118,7 +160,7 @@ public class PedidoAction extends ActionSupport {
     }
     
     @Action(value = "listarPedidoPorCliente", results = {
-        @Result(name = "ok", location = "/clientePerfil.jsp")
+        @Result(name = "ok", location = "/perfil.jsp")
         ,
 	@Result(name = "error", location = "admin/error.jsp")
 
@@ -135,6 +177,55 @@ public class PedidoAction extends ActionSupport {
             return "error";
         }
     }
+    
+    @Action(value = "AgregarCarrito", results = {
+        @Result(name = "ok", location = "/index.jsp")
+        ,
+	@Result(name = "error", location = "admin/error.jsp")
+
+    })
+    public String AgregarCarrito() {
+        try {
+            
+            VentaObj ven=new VentaObj();
+            ven.agregar(proObj, 1);
+            
+            lstLinea=ven.getCesta();
+            total =ven.getSubTot();
+            sesion.put("lstLinea", lstLinea);
+            sesion.put("total",total);
+            return "ok";
+        } catch (Exception e) {
+            resultado = "Error en: listarCate :: " + e.getMessage();
+            System.out.println("Error: " + e.getMessage());
+            return "error";
+        }
+    }
+    
+      @Action(value = "QuitarDelCarro", results = {
+        @Result(name = "ok", location = "/carro.jsp")
+        ,
+	@Result(name = "error", location = "admin/error.jsp")
+
+    })
+    public String QuitarDelCarro() {
+        try {
+            
+            VentaObj ven=new VentaObj();
+            ven.quitar(proObj.idProducto);
+            lstLinea=ven.getCesta();
+            total =ven.getSubTot();
+            sesion.put("lstLinea", lstLinea);
+            sesion.put("total",total);
+            return "ok";
+        } catch (Exception e) {
+            resultado = "Error en: listarCate :: " + e.getMessage();
+            System.out.println("Error: " + e.getMessage());
+            return "error";
+        }
+    }
+    
+    
 
     @Action(value = "actualizarPedido", results = {
         @Result(name = "ok", location = "/admin/principal/pedido.jsp")
@@ -179,5 +270,6 @@ public class PedidoAction extends ActionSupport {
         }
     }
 
+   
   
 }

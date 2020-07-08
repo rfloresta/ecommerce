@@ -21,9 +21,11 @@ import wyv.persistencia.exceptions.NonexistentEntityException;
  * @author bdeg_
  */
 public class ClienteJpa implements Serializable {
+
     public ClienteJpa() {
         this.emf= Persistence.createEntityManagerFactory("W_V_S.A.CPU");
     }
+
     public ClienteJpa(EntityManagerFactory emf) {
         this.emf = emf;
     }
@@ -136,6 +138,5 @@ public class ClienteJpa implements Serializable {
             em.close();
         }
     }
-    
     
 }

@@ -7,21 +7,7 @@ $(function () {
         var password = $("#password");
         var form = $("#form_login");
         if (dni.val() === "")
-<<<<<<< HEAD
-        {
 
-            toastr.error('Debe completar el campo usuario');
-            dni.focus();
-            return;
-        } else if (password.val() === "") {
-
-            toastr.error('Debe completar el campo password');
-            password.focus();
-            return;
-        } else {
-   
-        
-=======
         {        
                    toastr.error('Debe completar el campo usuario');
                    
@@ -33,7 +19,7 @@ $(function () {
              password.focus();
              return;
         } 
->>>>>>> 5bd843f1d468459a1d0d208020b39eae7b3e01df
+
             form.submit();
     }
     );

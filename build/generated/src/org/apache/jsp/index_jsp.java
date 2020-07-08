@@ -51,12 +51,12 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       _jspx_out = out;
       _jspx_resourceInjector = (org.glassfish.jsp.api.ResourceInjector) application.getAttribute("com.sun.appserv.jsp.resource.injector");
 
-      out.write("\r\n");
-      out.write("\r\n");
-      if (_jspx_meth_s_action_0(_jspx_page_context))
-        return;
       out.write('\r');
       out.write('\n');
+      if (_jspx_meth_s_action_0(_jspx_page_context))
+        return;
+      out.write("\r\n");
+      out.write("\r\n");
     } catch (Throwable t) {
       if (!(t instanceof SkipPageException)){
         out = _jspx_out;

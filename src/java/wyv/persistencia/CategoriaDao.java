@@ -74,7 +74,7 @@ public class CategoriaDao implements IOperacionesBD<Categoria>{
         } catch (Exception e) {
             e.getMessage();
             return null;
-        }
+}
     }
      
       public List<Categoria> listarsubCategoria(int id) {

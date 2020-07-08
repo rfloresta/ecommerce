@@ -2,8 +2,7 @@
 package wyv.negocio;
 
 public class ClienteObj {
-   private String idCli,nomCli,teleCli,emailCli,dniCli;
-   private double saldoClie;
+   private String idCli,nomCli,apeCli,direCli,teleCli,emailCli,dniCli,passCli;
 
     public String getIdCli() {
         return idCli;
@@ -19,6 +18,22 @@ public class ClienteObj {
 
     public void setNomCli(String nomCli) {
         this.nomCli = nomCli;
+    }
+
+    public String getApeCli() {
+        return apeCli;
+    }
+
+    public void setApeCli(String apeCli) {
+        this.apeCli = apeCli;
+    }
+
+    public String getDireCli() {
+        return direCli;
+    }
+
+    public void setDireCli(String direCli) {
+        this.direCli = direCli;
     }
 
     public String getTeleCli() {
@@ -45,12 +60,14 @@ public class ClienteObj {
         this.dniCli = dniCli;
     }
 
-    public double getSaldoClie() {
-        return saldoClie;
+    public String getPassCli() {
+        return passCli;
     }
 
-    public void setSaldoClie(double saldoClie) {
-        this.saldoClie = saldoClie;
+    public void setPassCli(String passCli) {
+        this.passCli = passCli;
     }
-   
+
+
+
 }

@@ -13,8 +13,13 @@ import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.interceptor.SessionAware;
 import wyv.persistencia.Cliente;
+import wyv.servicios.CategoriaServicio;
 import wyv.servicios.ClienteServicio;
-
+import wyv.servicios.MarcaServicio;
+import wyv.servicios.ProductoServicio;
+import wyv.persistencia.Producto;
+import wyv.persistencia.Categoria;
+import wyv.persistencia.Marca;
 /**
  *
  * @author Data
@@ -32,6 +37,41 @@ public class ClienteAction extends ActionSupport implements SessionAware {
     private int op;
     private Map<String, Object> sesion;
     private String estado="error";
+    private String mensajeError;
+    private List<Producto> lstProducto;
+    private List<Categoria> lstCategoria;
+    private List<Marca> lstMarca;
+
+    public String getMensajeError() {
+        return mensajeError;
+    }
+
+    public List<Producto> getLstProducto() {
+        return lstProducto;
+    }
+
+    public void setLstProducto(List<Producto> lstProducto) {
+        this.lstProducto = lstProducto;
+    }
+
+    public List<Categoria> getLstCategoria() {
+        return lstCategoria;
+    }
+
+    public void setLstCategoria(List<Categoria> lstCategoria) {
+        this.lstCategoria = lstCategoria;
+    }
+
+    public List<Marca> getLstMarca() {
+        return lstMarca;
+    }
+
+    public void setLstMarca(List<Marca> lstMarca) {
+        this.lstMarca = lstMarca;
+    }
+    
+    
+    
 
     public String getResultado() {
         return resultado;
@@ -72,6 +112,10 @@ public class ClienteAction extends ActionSupport implements SessionAware {
         return inicio;
     }
 
+    public void setInicio(int inicio) {
+        this.inicio = inicio;
+    }
+
     public void setClieSer(ClienteServicio clieSer) {
         this.clieSer = clieSer;
     }
@@ -92,18 +136,24 @@ public class ClienteAction extends ActionSupport implements SessionAware {
             
             clieSer = new ClienteServicio();
             lstClie = clieSer.listar();
+             lstProducto = new ProductoServicio().listar();
+            lstCategoria = new CategoriaServicio().listar();
+            //lstSubCategoria = new CategoriaServicio().listarsubCategoria(idCate);
+            lstMarca = new MarcaServicio().listar();
             String nombreClie = "";
             String apellidoClie = "";
             int idCliente = 0;
-            
+ 
             for (Cliente c : lstClie) {
-                if (c.getEmail().equals(cliente.getEmail()) && c.getPassword().equals(cliente.getPassword())) {
+                if(c.getEmail().equals(cliente.getEmail()) && c.getPassword().equals(cliente.getPassword())) {
                     nombreClie = c.getNombres();
                     apellidoClie = c.getApellidos();
                     idCliente = c.getIdCliente();
                     sesion.put("seccion", 1);
+                    mensajeError="";
+                   
                 } else {
-                    addActionError("Email o password incorectos");
+                     mensajeError="Usuario o contraseña incorrecta";
                     sesion.put("seccion", 0);
                 }
             }
@@ -141,7 +191,7 @@ public class ClienteAction extends ActionSupport implements SessionAware {
     public String registrarClie() {
         try {
             new ClienteServicio().registrar(cliente);
-            lstClie = new ClienteServicio().listar();
+            
             cliente = new Cliente();
             return "ok";
         } catch (Exception e) {
@@ -269,7 +319,11 @@ public class ClienteAction extends ActionSupport implements SessionAware {
                     apellidoClie = c.getApellidos();
                     idCliente = c.getIdCliente();
                     sesion.put("seccion", 1);
-                } 
+                    mensajeError="";
+                } else {
+                    mensajeError="Fallo al registrarse";
+                    sesion.put("seccion", 0);
+                }
             }
 
             sesion.put("NombreClienteCompleto", nombreClie + " " + apellidoClie);

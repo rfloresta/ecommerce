@@ -28,10 +28,20 @@ $(function () {
 
  $(document).ready(function() {
                             
-                            if($('.errorDiv').find('span').text() != "")
+                            if($('.msgError').text()!="")
                             {
                                 toastr.error('Email y/o password incorrecto');
                             }
+                            if($('#resultado').val()!= "")
+                            {
+                                toastr.success($('#resultado').val()+" " +", Por favor, Complete sus datos antes de realizar una compra");
+                            }else
+                            {
+                                
+                            }
+                            
+                            
+                            
 });
 
 

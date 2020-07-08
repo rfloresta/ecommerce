@@ -6,11 +6,10 @@ import java.util.List;
 
 
 
-public class VentaObj {/*
-    private List cesta=new ArrayList(); 
+public class VentaObj {
+    private static List cesta=new ArrayList(); 
     private String num;
     private String fec;
-    private UsuarioObj usu;
     private ClienteObj cli;
     private double pago;
 
@@ -24,7 +23,7 @@ public class VentaObj {/*
     public void quitar(String cod){
         for(int i=0;i<cesta.size();i++){
             Linea lin=(Linea)cesta.get(i);
-            if(lin.getProObj().getCodPro().equals(cod)){
+            if(lin.getProObj().getIdProducto().equals(cod)){
                 cesta.remove(i);
             }
         }
@@ -44,6 +43,7 @@ public class VentaObj {/*
         
         return tot;
     }
+    
     
     public double getValorIgv(){
         double tot=0.0;
@@ -84,7 +84,7 @@ public class VentaObj {/*
         return total;
     }
     
-    
+    /*
     public String getNum() {
         DaoVentaImp daoVen=new DaoVentaImp();
         return daoVen.generaNumero();
@@ -103,19 +103,12 @@ public class VentaObj {/*
     }
       
      
-
+*/
 
     public void setFec(String fec) {
         this.fec = fec;
     }
 
-    public UsuarioObj getUsu() {
-        return usu;
-    }
-
-    public void setUsu(UsuarioObj usu) {
-        this.usu = usu;
-    }
 
     public ClienteObj getCli() {
         return cli;
@@ -132,5 +125,5 @@ public class VentaObj {/*
     public void setPago(double pago) {
         this.pago = pago;
     }
-*/
+
 }

@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package wyv.persistencia;
 
 import java.io.Serializable;
@@ -11,6 +16,10 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import wyv.persistencia.exceptions.NonexistentEntityException;
 
+/**
+ *
+ * @author bdeg_
+ */
 public class ProductoJpa implements Serializable {
 
     public ProductoJpa() {

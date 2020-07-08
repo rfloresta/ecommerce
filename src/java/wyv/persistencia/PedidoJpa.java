@@ -256,7 +256,7 @@ public class PedidoJpa implements Serializable {
             System.out.println("resultado" + resultado);
         } catch (Exception e) {
             e.getMessage();
-        }
+}
         return resultado;
 
     }

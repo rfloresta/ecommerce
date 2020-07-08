@@ -26,11 +26,13 @@ public class ProductoAction extends ActionSupport{
     private Producto producto;
     private List<Producto> lstProducto;
     private List<Categoria> lstCategoria;
+    private List<Categoria> lstSubCategoria;
     private List<Marca> lstMarca;
     private int edit;
     private File imagen;
     private String imagenContentType;
     private String imagenFileName;
+    private int idCate;
 
     public File getImagen() {
         return imagen;
@@ -84,6 +86,23 @@ public class ProductoAction extends ActionSupport{
     public int getEdit() {
         return edit;
     }
+
+    public List<Categoria> getLstSubCategoria() {
+        return lstSubCategoria;
+    }
+
+    public void setLstSubCategoria(List<Categoria> lstSubCategoria) {
+        this.lstSubCategoria = lstSubCategoria;
+    }
+
+    public int getIdCate() {
+        return idCate;
+    }
+
+    public void setIdCate(int idCate) {
+        this.idCate = idCate;
+    }
+    
 
     public void setProSer(ProductoServicio proSer) {
         this.proSer = proSer;
@@ -212,6 +231,7 @@ public class ProductoAction extends ActionSupport{
         try {
             lstProducto = new ProductoServicio().listar();
             lstCategoria = new CategoriaServicio().listar();
+            //lstSubCategoria = new CategoriaServicio().listarsubCategoria(idCate);
             lstMarca = new MarcaServicio().listar();
             return "ok";
         } catch (Exception e) {

@@ -24,7 +24,7 @@ public class Linea {
     
     public double getImporte()
     {
-        return proObj.getPrecioven()*can;
+        return proObj.getPrecioVenta()*can;
     }
     
     
