@@ -4,11 +4,13 @@ import com.opensymphony.xwork2.ActionSupport;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 import org.apache.commons.io.FileUtils;
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.InterceptorRef;
 import org.apache.struts2.convention.annotation.Result;
+import org.apache.struts2.interceptor.SessionAware;
 import wyv.servicios.ProductoServicio;
 import wyv.persistencia.Producto;
 import wyv.persistencia.Categoria;
@@ -18,7 +20,7 @@ import wyv.servicios.MarcaServicio;
 
 
 @SuppressWarnings("serial")
-public class ProductoAction extends ActionSupport{
+public class ProductoAction extends ActionSupport implements SessionAware{
 
     ProductoServicio proSer;
     private String resultado;
@@ -33,6 +35,12 @@ public class ProductoAction extends ActionSupport{
     private String imagenContentType;
     private String imagenFileName;
     private int idCate;
+    private Map<String, Object> sesion;
+
+     @Override
+    public void setSession(Map<String, Object> map) {
+        this.sesion = map;
+    }    
 
     public File getImagen() {
         return imagen;
@@ -230,9 +238,12 @@ public class ProductoAction extends ActionSupport{
     public String verCatalogo() {
         try {
             lstProducto = new ProductoServicio().listar();
+            sesion.put("lstProducto", lstProducto);
             lstCategoria = new CategoriaServicio().listar();
+            sesion.put("lstCategoria", lstCategoria);
             //lstSubCategoria = new CategoriaServicio().listarsubCategoria(idCate);
             lstMarca = new MarcaServicio().listar();
+            sesion.put("lstMarca", lstMarca);
             return "ok";
         } catch (Exception e) {
             resultado = "Error en: verCatalogo :: " + e.getMessage();

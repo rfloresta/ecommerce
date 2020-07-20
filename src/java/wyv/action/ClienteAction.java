@@ -6,12 +6,19 @@
 package wyv.action;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import com.opensymphony.xwork2.ActionSupport;
+import java.io.PrintWriter;
 import java.util.List;
 import java.util.Map;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.Action;
+import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.interceptor.SessionAware;
+import org.json.simple.JSONObject;
 import wyv.persistencia.Cliente;
 import wyv.servicios.CategoriaServicio;
 import wyv.servicios.ClienteServicio;
@@ -20,10 +27,12 @@ import wyv.servicios.ProductoServicio;
 import wyv.persistencia.Producto;
 import wyv.persistencia.Categoria;
 import wyv.persistencia.Marca;
+
 /**
  *
  * @author Data
  */
+
 @SuppressWarnings("serial")
 public class ClienteAction extends ActionSupport implements SessionAware {
 
@@ -36,7 +45,7 @@ public class ClienteAction extends ActionSupport implements SessionAware {
     private String jsonPerfil;
     private int op;
     private Map<String, Object> sesion;
-    private String estado="error";
+    private String estado = "error";
     private String mensajeError;
     private List<Producto> lstProducto;
     private List<Categoria> lstCategoria;
@@ -69,9 +78,6 @@ public class ClienteAction extends ActionSupport implements SessionAware {
     public void setLstMarca(List<Marca> lstMarca) {
         this.lstMarca = lstMarca;
     }
-    
-    
-    
 
     public String getResultado() {
         return resultado;
@@ -100,6 +106,7 @@ public class ClienteAction extends ActionSupport implements SessionAware {
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
+
     public List<Cliente> getLstClie() {
         return lstClie;
     }
@@ -133,27 +140,27 @@ public class ClienteAction extends ActionSupport implements SessionAware {
 	@Result(name = "error", location = "/error.jsp"),})
     public String ingresoCliente() {
         try {
-            
+
             clieSer = new ClienteServicio();
             lstClie = clieSer.listar();
-             lstProducto = new ProductoServicio().listar();
+            lstProducto = new ProductoServicio().listar();
             lstCategoria = new CategoriaServicio().listar();
             //lstSubCategoria = new CategoriaServicio().listarsubCategoria(idCate);
             lstMarca = new MarcaServicio().listar();
             String nombreClie = "";
             String apellidoClie = "";
             int idCliente = 0;
- 
+
             for (Cliente c : lstClie) {
-                if(c.getEmail().equals(cliente.getEmail()) && c.getPassword().equals(cliente.getPassword())) {
+                if (c.getEmail().equals(cliente.getEmail()) && c.getPassword().equals(cliente.getPassword())) {
                     nombreClie = c.getNombres();
                     apellidoClie = c.getApellidos();
                     idCliente = c.getIdCliente();
                     sesion.put("seccion", 1);
-                    mensajeError="";
-                   
+                    mensajeError = "";
+
                 } else {
-                     mensajeError="Usuario o contraseña incorrecta";
+                    mensajeError = "Usuario o contraseña incorrecta";
                     sesion.put("seccion", 0);
                 }
             }
@@ -191,7 +198,7 @@ public class ClienteAction extends ActionSupport implements SessionAware {
     public String registrarClie() {
         try {
             new ClienteServicio().registrar(cliente);
-            
+
             cliente = new Cliente();
             return "ok";
         } catch (Exception e) {
@@ -226,17 +233,8 @@ public class ClienteAction extends ActionSupport implements SessionAware {
     public String buscarClie() {
 
         try {
-            switch (op) {
-                case 1: {
-                    cliente = new ClienteServicio().buscar(String.valueOf(cliente.getIdCliente()));
-                    break;
-                }
-                case 2: {
-                    cliente = new ClienteServicio().buscar(String.valueOf(cliente.getIdCliente()));
-                    op = 2;
-                    break;
-                }
-            }
+
+            cliente = new ClienteServicio().buscar(String.valueOf(cliente.getIdCliente()));
 
             return "ok";
         } catch (Exception e) {
@@ -245,41 +243,69 @@ public class ClienteAction extends ActionSupport implements SessionAware {
         }
     }
 
-    /* Prueba
-        @Action(value="buscarCliePerfil",results= {
-			@Result(name="ok",location="/clientePerfil.jsp"),
-			@Result(name="error",location="/error.jsp")
-	})
-	public String buscarCliePerfil() {
-		
-		try {
-			cliente =new ClienteServicio().buscar(String.valueOf(cliente.getIdCliente()));
-			jsonPerfil = new Gson().toJson(cliente.getNombres());
-                        System.out.println("Json perfil "+ jsonPerfil);
-			return "ok";
-		} catch (Exception e) {
-			resultado="Error en: editarAdmin :: "+e.getMessage();
-			return "error";
-		}
-	}
-     */
-    @Action(value = "actualizarClie", results = {
-        @Result(name = "ok", location = "/perfil.jsp")
-        ,
-			@Result(name = "error", location = "/error.jsp")
-    })
-    public String actualizarClie() {
+    @Action(value = "buscarCliePerfil", results = {})
+    public void buscarCliePerfil() {
 
         try {
-            new ClienteServicio().actualizar(cliente);
-            cliente = new ClienteServicio().buscar(String.valueOf(cliente.getIdCliente()));
-            op = 2;
+
+            HttpServletResponse response = ServletActionContext.getResponse();
+            HttpServletRequest request = ServletActionContext.getRequest();
+            PrintWriter out = response.getWriter();
+            int idCliente = Integer.parseInt(request.getParameter("idClie"));
+            cliente = new ClienteServicio().buscar(String.valueOf(idCliente));
+            JSONObject json = new JSONObject();
+            json.put("idClie", cliente.getIdCliente());
+            json.put("nombres", cliente.getNombres());
+            json.put("apellidos", cliente.getApellidos());
+            json.put("dni", cliente.getDni());
+            json.put("numCelular", cliente.getNumCelular());
+            json.put("email", cliente.getEmail());
+            json.put("direccion", cliente.getDireccion());
+            json.put("password", cliente.getPassword());
+            out.print(json);
+
+        } catch (Exception e) {
+            resultado = "Error en: editarAdmin :: " + e.getMessage();
+
+        }
+    }
+
+    @Action(value = "actualizarClie", results = {})
+    public void actualizarClie() {
+
+        try {
+
+            HttpServletResponse response = ServletActionContext.getResponse();
+            HttpServletRequest request = ServletActionContext.getRequest();
+            PrintWriter out = response.getWriter();
+
+            int idclie = Integer.parseInt(request.getParameter("idClie"));
+            String nombre = request.getParameter("nombre");
+            String apellido = request.getParameter("apellido");
+            String dni = request.getParameter("dni");
+            String numCelular = request.getParameter("numCelular");
+            String direccion = request.getParameter("direccion");
+            String email = request.getParameter("email");
+            String password = request.getParameter("password");
+
+            Cliente clie = new Cliente();
+            clie.setIdCliente(idclie);
+            clie.setNombres(nombre);
+            clie.setApellidos(apellido);
+            clie.setDni(dni);
+            clie.setNumCelular(numCelular);
+            clie.setDireccion(direccion);
+            clie.setEmail(email);
+            clie.setPassword(password);
+
+            new ClienteServicio().actualizar(clie);
+
             sesion.put("NombreClienteCompleto", cliente.getNombres() + " " + cliente.getApellidos());
             inicio = 1;
-            return "ok";
+            out.print("Actualizado");
         } catch (Exception e) {
             resultado = "Error en: eliminarMarca :: " + e.getMessage();
-            return "error";
+
         }
     }
 
@@ -299,7 +325,7 @@ public class ClienteAction extends ActionSupport implements SessionAware {
             return "error";
         }
     }
-    
+
     @Action(value = "registrarse", results = {
         @Result(name = "ok", location = "/catalogo.jsp")
         ,
@@ -307,8 +333,8 @@ public class ClienteAction extends ActionSupport implements SessionAware {
     })
     public String registrarse() {
         try {
-            clieSer=new ClienteServicio();
-            estado=clieSer.registrar(cliente);
+            clieSer = new ClienteServicio();
+            estado = clieSer.registrar(cliente);
             lstClie = clieSer.listar();
             String nombreClie = "";
             String apellidoClie = "";
@@ -319,16 +345,16 @@ public class ClienteAction extends ActionSupport implements SessionAware {
                     apellidoClie = c.getApellidos();
                     idCliente = c.getIdCliente();
                     sesion.put("seccion", 1);
-                    mensajeError="";
+                    mensajeError = "";
                 } else {
-                    mensajeError="Fallo al registrarse";
+                    mensajeError = "Fallo al registrarse";
                     sesion.put("seccion", 0);
                 }
             }
 
             sesion.put("NombreClienteCompleto", nombreClie + " " + apellidoClie);
             sesion.put("idClie", idCliente);
-            resultado="¡Gracias por registrarte!";
+            resultado = "¡Gracias por registrarte!";
             return estado;
         } catch (Exception e) {
             resultado = "Error en: registrarCate :: " + e.getMessage();

@@ -29,6 +29,7 @@
         <link rel="stylesheet" type="text/css" href="css/daterangepicker.css">
         <!--===============================================================================================-->
         <link rel="stylesheet" type="text/css" href="css/slick.css">
+        <link rel="stylesheet" type="text/css" href="css/nouislider.min.css">
         <!--===============================================================================================-->
         <link rel="stylesheet" type="text/css" href="css/lightbox.min.css">
         <!--===============================================================================================-->
@@ -82,8 +83,7 @@
                                     </s:if>
                                     <s:elseif test="#session.seccion==1">
                                         <s:url id="lnkbuscar" action="buscarClie">
-                                            <s:param value="#session.idClie" name="cliente.idCliente"/>
-                                            <s:param value="1" name="op"/>
+                                            <s:param value="#session.idClie" name="cliente.idCliente"/>                
                                         </s:url>
                                         <s:a  href="%{lnkbuscar}" cssClass="dropdown-item">Mi cuenta</s:a>
                                             <button type="button" class="dropdown-item">Cerrar Sesión</button>
@@ -103,7 +103,15 @@
                             <div class="header-wrapicon2 m-r-10">
                                 <!--Logo de Carrito de compras-->
                                 <img src="imagenes/icon-header-02.png" class="header-icon1 js-show-header-dropdown" alt="ICON">
-                                <span class="header-icons-noti">0</span>
+                                <span class="header-icons-noti">
+                                    <s:if test="#session.cantidadCart == null || #session.cantidadCart == 0">
+                                        0
+                                    </s:if>
+                                    <s:else>
+                                            <s:property value="#session.cantidadCart"/>
+                                    </s:else>
+                                
+                                </span>
 
                                 <!--Contenido de Carrito de compras-->
                                 <div class="header-cart header-dropdown">
@@ -152,12 +160,7 @@
                                             </a>
                                         </div>
 
-                                        <div class="header-cart-wrapbtn">
-
-                                            <a href="#" id="btn-quitar" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
-                                                Quitar
-                                            </a>
-                                        </div>
+                                       
                                     </div>
                                 </div>
                             </div>
@@ -177,7 +180,7 @@
                          flex-column flex-lg-row text-center" id="menu-principal" >
 
 
-                        <a href="index.html" class="nav-link">Home</a>
+                        <a href="index.jsp" class="nav-link">Home</a>
 
 
                         <li class="nav-item dropdown">
@@ -185,7 +188,7 @@
                                 Categoría
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <s:iterator value="lstCategoria">
+                                <s:iterator value="#session.lstCategoria">
                                     <s:if test="idCategoria==categoriaSuperior">
                                         <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" data-toggle="dropdown" href="#"><s:property value="nombre"/></a>
                                             <s:set var="idCat" value="idCategoria"></s:set> 
@@ -193,7 +196,7 @@
 
                                         <ul class="dropdown-menu">
 
-                                            <s:iterator value="lstCategoria">
+                                            <s:iterator value="#session.lstCategoria">
                                                 <s:if test="idCategoria!=categoriaSuperior&&categoriaSuperior==#idCat">
                                                     <a class="dropdown-item" href="#"><s:property value="nombre"/></a>
                                                 </s:if>
@@ -213,7 +216,7 @@
                             <a href="#" class="nav-link" id="dropMarca" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Marca</a>
 
                             <div class="dropdown-menu" aria-labelledby="dropMarca">
-                                <s:iterator value="lstMarca">
+                                <s:iterator value="#session.lstMarca">
                                     <a class="dropdown-item" href="#"><s:property value="nombre"/></a>
                                 </s:iterator>
                             </div>
@@ -222,7 +225,7 @@
 
 
 
-                        <a href="cart.html" class="nav-link">Caracteristicas</a>
+                        <a href="productos.jsp" class="nav-link">Productos</a>
 
 
 

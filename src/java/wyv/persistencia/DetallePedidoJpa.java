@@ -230,7 +230,7 @@ public class DetallePedidoJpa implements Serializable {
                 Pedido pedNext = new Pedido();
                 
                 
-                pedNext.setNumero(rs.getInt(1));
+                pedNext.setNumero(rs.getString(1));
                 pedNext.setFecha(rs.getString(2));
                 pedNext.setTotal(rs.getDouble(3));
                 

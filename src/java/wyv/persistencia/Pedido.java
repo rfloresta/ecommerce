@@ -49,7 +49,7 @@ public class Pedido implements Serializable {
     @Column(name = "idPedido")
     private Integer idPedido;
     @Column(name = "numero")
-    private Integer numero;
+    private String numero;
     @Column(name = "fecha")
     private String fecha;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
@@ -84,11 +84,11 @@ public class Pedido implements Serializable {
         this.idPedido = idPedido;
     }
 
-    public Integer getNumero() {
+    public String getNumero() {
         return numero;
     }
 
-    public void setNumero(Integer numero) {
+    public void setNumero(String numero) {
         this.numero = numero;
     }
 

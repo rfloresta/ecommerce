@@ -155,7 +155,7 @@
                         <div class="tab-pane fade show active" id="best-seller" role="tabpanel">
                             <div class="row">
                                 
-                                <s:iterator value="lstProducto">
+                                <s:iterator value="#session.lstProducto">
                                 <div class="col-sm-6 col-md-4 col-lg-3 p-b-50">
                                     <!-- Block2 -->
                                     <div class="block2">

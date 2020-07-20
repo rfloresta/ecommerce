@@ -3,15 +3,16 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import wyv.persistencia.PedidoDao;
 
 
 
 public class VentaObj {
-    private static List cesta=new ArrayList(); 
+    private static List<Linea> cesta=new ArrayList(); 
     private String num;
     private String fec;
     private ClienteObj cli;
-    private double pago;
+    private String pago;
 
 
     public void agregar(ProductoObj pro, int can){
@@ -83,11 +84,25 @@ public class VentaObj {
         double total=tot - getDescTotales();
         return total;
     }
+       
+     public int existeProducto(String webid, List<Linea> cart)
+    {
+        for(int i=0; i<cart.size();i++)
+        {
+           if(cart.get(i).getProObj().getIdProducto().equals(webid))
+           {
+               System.out.println("El producto existe");
+               return i;
+               
+           }
+        }
+        return -1;
+    }
     
-    /*
+    
     public String getNum() {
-        DaoVentaImp daoVen=new DaoVentaImp();
-        return daoVen.generaNumero();
+        PedidoDao daoPedi=new PedidoDao();
+        return daoPedi.generaNumero();
     }
 
     public void setNum(String num) {
@@ -103,7 +118,7 @@ public class VentaObj {
     }
       
      
-*/
+
 
     public void setFec(String fec) {
         this.fec = fec;
@@ -118,12 +133,14 @@ public class VentaObj {
         this.cli = cli;
     }
 
-    public double getPago() {
+    public String getPago() {
         return pago;
     }
 
-    public void setPago(double pago) {
+    public void setPago(String pago) {
         this.pago = pago;
     }
+
+ 
 
 }

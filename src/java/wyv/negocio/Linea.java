@@ -6,6 +6,14 @@ public class Linea {
     private ProductoObj proObj;
     private int can;
 
+    public Linea(ProductoObj proObj, int can) {
+        this.proObj = proObj;
+        this.can = can;
+    }
+
+    public Linea() {
+    }
+    
     public ProductoObj getProObj() {
         return proObj;
     }
