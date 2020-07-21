@@ -97,7 +97,7 @@
                                         <tr>
                                             <th>Nombre</th>
                                             <th>Descripcion</th>
-                                            <th>Opciones</th>7
+                                            <th>Opciones</th>
                                         </tr>
                                     </tfoot>
 

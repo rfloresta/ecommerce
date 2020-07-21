@@ -1,3 +1,4 @@
+<%@ taglib uri="/struts-tags" prefix="s"%>
 <footer class="main-footer">
     <div class="float-right d-none d-sm-block">
         <b>Version</b> 1.0.1
@@ -33,7 +34,7 @@
 <script src="../js/funciones.js" type="text/javascript"></script>
 <script src="../js/Chart.min.js" type="text/javascript"></script>
 <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
-
+<script src="../js/toastr.min.js" type="text/javascript"></script>
 <script>
     //Se obtiene la lista y se convierte a json
     var lstFecha = document.getElementById("jsonMes");

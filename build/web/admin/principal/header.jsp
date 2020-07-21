@@ -15,6 +15,7 @@
   <link href="../css/all.min.css" rel="stylesheet" type="text/css"/>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
  
+        <link href="../css/toastr.min.css" rel="stylesheet" type="text/css"/>
   <link href="../css/adminlte.min.css" rel="stylesheet" type="text/css"/>
   
   <!-- Datatables -->
@@ -67,11 +68,12 @@
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" data-toggle="dropdown"  
            id="cerrarsesion" aria-haspopup="true" aria-expanded="false">
-         Administrador: <s:label  name="#session.nombre"  />
+         Administrador: <s:label  name="#session.nombres"  />
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right"
              aria-labelledby="#cerrarsesion" >
             <a  href="cargarPerfilAdmin" class="dropdown-item">Perfil</a>
+            <a  href="../seguridad/cambiar-password-in.jsp" class="dropdown-item">Cambiar Contraseña</a>
             <a  href="login.jsp" class="dropdown-item">Cerrar Sesion</a>
           
         </div>

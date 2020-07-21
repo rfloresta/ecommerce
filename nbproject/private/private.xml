@@ -3,21 +3,19 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Romario/Desktop/Git/W-V-S.A.C/web/admin/principal/administrador.jsp</file>
-            <file>file:/C:/Users/Romario/Desktop/Git/W-V-S.A.C/web/admin/principal/pedido.jsp</file>
-            <file>file:/C:/Users/Romario/Desktop/Git/W-V-S.A.C/web/index.jsp</file>
-            <file>file:/C:/Users/Romario/Desktop/Git/W-V-S.A.C/web/perfil.jsp</file>
-            <file>file:/C:/Users/Romario/Desktop/Git/W-V-S.A.C/src/java/wyv/action/PedidoAction.java</file>
-            <file>file:/C:/Users/Romario/Desktop/Git/W-V-S.A.C/src/java/wyv/action/ProductoAction.java</file>
-            <file>file:/C:/Users/Romario/Desktop/Git/W-V-S.A.C/src/java/wyv/servicios/ProductoServicio.java</file>
+            <file>file:/C:/Users/Romario/Desktop/Git/W-V-S.A.C/src/java/wyv/persistencia/RecuperarPasswordDao.java</file>
             <file>file:/C:/Users/Romario/Desktop/Git/W-V-S.A.C/src/java/wyv/servicios/ClienteServicio.java</file>
-            <file>file:/C:/Users/Romario/Desktop/Git/W-V-S.A.C/src/java/wyv/servicios/CategoriaServicio.java</file>
-            <file>file:/C:/Users/Romario/Desktop/Git/W-V-S.A.C/src/java/wyv/persistencia/Cliente.java</file>
+            <file>file:/C:/Users/Romario/Desktop/Git/W-V-S.A.C/web/admin/js/funciones.js</file>
             <file>file:/C:/Users/Romario/Desktop/Git/W-V-S.A.C/src/java/wyv/persistencia/ClienteDao.java</file>
-            <file>file:/C:/Users/Romario/Desktop/Git/W-V-S.A.C/web/cambiar_password.jsp</file>
-            <file>file:/C:/Users/Romario/Desktop/Git/W-V-S.A.C/src/java/wyv/action/ClienteAction.java</file>
-            <file>file:/C:/Users/Romario/Desktop/Git/W-V-S.A.C/web/header.jsp</file>
-            <file>file:/C:/Users/Romario/Desktop/Git/W-V-S.A.C/src/java/wyv/persistencia/ClienteJpa.java</file>
+            <file>file:/C:/Users/Romario/Desktop/Git/W-V-S.A.C/web/admin/seguridad/restablecer-password.jsp</file>
+            <file>file:/C:/Users/Romario/Desktop/Git/W-V-S.A.C/web/admin/seguridad/cambiar-password-in.jsp</file>
+            <file>file:/C:/Users/Romario/Desktop/Git/W-V-S.A.C/web/admin/seguridad/login.jsp</file>
+            <file>file:/C:/Users/Romario/Desktop/Git/W-V-S.A.C/src/java/wyv/persistencia/AdministradorDao.java</file>
+            <file>file:/C:/Users/Romario/Desktop/Git/W-V-S.A.C/src/java/wyv/action/AdministradorAction.java</file>
+            <file>file:/C:/Users/Romario/Desktop/Git/W-V-S.A.C/src/java/wyv/servicios/AdministradorServicio.java</file>
+            <file>file:/C:/Users/Romario/Desktop/Git/W-V-S.A.C/web/admin/seguridad/validar-codigo.jsp</file>
+            <file>file:/C:/Users/Romario/Desktop/Git/W-V-S.A.C/web/admin/seguridad/cambiar-password-out.jsp</file>
+            <file>file:/C:/Users/Romario/Desktop/Git/W-V-S.A.C/web/admin/principal/header.jsp</file>
         </group>
     </open-files>
 </project-private>

@@ -55,7 +55,7 @@ public class PedidoServicio implements IOperacionesBD<Pedido>{
     }
 
     @Override
-    public Pedido ingresar(Pedido entrada) {
+    public Pedido validar(Pedido entrada) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

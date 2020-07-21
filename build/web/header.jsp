@@ -67,8 +67,8 @@
                                     </div>
                                 </s:if>
                                 <s:else>
-                                    <s:label name="#session.NombreClienteCompleto" />
-                            </s:else>
+                                    <s:label name="#session.nombres+ ' '+#session.apellidos" />
+                                </s:else>
 
                             </span>
 
@@ -77,21 +77,14 @@
                                     <img src="imagenes/icon-header-01.png" class="header-icon1" alt="ICON">
                                 </button>
                                 <div class="dropdown-menu " aria-labelledby="dropdownUsuario" >
-                                    <s:if test="inicio==0">
-                                        <button type="button" class="dropdown-item" data-toggle="modal" data-target="#loginModal">Iniciar Sesión</button>
-                                        <button type="button" class="dropdown-item" data-toggle="modal" data-target="#registrarseModal">Registrarse</button>
-                                    </s:if>
-                                    <s:elseif test="session.seccion==1">
-                                        <s:url id="lnkbuscar" action="buscarClie">
-                                            <s:param value="#session.idClie" name="cliente.idCliente"/>
-                                            <s:param value="1" name="op"/>
-                                         </s:url>
-                                        <s:a  href="%{lnkbuscar}" cssClass="dropdown-item">Mi cuenta</s:a>
-                                        <button type="button" class="dropdown-item">Cerrar Sesión</button>
 
-                                    </s:elseif>
+                                    <s:if test="#session.seccion==1">
+                                        <a  href="perfil.jsp" Class="dropdown-item">Mi cuenta</a>
+                                        <a href="cerrarSesionClie" class="dropdown-item">Cerrar Sesión</a>
+
+                                    </s:if>
                                     <s:else>
-                                         <button type="button" class="dropdown-item" data-toggle="modal" data-target="#loginModal">Iniciar Sesión</button>
+                                        <button type="button" class="dropdown-item" data-toggle="modal" data-target="#loginModal">Iniciar Sesión</button>
                                         <button type="button" class="dropdown-item" data-toggle="modal" data-target="#registrarseModal">Registrarse</button>
                                     </s:else>
 
@@ -245,40 +238,42 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header justify-content-center border-bottom-0">
-                        <div class="social-auth-links text-center  mb-3 mt-4">
-                            <a href="#" class="btn  btn-primary my-3 my-md-0">
-                                <i class="fa fa-facebook mr-2"></i> Sign in using Facebook
-                            </a>
-                            <a href="#" class="btn  btn-danger">
-                                <i class="fa fa-google-plus mr-2"></i> Sign in using Google+
-                            </a>
-                        </div>
+                        <div class="social-auth-links text-center">
 
+                            <div onlogin="checkLoginState();" appId="282898703055776" scope="public_profile,email" id="facebook-login-button" class="fb-login-button" data-size="large" data-button-type="continue_with" data-layout="default" data-auto-logout-link="false" data-use-continue-as="true" data-width=""></div>
+                        </div>
+                        <div id="fbStatus">
+
+                        </div>
                     </div>
                     <div class="modal-body pt-0">
-                        <p class="text-center">- OR -</p>
                         <s:form  action="ingresoCliente" id="form_login"  styleId="acc" theme="simple">
                             <div class="form-group">
-                                <label for="Email">Correo Electronico</label>
-                                <s:textfield cssClass="form-control" name="cliente.email" id="email" placeholder="Ingrese Email"/>
-                                </div>
-                                <div class="form-group">
-                                    <label for="Password">Password</label>
-                                <s:password cssClass="form-control" name="cliente.password" id="password" placeholder="Ingrese Password"/>
-                                </div>
-                                <div class="form-group">
-                                    <div class="form-check">
-                                        <input type="checkbox" class="form-check-input ml-0" id="dropdownCheck">
-                                        <label class="form-check-label" for="Check">
-                                            Recordar Contraseña
-                                        </label>
-                                    </div>
-                                </div>
 
-                            <s:submit id="ingresar" styleId="btnreg" cssClass="btn btn-primary  toastrDefaultError" value="Iniciar Sesión" />
+                                <s:textfield cssClass="form-control" name="cliente.email" id="email" placeholder="Ingrese Email"/>
+                            </div>
+                            <div class="form-group">
+                                <s:password cssClass="form-control" name="cliente.password" id="password" placeholder="Ingrese Password"/>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input ml-0" id="dropdownCheck">
+                                    <label class="form-check-label" for="Check">
+                                        Recordar Contraseña
+                                    </label>
+                                </div>
+                            </div>
+
+                            <s:submit id="ingresar" styleId="btnreg" cssClass="btn btn-primary btn-block  toastrDefaultError" value="Iniciar Sesión" />
+                            <div class="text-center"> 
+                                <button  type="button" Class="btn btn-link" data-toggle="modal" data-target="#registrarseModal" >Registrese</button>
+                            </div>
                         </s:form>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Olvidaste tu contraseña?</a>
+
+                    </div>
+                    <div class="modal-footer">
+                        <a Class="btn btn-link" href="#">Olvidé mi contraseña</a>
+                        <a Class="btn btn-link" href="admin/seguridad/login.jsp">Iniciar como administrador</a>
                     </div>
 
 
@@ -301,35 +296,36 @@
                             <a href="#" class="btn  btn-danger">
                                 <i class="fa fa-google-plus mr-2"></i> Sign in using Google+
                             </a>
+
                         </div>
 
                     </div>
                     <div class="modal-body pt-0">
                         <p class="text-center">- OR -</p>
-                        
-                         <s:form action="registrarse" theme="simple">
+
+                        <s:form action="registrarse" theme="simple">
                             <div class="input-group mb-3 mt-3">
                                 <s:textfield cssClass="form-control" name="cliente.nombres" id="nombres" placeholder="Ingrese Nombres"/>
                             </div>
                             <div class="input-group mb-3">
-                            <s:textfield cssClass="form-control" name="cliente.apellidos" id="apellidos" placeholder="Ingrese Apellidos"/>
-
-                            </div>
-                           <div class="input-group mb-3">
-                            <s:textfield  cssClass="form-control" name="cliente.email" id="email" placeholder="Ingrese Email"/>
+                                <s:textfield cssClass="form-control" name="cliente.apellidos" id="apellidos" placeholder="Ingrese Apellidos"/>
 
                             </div>
                             <div class="input-group mb-3">
-                            <s:password cssClass="form-control" name="cliente.password" id="password" placeholder="Ingrese Password"/>
+                                <s:textfield  cssClass="form-control" name="cliente.email" id="email" placeholder="Ingrese Email"/>
 
                             </div>
                             <div class="input-group mb-3">
-                            <s:password cssClass="form-control" name="password2" id="password2" placeholder="Confirmar Password"/>
+                                <s:password cssClass="form-control" name="cliente.password" id="password" placeholder="Ingrese Password"/>
+
+                            </div>
+                            <div class="input-group mb-3">
+                                <s:password cssClass="form-control" name="confirmarPass" id="confirmarPass" placeholder="Confirmar Password"/>
 
                             </div>
                             <div class="row">
                                 <!-- /.col -->
-                                 <div class="col-8">
+                                <div class="col-8">
                                     <div class="icheck-primary">
                                         <input type="checkbox" id="agreeTerms" name="terms" value="agree">
                                         <label for="agreeTerms">
@@ -338,16 +334,54 @@
                                     </div>
                                 </div>
                                 <div class="col-4">
-                                <s:submit id="enviar"  cssClass="btn btn-primary btn-block toastrDefaultError" value="Enviar"/>
+                                    <s:submit  cssClass="btn btn-primary btn-block toastrDefaultError" value="Enviar"/>
                                 </div>
                                 <!-- /.col -->
                             </div>
                         </s:form>
-                        
-                           
+
+
                     </div>
                 </div>
             </div>
         </div>
 
         <!--Fin Modal Para Registrarse -->
+
+        <!--Inicio Modal Para Restablecer Password -->
+        <div class="modal fade" id="restablecerModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header justify-content-center border-bottom-0">
+                    </div>
+                    <div class="modal-body pt-0">
+                        <s:form  action="restablecerPassword" id="form_rest"  styleId="acc" theme="simple">
+                            <div class="form-group">
+
+                                <s:textfield cssClass="form-control" name="cliente.email" id="email" placeholder="Ingrese Email"/>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input ml-0" id="dropdownCheck">
+                                    <label class="form-check-label" for="Check">
+                                        Recordar Contraseña
+                                    </label>
+                                </div>
+                            </div>
+
+                            <s:submit id="ingresar" styleId="btnreg" cssClass="btn btn-primary btn-block  toastrDefaultError" value="Iniciar Sesión" />
+                            <div class="text-center"> 
+                                <button  type="button" Class="btn btn-link" data-toggle="modal" data-target="#registrarseModal" >Registrese</button>
+                            </div>
+                        </s:form>
+
+                    </div>
+                    <div class="modal-footer">
+                        <a Class="btn btn-link" href="#">Olvidé mi contraseña</a>
+                        <a Class="btn btn-link" href="admin/seguridad/login.jsp">Iniciar como administrador</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Fin Modal Para Restablecer Password -->
+

@@ -53,7 +53,7 @@ public class AdministradorDao implements IOperacionesBD<Administrador> {
     }
 
     @Override
-    public Administrador ingresar(Administrador entrada) {
+    public Administrador validar(Administrador entrada) {
        
      return admJpa.findAdministrador(entrada.getDni());
   

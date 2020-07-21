@@ -2,92 +2,95 @@ $(function () {
     $("#ingresar").click(function (event)
 
     {
-       event.preventDefault();
+        event.preventDefault();
         var email = $("#email");
         var password = $("#password");
         var form = $("#form_login");
         if (email.val() === "")
         {
-            
-                   toastr.error('Debe completar el email');
-                   
-                email.focus();
+            toastr.error('Debe completar el email');
+            email.focus();
             return;
-        }else if(password.val() === ""){
-            
+        } else if (password.val() === "") {
             toastr.error('Debe completar el campo password');
-             password.focus();
-             return;
-        } 
-        else {
-            form.submit();
+            password.focus();
+            return;
         }
+        form.submit();
     }
     );
 });
 
- $(document).ready(function() {
-                            
-                            if($('.errorDiv').find('span').text() != "")
-                            {
-                                toastr.error('Email y/o password incorrecto');
-                            }
-});
-
-
-/*
 $(function () {
-    $("#grabar").click(function (event)
+    $("#cambiar").click(function (event)
     {
-       event.preventDefault();
-        var form = $(this).parents("#form_mante");
-        var check = checkCampos(form);
-        if(!check) {
-            swal({
-                    title: "¡Error!",
-                    text: "Debe completar todos los campos",
-                    icon: "error",
-                    button: "Aceptar",
-                    });  
+        event.preventDefault();
+        var password2 = $("#password2").val();
+        var password3 = $("#password3").val();
+        var form = $("#form_pass");
+        var error = $("#errorPassword");
+        var mayuscula = false;
+        var minuscula = false;
+        var numero = false;
+        var caracter_raro = false;
+
+            
+        for (var i = 0; i < password2.length; i++)
+        {
+            if (password2.charCodeAt(i) >= 65 && password2.charCodeAt(i) <= 90)
+            {
+                mayuscula = true;
+            } else if (password2.charCodeAt(i) >= 97 && password2.charCodeAt(i) <= 122)
+            {
+                minuscula = true;
+            } else if (password2.charCodeAt(i) >= 48 && password2.charCodeAt(i) <= 57)
+            {
+                numero = true;
+            } else
+            {
+                caracter_raro = true;
+            }
         }
-        else {
+        if (password2.length >= 8 && mayuscula && minuscula && !caracter_raro && numero)
+        {
+            if (password2 !== password3) {
+                toastr.error('Las contraseñas no coinciden');
+                error.hide();
+                return;
+            }
             form.submit();
+        } else {
+            
+            error.hide();
+            error.show("low");
         }
     }
     );
 });
 
-/*
-//Función para comprobar los campos de texto
-function checkCampos(obj) {
-    var camposRellenados = true;
-    obj.find("input").each(function() {
-    var $this = $(this);
-        if( $this.val().length <= 0 ) {
-            camposRellenados = false;
-            return false;
-        }
-    });
-    if(camposRellenados == false) {
-        return false;
+function mostrarPassword(id) {
+    var idPass = document.getElementById(id);
+    if (idPass.type == "password") {
+        idPass.type = "text";
+        $('#show_'+id).removeClass('fa fa-eye-slash').addClass('fa fa-eye');
+    } else {
+        idPass.type = "password";
+        $('#show_'+id).removeClass('fa fa-eye').addClass('fa fa-eye-slash');
     }
-    else {
-        return true;
+}
+$(document).ready(function () {
+
+    if ($('.errorDiv').find('span').text() != "")
+    {
+        toastr.error('Email y/o password incorrecto');
     }
-    }
-//$(function () {
-//    $(".menu").click(function (event)
-//
-//    {
-//       event.preventDefault();
-//        
-//     $("#sectionAjax").load($(this).attr('href'), function (response, status, xhr)
-//    {
-//        if (status == "success") {
-//           
-//        }
-//    });
-//        
-//    }
-//    );
-//});*/
+});
+
+
+//function compararPass(password2){
+//        var password3 = $("#password3").val();
+//         if (password2 !== password3) {
+//                toastr.error('Las contraseñas no coinciden');
+//                return false;
+//            }
+//}

@@ -25,7 +25,7 @@ public class EmpresaDao implements IOperacionesBD<Empresa>{
     }
 
     @Override
-    public Empresa ingresar(Empresa entrada) {
+    public Empresa validar(Empresa entrada) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

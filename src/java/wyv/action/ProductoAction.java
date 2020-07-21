@@ -4,11 +4,13 @@ import com.opensymphony.xwork2.ActionSupport;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 import org.apache.commons.io.FileUtils;
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.InterceptorRef;
 import org.apache.struts2.convention.annotation.Result;
+import org.apache.struts2.interceptor.SessionAware;
 import wyv.servicios.ProductoServicio;
 import wyv.persistencia.Producto;
 import wyv.persistencia.Categoria;
@@ -18,7 +20,7 @@ import wyv.servicios.MarcaServicio;
 
 
 @SuppressWarnings("serial")
-public class ProductoAction extends ActionSupport{
+public class ProductoAction extends ActionSupport implements SessionAware{
 
     ProductoServicio proSer;
     private String resultado;
@@ -31,7 +33,8 @@ public class ProductoAction extends ActionSupport{
     private File imagen;
     private String imagenContentType;
     private String imagenFileName;
-
+    private Map<String, Object> sesion;
+    
     public File getImagen() {
         return imagen;
     }
@@ -88,7 +91,11 @@ public class ProductoAction extends ActionSupport{
     public void setProSer(ProductoServicio proSer) {
         this.proSer = proSer;
     }
-
+    @Override
+    public void setSession(Map<String, Object> map) {
+        this.sesion = map;
+    }
+    
     @Action(value = "listarProducto", results = {
         @Result(name = "ok", location = "/admin/principal/producto.jsp")
         ,

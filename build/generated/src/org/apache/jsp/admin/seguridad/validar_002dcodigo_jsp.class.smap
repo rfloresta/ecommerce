@@ -1,0 +1,24 @@
+SMAP
+validar_002dcodigo_jsp.java
+JSP
+*S JSP
+*F
++ 0 validar-codigo.jsp
+admin/seguridad/validar-codigo.jsp
++ 1 header.jsp
+admin/seguridad/header.jsp
++ 2 footer.jsp
+admin/seguridad/footer.jsp
+*L
+1:66
+1#1,27:67
+1#0,12:94
+12:156,14
+13,2:170
+14:216,7
+14,15:174
+28:236,6
+28,5:191
+32,12:108
+1#2,18:120
+*E
