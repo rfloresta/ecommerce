@@ -12,7 +12,6 @@ $(function () {
             dni.focus();
             return;
         } else if (password.val() === "") {
-
             toastr.error('Debe completar el campo contraseña');
             password.focus();
             return;

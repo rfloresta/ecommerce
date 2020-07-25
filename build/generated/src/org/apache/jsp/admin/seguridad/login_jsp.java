@@ -212,7 +212,7 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
         out.write("                                    <div class=\"icheck-primary\">\r\n");
         out.write("                                        <input type=\"checkbox\" id=\"remember\">\r\n");
         out.write("                                        <label for=\"remember\">\r\n");
-        out.write("                                            Remember Me\r\n");
+        out.write("                                            Recordarme\r\n");
         out.write("                                        </label>\r\n");
         out.write("                                    </div>\r\n");
         out.write("                                </div>\r\n");

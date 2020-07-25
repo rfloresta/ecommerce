@@ -28,13 +28,20 @@ public class ProductoAction extends ActionSupport implements SessionAware{
     private Producto producto;
     private List<Producto> lstProducto;
     private List<Categoria> lstCategoria;
+    private List<Categoria> lstSubCategoria;
     private List<Marca> lstMarca;
     private int edit;
     private File imagen;
     private String imagenContentType;
     private String imagenFileName;
+    private int idCate;
     private Map<String, Object> sesion;
-    
+
+     @Override
+    public void setSession(Map<String, Object> map) {
+        this.sesion = map;
+    }    
+
     public File getImagen() {
         return imagen;
     }
@@ -88,13 +95,27 @@ public class ProductoAction extends ActionSupport implements SessionAware{
         return edit;
     }
 
+    public List<Categoria> getLstSubCategoria() {
+        return lstSubCategoria;
+    }
+
+    public void setLstSubCategoria(List<Categoria> lstSubCategoria) {
+        this.lstSubCategoria = lstSubCategoria;
+    }
+
+    public int getIdCate() {
+        return idCate;
+    }
+
+    public void setIdCate(int idCate) {
+        this.idCate = idCate;
+    }
+    
+
     public void setProSer(ProductoServicio proSer) {
         this.proSer = proSer;
     }
-    @Override
-    public void setSession(Map<String, Object> map) {
-        this.sesion = map;
-    }
+
     
     @Action(value = "listarProducto", results = {
         @Result(name = "ok", location = "/admin/principal/producto.jsp")
@@ -218,8 +239,12 @@ public class ProductoAction extends ActionSupport implements SessionAware{
     public String verCatalogo() {
         try {
             lstProducto = new ProductoServicio().listar();
+            sesion.put("lstProducto", lstProducto);
             lstCategoria = new CategoriaServicio().listar();
+            sesion.put("lstCategoria", lstCategoria);
+            //lstSubCategoria = new CategoriaServicio().listarsubCategoria(idCate);
             lstMarca = new MarcaServicio().listar();
+            sesion.put("lstMarca", lstMarca);
             return "ok";
         } catch (Exception e) {
             resultado = "Error en: verCatalogo :: " + e.getMessage();

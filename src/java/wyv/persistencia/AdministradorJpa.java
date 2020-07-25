@@ -161,7 +161,7 @@ public class AdministradorJpa implements Serializable {
         try {
 
             cn = Util.getConexionBD();
-            pstmt = cn.prepareStatement("SELECT fecha as fecha,sum(total) as Total FROM pedido  GROUP BY fecha ORDER BY date(fecha)");
+            pstmt = cn.prepareStatement("SELECT fecha as fecha,sum(total) as Total FROM pedido  GROUP BY fecha ORDER BY  fecha");
             rs = pstmt.executeQuery();
             Map<String, String> mapa=null;
             while(rs.next())

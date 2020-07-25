@@ -243,7 +243,7 @@ public class PedidoJpa implements Serializable {
         try {
             cn = Util.getConexionBD();
             pstmt = cn.prepareStatement("UPDATE pedido set  numero=?, fecha=?, subtotal=?, igv=?, total=?, pago=?, estado=?, idCliente=? where idPedido=?");
-            pstmt.setInt(1, p.getNumero());
+            pstmt.setString(1, p.getNumero());
             pstmt.setString(2, p.getFecha());
             pstmt.setDouble(3, p.getSubtotal());
             pstmt.setDouble(4, p.getIgv());
@@ -256,7 +256,7 @@ public class PedidoJpa implements Serializable {
             System.out.println("resultado" + resultado);
         } catch (Exception e) {
             e.getMessage();
-        }
+}
         return resultado;
 
     }
@@ -273,7 +273,7 @@ public class PedidoJpa implements Serializable {
             while (rs.next()) {
                 Pedido pedNext = new Pedido();
                 pedNext.setIdPedido(rs.getInt(1));
-                pedNext.setNumero(rs.getInt(2));
+                pedNext.setNumero(rs.getString(2));
                 pedNext.setFecha(rs.getString(3));
                 pedNext.setSubtotal(rs.getDouble(4));
                 pedNext.setIgv(rs.getDouble(5));

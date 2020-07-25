@@ -54,4 +54,14 @@ public class CategoriaServicio implements IOperacionesBD<Categoria> {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
+     public List<Categoria> listarCategoria() {
+       cateDao = new CategoriaDao();
+        return cateDao.listarCategoria();
+    }
+     
+      public List<Categoria> listarsubCategoria(int id) {
+       cateDao = new CategoriaDao();
+        return cateDao.listarsubCategoria(id);
+    }
+    
 }

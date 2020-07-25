@@ -26,11 +26,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
-<<<<<<< HEAD
- * @author Romario
-=======
  * @author bdeg_
->>>>>>> f4f39a8562a2416f673e4a77a81b882ca25ce0e1
  */
 @Entity
 @Table(name = "producto")
@@ -44,6 +40,7 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Producto.findByPrecioVenta", query = "SELECT p FROM Producto p WHERE p.precioVenta = :precioVenta")
     , @NamedQuery(name = "Producto.findByDescuento", query = "SELECT p FROM Producto p WHERE p.descuento = :descuento")})
 public class Producto implements Serializable {
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "producto")
     private List<DetallePedido> detallePedidoList;
 
@@ -203,4 +200,5 @@ public class Producto implements Serializable {
     public void setDetallePedidoList(List<DetallePedido> detallePedidoList) {
         this.detallePedidoList = detallePedidoList;
     }
+    
 }

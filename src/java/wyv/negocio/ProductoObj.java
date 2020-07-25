@@ -1,17 +1,17 @@
 package wyv.negocio;
 
 public class ProductoObj {
-    public String codPro,nombre,descripcion,proveedor;
-    public double preciocom,precioven;
+    public String idProducto,nombre,descripcion,imagen, idCategoria, idMarca;
+    public double precioCompra,precioVenta;
     public int stock;
     public double descuento;
 
-    public String getCodPro() {
-        return codPro;
+    public String getIdProducto() {
+        return idProducto;
     }
 
-    public void setCodPro(String codPro) {
-        this.codPro = codPro;
+    public void setIdProducto(String idProducto) {
+        this.idProducto = idProducto;
     }
 
     public String getNombre() {
@@ -30,28 +30,44 @@ public class ProductoObj {
         this.descripcion = descripcion;
     }
 
-    public String getProveedor() {
-        return proveedor;
+    public String getImagen() {
+        return imagen;
     }
 
-    public void setProveedor(String proveedor) {
-        this.proveedor = proveedor;
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
     }
 
-    public double getPreciocom() {
-        return preciocom;
+    public String getIdCategoria() {
+        return idCategoria;
     }
 
-    public void setPreciocom(double preciocom) {
-        this.preciocom = preciocom;
+    public void setIdCategoria(String idCategoria) {
+        this.idCategoria = idCategoria;
     }
 
-    public double getPrecioven() {
-        return precioven;
+    public String getIdMarca() {
+        return idMarca;
     }
 
-    public void setPrecioven(double precioven) {
-        this.precioven = precioven;
+    public void setIdMarca(String idMarca) {
+        this.idMarca = idMarca;
+    }
+
+    public double getPrecioCompra() {
+        return precioCompra;
+    }
+
+    public void setPrecioCompra(double precioCompra) {
+        this.precioCompra = precioCompra;
+    }
+
+    public double getPrecioVenta() {
+        return precioVenta;
+    }
+
+    public void setPrecioVenta(double precioVenta) {
+        this.precioVenta = precioVenta;
     }
 
     public int getStock() {
@@ -69,6 +85,8 @@ public class ProductoObj {
     public void setDescuento(double descuento) {
         this.descuento = descuento;
     }
+
+   
 
  
 }

@@ -30,7 +30,6 @@ public class DetallePedidoJpa implements Serializable {
         this.emf= Persistence.createEntityManagerFactory("W_V_S.A.CPU");
     }
 
-    
     public DetallePedidoJpa(EntityManagerFactory emf) {
         this.emf = emf;
     }
@@ -231,7 +230,7 @@ public class DetallePedidoJpa implements Serializable {
                 Pedido pedNext = new Pedido();
                 
                 
-                pedNext.setNumero(rs.getInt(1));
+                pedNext.setNumero(rs.getString(1));
                 pedNext.setFecha(rs.getString(2));
                 pedNext.setTotal(rs.getDouble(3));
                 
@@ -247,7 +246,7 @@ public class DetallePedidoJpa implements Serializable {
                 //Ingresamos cliente
                 lisDetallePedido.add(deta);
                 
-            }
+}
         } catch (Exception e) {
             e.printStackTrace();
         }

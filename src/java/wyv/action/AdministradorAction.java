@@ -22,18 +22,14 @@ import static wyv.action.Encriptacion.Desencriptar;
 import wyv.servicios.AdministradorServicio;
 import wyv.persistencia.Administrador;
 import static wyv.action.Encriptacion.Encriptar;
-import wyv.persistencia.RecuperarPassword;
-import wyv.servicios.RecuperarPasswordServicio;
 
 @SuppressWarnings("serial")
 public class AdministradorAction extends ActionSupport implements SessionAware {
 
     AdministradorServicio admSer;
-    RecuperarPasswordServicio recSer;
     private String resultado;
     private String estado = "error";
     private Administrador admin;
-    private RecuperarPassword recuperar = new RecuperarPassword();
     ;
     private List<Administrador> lstAdmin;
     private List<String> listaMes;
@@ -56,10 +52,6 @@ public class AdministradorAction extends ActionSupport implements SessionAware {
 
     public void setCodigo(String codigo) {
         this.codigo = codigo;
-    }
-
-    public void setRecuperar(RecuperarPassword recuperar) {
-        this.recuperar = recuperar;
     }
 
     @Override

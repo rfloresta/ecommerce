@@ -21,6 +21,21 @@ $(function () {
     );
 });
 
+//$(document).ready(function () {
+//
+//    if ($('.msgError').text() != "")
+//    {
+//        toastr.error('Email y/o password incorrecto');
+//    }
+//    if ($('#resultado').val() != "")
+//    {
+//        toastr.success($('#resultado').val() + " " + ", Por favor, Complete sus datos antes de realizar una compra");
+//    } else
+//    {
+//
+//    }
+//});
+
 $(function () {
     $("#cambiar").click(function (event)
     {
@@ -34,7 +49,7 @@ $(function () {
         var numero = false;
         var caracter_raro = false;
 
-            
+
         for (var i = 0; i < password2.length; i++)
         {
             if (password2.charCodeAt(i) >= 65 && password2.charCodeAt(i) <= 90)
@@ -60,7 +75,7 @@ $(function () {
             }
             form.submit();
         } else {
-            
+
             error.hide();
             error.show("low");
         }
@@ -72,10 +87,10 @@ function mostrarPassword(id) {
     var idPass = document.getElementById(id);
     if (idPass.type == "password") {
         idPass.type = "text";
-        $('#show_'+id).removeClass('fa fa-eye-slash').addClass('fa fa-eye');
+        $('#show_' + id).removeClass('fa fa-eye-slash').addClass('fa fa-eye');
     } else {
         idPass.type = "password";
-        $('#show_'+id).removeClass('fa fa-eye').addClass('fa fa-eye-slash');
+        $('#show_' + id).removeClass('fa fa-eye').addClass('fa fa-eye-slash');
     }
 }
 $(document).ready(function () {

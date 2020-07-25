@@ -68,4 +68,21 @@ public class CategoriaDao implements IOperacionesBD<Categoria>{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
+     public List<Categoria> listarCategoria() {
+       try {
+            return cateJpa.listarCategoria();
+        } catch (Exception e) {
+            e.getMessage();
+            return null;
+}
+    }
+     
+      public List<Categoria> listarsubCategoria(int id) {
+       try {
+            return cateJpa.listarsubCategoria(id);
+        } catch (Exception e) {
+            e.getMessage();
+            return null;
+        }
+    }
 }

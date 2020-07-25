@@ -43,22 +43,42 @@
     var datalstTotal = JSON.parse(lstTotal.value);
     //Fin de obtener lista y convertir a json
 
+    //Comenzar formateo de fecha
+    //Creamos arreglo de meses en español
+    const monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+        "Julio", "Agosto", "Setiembre", "Octubre", "Noviembre", "Diciembre"
+    ];
+    const fechas=[];
+    //recorremos el datalstFecha para separarlo y  ponerlo en formato que admita el DATE()
+    for(var i =0; i< datalstFecha.length; i++){
+        var fecha= datalstFecha[i];
+        var parteFecha = fecha.split("/"); // separamos por la barra diagonal y devuelve un arreglo
+        var dateObject = new Date(+parteFecha[2], parteFecha[1] - 1, +parteFecha[0]); // formateamos la fecha en el orden deseado
+        var fechaFormat=new Date(dateObject); // mandamos la fecha para que se formatee
+        
+        fechas.push(monthNames[fechaFormat.getMonth()]); // y obtenemos el numero del mes que va deacuerdo al arreglo.
+    }
+    
+    
+   
+    
+
     //Obtenemos los valores de los json para los widgets
-    var total=0;
+    var total = 0;
     for (var i = 0; i < datalstTotal.length; i++)
     {
 
-        total = parseInt(datalstTotal[i])+total;
+        total = parseInt(datalstTotal[i]) + total;
     }
-    var VentaTotal= document.getElementById("LabelTotal");
-    VentaTotal.innerHTML= "<h3 id='LabelTotal'><sup style='font-size: 20px'>$</sup> "+total+" </h3>";
+    var VentaTotal = document.getElementById("LabelTotal");
+    VentaTotal.innerHTML = "<h3 id='LabelTotal'><sup style='font-size: 20px'>$</sup> " + total + " </h3>";
 
 
     var ctx = document.getElementById('myChart').getContext('2d');
     var myChart = new Chart(ctx, {
         type: 'line',
         data: {
-            labels: datalstFecha,
+            labels: fechas,
             datasets: [{
                     label: "Venta",
                     data: datalstTotal,

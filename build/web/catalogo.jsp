@@ -66,7 +66,7 @@
         </section>
         
         
-
+ 
         <!-- Banner -->
         <div class="banner bgwhite p-t-40 p-b-40">
             <div class="container">
@@ -155,7 +155,7 @@
                         <div class="tab-pane fade show active" id="best-seller" role="tabpanel">
                             <div class="row">
                                 
-                                <s:iterator value="lstProducto">
+                                <s:iterator value="#session.lstProducto">
                                 <div class="col-sm-6 col-md-4 col-lg-3 p-b-50">
                                     <!-- Block2 -->
                                     <div class="block2">
@@ -164,16 +164,30 @@
 
                                             <div class="block2-overlay trans-0-4">
                                                 <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
-                                                    <i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
+                                                    <i class="far fa-heart"></i>
                                                     <i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
                                                 </a>
-
+                                                
                                                 <div class="block2-btn-addcart w-size1 trans-0-4">
+                                                    <s:url var="lnkAgregarCarro" action="AgregarCarrito">
+                                                        <s:param value="idProducto" name="proObj.idProducto" />
+                                                        <s:param value="nombre" name="proObj.nombre" />
+                                                        <s:param value="descripcionto" name="proObj.descripcion" />
+                                                        <s:param value="stock" name="proObj.stock" /> 
+                                                        <s:param value="precioCompra" name="proObj.precioCompra" />
+                                                        <s:param value="precioVenta" name="proObj.precioVenta" />
+                                                        <s:param value="descuento" name="proObj.descuento" />
+                                                        <s:param value="imagen" name="proObj.imagen" />
+                                                    </s:url>
+                                                    
                                                     <!-- Button -->
-                                                    <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
-                                                        Agregar al carro
-                                                    </button>
+                                                    <s:a href="%{lnkAgregarCarro}"  cssClass="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
+                                                        Agregar al Carro
+                                                    </s:a>
+                                                       
+                                                   
                                                 </div>
+                                               
                                             </div>
                                         </div>
 
