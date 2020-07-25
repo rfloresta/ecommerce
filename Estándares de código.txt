@@ -3,4 +3,5 @@ Nombre de Clases en mayúscula la primera letra de la palabra. Ejm: Persona, Clie
 Nombre de Métodos en minúscula/mayúscula (Camel case). Ejm: registrarPedido, registrarUsuario...
 Nombre de los archivos .jsp en minúscula.
 Comentar código cuando sea necesario (flujo complejo).
+x
 

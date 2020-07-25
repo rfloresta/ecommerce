@@ -19,10 +19,11 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `tiendaw_v`
 --
+--
 
 DELIMITER $$
 --
--- Procedimientos
+-- Procedimientos 
 --
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_actualizarcantidadproducto` (IN `cantidad` INT, IN `precioVenta` DOUBLE(10,2), IN `idProducto` INT)  BEGIN
 
