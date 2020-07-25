@@ -20,6 +20,7 @@ SET time_zone = "+00:00";
 -- Base de datos: `tiendaw_v`
 --
 --
+--
 
 DELIMITER $$
 --
