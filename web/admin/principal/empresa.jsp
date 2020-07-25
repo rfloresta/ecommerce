@@ -48,7 +48,7 @@
                                 <div class="col-md-6">
                                 <div class="form-group">
                                      <label for="inputDireccion">Dirección</label>
-                                     <s:textarea  name="empresa.direccion" cssClass="form-control" placeholder="Ingrese la Misión"/>
+                                     <s:textarea  name="empresa.direccion" cssClass="form-control" placeholder="Ingrese la Dirección"/>
                                 </div> 
                                 </div>
                                 <div class="col-md-6">

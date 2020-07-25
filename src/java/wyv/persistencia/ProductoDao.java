@@ -73,7 +73,7 @@ public class ProductoDao implements IOperacionesBD<Producto>{
     }
 
     @Override
-    public Producto ingresar(Producto entrada) {
+    public Producto validar(Producto entrada) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

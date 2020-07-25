@@ -11,9 +11,16 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
 
   private static java.util.List<String> _jspx_dependants;
 
+  static {
+    _jspx_dependants = new java.util.ArrayList<String>(2);
+    _jspx_dependants.add("/admin/seguridad/header.jsp");
+    _jspx_dependants.add("/admin/seguridad/footer.jsp");
+  }
+
   private org.apache.jasper.runtime.TagHandlerPool _jspx_tagPool_s_textfield_styleId_placeholder_name_id_cssClass_nobody;
-  private org.apache.jasper.runtime.TagHandlerPool _jspx_tagPool_s_actionerror_nobody;
+  private org.apache.jasper.runtime.TagHandlerPool _jspx_tagPool_s_actionerror_cssClass_nobody;
   private org.apache.jasper.runtime.TagHandlerPool _jspx_tagPool_s_submit_value_styleId_id_cssClass_nobody;
+  private org.apache.jasper.runtime.TagHandlerPool _jspx_tagPool_s_actionmessage_cssClass_nobody;
   private org.apache.jasper.runtime.TagHandlerPool _jspx_tagPool_s_form_theme_styleId_id_action;
   private org.apache.jasper.runtime.TagHandlerPool _jspx_tagPool_s_password_styleId_placeholder_name_id_cssClass_nobody;
   private org.apache.jasper.runtime.TagHandlerPool _jspx_tagPool_s_if_test;
@@ -26,8 +33,9 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
 
   public void _jspInit() {
     _jspx_tagPool_s_textfield_styleId_placeholder_name_id_cssClass_nobody = org.apache.jasper.runtime.TagHandlerPool.getTagHandlerPool(getServletConfig());
-    _jspx_tagPool_s_actionerror_nobody = org.apache.jasper.runtime.TagHandlerPool.getTagHandlerPool(getServletConfig());
+    _jspx_tagPool_s_actionerror_cssClass_nobody = org.apache.jasper.runtime.TagHandlerPool.getTagHandlerPool(getServletConfig());
     _jspx_tagPool_s_submit_value_styleId_id_cssClass_nobody = org.apache.jasper.runtime.TagHandlerPool.getTagHandlerPool(getServletConfig());
+    _jspx_tagPool_s_actionmessage_cssClass_nobody = org.apache.jasper.runtime.TagHandlerPool.getTagHandlerPool(getServletConfig());
     _jspx_tagPool_s_form_theme_styleId_id_action = org.apache.jasper.runtime.TagHandlerPool.getTagHandlerPool(getServletConfig());
     _jspx_tagPool_s_password_styleId_placeholder_name_id_cssClass_nobody = org.apache.jasper.runtime.TagHandlerPool.getTagHandlerPool(getServletConfig());
     _jspx_tagPool_s_if_test = org.apache.jasper.runtime.TagHandlerPool.getTagHandlerPool(getServletConfig());
@@ -35,8 +43,9 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
 
   public void _jspDestroy() {
     _jspx_tagPool_s_textfield_styleId_placeholder_name_id_cssClass_nobody.release();
-    _jspx_tagPool_s_actionerror_nobody.release();
+    _jspx_tagPool_s_actionerror_cssClass_nobody.release();
     _jspx_tagPool_s_submit_value_styleId_id_cssClass_nobody.release();
+    _jspx_tagPool_s_actionmessage_cssClass_nobody.release();
     _jspx_tagPool_s_form_theme_styleId_id_action.release();
     _jspx_tagPool_s_password_styleId_placeholder_name_id_cssClass_nobody.release();
     _jspx_tagPool_s_if_test.release();
@@ -55,7 +64,7 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
     PageContext _jspx_page_context = null;
 
     try {
-      response.setContentType("text/html;charset=UTF-8");
+      response.setContentType("text/html");
       pageContext = _jspxFactory.getPageContext(this, request, response,
       			null, true, 8192, true);
       _jspx_page_context = pageContext;
@@ -66,34 +75,36 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
       _jspx_out = out;
       _jspx_resourceInjector = (org.glassfish.jsp.api.ResourceInjector) application.getAttribute("com.sun.appserv.jsp.resource.injector");
 
+      out.write("    ");
+      out.write("\n");
+      out.write("\n");
+      out.write("<!DOCTYPE html>\n");
+      out.write("<html>\n");
+      out.write("    <head>\n");
+      out.write("        <meta charset=\"utf-8\">\n");
+      out.write("        <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n");
+      out.write("        <title>AdminLTE 3 | Log in</title>\n");
+      out.write("        <!-- Tell the browser to be responsive to screen width -->\n");
+      out.write("        <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n");
+      out.write("        <!-- icheck bootstrap -->\n");
+      out.write("        <link rel=\"stylesheet\" href=\"../css/icheck-bootstrap.min.css\">\n");
+      out.write("        <!-- Font Awesome -->\n");
+      out.write("        <link rel=\"stylesheet\" href=\"../css/all.min.css\">\n");
+      out.write("        <link rel=\"stylesheet\" href=\"https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css\">\n");
+      out.write("        <link href=\"../css/main.css\" rel=\"stylesheet\" type=\"text/css\"/>\n");
+      out.write("        <!-- Ionicons -->\n");
+      out.write("        <link rel=\"stylesheet\" href=\"https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css\">\n");
+      out.write("        <link href=\"../css/toastr.min.css\" rel=\"stylesheet\" type=\"text/css\"/>\n");
+      out.write("        <!-- Theme style -->\n");
+      out.write("        <link rel=\"stylesheet\" href=\"../css/adminlte.min.css\">\n");
+      out.write("        <!-- Google Font: Source Sans Pro -->\n");
+      out.write("        <link href=\"https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700\" rel=\"stylesheet\">\n");
+      out.write("\n");
+      out.write("        <!-- sweetalert -->\n");
+      out.write("\n");
+      out.write("    </head>");
       out.write("\r\n");
-      out.write("\r\n");
-      out.write("<!DOCTYPE html>\r\n");
-      out.write("<html>\r\n");
-      out.write("    <head>\r\n");
-      out.write("        <meta charset=\"utf-8\">\r\n");
-      out.write("        <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\r\n");
-      out.write("        <title>AdminLTE 3 | Log in</title>\r\n");
-      out.write("        <!-- Tell the browser to be responsive to screen width -->\r\n");
-      out.write("        <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\r\n");
-      out.write("        <!-- icheck bootstrap -->\r\n");
-      out.write("        <link rel=\"stylesheet\" href=\"../css/icheck-bootstrap.min.css\">\r\n");
-      out.write("        <!-- Font Awesome -->\r\n");
-      out.write("        <link rel=\"stylesheet\" href=\"../css/all.min.css\">\r\n");
-      out.write("        <link rel=\"stylesheet\" href=\"https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css\">\r\n");
-      out.write("        <link href=\"../css/main.css\" rel=\"stylesheet\" type=\"text/css\"/>\r\n");
-      out.write("        <!-- Ionicons -->\r\n");
-      out.write("        <link rel=\"stylesheet\" href=\"https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css\">\r\n");
-      out.write("        <link href=\"../css/toastr.min.css\" rel=\"stylesheet\" type=\"text/css\"/>\r\n");
-      out.write("        <!-- Theme style -->\r\n");
-      out.write("        <link rel=\"stylesheet\" href=\"../css/adminlte.min.css\">\r\n");
-      out.write("        <!-- Google Font: Source Sans Pro -->\r\n");
-      out.write("        <link href=\"https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700\" rel=\"stylesheet\">\r\n");
-      out.write("\r\n");
-      out.write("        <!-- sweetalert -->\r\n");
-      out.write("\r\n");
-      out.write("    </head>\r\n");
-      out.write("    <body class=\"hold-transition login-page\">\r\n");
+      out.write("<body class=\"hold-transition login-page\">\r\n");
       out.write("        <div class=\"login-box\">\r\n");
       out.write("            <div class=\"login-logo\">\r\n");
       out.write("                <a href=\"../../index2.html\"><b>W&V</b>S.A.C</a>\r\n");
@@ -117,24 +128,26 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("      \r\n");
       out.write("        <!-- /.login-box -->\r\n");
       out.write("\r\n");
-      out.write("        <!-- jQuery -->\r\n");
-      out.write("        <script src=\"../js/jquery.min.js\"></script>\r\n");
-      out.write("        <!-- Bootstrap 4 -->\r\n");
-      out.write("        <script src=\"resources/js/bootstrap.bundle.min.js\"></script>\r\n");
-      out.write("        <!-- AdminLTE App -->\r\n");
-      out.write("        <script src=\"resources/js/adminlte.min.js\"></script>\r\n");
-      out.write("\r\n");
-      out.write("\r\n");
-      out.write("        <script src=\"https://cdn.jsdelivr.net/npm/sweetalert2@9\"></script>\r\n");
-      out.write("        <script src=\"../js/funciones.js\" type=\"text/javascript\"></script>\r\n");
-      out.write("        \r\n");
-      out.write("        <script src=\"../plugins/toastr/toastr.min.js\"></script>\r\n");
-      out.write("        <!--mi script-->\r\n");
-      out.write("        <script src=\"../js/main.js\" type=\"text/javascript\"></script>\r\n");
-      out.write("        <script src=\"../js/toastr.min.js\" type=\"text/javascript\"></script>\r\n");
-      out.write("\r\n");
-      out.write("    </body>\r\n");
+      out.write("    ");
+      out.write("        <!-- jQuery -->\n");
+      out.write("        <script src=\"../js/jquery.min.js\"></script>\n");
+      out.write("        <!-- Bootstrap 4 -->\n");
+      out.write("        <script src=\"resources/js/bootstrap.bundle.min.js\"></script>\n");
+      out.write("        <!-- AdminLTE App -->\n");
+      out.write("        <script src=\"resources/js/adminlte.min.js\"></script>\n");
+      out.write("\n");
+      out.write("\n");
+      out.write("        <script src=\"https://cdn.jsdelivr.net/npm/sweetalert2@9\"></script>\n");
+      out.write("        <script src=\"../js/funciones.js\" type=\"text/javascript\"></script>\n");
+      out.write("        \n");
+      out.write("        <script src=\"../plugins/toastr/toastr.min.js\"></script>\n");
+      out.write("        <!--mi script-->\n");
+      out.write("        <script src=\"../js/main.js\" type=\"text/javascript\"></script>\n");
+      out.write("        <script src=\"../js/toastr.min.js\" type=\"text/javascript\"></script>\n");
+      out.write("    </body>\n");
       out.write("</html>");
+      out.write('\r');
+      out.write('\n');
     } catch (Throwable t) {
       if (!(t instanceof SkipPageException)){
         out = _jspx_out;
@@ -199,7 +212,7 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
         out.write("                                    <div class=\"icheck-primary\">\r\n");
         out.write("                                        <input type=\"checkbox\" id=\"remember\">\r\n");
         out.write("                                        <label for=\"remember\">\r\n");
-        out.write("                                            Remember Me\r\n");
+        out.write("                                            Recordarme\r\n");
         out.write("                                        </label>\r\n");
         out.write("                                    </div>\r\n");
         out.write("                                </div>\r\n");
@@ -209,17 +222,20 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
         if (_jspx_meth_s_submit_0((javax.servlet.jsp.tagext.JspTag) _jspx_th_s_form_0, _jspx_page_context))
           return true;
         out.write("\r\n");
-        out.write("                                 ");
+        out.write("                                ");
         if (_jspx_meth_s_if_0((javax.servlet.jsp.tagext.JspTag) _jspx_th_s_form_0, _jspx_page_context))
           return true;
         out.write("\r\n");
-        out.write("   \r\n");
+        out.write("                                ");
+        if (_jspx_meth_s_if_1((javax.servlet.jsp.tagext.JspTag) _jspx_th_s_form_0, _jspx_page_context))
+          return true;
+        out.write("\r\n");
         out.write("                            </div>\r\n");
         out.write("                            <!-- /.col -->\r\n");
         out.write("                        </div>\r\n");
         out.write("                                \r\n");
         out.write("                        <p class=\"mb-1\">\r\n");
-        out.write("                            <a href=\"forgot-password.html\">Olvide mi contraseña</a>\r\n");
+        out.write("                            <a href=\"restablecer-password.jsp\">Olvidé mi contraseña</a>\r\n");
         out.write("                        </p>\r\n");
         out.write("                    ");
         int evalDoAfterBody = _jspx_th_s_form_0.doAfterBody();
@@ -320,12 +336,10 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
       }
       do {
         out.write("\r\n");
-        out.write("                                    <div class=\"errorDiv text-center text-danger mt-3\" >\r\n");
-        out.write("                                        ");
+        out.write("                                ");
         if (_jspx_meth_s_actionerror_0((javax.servlet.jsp.tagext.JspTag) _jspx_th_s_if_0, _jspx_page_context))
           return true;
         out.write("\r\n");
-        out.write("                                    </div>\r\n");
         out.write("                                ");
         int evalDoAfterBody = _jspx_th_s_if_0.doAfterBody();
         if (evalDoAfterBody != javax.servlet.jsp.tagext.BodyTag.EVAL_BODY_AGAIN)
@@ -347,15 +361,72 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
     PageContext pageContext = _jspx_page_context;
     JspWriter out = _jspx_page_context.getOut();
     //  s:actionerror
-    org.apache.struts2.views.jsp.ui.ActionErrorTag _jspx_th_s_actionerror_0 = (org.apache.struts2.views.jsp.ui.ActionErrorTag) _jspx_tagPool_s_actionerror_nobody.get(org.apache.struts2.views.jsp.ui.ActionErrorTag.class);
+    org.apache.struts2.views.jsp.ui.ActionErrorTag _jspx_th_s_actionerror_0 = (org.apache.struts2.views.jsp.ui.ActionErrorTag) _jspx_tagPool_s_actionerror_cssClass_nobody.get(org.apache.struts2.views.jsp.ui.ActionErrorTag.class);
     _jspx_th_s_actionerror_0.setPageContext(_jspx_page_context);
     _jspx_th_s_actionerror_0.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_s_if_0);
+    _jspx_th_s_actionerror_0.setCssClass("errorMessage text-center text-danger mr-5");
     int _jspx_eval_s_actionerror_0 = _jspx_th_s_actionerror_0.doStartTag();
     if (_jspx_th_s_actionerror_0.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
-      _jspx_tagPool_s_actionerror_nobody.reuse(_jspx_th_s_actionerror_0);
+      _jspx_tagPool_s_actionerror_cssClass_nobody.reuse(_jspx_th_s_actionerror_0);
       return true;
     }
-    _jspx_tagPool_s_actionerror_nobody.reuse(_jspx_th_s_actionerror_0);
+    _jspx_tagPool_s_actionerror_cssClass_nobody.reuse(_jspx_th_s_actionerror_0);
+    return false;
+  }
+
+  private boolean _jspx_meth_s_if_1(javax.servlet.jsp.tagext.JspTag _jspx_th_s_form_0, PageContext _jspx_page_context)
+          throws Throwable {
+    PageContext pageContext = _jspx_page_context;
+    JspWriter out = _jspx_page_context.getOut();
+    //  s:if
+    org.apache.struts2.views.jsp.IfTag _jspx_th_s_if_1 = (org.apache.struts2.views.jsp.IfTag) _jspx_tagPool_s_if_test.get(org.apache.struts2.views.jsp.IfTag.class);
+    _jspx_th_s_if_1.setPageContext(_jspx_page_context);
+    _jspx_th_s_if_1.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_s_form_0);
+    _jspx_th_s_if_1.setTest("hasActionMessages()");
+    int _jspx_eval_s_if_1 = _jspx_th_s_if_1.doStartTag();
+    if (_jspx_eval_s_if_1 != javax.servlet.jsp.tagext.Tag.SKIP_BODY) {
+      if (_jspx_eval_s_if_1 != javax.servlet.jsp.tagext.Tag.EVAL_BODY_INCLUDE) {
+        out = _jspx_page_context.pushBody();
+        _jspx_th_s_if_1.setBodyContent((javax.servlet.jsp.tagext.BodyContent) out);
+        _jspx_th_s_if_1.doInitBody();
+      }
+      do {
+        out.write("\r\n");
+        out.write("                                    ");
+        if (_jspx_meth_s_actionmessage_0((javax.servlet.jsp.tagext.JspTag) _jspx_th_s_if_1, _jspx_page_context))
+          return true;
+        out.write("\r\n");
+        out.write("                                ");
+        int evalDoAfterBody = _jspx_th_s_if_1.doAfterBody();
+        if (evalDoAfterBody != javax.servlet.jsp.tagext.BodyTag.EVAL_BODY_AGAIN)
+          break;
+      } while (true);
+      if (_jspx_eval_s_if_1 != javax.servlet.jsp.tagext.Tag.EVAL_BODY_INCLUDE)
+        out = _jspx_page_context.popBody();
+    }
+    if (_jspx_th_s_if_1.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
+      _jspx_tagPool_s_if_test.reuse(_jspx_th_s_if_1);
+      return true;
+    }
+    _jspx_tagPool_s_if_test.reuse(_jspx_th_s_if_1);
+    return false;
+  }
+
+  private boolean _jspx_meth_s_actionmessage_0(javax.servlet.jsp.tagext.JspTag _jspx_th_s_if_1, PageContext _jspx_page_context)
+          throws Throwable {
+    PageContext pageContext = _jspx_page_context;
+    JspWriter out = _jspx_page_context.getOut();
+    //  s:actionmessage
+    org.apache.struts2.views.jsp.ui.ActionMessageTag _jspx_th_s_actionmessage_0 = (org.apache.struts2.views.jsp.ui.ActionMessageTag) _jspx_tagPool_s_actionmessage_cssClass_nobody.get(org.apache.struts2.views.jsp.ui.ActionMessageTag.class);
+    _jspx_th_s_actionmessage_0.setPageContext(_jspx_page_context);
+    _jspx_th_s_actionmessage_0.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_s_if_1);
+    _jspx_th_s_actionmessage_0.setCssClass("errorMessage text-center text-success mr-5");
+    int _jspx_eval_s_actionmessage_0 = _jspx_th_s_actionmessage_0.doStartTag();
+    if (_jspx_th_s_actionmessage_0.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
+      _jspx_tagPool_s_actionmessage_cssClass_nobody.reuse(_jspx_th_s_actionmessage_0);
+      return true;
+    }
+    _jspx_tagPool_s_actionmessage_cssClass_nobody.reuse(_jspx_th_s_actionmessage_0);
     return false;
   }
 }

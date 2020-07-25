@@ -116,6 +116,7 @@ public class ProductoAction extends ActionSupport implements SessionAware{
         this.proSer = proSer;
     }
 
+    
     @Action(value = "listarProducto", results = {
         @Result(name = "ok", location = "/admin/principal/producto.jsp")
         ,

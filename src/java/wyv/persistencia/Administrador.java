@@ -17,7 +17,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author bdeg_
+ * @author Romario
  */
 @Entity
 @Table(name = "administrador")
@@ -29,7 +29,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Administrador.findByApellidos", query = "SELECT a FROM Administrador a WHERE a.apellidos = :apellidos")
     , @NamedQuery(name = "Administrador.findByPassword", query = "SELECT a FROM Administrador a WHERE a.password = :password")
     , @NamedQuery(name = "Administrador.findByEmail", query = "SELECT a FROM Administrador a WHERE a.email = :email")
-    , @NamedQuery(name = "Administrador.findByPrivilegio", query = "SELECT a FROM Administrador a WHERE a.privilegio = :privilegio")})
+    , @NamedQuery(name = "Administrador.findByPrivilegio", query = "SELECT a FROM Administrador a WHERE a.privilegio = :privilegio")
+    , @NamedQuery(name = "Administrador.findByCodigoGenerado", query = "SELECT a FROM Administrador a WHERE a.codigoGenerado = :codigoGenerado")})
 public class Administrador implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -39,7 +40,6 @@ public class Administrador implements Serializable {
     private String dni;
     @Column(name = "nombres")
     private String nombres;
-    @Basic(optional = false)
     @Column(name = "apellidos")
     private String apellidos;
     @Column(name = "password")
@@ -48,6 +48,9 @@ public class Administrador implements Serializable {
     private String email;
     @Column(name = "privilegio")
     private Character privilegio;
+    @Basic(optional = false)
+    @Column(name = "codigo_generado")
+    private String codigoGenerado;
 
     public Administrador() {
     }
@@ -56,9 +59,9 @@ public class Administrador implements Serializable {
         this.dni = dni;
     }
 
-    public Administrador(String dni, String apellidos) {
+    public Administrador(String dni, String codigoGenerado) {
         this.dni = dni;
-        this.apellidos = apellidos;
+        this.codigoGenerado = codigoGenerado;
     }
 
     public String getDni() {
@@ -107,6 +110,14 @@ public class Administrador implements Serializable {
 
     public void setPrivilegio(Character privilegio) {
         this.privilegio = privilegio;
+    }
+
+    public String getCodigoGenerado() {
+        return codigoGenerado;
+    }
+
+    public void setCodigoGenerado(String codigoGenerado) {
+        this.codigoGenerado = codigoGenerado;
     }
 
     @Override

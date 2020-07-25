@@ -27,7 +27,7 @@ import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.interceptor.SessionAware;
 
 import wyv.negocio.Linea;
-import wyv.negocio.VentaObj;
+import wyv.negocio.PedidoObj;
 import wyv.servicios.PedidoServicio;
 import wyv.persistencia.Pedido;
 import wyv.persistencia.DetallePedido;
@@ -230,7 +230,7 @@ public class PedidoAction extends ActionSupport implements SessionAware {
             
             
              pedSer = new PedidoServicio();
-             VentaObj ven = new VentaObj();
+             PedidoObj ven = new PedidoObj();
              clieObj.getIdCli();
              ven.setCli(clieObj);
              ven.getFec();
@@ -247,7 +247,6 @@ public class PedidoAction extends ActionSupport implements SessionAware {
     @Action(value = "listarPedidoPorCliente", results = {})
     public void listarPedidoPorCliente() {
         try {
-
             HttpServletResponse response = ServletActionContext.getResponse();
             HttpServletRequest request = ServletActionContext.getRequest();
             PrintWriter out = response.getWriter();
@@ -255,15 +254,13 @@ public class PedidoAction extends ActionSupport implements SessionAware {
             lstDetalle = new PedidoServicio().listarDPedidoPorCliente(idCliente);
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
             String json = gson.toJson(lstDetalle);
-
             out.print(json);
+            
         } catch (Exception e) {
             resultado = "Error en: listarCate :: " + e.getMessage();
-
         }
     }
     
-
     @Action(value = "AgregarCarrito", results = {
         @Result(name = "ok", location = "/index.jsp")
         ,
@@ -272,7 +269,7 @@ public class PedidoAction extends ActionSupport implements SessionAware {
     })
     public String AgregarCarrito() {
         try {
-            VentaObj ven = new VentaObj();
+            PedidoObj ven = new PedidoObj();
             if (sesion.get("lstLinea") == null) {
 
                 ven.agregar(proObj, 1);
@@ -325,7 +322,7 @@ public class PedidoAction extends ActionSupport implements SessionAware {
     public String QuitarDelCarro() {
         try {
 
-            VentaObj ven = new VentaObj();
+            PedidoObj ven = new PedidoObj();
             ven.quitar(proObj.idProducto);
             lstLinea = ven.getCesta();
             subtotal = ven.getSubTot();
@@ -373,7 +370,7 @@ public class PedidoAction extends ActionSupport implements SessionAware {
                     }
                 }
             }
-            VentaObj ven = new VentaObj();
+            PedidoObj ven = new PedidoObj();
             lstLinea = ven.getCesta();
             subtotal = ven.getSubTot();
             igv = Math.round(ven.getValorIgv() *100) / 100;

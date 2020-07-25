@@ -2,7 +2,7 @@ package wyv.persistencia;
 
 import java.util.List;
 import wyv.negocio.Linea;
-import wyv.negocio.VentaObj;
+import wyv.negocio.PedidoObj;
 
 public class PedidoDao {
 
@@ -10,10 +10,9 @@ public class PedidoDao {
     DetallePedidoJpa detaJpa=new DetallePedidoJpa();
 
 
-    public String registrar(VentaObj ven) {
+    public String registrar(PedidoObj ven) {
         String msg=null;
         Pedido pedido=new Pedido();
-        
         Cliente clie=new Cliente();
         clie.setIdCliente(Integer.parseInt(ven.getCli().getIdCli()));
         

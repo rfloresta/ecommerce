@@ -131,7 +131,7 @@
                 </span>
             </div>
             <div class="">
-                <s:hidden name="clieObj.idCli" value="%{#session.idClie}"  id="idCliente"/>
+                <s:hidden name="clieObj.idCli" value="%{#session.id}"  id="idCliente"/>
                 <s:submit id="registrarVen" cssClass="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4 py-2" value="Continuar con el proceso"></s:submit>
             </div>
 
