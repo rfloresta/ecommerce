@@ -55,7 +55,7 @@ public class CategoriaServicio implements IOperacionesBD<Categoria> {
     }
 
     @Override
-    public Categoria ingresar(Categoria entrada) {
+    public Categoria validar(Categoria entrada) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

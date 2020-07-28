@@ -17,6 +17,7 @@ import wyv.persistencia.IOperacionesBD;
 public class ClienteServicio implements  IOperacionesBD<Cliente>{
     
     ClienteDao clieDao;
+    Cliente cliente;
 
     public void setClieDao(ClienteDao clieDao) {
         this.clieDao = clieDao;
@@ -60,8 +61,20 @@ public class ClienteServicio implements  IOperacionesBD<Cliente>{
     }
 
     @Override
-    public Cliente ingresar(Cliente entrada) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Cliente validar(Cliente entrada) {
+         clieDao = new ClienteDao();
+        cliente = clieDao.validar(entrada);
+        try {
+            if (cliente != null) {
+            if (cliente.getEmail().equals(entrada.getEmail())) {
+                return cliente;
+            }
+        }
+        } catch (Exception e) {
+             System.out.println(e.getMessage());
+             return null;
+        }
+        return null;
     }
     
     public String registrarse(Cliente a) {
@@ -70,4 +83,15 @@ public class ClienteServicio implements  IOperacionesBD<Cliente>{
         return "ok";
         
     }
+    
+    public Cliente validarEmail(String email){
+            List<Cliente> lstClie = listar();
+            for (Cliente c : lstClie) {
+                if (c.getEmail().equals(email)) {
+                    return c;
+                } 
+            }
+            return null;
+        }
+     
 }

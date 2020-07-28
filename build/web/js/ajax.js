@@ -1,9 +1,8 @@
 $('.btnDatosClie').on('click', function () {
-    var idClie = $('#idClie').val();
-    console.log(idClie);
+    var idCliente = $('#idClie').val();
     $.ajax({
         type: 'POST',
-        url: 'buscarCliePerfil.action?idClie=' + idClie,
+        url: 'buscarCliePerfil.action?idClie=' + idCliente,
         success: function (respuesta) {
             var json = JSON.parse(respuesta);
             console.log(json);
@@ -12,23 +11,23 @@ $('.btnDatosClie').on('click', function () {
             var direccion = json.direccion == null ? '' : json.direccion;
 
             $('#div-contenido').html("\n\
-            <h3 class='mb-5 mt-5'>Datos Personales</h3>\n\
+            <h3 class='mb-4'>Datos Personales</h3>\n\
             <div class='row' >\n\
             <div class='col-6'>\n\
             <label class='text-start'>Nombre</label>\n\
-            <input  type='text' id='nombre' class='form-control mb-5' value='" + json.nombres + "'>\n\
+            <input  type='text' id='nombre' class='form-control mb-3' value='" + json.nombres + "'>\n\
             <label>Dni</label>\n\
-            <input  type='text' id='dni' class='form-control mb-5' value='" + dni + "'>\n\
+            <input  type='text' id='dni' class='form-control mb-3' value='" + dni + "'>\n\
             </div>\n\
             <div class='col-6'>\n\
             <label>Apellidos</label>\n\
-            <input  type='text' id='apellido' class='form-control mb-5' value='" + json.apellidos + "'>\n\
+            <input  type='text' id='apellido' class='form-control mb-3' value='" + json.apellidos + "'>\n\
             <label>Celular</label>\n\
-            <input  type='text' id='numCelular' class='form-control mb-5' value='" + numCelular + "'>\n\
+            <input  type='text' id='numCelular' class='form-control mb-3' value='" + numCelular + "'>\n\
             </div>\n\
             <div class='col-6'>\n\
             <label>Direccion</label>\n\
-            <input  type='text' id='direccion' class='form-control mb-5' value='" + direccion + "'>\n\
+            <input  type='text' id='direccion' class='form-control mb-3' value='" + direccion + "'>\n\
             </div>\n\
             <div class='col-6'>\n\
             <label>Email</label>\n\
@@ -43,43 +42,44 @@ $('.btnDatosClie').on('click', function () {
 
 });
 
-$('#btnBuscarPass').on('click', function () {
-   var idClie = $('#idClie').val();
-    console.log(idClie);
-    $.ajax({
-        type: 'POST',
-        url: 'buscarCliePerfil.action?idClie=' + idClie,
-        success: function (respuesta) {
-            var json = JSON.parse(respuesta);
-            $('#div-contenido').html("\n\
-             <h3 class='mb-3 mt-3'>Cambiar Contrase&ntilde;a</h3>\n\
-                 <div class='row'>\n\
-                        <div class='col-md-12'>\n\
-                            <div class='form-group'>\n\
-                            <input  type='hidden' id='nombre' class='form-control mb-5' value='" + json.nombres + "'>\n\
-                            <input  type='hidden' id='dni' class='form-control mb-5' value='" + json.dni + "'>\n\
-                            <input  type='hidden' id='apellido' class='form-control mb-5' value='" + json.apellidos + "'>\n\
-                            <input  type='hidden' id='numCelular' class='form-control mb-5' value='" + json.numCelular + "'>\n\
-                            <input  type='hidden' id='direccion' class='form-control mb-5' value='" + json.direccion + "'>\n\
-                            <input  type='hidden' id='email' class='form-control mb-5' value='" + json.email + "'>\n\
-                            <label>Contrase&ntilde;a Actual</label>\n\
-                            <input type='password' name='password' class='form-control' />\n\
-                            </div>\n\
-                            <div class='form-group'>\n\
-                            <label>Nueva Contrase&ntilde;a</label>\n\
-                            <input type='password'  name='password2' class='form-control' />\n\
-                            </div>\n\
-                       <div class='form-group'>\n\
-                            <label>Confirmar Nueva Contrase&ntilde;a</label>\n\
-                             <input type='password' id='contrasena' name='password2' class='form-control' />\n\
-                        </div>\n\
-                        <div class='text-center pb-4'>\n\
-                            <input type='submit'  onclick='ActualizarDatos()' class='actuaInfo btn btn-warning' value='Enviar' />\n\
-                        </div>\n\
-                        </div>\n\
-                    </div>");
-        }});
-});
+//$('#btnBuscarPass').on('click', function () {
+//   var idClie = $('#idClie').val();
+//    console.log(idClie);
+//    $.ajax({
+//        type: 'POST',
+//        url: 'buscarCliePerfil.action?idClie=' + idClie,
+//        success: function (respuesta) {
+//            var json = JSON.parse(respuesta);
+//            $('#div-contenido').html("\n\
+//             <h3 class='mb-3 mt-3'>Cambiar Contrase&ntilde;a</h3>\n\
+//                 <div class='row'>\n\
+//                        <div class='col-md-12'>\n\
+//                            <div class='form-group'>\n\
+//                            <input  type='hidden' id='nombre' class='form-control mb-5' value='" + json.nombres + "'>\n\
+//                            <input  type='hidden' id='dni' class='form-control mb-5' value='" + json.dni + "'>\n\
+//                            <input  type='hidden' id='apellido' class='form-control mb-5' value='" + json.apellidos + "'>\n\
+//                            <input  type='hidden' id='numCelular' class='form-control mb-5' value='" + json.numCelular + "'>\n\
+//                            <input  type='hidden' id='direccion' class='form-control mb-5' value='" + json.direccion + "'>\n\
+//                            <input  type='hidden' id='email' class='form-control mb-5' value='" + json.email + "'>\n\
+//                            <label>Contrase&ntilde;a Actual</label>\n\
+//                            <input type='password' name='password' class='form-control' />\n\
+//                            </div>\n\
+//                            <div class='form-group'>\n\
+//                            <label>Nueva Contrase&ntilde;a</label>\n\
+//                            <input type='password'  name='password2' class='form-control' />\n\
+//                            </div>\n\
+//                       <div class='form-group'>\n\
+//                            <label>Confirmar Nueva Contrase&ntilde;a</label>\n\
+//                             <input type='password' id='contrasena' name='password2' class='form-control' />\n\
+//                        </div>\n\
+//                        <div class='text-center pb-4'>\n\
+//                            <input type='submit'  onclick='ActualizarDatos()' class='actuaInfo btn btn-warning' value='Enviar' />\n\
+//                        </div>\n\
+//                        </div>\n\
+//                    </div>");
+//        }});
+//});
+
 
 
 function ActualizarDatos() {
@@ -104,9 +104,6 @@ function ActualizarDatos() {
         }});
 }
 
-
-
-
 $('.btnPedidoClie').on('click', function () {
     var idClie = $('#idClie').val();
     console.log(idClie);
@@ -120,9 +117,9 @@ $('.btnPedidoClie').on('click', function () {
             json.forEach(pedido => {
                 lista += "<div class='row'>\n\
                         <div class='col-6'>\n\
-                            <h3>Numero de Orden: <span>" + pedido.pedido.numero + "</span></h3>\n\
+                            <h3 class='text-bold'>Numero de Orden: <span>" + pedido.pedido.numero + "</span></h3>\n\
                             <div class='detalle my-3'>\n\
-                                <img class='img-fluid img-pro-pefil' src='imagenes/" + pedido.producto.imagen + "'>\n\
+                                <img class='img-fluid img-pro-pefil' src='<%=request.getContextPath()%>/admin/imagenes/" + pedido.producto.imagen + "'>\n\
                                 <div class='d-inline-block ml-2'>\n\
                                     <h4 class='mb-2'>" + pedido.producto.nombre + "</h4>\n\
                                     <span class='text-success'>" + pedido.producto.precioVenta + "</span>\n\
@@ -145,3 +142,12 @@ $('.btnPedidoClie').on('click', function () {
     });
 
 });
+
+ $(function () {
+     $("#btnCambiarPass").click(function (event)
+     {
+        event.preventDefault();
+      $("#div-contenido").load($(this).attr('href'));
+     }
+     );
+ });

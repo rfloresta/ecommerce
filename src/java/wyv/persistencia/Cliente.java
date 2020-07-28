@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package wyv.persistencia;
 
 import java.io.Serializable;
@@ -20,10 +15,6 @@ import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
-/**
- *
- * @author bdeg_
- */
 @Entity
 @Table(name = "cliente")
 @XmlRootElement
@@ -36,7 +27,8 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Cliente.findByNumCelular", query = "SELECT c FROM Cliente c WHERE c.numCelular = :numCelular")
     , @NamedQuery(name = "Cliente.findByDireccion", query = "SELECT c FROM Cliente c WHERE c.direccion = :direccion")
     , @NamedQuery(name = "Cliente.findByEmail", query = "SELECT c FROM Cliente c WHERE c.email = :email")
-    , @NamedQuery(name = "Cliente.findByPassword", query = "SELECT c FROM Cliente c WHERE c.password = :password")})
+    , @NamedQuery(name = "Cliente.findByPassword", query = "SELECT c FROM Cliente c WHERE c.password = :password")
+    , @NamedQuery(name = "Cliente.findByCodigoGenerado", query = "SELECT c FROM Cliente c WHERE c.codigoGenerado = :codigoGenerado")})
 public class Cliente implements Serializable {
 
     @OneToMany(mappedBy = "idCliente")
@@ -62,12 +54,20 @@ public class Cliente implements Serializable {
     private String email;
     @Column(name = "password")
     private String password;
+    @Basic(optional = false)
+    @Column(name = "codigo_generado")
+    private String codigoGenerado;
 
     public Cliente() {
     }
 
     public Cliente(Integer idCliente) {
         this.idCliente = idCliente;
+    }
+
+    public Cliente(Integer idCliente, String codigoGenerado) {
+        this.idCliente = idCliente;
+        this.codigoGenerado = codigoGenerado;
     }
 
     public Integer getIdCliente() {
@@ -134,6 +134,14 @@ public class Cliente implements Serializable {
         this.password = password;
     }
 
+    public String getCodigoGenerado() {
+        return codigoGenerado;
+    }
+
+    public void setCodigoGenerado(String codigoGenerado) {
+        this.codigoGenerado = codigoGenerado;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -162,7 +170,7 @@ public class Cliente implements Serializable {
     @XmlTransient
     public List<Pedido> getPedidoList() {
         return pedidoList;
-    }
+}
 
     public void setPedidoList(List<Pedido> pedidoList) {
         this.pedidoList = pedidoList;

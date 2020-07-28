@@ -7,7 +7,7 @@ import wyv.persistencia.PedidoDao;
 
 
 
-public class VentaObj {
+public class PedidoObj {
     private static List<Linea> cesta=new ArrayList(); 
     private String num;
     private String fec;

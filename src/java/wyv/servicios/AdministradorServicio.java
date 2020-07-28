@@ -1,23 +1,19 @@
 package wyv.servicios;
 
 import java.util.List;
+import java.util.Map;
+import static wyv.action.Encriptacion.Desencriptar;
 
 import wyv.persistencia.Administrador;
 import wyv.persistencia.AdministradorDao;
 import wyv.persistencia.IOperacionesBD;
-import java.security.MessageDigest;
-import java.util.Arrays;
-import java.util.Map;
-import javax.crypto.Cipher;
-import javax.crypto.SecretKey;
-import javax.crypto.spec.SecretKeySpec;
-import org.apache.commons.codec.binary.Base64;
 
 public class AdministradorServicio implements IOperacionesBD<Administrador> {
 
     AdministradorDao admDao;
     Administrador admin;
 
+    private List<Administrador> lstAdmin;
     public void setAdmDao(AdministradorDao admDao) {
         this.admDao = admDao;
     }
@@ -25,22 +21,12 @@ public class AdministradorServicio implements IOperacionesBD<Administrador> {
     @Override
     public String registrar(Administrador a) {
         admDao = new AdministradorDao();
-        admin = new Administrador();
-        admin.setDni(a.getDni());
-        admin.setNombres(a.getNombres());
-        admin.setApellidos(a.getApellidos());
-        //Mandamos password encriptado
-        String passEncryp = Encriptar(a.getPassword());
-        admin.setPassword(passEncryp);
-        // Fin de password encriptado
-        admin.setPrivilegio(a.getPrivilegio());
-        return admDao.registrar(admin);
+        return admDao.registrar(a);
     }
 
     @Override
     public String actualizar(Administrador a) {
         admDao = new AdministradorDao();
-
         return admDao.actualizar(a);
 
     }
@@ -66,20 +52,18 @@ public class AdministradorServicio implements IOperacionesBD<Administrador> {
     }
 
     @Override
-    public Administrador ingresar(Administrador entrada) {
+    public Administrador validar(Administrador entrada) {
         admDao = new AdministradorDao();
-        admin = admDao.ingresar(entrada);
+        admin = admDao.validar(entrada);
         try {
             if (admin != null) {
-            //Se desincrepta el password para poder validarlo con la entrada.
-            String passDesencriptado= Desencriptar(admin.getPassword());
-                
+                String passDesencriptado= Desencriptar(admin.getPassword());
             if (passDesencriptado.equals(entrada.getPassword())) {
-                
                 return admin;
             }
         }
         } catch (Exception e) {
+             System.out.println(e.getMessage());
              return null;
         }
         return null;
@@ -116,54 +100,28 @@ public class AdministradorServicio implements IOperacionesBD<Administrador> {
         return admDao.ContarPedido();
     }
     
-
-    public static String Encriptar(String texto) {
-        String secretKey = "llaveencriptacion"; //llave para encriptar datos
-
-        String base64EncryptedString = "";
-
-        try {
-
-            MessageDigest md = MessageDigest.getInstance("MD5");
-            byte[] digestOfPassword = md.digest(secretKey.getBytes("utf-8"));
-            byte[] keyBytes = Arrays.copyOf(digestOfPassword, 24);
-
-            SecretKey key = new SecretKeySpec(keyBytes, "DESede");
-            Cipher cipher = Cipher.getInstance("DESede");
-            cipher.init(Cipher.ENCRYPT_MODE, key);
-
-            byte[] plainTextBytes = texto.getBytes("utf-8");
-            byte[] buf = cipher.doFinal(plainTextBytes);
-            byte[] base64Bytes = Base64.encodeBase64(buf);
-            base64EncryptedString = new String(base64Bytes);
-
-        } catch (Exception ex) {
+   public Administrador validarEmail(String email){
+            lstAdmin = listar();
+            for (Administrador a : lstAdmin) {
+                if (a.getEmail().equals(email)) {
+                    return a;
+                } 
+            }
+            return null;
         }
-        return base64EncryptedString;
-    }
-
-    public static String Desencriptar(String textoEncriptado) throws Exception {
-        String secretKey = "llaveencriptacion"; //llave para encriptar datos
-
-        String base64EncryptedString = "";
-
+   public String comparar(Administrador entrada) {
         try {
-            byte[] message = Base64.decodeBase64(textoEncriptado.getBytes("utf-8"));
-            MessageDigest md = MessageDigest.getInstance("MD5");
-            byte[] digestOfPassword = md.digest(secretKey.getBytes("utf-8"));
-            byte[] keyBytes = Arrays.copyOf(digestOfPassword, 24);
-            SecretKey key = new SecretKeySpec(keyBytes, "DESede");
-
-            Cipher decipher = Cipher.getInstance("DESede");
-            decipher.init(Cipher.DECRYPT_MODE, key);
-
-            byte[] plainText = decipher.doFinal(message);
-
-            base64EncryptedString = new String(plainText, "UTF-8");
-
-        } catch (Exception ex) {
+            admDao = new AdministradorDao();
+            admin = admDao.buscar(entrada.getDni());
+            if (admin != null) {
+                if (admin.getCodigoGenerado().equals(entrada.getCodigoGenerado())) {
+                    return "ok";
+                }
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return null;
         }
-        return base64EncryptedString;
+        return null;
     }
-
 }

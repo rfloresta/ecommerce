@@ -90,6 +90,10 @@
                                     <tfoot>
                                         <tr>
                                             <th>Nombre</th>
+<<<<<<< HEAD
+=======
+                                            <th>Descripcion</th>
+>>>>>>> 65345ee6f52115baac334b64693a6f6b4473bdff
                                             <th>Opciones</th>
                                         </tr>
                                     </tfoot>

@@ -1,6 +1,5 @@
 package wyv.persistencia;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public interface IOperacionesBD<T> {
@@ -10,7 +9,7 @@ public interface IOperacionesBD<T> {
 	 String eliminar(String id);
 	 T buscar(String id);
 	 List<T> listar();
-         T ingresar(T entrada);
+         T validar (T entrada);
     
 }
 

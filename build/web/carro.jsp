@@ -136,8 +136,17 @@
                     <s:hidden value="%{#session.total}"  id="totalPay"/>
                     <s:hidden value="%{#session.subtotal}"  id="subtotalPay"/>
                     
+<<<<<<< HEAD
                     <%@include  file="checkout.jsp" %>
                 </div>
+=======
+                </span>
+            </div>
+            <div class="">
+                <s:hidden name="clieObj.idCli" value="%{#session.id}"  id="idCliente"/>
+                <s:submit id="registrarVen" cssClass="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4 py-2" value="Continuar con el proceso"></s:submit>
+            </div>
+>>>>>>> 65345ee6f52115baac334b64693a6f6b4473bdff
 
 
                 </div>

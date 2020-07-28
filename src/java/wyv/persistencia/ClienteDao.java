@@ -76,8 +76,8 @@ public class ClienteDao implements IOperacionesBD<Cliente>{
     }
 
     @Override
-    public Cliente ingresar(Cliente entrada) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Cliente validar(Cliente entrada) {
+        return clieJpa.findCliente(entrada.getIdCliente());
     }
     
 }
