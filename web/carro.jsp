@@ -1,9 +1,10 @@
 <%@include file="header.jsp" %>
+ <script src="https://www.paypalobjects.com/api/checkout.js"></script>
 <!-- Title Page -->
 <section class="bg-title-page p-t-40 p-b-50 flex-col-c-m" style="background-image: url(imagenes/cart.jpg);">
     <h2 class="l-text2 t-center">
         Mis Pedidos
-        
+
     </h2>
 </section>
 
@@ -40,8 +41,8 @@
                                     <s:a href="%{LnkDisminuir}" cssClass="%{(can <= 1)? 'disminuir': ''} color1 flex-c-m size7 bg8 eff2">
                                         <i class="fs-12 fa fa-minus" aria-hidden="true"></i>
                                     </s:a>
-                                        
-                                        <input class="size8 m-text18 t-center num-product" type="number" name="num-product1" disabled="disabled" value="<s:property value="can" />">
+
+                                    <input class="size8 m-text18 t-center num-product" type="number" name="num-product1" disabled="disabled" value="<s:property value="can" />">
                                     <s:url var="LnkAumentar" action="actualizarCantidadCar" >
                                         <s:param value="proObj.idProducto" name="proObj.idProducto" />
                                         <s:param value="true" name="aumentarCar" />
@@ -84,60 +85,64 @@
         </div>
 
         <!-- Total -->
-        <s:form id="registrarPedido" action="registrarPedido" theme="simple">
-        <div class="bo9 w-size18 p-l-40 p-r-40 p-t-30 p-b-38 m-t-30 m-r-0 m-l-auto p-lr-15-sm">
-            <h5 class="m-text20 p-b-24">
-                Total de los acticulos
-            </h5>
+       
+            <div class="bo9 w-size18 p-l-40 p-r-40 p-t-30 p-b-38 m-t-30 m-r-0 m-l-auto p-lr-15-sm">
+                <h5 class="m-text20 p-b-24">
+                    Total de los acticulos
+                </h5>
 
-            <!--  -->
-            <div class="flex-w flex-sb-m p-b-12">
-                <span class="s-text18 w-size19 w-full-sm">
-                    Subtotal:
-                </span>
+                <!--  -->
+                <div class="flex-w flex-sb-m p-b-12">
+                    <span class="s-text18 w-size19 w-full-sm">
+                        Subtotal:
+                    </span>
 
-                <span class="m-text21 w-size20 w-full-sm">
-                    $/<s:property value="#session.subtotal" />
-                </span>
-            </div>
-            <div class="flex-w flex-sb-m p-b-12">
-                <span class="s-text18 w-size19 w-full-sm">
-                    Descuento:
-                </span>
+                    <span class="m-text21 w-size20 w-full-sm">
+                        $/<s:property value="#session.subtotal" />
+                    </span>
+                </div>
+                <div class="flex-w flex-sb-m p-b-12">
+                    <span class="s-text18 w-size19 w-full-sm">
+                        Descuento:
+                    </span>
 
-                <span class="m-text21 w-size20 w-full-sm">
-                    $/<s:property value="#session.descuento" />
-                </span>
-            </div>
-                
-            <div class="flex-w flex-sb-m p-b-12">
-                <span class="s-text18 w-size19 w-full-sm">
-                    Igv:
-                </span>
+                    <span class="m-text21 w-size20 w-full-sm">
+                        $/<s:property value="#session.descuento" />
+                    </span>
+                </div>
 
-                <span class="m-text21 w-size20 w-full-sm">
-                    $/<s:property value="#session.igv" />
-                </span>
-            </div>
-                
-            <div class="flex-w flex-sb-m p-b-12">
-                <span class="s-text18 w-size19 w-full-sm">
-                    Total:
-                </span>
+                <div class="flex-w flex-sb-m p-b-12">
+                    <span class="s-text18 w-size19 w-full-sm">
+                        Igv:
+                    </span>
 
-                <span class="m-text21 w-size20 w-full-sm">
-                    $/<s:property value="#session.total" />
+                    <span class="m-text21 w-size20 w-full-sm">
+                        $/<s:property value="#session.igv" />
+                    </span>
+                </div>
+
+                <div class="flex-w flex-sb-m p-b-12">
+                    <span class="s-text18 w-size19 w-full-sm">
+                        Total:
+                    </span>
+
+                    <span class="m-text21 w-size20 w-full-sm">
+                        $/<s:property value="#session.total" />
+
+                    </span>
+                </div>
+                <div class="">
+                    <s:hidden name="clieObj.idCli" value="%{#session.idClie}"  id="idCliente"/>
+                    <s:hidden value="%{#session.total}"  id="totalPay"/>
+                    <s:hidden value="%{#session.subtotal}"  id="subtotalPay"/>
                     
-                </span>
-            </div>
-            <div class="">
-                <s:hidden name="clieObj.idCli" value="%{#session.idClie}"  id="idCliente"/>
-                <s:submit id="registrarVen" cssClass="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4 py-2" value="Continuar con el proceso"></s:submit>
-            </div>
+                    <%@include  file="checkout.jsp" %>
+                </div>
 
-           
-        </div>
-            </s:form>
+
+                </div>
+  
+        
     </div>
 </section>
 

@@ -18,6 +18,10 @@
         <max-file-size>20848820</max-file-size>
         <file-size-threshold>1048576</file-size-threshold>
     </multipart-config>
+    <context-param>
+        <param-name>urlpaypal</param-name>
+        <param-value>https://www.sandbox.paypal.com/cgi-bin/webscr</param-value>
+    </context-param>
     <filter>
         <filter-name>struts2</filter-name>
         <filter-class>org.apache.struts2.dispatcher.FilterDispatcher</filter-class>

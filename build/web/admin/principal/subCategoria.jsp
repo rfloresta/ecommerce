@@ -5,12 +5,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="font-weight-bold ">Mantenimiento SubCategoria</h1>
+                    <h1 class="font-weight-bold ">Mantenimiento Categoria</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-                        <li class="breadcrumb-item active">SubCategorias</li>
+                        <li class="breadcrumb-item active">Categorias</li>
                     </ol>
                 </div>  
             </div>
@@ -41,6 +41,13 @@
 
                                     <s:textfield  name="categoria.nombre" cssClass="form-control" placeholder="Ingrese Nombre" />
                                 </div>
+                                 <div class="form-group">
+                                    <label for="inputNombre">Categoría</label>
+                                    <s:select list="lstCate" headerKey="0" 
+                                              headerValue="[--Seleccione--]" name="producto.idCategoria.idCategoria"
+                                              listKey="idCategoria" listValue="nombre"
+                                              label="Categoría" cssClass="form-control"  />
+                                </div>
                               
 
                             </div>
@@ -67,10 +74,10 @@
                                         </tr> 
                                     </thead>     
                                     <tbody>
-                                        <s:iterator value="lstCate">
+                                        <s:iterator value="lstSubCate">
                                             <tr>
-                                                <td><s:property value="nombre"/></td>  
-
+                                                <td><s:property value="nombre"/></td> 
+                                              
                                                 <td>
                                                     <s:url id="lnkEditar" action="editarCate">
                                                         <s:param value="idCategoria" name="categoria.idCategoria" />

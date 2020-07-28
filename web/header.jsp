@@ -38,6 +38,7 @@
         <link href="css/icheck-bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <!--===============================================================================================-->
         <link href="css/toastr.min.css" rel="stylesheet" type="text/css"/>
+        
     </head>
     <body class="">
 
@@ -86,7 +87,7 @@
                                             <s:param value="#session.idClie" name="cliente.idCliente"/>                
                                         </s:url>
                                         <s:a  href="%{lnkbuscar}" cssClass="dropdown-item">Mi cuenta</s:a>
-                                            <button type="button" class="dropdown-item">Cerrar Sesión</button>
+                                        <s:a href="cerrarSesionClie" cssClass="dropdown-item">Cerrar Sesión</s:a>
 
                                     </s:elseif>
                                     <s:else>
@@ -108,9 +109,9 @@
                                         0
                                     </s:if>
                                     <s:else>
-                                            <s:property value="#session.cantidadCart"/>
+                                        <s:property value="#session.cantidadCart"/>
                                     </s:else>
-                                
+
                                 </span>
 
                                 <!--Contenido de Carrito de compras-->
@@ -132,17 +133,17 @@
                                                         <s:property value="can" /> x <s:property value="proObj.precioVenta" />
                                                     </span>
                                                 </div>
-                                                    
-                                                    <div>
-                                                         <s:url var="LnkQuitar" action="QuitarDelCarro" >
-                                                            <s:param value="proObj.idProducto" name="proObj.idProducto" /> 
-                                                        </s:url>
-                                                        <s:a href="%{LnkQuitar}">
-                                                            <i class="fas fa-times"></i>
-                                                        </s:a>
-                                                    
-                                                    
-                                                    </div>
+
+                                                <div>
+                                                    <s:url var="LnkQuitar" action="QuitarDelCarro" >
+                                                        <s:param value="proObj.idProducto" name="proObj.idProducto" /> 
+                                                    </s:url>
+                                                    <s:a href="%{LnkQuitar}">
+                                                        <i class="fas fa-times"></i>
+                                                    </s:a>
+
+
+                                                </div>
                                             </li>   
 
                                         </s:iterator>
@@ -160,7 +161,7 @@
                                             </a>
                                         </div>
 
-                                       
+
                                     </div>
                                 </div>
                             </div>

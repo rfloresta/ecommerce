@@ -17,6 +17,7 @@ public class CategoriaAction extends ActionSupport{
     private String resultado;
     private Categoria categoria;
     private List<Categoria> lstCate;
+    private List<Categoria> lstSubCate;
     private int edit;
 
    
@@ -37,6 +38,10 @@ public class CategoriaAction extends ActionSupport{
         return lstCate;
     }
 
+    public List<Categoria> getLstSubCate() {
+        return lstSubCate;
+    }
+
 
     public int getEdit() {
         return edit;
@@ -55,7 +60,24 @@ public class CategoriaAction extends ActionSupport{
     public String listarCate() {
         try {
             catSer=new CategoriaServicio();
-            lstCate = catSer.listar();
+            lstCate = catSer.listarCategoria();
+            return "ok";
+        } catch (Exception e) {
+            resultado = "Error en: listarCate :: " + e.getMessage();
+            return "error";
+        }
+    }
+    
+    @Action(value = "listarSubCate", results = {
+        @Result(name = "ok", location = "/admin/principal/subCategoria.jsp"),
+	@Result(name = "error", location = "admin/error.jsp")
+
+    })
+    public String listarSubCate() {
+        try {
+            catSer=new CategoriaServicio();
+            lstSubCate = catSer.listarsubCategoria();
+            lstCate = catSer.listarCategoria();
             return "ok";
         } catch (Exception e) {
             resultado = "Error en: listarCate :: " + e.getMessage();

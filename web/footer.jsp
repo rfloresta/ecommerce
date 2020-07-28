@@ -169,33 +169,30 @@
     $(".selection-1").select2({
         minimumResultsForSearch: 20,
         dropdownParent: $('#dropDownSelect1')
-    });
-</script>
+    });</script>
 <!--===============================================================================================-->
-	<script type="text/javascript" src="js/moment.min.js"></script>
-	<script type="text/javascript" src="js/daterangepicker.js"></script>
+<script type="text/javascript" src="js/moment.min.js"></script>
+<script type="text/javascript" src="js/daterangepicker.js"></script>
 <!--===============================================================================================-->
 <!--===============================================================================================-->
 <script type="text/javascript" src="js/slick.min.js"></script>
 <script type="text/javascript" src="js/slick-custom.js"></script>
 <!--===============================================================================================-->
 <!--===============================================================================================-->
-	<script type="text/javascript" src="vendor/sweetalert/sweetalert.min.js"></script>
-	<script type="text/javascript">
-		$('.block2-btn-addcart').each(function(){
-			var nameProduct = $(this).parent().parent().parent().find('.block2-name').html();
-			$(this).on('click', function(){
-				swal(nameProduct, "is added to cart !", "success");
-			});
-		});
-
-		$('.block2-btn-addwishlist').each(function(){
-			var nameProduct = $(this).parent().parent().parent().find('.block2-name').html();
-			$(this).on('click', function(){
-				swal(nameProduct, "is added to wishlist !", "success");
-			});
-		});
-	</script>
+<script type="text/javascript" src="vendor/sweetalert/sweetalert.min.js"></script>
+<script type="text/javascript">
+    $('.block2-btn-addcart').each(function () {
+        var nameProduct = $(this).parent().parent().parent().find('.block2-name').html();
+        $(this).on('click', function () {
+            swal(nameProduct, "is added to cart !", "success");
+        });
+    });
+    $('.block2-btn-addwishlist').each(function () {
+        var nameProduct = $(this).parent().parent().parent().find('.block2-name').html();
+        $(this).on('click', function () {
+            swal(nameProduct, "is added to wishlist !", "success");
+        });
+    });</script>
 
 <!--===============================================================================================-->
 
@@ -216,49 +213,124 @@
             swal(nameProduct, "Producto agregado !", "success");
         });
     });
-
     $('.block2-btn-addwishlist').each(function () {
         var nameProduct = $(this).parent().parent().parent().find('.block2-name').html();
         $(this).on('click', function () {
             swal(nameProduct, "is added to wishlist !", "success");
         });
-    });
-</script>
+    });</script>
 <!--===============================================================================================-->
-	<script type="text/javascript" src="js/nouislider.min.js"></script>
-	<script type="text/javascript">
-		/*[ No ui ]
-	    ===========================================================*/
-var filterBar = document.getElementById('filter-bar');
-
-	    noUiSlider.create(filterBar, {
-	        start: [ 50, 200 ],
-	        connect: true,
-	        range: {
-	            'min': 50,
-	            'max': 200
-	        }
-	    });
-
-	    var skipValues = [
-	    document.getElementById('value-lower'),
-	    document.getElementById('value-upper')
-	    ];
-
-	    filterBar.noUiSlider.on('update', function( values, handle ) {
-	        skipValues[handle].innerHTML = Math.round(values[handle]) ;
-	    });
-	</script>
+<script type="text/javascript" src="js/nouislider.min.js"></script>
+<script type="text/javascript">
+    /*[ No ui ]
+     ===========================================================*/
+    var filterBar = document.getElementById('filter-bar');
+    noUiSlider.create(filterBar, {
+        start: [50, 200],
+        connect: true,
+        range: {
+            'min': 50,
+            'max': 200
+        }
+    });
+    var skipValues = [
+        document.getElementById('value-lower'),
+        document.getElementById('value-upper')
+    ];
+    filterBar.noUiSlider.on('update', function (values, handle) {
+        skipValues[handle].innerHTML = Math.round(values[handle]);
+    });</script>
 <!--===============================================================================================-->
 <script src="js/ajax.js" type="text/javascript"></script>
 <script src="js/registroVenta.js" type="text/javascript"></script>
 <!--===============================================================================================-->
 <script type="text/javascript" src="js/parallax100.js"></script>
 <script type="text/javascript">
-    $('.parallax100').parallax100();
-</script>
+    $('.parallax100').parallax100();</script>
 <!--===============================================================================================-->
 <script src="js/main.js"></script>
+<!-- Integracion a paypal checkout -->
+<script src="https://www.paypalobjects.com/api/checkout.js"></script>
+<script>
 
+    paypal.Button.render({
+
+        // Configure environment
+        env: 'sandbox',
+        client: {
+            sandbox: 'Aft06wqLKlN8jiexF1_Cijb1MTEHmDQHbCggqAabmQK-0wNAXxnYwRMlvta_vZokfM0Yd3h-x6VerT3r',
+            production: 'demo_production_client_id'
+        },
+        // Customize button (optional)
+        locale: 'en_US',
+        style: {
+            size: 'responsive',
+            color: 'black',
+            shape: 'pill',
+            tagline: false
+        },
+
+        // Enable Pay Now checkout flow (optional)
+        commit: true,
+
+        // Set up a payment
+        payment: function (data, actions) {
+            var total = $('totalPay').val();
+            var subtotal = $('subtotalPay').val();
+            var listaJson = $.post("obtenerLista.action");
+            return actions.payment.create({
+                transactions: [{
+                        amount: {
+                            total: `${total}`,
+                            currency: 'USD',
+                            details: {
+                                subtotal: `${subtotal}`,
+                                tax: '0.00',
+                                shipping: '0.00',
+                                handling_fee: '0.00',
+                                shipping_discount: '-0.00',
+                                insurance: '0.00'
+                            }
+                        },
+                        description: 'The payment transaction description.',
+                        custom: '90048630024435',
+                        //invoice_number: '12345', Insert a unique invoice number
+                        payment_options: {
+                            allowed_payment_method: 'INSTANT_FUNDING_SOURCE'
+                        },
+                        soft_descriptor: 'ECHI5786786',
+                        item_list: {
+                            items: [
+
+                                {
+                                    name: 'handbag',
+                                    description: 'Black handbag.',
+                                    quantity: '1',
+                                    price: '80',
+                                    tax: '0.02',
+                                    sku: 'product34',
+                                    currency: 'USD'
+                                }]
+
+                        }
+                    }],
+                note_to_payer: 'Detalle de productos'
+            });
+        },
+        // Execute the payment
+        onAuthorize: function (data, actions) {
+            return actions.payment.execute().then(function () {
+                // Show a confirmation message to the buyer
+                swal({
+                    title: "Bien Echo",
+                    text: "Su trasaccion fue exitosa!",
+                    icon: "success",
+                    button: "Aceptar",
+                });
+            });
+        }
+    }, '#paypal-button');
+
+</script>
 </body>
 </html>

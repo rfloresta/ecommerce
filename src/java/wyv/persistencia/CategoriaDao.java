@@ -18,6 +18,17 @@ public class CategoriaDao implements IOperacionesBD<Categoria>{
             return "error";
         }
     }
+    /*
+    public String registrarSubCate(Categoria a) {
+        try {
+           
+            cateJpa.crearSubCate(a);
+            return "ok";
+        } catch (Exception e) {
+            e.getMessage();
+            return "error";
+        }
+    }*/
 
     @Override
     public String actualizar(Categoria a) {
@@ -77,9 +88,10 @@ public class CategoriaDao implements IOperacionesBD<Categoria>{
 }
     }
      
-      public List<Categoria> listarsubCategoria(int id) {
+     
+      public List<Categoria> listarsubCategoria() {
        try {
-            return cateJpa.listarsubCategoria(id);
+            return cateJpa.listarsubCategoria();
         } catch (Exception e) {
             e.getMessage();
             return null;

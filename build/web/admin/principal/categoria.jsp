@@ -5,12 +5,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="font-weight-bold ">Mantenimiento Categoria</h1>
+                    <h1 class="font-weight-bold ">Mantenimiento SubCategoria</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-                        <li class="breadcrumb-item active">Categorias</li>
+                        <li class="breadcrumb-item active">SubCategorias</li>
                     </ol>
                 </div>  
             </div>
@@ -41,11 +41,7 @@
 
                                     <s:textfield  name="categoria.nombre" cssClass="form-control" placeholder="Ingrese Nombre" />
                                 </div>
-                                <div class="form-group">
-                                    <label for="inputNombre">Descripción</label>
-                                    <s:textfield  name="categoria.descripcion" cssClass="form-control" placeholder="Ingrese Descripción"/>
-                                </div>
-
+                              
 
                             </div>
 
@@ -67,15 +63,13 @@
                                     <thead>
                                         <tr class="">
                                             <th>Nombre</th>
-                                            <th>Descripcion</th>
                                             <th>Opciones</th>
                                         </tr> 
                                     </thead>     
                                     <tbody>
                                         <s:iterator value="lstCate">
                                             <tr>
-                                                <td><s:property value="nombre"/></td> 
-                                                <td><s:property value="descripcion"/></td>     
+                                                <td><s:property value="nombre"/></td>  
 
                                                 <td>
                                                     <s:url id="lnkEditar" action="editarCate">
@@ -96,8 +90,7 @@
                                     <tfoot>
                                         <tr>
                                             <th>Nombre</th>
-                                            <th>Descripcion</th>
-                                            <th>Opciones</th>7
+                                            <th>Opciones</th>
                                         </tr>
                                     </tfoot>
 

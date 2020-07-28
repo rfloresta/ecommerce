@@ -230,12 +230,32 @@ public class PedidoAction extends ActionSupport implements SessionAware {
             
             
              pedSer = new PedidoServicio();
-             VentaObj ven = new VentaObj();
-             clieObj.getIdCli();
-             ven.setCli(clieObj);
-             ven.getFec();
-             ven.getNum();
-             pedSer.registrar(ven);
+            VentaObj ven = new VentaObj();
+            HttpServletResponse response = ServletActionContext.getResponse();
+            HttpServletRequest request = ServletActionContext.getRequest();
+
+            String idCliente = request.getParameter("idcliente");
+            ClienteObj clie = new ClienteObj();
+            clie.setIdCli(idCliente);
+            ven.setCli(clie);
+            ven.getFec();
+            ven.getNum();
+            pedSer.registrar(ven);
+            lstLinea=(List<Linea>) sesion.get("lstLinea");
+            lstLinea.clear();
+            
+                lstLinea = ven.getCesta();
+                subtotal = ven.getSubTot();
+                igv = Math.round(ven.getValorIgv() * 100) / 100;
+                descuento = ven.getDescTotales();
+                total = ven.getTot();
+
+                sesion.put("lstLinea", lstLinea);
+                sesion.put("subtotal", subtotal);
+                sesion.put("descuento", descuento);
+                sesion.put("igv", igv);
+                sesion.put("total", total);
+                sesion.put("cantidadCart", lstLinea.size());
             return "ok";
         } catch (Exception e) {
             resultado = "Error en: listarCate :: " + e.getMessage();
@@ -295,6 +315,20 @@ public class PedidoAction extends ActionSupport implements SessionAware {
                 int existe = ven.existeProducto(proObj.idProducto, lstLinea);
                 if (existe == -1) {
                     lstLinea.add(new Linea(proObj, 1));
+                    
+                    lstLinea = ven.getCesta();
+                    subtotal = ven.getSubTot();
+                    igv = Math.round(ven.getValorIgv() * 100) / 100;
+                    descuento = ven.getDescTotales();
+                    total = ven.getTot();
+
+                    sesion.put("lstLinea", lstLinea);
+                    sesion.put("subtotal", subtotal);
+                    sesion.put("descuento", descuento);
+                    sesion.put("igv", igv);
+                    sesion.put("total", total);
+                    sesion.put("cantidadCart", lstLinea.size());
+                    
                 } else {
                     int producto = lstLinea.get(existe).getCan();
                     int cantidad = producto + 1;
@@ -315,6 +349,27 @@ public class PedidoAction extends ActionSupport implements SessionAware {
             return "error";
         }
     }
+    
+    @Action(value = "obtenerLista", results = {
+   
+    })
+    public void obtenerLista() {
+        try {
+            lstLinea = (List<Linea>) sesion.get("lstLinea");
+            HttpServletResponse response = ServletActionContext.getResponse();
+            HttpServletRequest request = ServletActionContext.getRequest();
+            PrintWriter out = response.getWriter();     
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            String json = gson.toJson(lstLinea);
+            out.print(json);
+        
+        } catch (Exception e) {
+            resultado = "Error en: listarCate :: " + e.getMessage();
+            System.out.println("Error: " + e.getMessage());
+    
+        }
+    }
+    
 
     @Action(value = "QuitarDelCarro", results = {
         @Result(name = "ok", location = "/carro.jsp")

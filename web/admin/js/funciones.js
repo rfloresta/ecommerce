@@ -70,7 +70,7 @@ $(function () {
 //    );
 //});
 
-/*
+
  //Función para comprobar los campos de texto
  function checkCampos(obj) {
  var camposRellenados = true;

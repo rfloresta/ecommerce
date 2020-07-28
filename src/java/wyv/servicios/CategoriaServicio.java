@@ -24,6 +24,11 @@ public class CategoriaServicio implements IOperacionesBD<Categoria> {
         cateDao = new CategoriaDao();
         return cateDao.registrar(a);
     }
+    /*
+    public String registrarSubCate(Categoria a) {
+        cateDao = new CategoriaDao();
+        return cateDao.registrarSubCate(a);
+    }*/
 
     @Override
     public String actualizar(Categoria a) {
@@ -59,9 +64,9 @@ public class CategoriaServicio implements IOperacionesBD<Categoria> {
         return cateDao.listarCategoria();
     }
      
-      public List<Categoria> listarsubCategoria(int id) {
+      public List<Categoria> listarsubCategoria() {
        cateDao = new CategoriaDao();
-        return cateDao.listarsubCategoria(id);
+        return cateDao.listarsubCategoria();
     }
     
 }

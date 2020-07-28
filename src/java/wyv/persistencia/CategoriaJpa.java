@@ -9,6 +9,7 @@ import java.io.Serializable;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
@@ -148,16 +149,39 @@ public class CategoriaJpa implements Serializable {
         }
     }
     
+    public String registrarCate(Categoria cat) {
+        Connection cn;
+        PreparedStatement stmt;
+        ResultSet rs;
+        
+        try {
+            cn = Util.getConexionBD();
+            stmt = cn.prepareCall("INSERT INTO categoria values(?,idCategoria)");
+            stmt.setString(1, cat.getNombre());
+             stmt.executeUpdate();
+        } catch (Exception e) {
+        }
+        return "ok";
+    }
+    
+    public static void main(String[] args)
+    {
+        Categoria cat = new Categoria();
+        cat.setNombre("Prueba2");
+        CategoriaJpa cate = new CategoriaJpa();
+        cate.registrarCate(cat);
+    }
+    
     public List<Categoria> listarCategoria()
     {
         Connection cn;
-        CallableStatement cstmt;
+        PreparedStatement stmt;
         ResultSet rs;
         List<Categoria> lstCate=new ArrayList<>();
         try {
             cn = Util.getConexionBD();
-            cstmt = cn.prepareCall("call sp_listarcategoria()");
-            rs = cstmt.executeQuery();
+            stmt = cn.prepareCall("select * from categoria where idCategoria = categoriaSuperior");
+            rs = stmt.executeQuery();
             while(rs.next())
             {
                 Categoria cat=new Categoria();
@@ -172,16 +196,16 @@ public class CategoriaJpa implements Serializable {
         return lstCate;
     }
     
-    public List<Categoria> listarsubCategoria(int id)
+    public List<Categoria> listarsubCategoria()
     {
         Connection cn;
-        CallableStatement cstmt;
+        PreparedStatement stmt;
         ResultSet rs;
         List<Categoria> lstCate=new ArrayList<>();
         try {
             cn = Util.getConexionBD();
-            cstmt = cn.prepareCall("call sp_listarsubCategoria("+id+")");
-            rs = cstmt.executeQuery();
+            stmt = cn.prepareCall("select * from categoria where idCategoria != categoriaSuperior");
+            rs = stmt.executeQuery();
             while(rs.next())
             {
                 Categoria cat=new Categoria();

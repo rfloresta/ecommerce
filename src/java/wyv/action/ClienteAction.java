@@ -150,7 +150,8 @@ public class ClienteAction extends ActionSupport implements SessionAware {
             String nombreClie = "";
             String apellidoClie = "";
             int idCliente = 0;
-
+            System.out.println("El email entrado es : " + cliente.getEmail());
+            System.out.println("El password entrado es : " + cliente.getPassword());
             for (Cliente c : lstClie) {
                 if (c.getEmail().equals(cliente.getEmail()) && c.getPassword().equals(cliente.getPassword())) {
                     nombreClie = c.getNombres();
@@ -158,6 +159,10 @@ public class ClienteAction extends ActionSupport implements SessionAware {
                     idCliente = c.getIdCliente();
                     sesion.put("seccion", 1);
                     mensajeError = "";
+                    System.out.println("el id de base de datos es : " + c.getEmail());
+                    System.out.println("El email entrado es : " + cliente.getEmail());
+                    System.out.println("el password de base de datos es : " + c.getPassword());
+                    System.out.println("El password entrado es : " + cliente.getPassword());
 
                 } else {
                     mensajeError = "Usuario o contraseña incorrecta";
@@ -172,6 +177,22 @@ public class ClienteAction extends ActionSupport implements SessionAware {
             return "error";
         }
     }
+    
+    
+     @Action(value="cerrarSesionClie",results= {
+			@Result(name="ok",location="/index.jsp"),
+			@Result(name="error",location="/error.jsp")
+	})
+	public String cerrarSesionClie() {
+		try {
+                        sesion.clear();
+                        sesion.put("seccion", 0);
+			return estado="ok";
+		} catch (Exception e) {
+			resultado="Error en: cerrarSesionCliente :: "+e.getMessage();
+			return estado;
+		}
+	}
 
     @Action(value = "listarClie", results = {
         @Result(name = "ok", location = "/admin/principal/cliente.jsp")
