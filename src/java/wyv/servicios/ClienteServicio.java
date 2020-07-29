@@ -29,6 +29,7 @@ public class ClienteServicio implements  IOperacionesBD<Cliente>{
     public String registrar(Cliente a) {
         clieDao=new ClienteDao();
         clieDao.registrar(a);
+        
         return "ok";
         
     }
@@ -44,7 +45,6 @@ public class ClienteServicio implements  IOperacionesBD<Cliente>{
     @Override
     public String eliminar(String id) {
         clieDao=new ClienteDao();
-        
         return clieDao.eliminar(id);
     }
 
@@ -94,4 +94,19 @@ public class ClienteServicio implements  IOperacionesBD<Cliente>{
             return null;
         }
      
+    public String comparar(Cliente entrada) {
+        try {
+            clieDao = new ClienteDao();
+            cliente = clieDao.buscar(entrada.getIdCliente().toString());
+            if (cliente != null) {
+                if (cliente.getCodigoGenerado().equals(entrada.getCodigoGenerado())) {
+                    return "ok";
+                }
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
+        return null;
+    }
 }

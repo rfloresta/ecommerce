@@ -151,3 +151,28 @@ $('.btnPedidoClie').on('click', function () {
      }
      );
  });
+ 
+  $(function () {
+     $("#btnRestablecer").click(function (event)
+     {
+        event.preventDefault();
+        var form = $("#form-restablecer");
+        var action=form.attr("action");
+        var formSer = form.serialize();
+    $.ajax({
+        type: 'POST',
+        url: action,
+        cache: false,
+        data: formSer,
+        success: function (respuesta) {
+            if(respuesta.substr(0,5)==="<!--1"){
+               $('#RestablecerTab').html(respuesta); 
+            }
+            if(respuesta.substr(0,5)==="<!--0"){
+               $('#incorrecto').html(respuesta);
+            }
+           }
+     });
+ });
+ });
+ 

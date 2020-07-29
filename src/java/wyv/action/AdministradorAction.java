@@ -402,12 +402,12 @@ public class AdministradorAction extends ActionSupport implements SessionAware {
                     String correoReceptor = email;
                     String asunto = "W&V - Restablecer Contraseña";
                     //genera un numero entre 1 y 5 y lo guarda en la variable codigo
-                    int codigo = (int) (100000 * Math.random());
+                    int cod = (int) (100000 * Math.random());
 
-                    admin.setCodigoGenerado(String.valueOf(codigo));
+                    admin.setCodigoGenerado(String.valueOf(cod));
                     admSer.actualizar(admin);
 
-                    String mensaje = "Hola " + admin.getNombres() + "<br>Tu código de restablecimiento es: " + codigo;
+                    String mensaje = "Hola " + admin.getNombres() + "<br>Tu código de restablecimiento es: " + cod;
                     MimeMessage message = new MimeMessage(session);
                     message.setFrom(new InternetAddress(correoRemitente));
                     message.addRecipient(Message.RecipientType.TO, new InternetAddress(correoReceptor));
@@ -417,7 +417,6 @@ public class AdministradorAction extends ActionSupport implements SessionAware {
                     t.connect(correoRemitente, passwordRemitente);
                     t.sendMessage(message, message.getRecipients(Message.RecipientType.TO));
                     t.close();
-
                     enviarSession(admin);
                     estado = "ok";
                 } else {

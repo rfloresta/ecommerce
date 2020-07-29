@@ -4,17 +4,8 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/Romario/Desktop/Git/W-V-S.A.C/web/js/ajax.js</file>
-            <file>file:/C:/Users/Romario/Desktop/Git/W-V-S.A.C/web/catalogo.jsp</file>
-            <file>file:/C:/Users/Romario/Desktop/Git/W-V-S.A.C/src/java/wyv/persistencia/PedidoDao.java</file>
-            <file>file:/C:/Users/Romario/Desktop/Git/W-V-S.A.C/web/index.jsp</file>
-            <file>file:/C:/Users/Romario/Desktop/Git/W-V-S.A.C/src/java/wyv/negocio/PedidoObj.java</file>
-            <file>file:/C:/Users/Romario/Desktop/Git/W-V-S.A.C/web/perfil.jsp</file>
-            <file>file:/C:/Users/Romario/Desktop/Git/W-V-S.A.C/src/java/wyv/persistencia/IOperacionesBD.java</file>
-            <file>file:/C:/Users/Romario/Desktop/Git/W-V-S.A.C/web/js/funciones.js</file>
-            <file>file:/C:/Users/Romario/Desktop/Git/W-V-S.A.C/src/java/wyv/action/ProductoAction.java</file>
             <file>file:/C:/Users/Romario/Desktop/Git/W-V-S.A.C/src/java/wyv/action/ClienteAction.java</file>
-            <file>file:/C:/Users/Romario/Desktop/Git/W-V-S.A.C/src/java/wyv/servicios/ClienteServicio.java</file>
-            <file>file:/C:/Users/Romario/Desktop/Git/W-V-S.A.C/web/cambiar-password.jsp</file>
+            <file>file:/C:/Users/Romario/Desktop/Git/W-V-S.A.C/web/header.jsp</file>
         </group>
     </open-files>
 </project-private>

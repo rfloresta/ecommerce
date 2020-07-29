@@ -1,7 +1,5 @@
 package wyv.action;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 import com.opensymphony.xwork2.ActionSupport;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -50,6 +48,7 @@ public class ClienteAction extends ActionSupport implements SessionAware {
     private List<Producto> lstProducto;
     private List<Categoria> lstCategoria;
     private List<Marca> lstMarca;
+    private String codigo;
 
     public String getMensajeError() {
         return mensajeError;
@@ -139,7 +138,14 @@ public class ClienteAction extends ActionSupport implements SessionAware {
     public void setSession(Map<String, Object> map) {
         this.sesion = map;
     }
-    
+
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
+    }
 
     @Action(value = "ingresoCliente", results = {
         @Result(name = "ok", location = "/catalogo.jsp")
@@ -155,47 +161,26 @@ public class ClienteAction extends ActionSupport implements SessionAware {
             lstCategoria = new CategoriaServicio().listar();
             //lstSubCategoria = new CategoriaServicio().listarsubCategoria(idCate);
             lstMarca = new MarcaServicio().listar();
-            String id = "";
-            String dni = "";
-            String nombres = "";
-            String apellidos = "";
-            String dir = "";
-            String cel = "";
-            String email = "";
-            String pass = "";
+            Cliente clie = null;
             for (Cliente c : lstClie) {
-                
             String passDesencriptado= Desencriptar(c.getPassword());
                 if (c.getEmail().equals(cliente.getEmail()) && passDesencriptado.equals(cliente.getPassword())) {
-                    id = c.getIdCliente().toString();
-                    dni = c.getDni();
-                    nombres = c.getNombres();
-                    apellidos = c.getApellidos();
-                    dir = c.getDireccion();
-                    cel = c.getNumCelular();
-                    email = c.getEmail();
-                    pass = c.getPassword();
-                    sesion.put("seccion", 1);
+                    clie=c;
+                    enviarSession(c);
                     addActionMessage("");
-                } else {
-                    addFieldError("mensajeError","Usuario o contraseña incorrecta");
-                    sesion.put("seccion", 0);
+                    sesion.put("seccion", 1);
+                    estado="ok";
                 }
             }
-            
-            sesion.put("id", id);
-            sesion.put("dni", dni);
-            sesion.put("nombres", nombres);
-            sesion.put("apellidos", apellidos);
-            sesion.put("cel", cel);
-            sesion.put("dir", dir);
-            sesion.put("email", email);
-            sesion.put("pass", pass);
-            return "ok";
+            if(clie==null){
+                    addFieldError("mensajeError","Usuario o contraseña incorrecta");
+                    sesion.put("seccion", 0);
+                    estado="incorrecto";
+            }     
         } catch (Exception e) {
             resultado = "Error en: ingresoClie :: " + e.getMessage();
-            return "error";
         }
+        return estado;
     }
 
     @Action(value = "listarClie", results = {
@@ -211,41 +196,6 @@ public class ClienteAction extends ActionSupport implements SessionAware {
             return "ok";
         } catch (Exception e) {
             resultado = "Error en: listarCate :: " + e.getMessage();
-            return "error";
-        }
-    }
-
-    @Action(value = "registrarClie", results = {
-        @Result(name = "ok", location = "/admin/principal/cliente.jsp")
-        ,
-			@Result(name = "error", location = "/error.jsp")
-    })
-    public String registrarClie() {
-        try {
-            new ClienteServicio().registrar(cliente);
-
-            cliente = new Cliente();
-            return "ok";
-        } catch (Exception e) {
-            resultado = "Error en: registrarCate :: " + e.getMessage();
-            return "error";
-        }
-    }
-
-    @Action(value = "editarClie", results = {
-        @Result(name = "ok", location = "/admin/principal/cliente.jsp")
-        ,
-			@Result(name = "error", location = "/error.jsp")
-    })
-    public String editarClie() {
-
-        try {
-            cliente = new ClienteServicio().buscar(String.valueOf(cliente.getIdCliente()));
-            lstClie = new ClienteServicio().listar();
-            edit = 1;
-            return "ok";
-        } catch (Exception e) {
-            resultado = "Error en: editarAdmin :: " + e.getMessage();
             return "error";
         }
     }
@@ -344,23 +294,6 @@ public class ClienteAction extends ActionSupport implements SessionAware {
         }
     }
 
-    @Action(value = "eliminarClie", results = {
-        @Result(name = "ok", location = "/admin/principal/cliente.jsp")
-        ,
-			@Result(name = "error", location = "/error.jsp")
-    })
-    public String eliminarClie() {
-
-        try {
-            new ClienteServicio().eliminar(String.valueOf(cliente.getIdCliente()));
-            lstClie = new ClienteServicio().listar();
-            return "ok";
-        } catch (Exception e) {
-            resultado = "Error en: eliminarMarca :: " + e.getMessage();
-            return "error";
-        }
-    }
-
     @Action(value = "registrarse", results = {
         @Result(name = "ok", location = "/catalogo.jsp")
         ,
@@ -373,47 +306,39 @@ public class ClienteAction extends ActionSupport implements SessionAware {
             cliente.setPassword(passEncryp);
             estado=clieSer.registrar(cliente);
             if(estado.equals("ok")){
+            Cliente clie = null;
+                for (Cliente c : lstClie) {
+                if (c.getEmail().equals(cliente.getEmail())) {
+                    clie=c;
+                    enviarSession(clie);
+                    addActionMessage("¡Gracias por registrarte!");
+                    sesion.put("seccion", 1);
+                    estado="ok";
+                }
+            }
+            if(clie==null){
+                addFieldError("mensajeError","Falló al registrarse");
+                    sesion.put("seccion", 0);
+                    estado="incorrecto";
+            }
+            }
+        } catch (Exception e) {
+            resultado = "Error en: registrarse :: " + e.getMessage();
+        }
+        
+        return estado;
+    }
+    
+    public void enviarSession(Cliente cliente) {
+        
+            sesion.put("id", cliente.getIdCliente());
+            sesion.put("dni", cliente.getDni());
             sesion.put("nombres", cliente.getNombres());
             sesion.put("apellidos", cliente.getApellidos());
+            sesion.put("cel", cliente.getNumCelular());
+            sesion.put("dir", cliente.getDireccion());
             sesion.put("email", cliente.getEmail());
             sesion.put("pass", cliente.getPassword());
-            sesion.put("seccion", 1);
-            addActionMessage("¡Gracias por registrarte!");
-            }else{
-            addActionError("Falló al registrarse");
-            sesion.put("seccion", 0);
-            }
-//                    sesion.put("seccion", 0);
-            
-//=======
-//            clieSer = new ClienteServicio();
-//            estado = clieSer.registrar(cliente);
-//            lstClie = clieSer.listar();
-//            String nombreClie = "";
-//            String apellidoClie = "";
-//            int idCliente = 0;
-//            for (Cliente c : lstClie) {
-//                if (c.getEmail().equals(cliente.getEmail())) {
-//                    nombreClie = c.getNombres();
-//                    apellidoClie = c.getApellidos();
-//                    idCliente = c.getIdCliente();
-//                    sesion.put("seccion", 1);
-//                    mensajeError = "";
-//                } else {
-//                    mensajeError = "Fallo al registrarse";
-//                    sesion.put("seccion", 0);
-//                }
-//            }
-//
-//            sesion.put("NombreClienteCompleto", nombreClie + " " + apellidoClie);
-//            sesion.put("idClie", idCliente);
-//            resultado = "¡Gracias por registrarte!";
-//>>>>>>> f974d601378f2d29b5a5c79ead12bfe31be4d89a
-            return estado;
-        } catch (Exception e) {
-            resultado = "Error en: registrarCate :: " + e.getMessage();
-            return estado;
-        }
     }
     
      @Action(value="devolverPagPass",results= {
@@ -423,43 +348,48 @@ public class ClienteAction extends ActionSupport implements SessionAware {
         return "ok";
     }
     
-    @Action(value="cambiarPasswordClie",results= {
+    @Action(value="cambiarPasswordClieIn",results= {
 			@Result(name="ok",location="/cambiar-password.jsp"),
 			@Result(name="error",location="/error.jsp"),
                         @Result(name="incorrecto",location="/cambiar-password.jsp")
 	})
-	public String cambiarPasswordClie() {
+	public String cambiarPasswordClieIn() {
 		try {
                         String passSession=Desencriptar((String)sesion.get("pass"));
                         String passForm=passwordActual;
                         if(passSession.equals(passForm)){
                         clieSer=new ClienteServicio();
-			String id=(String)sesion.get("id");
-                        String dni=(String)sesion.get("dni");
-                        String nombres=(String)sesion.get("nombres");
-                        String apellidos=(String)sesion.get("apellidos");
-                        String dir=(String)sesion.get("dir");
-                        String cel=(String)sesion.get("cel");
-                        String email=(String)sesion.get("email");
-                        String passEncryp = Encriptar(cliente.getPassword());
-                        cliente.setIdCliente(Integer.parseInt(id));
-                        cliente.setDni(dni);
-                        cliente.setNombres(nombres);
-                        cliente.setApellidos(apellidos);
-                        cliente.setEmail(email);
-                        cliente.setDireccion(dir);
-                        cliente.setNumCelular(cel);
-                        cliente.setPassword(passEncryp);
+			cliente = recibirSession();
 			estado=clieSer.actualizar(cliente);
 			return estado;
                         }
                         addActionError("La Contraseña Actual no es la correcta");
                         return estado="incorrecto";
 		} catch (Exception e) {
-			resultado="Error en: cambiarPasswordCliente :: "+e.getMessage();
+			resultado="Error en: cambiarPasswordClieIn :: "+e.getMessage();
 			return estado;
 		}
 	}
+        
+        public Cliente recibirSession() {
+            int id=(Integer)sesion.get("id");
+            String dni=(String)sesion.get("dni");
+            String nombres=(String)sesion.get("nombres");
+            String apellidos=(String)sesion.get("apellidos");
+            String dir=(String)sesion.get("dir");
+            String cel=(String)sesion.get("cel");
+            String email=(String)sesion.get("email");
+            String passEncryp = Encriptar(cliente.getPassword());
+            cliente.setIdCliente(id);
+            cliente.setDni(dni);
+            cliente.setNombres(nombres);
+            cliente.setApellidos(apellidos);
+            cliente.setEmail(email);
+            cliente.setDireccion(dir);
+            cliente.setNumCelular(cel);
+            cliente.setPassword(passEncryp);
+        return cliente;
+        }
         
         @Action(value="cerrarSesionClie",results= {
 			@Result(name="ok",location="/index.jsp"),
@@ -477,12 +407,17 @@ public class ClienteAction extends ActionSupport implements SessionAware {
 	}
         
         @Action(value="restablecerPasswordClie",results= {
-			@Result(name="ok",location="/cliente/seguridad/validar-codigo.jsp"),
-			@Result(name="error",location="/cliente/error.jsp"),
-                        @Result(name="incorrecto",location="/cliente/seguridad/restablecer-password.jsp")
-	})
-        public String restablecerPasswordClie() throws MessagingException{
+        @Result(name="ok",location="/seguridad/validar-codigo.jsp"),
+        @Result(name="incorrecto",location="/seguridad/incorrecto.jsp"),
+        @Result(name="error",location="/seguridad/incorrecto.jsp")}
+        )
+        public String restablecerPasswordClie() throws MessagingException, IOException{
+            
             try {
+            if (cliente.getEmail().isEmpty()) {
+                addActionError("Debe ingresar el campo Email");
+                estado="incorrecto";
+            }else{ 
             clieSer=new ClienteServicio();
             String email=cliente.getEmail();
             cliente=clieSer.validarEmail(email);
@@ -492,22 +427,16 @@ public class ClienteAction extends ActionSupport implements SessionAware {
             props.setProperty("mail.smtp.starttls.enable", "true");// habilitamos el protocol seguro TLS
             props.setProperty("mail.smtp.port", "587");//Puerto de gmail
             props.setProperty("mail.smtp.auth", "true");//Autorización
-            
             Session session = Session.getDefaultInstance(props);
             String correoRemitente = "prueba10021@gmail.com";
             String passwordRemitente = "prueba12344";
             String correoReceptor = cliente.getEmail();
             String asunto = "W&V - Restablecer Contraseña";
             //genera un numero entre 1 y 5 y lo guarda en la variable codigo
-            int codigo = (int)(100000 * Math.random());
-            
-//            //Actualizamos el código de la tabla recuperar_password del usuario
-//            recSer=new RecuperarPasswordServicio();
-//            recuperar.setIdUsuario(cliente.getIdCliente().toString());
-//            recuperar.setCodigo(String.valueOf(codigo));
-//            recSer.actualizar(recuperar);
-            
-            String mensaje = "Hola "+cliente.getNombres()+"<br>Tu código de restableción es: "+codigo;
+            int cod = (int)(100000 * Math.random());
+            cliente.setCodigoGenerado(String.valueOf(cod));
+            clieSer.actualizar(cliente);
+            String mensaje = "Hola "+cliente.getNombres()+"<br>Tu código de restablecimiento es: "+cod;
             MimeMessage message = new MimeMessage(session);
             message.setFrom(new InternetAddress(correoRemitente));
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(correoReceptor));
@@ -517,18 +446,68 @@ public class ClienteAction extends ActionSupport implements SessionAware {
             t.connect(correoRemitente, passwordRemitente);
             t.sendMessage(message, message.getRecipients(Message.RecipientType.TO));
             t.close();
-            estado="ok";
+            enviarSession(cliente);
+            return "ok";
             }else{
             addActionError("El email no existe en el sistema");
             estado="incorrecto";
             }
-            }catch (MessagingException e){
-                System.out.println(e.getMessage());
-                 return estado;
+           }
+            } catch (MessagingException e) {
+            resultado = "Error en: restablecerPasswordClie :: " + e.getMessage();
+        }
+            return estado;
+        }
+       
+        
+        @Action(value = "validarCodigoClie", results = {
+        @Result(name="ok",location="/seguridad/cambiar-password-out.jsp"),
+        @Result(name="incorrecto",location="/seguridad/incorrecto.jsp"),
+        @Result(name="error",location="/seguridad/incorrecto.jsp")
+    })
+    public String validarCodigoClie() {
+        try {
+            if (codigo.isEmpty()) {
+                addActionError("Debe ingresar el código");
+                estado = "incorrecto";
+            } else {
+                clieSer = new ClienteServicio();
+                int id =(Integer) sesion.get("id");
+                cliente=new Cliente();
+                cliente.setIdCliente(id);
+                cliente.setCodigoGenerado(codigo);
+                estado = clieSer.comparar(cliente);
+                if (estado != null) {
+                    return estado;
+                } else {
+                    addActionError("El código es incorrecto");
+                    estado = "incorrecto";
+                }
+            }
+        } catch (Exception e) {
+            resultado = "Error en: validarCodigoClie :: " + e.getMessage();
+            return estado;
         }
         return estado;
+    }
+
+    @Action(value = "cambiarPasswordOutClie", results = {
+        @Result(name = "ok", location = "/index.jsp")
+        ,
+			@Result(name = "error", location = "/error.jsp")
+        ,
+                        @Result(name = "incorrecto", location = "/seguridad/incorrecto.jsp")
+    })
+    public String cambiarPasswordOutClie() {
+        try {
+            clieSer = new ClienteServicio();
+            cliente = recibirSession();
+            estado = clieSer.actualizar(cliente);
+            addActionMessage("¡Constraseña restablecida!");
+            return estado;
+        } catch (Exception e) {
+            resultado = "Error en: cambiarPasswordOutClie :: " + e.getMessage();
+            return estado;
         }
-        
-        
-        
+    }
 }

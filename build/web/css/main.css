@@ -2219,3 +2219,8 @@ body{
     cursor: default;
     pointer-events: none;
 }
+
+.errorMessage
+{
+    list-style: none
+}

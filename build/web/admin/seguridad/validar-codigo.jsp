@@ -6,7 +6,7 @@
         </div>
         <!-- /.login-logo -->
         <div class="card">
-            <div class="card-body login-card-body">
+                <div class="card-body login-card-body">
                 <p class="login-box-msg">El código ha sido enviado a su Email</p>
 
                 <s:form action="validarCodigoAdmin" theme="simple">
