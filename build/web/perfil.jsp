@@ -7,7 +7,7 @@
             <span>Datos y preferencias</span>
         </div>
         <div class="col-4 list-group pr-0 barra-lateral-perfilC">
-           <s:hidden name="#session.id" id="idClie"/>
+            <s:hidden name="%{#session.id}"  id="idClie"/>
             <a href="#" class="btnPedidoClie list-group-item list-group-item-action"> <i class="fa fa-shopping-cart"></i> Mis Compras</a>
             <a href="#" class="btnDatosClie list-group-item list-group-item-action"><i class="fa fa-user-cog"></i> Datos Personales</a>
             <s:a href="devolverPagPass" id="btnCambiarPass" Class="list-group-item list-group-item-action"><i class="fa fa-lock"></i> Cambiar Contraseña</s:a>

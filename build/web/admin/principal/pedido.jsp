@@ -60,9 +60,9 @@
                                                     <s:url id="lnkActuProceso" action="actualizarPedido">
                                                         <s:param value="idPedido" name="pedido.idPedido" />
                                                         <s:param value="numero" name="pedido.numero" />
-                                                        <s:param value="subtotal" name="pedido.subtotal" />
-                                                        <s:param value="igv" name="pedido.igv" />
-                                                        <s:param value="total" name="pedido.total" />
+                                                         <s:param value="%{getText('{0,number,#0.0##}',{subtotal})}" name="pedido.subtotal" />
+                                                        <s:param value="%{getText('{0,number,#0.0##}',{igv})}" name="pedido.igv" />
+                                                        <s:param value="%{getText('{0,number,#0.0##}',{total})}" name="pedido.total" />
                                                         <s:param value="pago" name="pedido.pago" />
                                                         <s:param value="fecha" name="pedido.fecha"  />
                                                         <s:param value="0" name="pedido.estado" />
@@ -71,9 +71,9 @@
                                                     <s:url id="lnkActuEnviado" action="actualizarPedido">
                                                         <s:param value="idPedido" name="pedido.idPedido" />
                                                         <s:param value="numero" name="pedido.numero" />
-                                                        <s:param value="subtotal" name="pedido.subtotal" />
-                                                        <s:param value="igv" name="pedido.igv" />
-                                                        <s:param value="total" name="pedido.total" />
+                                                        <s:param value="%{getText('{0,number,#0.0##}',{subtotal})}" name="pedido.subtotal" />
+                                                        <s:param value="%{getText('{0,number,#0.0##}',{igv})}" name="pedido.igv" />
+                                                        <s:param value="%{getText('{0,number,#0.0##}',{total})}" name="pedido.total" />
                                                         <s:param value="pago" name="pedido.pago" />
                                                         <s:param value="fecha" name="pedido.fecha"  />
                                                         <s:param value="2" name="pedido.estado" />
@@ -82,9 +82,9 @@
                                                     <s:url id="lnkActuEntregado" action="actualizarPedido">
                                                         <s:param value="idPedido" name="pedido.idPedido" />
                                                         <s:param value="numero" name="pedido.numero" />
-                                                        <s:param value="subtotal" name="pedido.subtotal" />
-                                                        <s:param value="igv" name="pedido.igv" />
-                                                        <s:param value="total" name="pedido.total" />
+                                                         <s:param value="%{getText('{0,number,#0.0##}',{subtotal})}" name="pedido.subtotal" />
+                                                        <s:param value="%{getText('{0,number,#0.0##}',{igv})}" name="pedido.igv" />
+                                                        <s:param value="%{getText('{0,number,#0.0##}',{total})}" name="pedido.total" />
                                                         <s:param value="pago" name="pedido.pago" />
                                                         <s:param value="fecha" name="pedido.fecha"  />
                                                         <s:param value="1" name="pedido.estado" />

@@ -31,7 +31,7 @@ $('.btnDatosClie').on('click', function () {
             </div>\n\
             <div class='col-6'>\n\
             <label>Email</label>\n\
-            <input  type='text' id='email' class='form-control mb-5' value='" + json.email + "'>\n\
+            <input  type='text' id='emailPerfil' class='form-control mb-5' value='" + json.email + "'>\n\
             <input  type='hidden' id='contrasena' class='form-control mb-5' value='" + json.password + "'>\n\
             </div>\n\
             <div class='col-12 text-center pb-4'>\n\
@@ -89,8 +89,9 @@ function ActualizarDatos() {
     var apellido = $('#apellido').val();
     var numCelular = $('#numCelular').val();
     var direccion = $('#direccion').val();
-    var email = $('#email').val();
+    var email = $('#emailPerfil').val();
     var password = $('#contrasena').val();
+    console.log(email);
     $.ajax({
         type: 'POST',
         url: 'actualizarClie.action?idClie=' + idClie + '&nombre=' + nombre + '&dni=' + dni + '&apellido=' + apellido + '&numCelular=' + numCelular + '&direccion=' + direccion + '&email=' + email + '&password=' + password,

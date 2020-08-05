@@ -74,6 +74,9 @@ public class Producto implements Serializable {
     @JoinColumn(name = "idMarca", referencedColumnName = "idMarca")
     @ManyToOne
     private Marca idMarca;
+    @JoinColumn(name = "idSubCategoria", referencedColumnName = "idSubcategoria")
+    @ManyToOne(optional = false)
+    private Subcategoria idSubCategoria;
 
     public Producto() {
     }
@@ -165,6 +168,14 @@ public class Producto implements Serializable {
 
     public void setIdMarca(Marca idMarca) {
         this.idMarca = idMarca;
+    }
+
+    public Subcategoria getIdSubCategoria() {
+        return idSubCategoria;
+    }
+
+    public void setIdSubCategoria(Subcategoria idSubCategoria) {
+        this.idSubCategoria = idSubCategoria;
     }
 
     @Override

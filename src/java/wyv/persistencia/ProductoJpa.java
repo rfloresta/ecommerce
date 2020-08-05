@@ -6,6 +6,10 @@
 package wyv.persistencia;
 
 import java.io.Serializable;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -49,6 +53,11 @@ public class ProductoJpa implements Serializable {
                 idMarca = em.getReference(idMarca.getClass(), idMarca.getIdMarca());
                 producto.setIdMarca(idMarca);
             }
+            Subcategoria idSubCategoria = producto.getIdSubCategoria();
+            if (idSubCategoria != null) {
+                idSubCategoria = em.getReference(idSubCategoria.getClass(), idSubCategoria.getIdSubcategoria());
+                producto.setIdSubCategoria(idSubCategoria);
+            }
             em.persist(producto);
             if (idCategoria != null) {
                 idCategoria.getProductoList().add(producto);
@@ -57,6 +66,10 @@ public class ProductoJpa implements Serializable {
             if (idMarca != null) {
                 idMarca.getProductoList().add(producto);
                 idMarca = em.merge(idMarca);
+            }
+            if (idSubCategoria != null) {
+                idSubCategoria.getProductoList().add(producto);
+                idSubCategoria = em.merge(idSubCategoria);
             }
             em.getTransaction().commit();
         } finally {
@@ -76,6 +89,8 @@ public class ProductoJpa implements Serializable {
             Categoria idCategoriaNew = producto.getIdCategoria();
             Marca idMarcaOld = persistentProducto.getIdMarca();
             Marca idMarcaNew = producto.getIdMarca();
+            Subcategoria idSubCategoriaOld = persistentProducto.getIdSubCategoria();
+            Subcategoria idSubCategoriaNew = producto.getIdSubCategoria();
             if (idCategoriaNew != null) {
                 idCategoriaNew = em.getReference(idCategoriaNew.getClass(), idCategoriaNew.getIdCategoria());
                 producto.setIdCategoria(idCategoriaNew);
@@ -83,6 +98,10 @@ public class ProductoJpa implements Serializable {
             if (idMarcaNew != null) {
                 idMarcaNew = em.getReference(idMarcaNew.getClass(), idMarcaNew.getIdMarca());
                 producto.setIdMarca(idMarcaNew);
+            }
+            if (idSubCategoriaNew != null) {
+                idSubCategoriaNew = em.getReference(idSubCategoriaNew.getClass(), idSubCategoriaNew.getIdSubcategoria());
+                producto.setIdSubCategoria(idSubCategoriaNew);
             }
             producto = em.merge(producto);
             if (idCategoriaOld != null && !idCategoriaOld.equals(idCategoriaNew)) {
@@ -100,6 +119,14 @@ public class ProductoJpa implements Serializable {
             if (idMarcaNew != null && !idMarcaNew.equals(idMarcaOld)) {
                 idMarcaNew.getProductoList().add(producto);
                 idMarcaNew = em.merge(idMarcaNew);
+            }
+            if (idSubCategoriaOld != null && !idSubCategoriaOld.equals(idSubCategoriaNew)) {
+                idSubCategoriaOld.getProductoList().remove(producto);
+                idSubCategoriaOld = em.merge(idSubCategoriaOld);
+            }
+            if (idSubCategoriaNew != null && !idSubCategoriaNew.equals(idSubCategoriaOld)) {
+                idSubCategoriaNew.getProductoList().add(producto);
+                idSubCategoriaNew = em.merge(idSubCategoriaNew);
             }
             em.getTransaction().commit();
         } catch (Exception ex) {
@@ -139,6 +166,11 @@ public class ProductoJpa implements Serializable {
             if (idMarca != null) {
                 idMarca.getProductoList().remove(producto);
                 idMarca = em.merge(idMarca);
+            }
+            Subcategoria idSubCategoria = producto.getIdSubCategoria();
+            if (idSubCategoria != null) {
+                idSubCategoria.getProductoList().remove(producto);
+                idSubCategoria = em.merge(idSubCategoria);
             }
             em.remove(producto);
             em.getTransaction().commit();
@@ -194,5 +226,37 @@ public class ProductoJpa implements Serializable {
             em.close();
         }
     }
+    
+    
+     public List<Subcategoria> listarSubPorCate(int idCate) {
+        PreparedStatement ptstm;
+        Connection cn;
+        ResultSet rs;
+        List<Subcategoria> listSubCategoria = new ArrayList<>();
+        
+        try {
+            cn = Util.getConexionBD();
+            ptstm = cn.prepareStatement("Select * from subcategoria where idCategoria ="+idCate+"");
+            rs = ptstm.executeQuery();
+           
+            while (rs.next()) {
+                Subcategoria subC=new Subcategoria();
+                Categoria cat = new Categoria();
+                
+                subC.setIdSubcategoria(rs.getInt(1));
+                subC.setNombre(rs.getString(2));
+                cat.setIdCategoria(rs.getInt(3));
+                subC.setIdCategoria(cat);
+                //Ingresamos cliente
+                listSubCategoria.add(subC);
+                
+}
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return listSubCategoria;
+    }
+   
+   
     
 }

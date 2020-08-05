@@ -83,17 +83,6 @@
                                         <a  href="perfil.jsp" Class="dropdown-item">Mi cuenta</a>
                                         <a href="cerrarSesionClie" class="dropdown-item">Cerrar Sesión</a>
                                     </s:if>
-<<<<<<< HEAD
-                                    <s:elseif test="#session.seccion==1">
-                                        <s:url id="lnkbuscar" action="buscarClie">
-                                            <s:param value="#session.idClie" name="cliente.idCliente"/>                
-                                        </s:url>
-                                        <s:a  href="%{lnkbuscar}" cssClass="dropdown-item">Mi cuenta</s:a>
-                                        <s:a href="cerrarSesionClie" cssClass="dropdown-item">Cerrar Sesión</s:a>
-
-                                    </s:elseif>
-=======
->>>>>>> 65345ee6f52115baac334b64693a6f6b4473bdff
                                     <s:else>
                                         <button type="button" class="dropdown-item" data-toggle="modal" data-target="#loginModal">Iniciar Sesión</button>
                                         <button type="button" class="dropdown-item" data-toggle="modal" data-target="#registrarseModal">Registrarse</button>
@@ -190,16 +179,15 @@
                                 Categoría
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <s:iterator value="#session.lstCategoria">
-                                    <s:if test="idCategoria==categoriaSuperior">
+                                <s:iterator value="#session.lstCategoria" var="cate">
+                                   
                                         <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" data-toggle="dropdown" href="#"><s:property value="nombre"/></a>
-                                            <s:set var="idCat" value="idCategoria"></s:set> 
-                                        </s:if>
+                                           
 
                                         <ul class="dropdown-menu">
 
-                                            <s:iterator value="#session.lstCategoria">
-                                                <s:if test="idCategoria!=categoriaSuperior&&categoriaSuperior==#idCat">
+                                            <s:iterator value="#session.lstSubCate" var="subcate">
+                                                <s:if test="#cate.idCategoria == #subcate.idCategoria.idCategoria">
                                                     <a class="dropdown-item" href="#"><s:property value="nombre"/></a>
                                                 </s:if>
 

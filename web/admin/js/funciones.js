@@ -59,7 +59,7 @@ $(function () {
             }
             form.submit();
         } else {
-            
+
             error.hide();
             error.show("low");
         }
@@ -71,13 +71,46 @@ function mostrarPassword(id) {
     var idPass = document.getElementById(id);
     if (idPass.type == "password") {
         idPass.type = "text";
-        $('#show_'+id).removeClass('fa fa-eye-slash').addClass('fa fa-eye');
+        $('#show_' + id).removeClass('fa fa-eye-slash').addClass('fa fa-eye');
     } else {
         idPass.type = "password";
-        $('#show_'+id).removeClass('fa fa-eye').addClass('fa fa-eye-slash');
+        $('#show_' + id).removeClass('fa fa-eye').addClass('fa fa-eye-slash');
     }
 }
 
+$(function () {
+    $("#Categoria").on('change', function () {
+
+        var selected = $("#Categoria option:selected").val();
+
+        $.ajax({
+            type: 'POST',
+            url: 'listarSubCateFiltro.action?idCate=' + selected,
+            success: function (respuesta) {
+                var json = JSON.parse(respuesta);
+
+
+                var html="";
+               for(let i=0; i < json.length;i++){
+                   html += `<option value="${json[i].idSubcategoria}">${json[i].nombre}</option>`;
+                                            
+                        
+               }
+               
+                        
+                        
+                
+                   
+                $('#selectSubCate').html(
+                `<select name="producto.idSubCategoria.idSubcategoria" class="form-control">${html} </select>`);
+
+
+
+            }});
+
+
+    });
+});
 //$(function () {
 //    $("#grabar").click(function (event)
 //    {
@@ -124,36 +157,35 @@ function mostrarPassword(id) {
 //});
 
 
- //Función para comprobar los campos de texto
- function checkCampos(obj) {
- var camposRellenados = true;
- obj.find("input").each(function() {
- var $this = $(this);
- if( $this.val().length <= 0 ) {
- camposRellenados = false;
- return false;
- }
- });
- if(camposRellenados == false) {
- return false;
- }
- else {
- return true;
- }
- }
- //$(function () {
- //    $(".menu").click(function (event)
- //
- //    {
- //       event.preventDefault();
- //        
- //     $("#sectionAjax").load($(this).attr('href'), function (response, status, xhr)
- //    {
- //        if (status == "success") {
- //           
- //        }
- //    });
- //        
- //    }
- //    );
- //});*/
+//Función para comprobar los campos de texto
+function checkCampos(obj) {
+    var camposRellenados = true;
+    obj.find("input").each(function () {
+        var $this = $(this);
+        if ($this.val().length <= 0) {
+            camposRellenados = false;
+            return false;
+        }
+    });
+    if (camposRellenados == false) {
+        return false;
+    } else {
+        return true;
+    }
+}
+//$(function () {
+//    $(".menu").click(function (event)
+//
+//    {
+//       event.preventDefault();
+//        
+//     $("#sectionAjax").load($(this).attr('href'), function (response, status, xhr)
+//    {
+//        if (status == "success") {
+//           
+//        }
+//    });
+//        
+//    }
+//    );
+//});*/

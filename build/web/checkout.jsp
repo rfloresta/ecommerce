@@ -1,7 +1,7 @@
 <%@ taglib uri="/struts-tags" prefix="s"%>
 <form id="formPaypal" action="${initParam['urlpaypal']}" method="POST" target="_top">
     <input type="hidden" name="business" value="wyv@hotmail.com"/>
-    <input type="hidden" name="return" value="http://localhost:8080/W_V_S.A.C/registrarPedido.action?idcliente=<s:property value="%{#session.idClie}" />"/> 
+    <input type="hidden" name="return" value="http://localhost:8080/W_V_S.A.C/registrarPedido.action?idcliente=<s:property value="%{#session.id}" />"/> 
     <input type="hidden" name="cmd" value="_cart"/> 
     <input type="hidden" name="upload" value="1"/> 
     

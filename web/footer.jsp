@@ -185,12 +185,7 @@
             swal(nameProduct, "is added to cart !", "success");
         });
     });
-    $('.block2-btn-addwishlist').each(function () {
-        var nameProduct = $(this).parent().parent().parent().find('.block2-name').html();
-        $(this).on('click', function () {
-            swal(nameProduct, "is added to wishlist !", "success");
-        });
-    });</script>
+   </script>
 
 <!--===============================================================================================-->
 
@@ -211,12 +206,7 @@
             swal(nameProduct, "Producto agregado !", "success");
         });
     });
-    $('.block2-btn-addwishlist').each(function () {
-        var nameProduct = $(this).parent().parent().parent().find('.block2-name').html();
-        $(this).on('click', function () {
-            swal(nameProduct, "is added to wishlist !", "success");
-        });
-    });</script>
+    </script>
 <!--===============================================================================================-->
 <script type="text/javascript" src="js/nouislider.min.js"></script>
 <script type="text/javascript">

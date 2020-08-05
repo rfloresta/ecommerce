@@ -27,13 +27,13 @@
                                 Todas
                             </a>
                         </li>
-                        <s:iterator value="#session.lstCategoria">
+                        <s:iterator value="#session.lstSubCate" >
                         <li class="p-t-4">
-                             <s:if test="idCategoria==categoriaSuperior">
+                           
                             <a href="#" class="s-text13">
                                 <s:property value="nombre"/>
                             </a>
-                             </s:if>
+                            
                         </li>
                         </s:iterator>
                        
@@ -156,29 +156,39 @@
                 <!-- Product -->
                 <div class="row">
                      <s:iterator value="#session.lstProducto">
+                        
                     <div class="col-sm-12 col-md-6 col-lg-4 p-b-50">
                         <!-- Block2 -->
-                        
+                         
                         <div class="block2">
-                            
+                               
                             <div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelnew">
                                 <img src="admin/imagenes/<s:property value="imagen"/>" alt="IMG-PRODUCT">
-
+                                
+                               
                                 <div class="block2-overlay trans-0-4">
-                                    <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
-                                        <i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
-                                        <i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
-                                    </a>
+                                    
+                                         <s:url id="lnkBuscar" action="detalleProducto">
+                                            <s:param value="idProducto" name="producto.idProducto" />
+                                        </s:url>
+                                         <s:a href="%{lnkBuscar}" cssClass="block2-btn-addwishlist hov-pointer trans-0-4">
+                                        <i class="fa fa-2x fa-eye" style="margin-top: -1.2rem"></i>
+                                        </s:a>   
+                                   
 
                                     <div class="block2-btn-addcart w-size1 trans-0-4">
                                         <!-- Button -->
                                         <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
                                             Agregar al carro
                                         </button>
+                                        
+                                       
                                     </div>
                                 </div>
+                                 
+                               
                             </div>
-
+                             
                             <div class="block2-txt p-t-20">
                                 <a href="product-detail.html" class="block2-name dis-block s-text3 p-b-5">
                                     <s:property value="nombre"/>
@@ -190,7 +200,9 @@
                             </div>
                             
                         </div>
+                                
                     </div>
+                               
                     </s:iterator>
                     
 

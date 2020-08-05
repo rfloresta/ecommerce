@@ -160,7 +160,7 @@ public class CategoriaJpa implements Serializable {
             stmt.setString(1, cat.getNombre());
              stmt.executeUpdate();
         } catch (Exception e) {
-        }
+}
         return "ok";
     }
     
@@ -172,29 +172,7 @@ public class CategoriaJpa implements Serializable {
         cate.registrarCate(cat);
     }
     
-    public List<Categoria> listarCategoria()
-    {
-        Connection cn;
-        PreparedStatement stmt;
-        ResultSet rs;
-        List<Categoria> lstCate=new ArrayList<>();
-        try {
-            cn = Util.getConexionBD();
-            stmt = cn.prepareCall("select * from categoria where idCategoria = categoriaSuperior");
-            rs = stmt.executeQuery();
-            while(rs.next())
-            {
-                Categoria cat=new Categoria();
-                cat.setIdCategoria(rs.getInt(1));
-                cat.setNombre(rs.getString(2));
-                cat.setCategoriaSuperior(rs.getInt(3));
-                lstCate.add(cat);
-}
-        } catch (Exception e) {
-            e.getMessage();
-        }
-        return lstCate;
-    }
+ 
     
     public List<Categoria> listarsubCategoria()
     {

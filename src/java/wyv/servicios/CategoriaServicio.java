@@ -61,7 +61,7 @@ public class CategoriaServicio implements IOperacionesBD<Categoria> {
     
      public List<Categoria> listarCategoria() {
        cateDao = new CategoriaDao();
-        return cateDao.listarCategoria();
+        return cateDao.listar();
     }
      
       public List<Categoria> listarsubCategoria() {

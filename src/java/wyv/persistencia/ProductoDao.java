@@ -77,4 +77,15 @@ public class ProductoDao implements IOperacionesBD<Producto>{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
+     public List<Subcategoria> listarSubPorCate(int id) {
+        try {
+           
+            return  proJpa.listarSubPorCate(id);
+        } catch (Exception e) {
+            e.getMessage();
+            return null;
+        }
+    }
+    
+    
 }

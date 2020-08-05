@@ -30,12 +30,14 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Categoria.findAll", query = "SELECT c FROM Categoria c")
     , @NamedQuery(name = "Categoria.findByIdCategoria", query = "SELECT c FROM Categoria c WHERE c.idCategoria = :idCategoria")
-    , @NamedQuery(name = "Categoria.findByNombre", query = "SELECT c FROM Categoria c WHERE c.nombre = :nombre")
-    , @NamedQuery(name = "Categoria.findByCategoriaSuperior", query = "SELECT c FROM Categoria c WHERE c.categoriaSuperior = :categoriaSuperior")})
+    , @NamedQuery(name = "Categoria.findByNombre", query = "SELECT c FROM Categoria c WHERE c.nombre = :nombre")})
 public class Categoria implements Serializable {
 
     @OneToMany(mappedBy = "idCategoria")
     private List<Producto> productoList;
+
+    @OneToMany(mappedBy = "idCategoria")
+    private List<Subcategoria> subcategoriaList;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -45,8 +47,6 @@ public class Categoria implements Serializable {
     private Integer idCategoria;
     @Column(name = "nombre")
     private String nombre;
-    @Column(name = "categoriaSuperior")
-    private Integer categoriaSuperior;
 
     public Categoria() {
     }
@@ -69,14 +69,6 @@ public class Categoria implements Serializable {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
-
-    public Integer getCategoriaSuperior() {
-        return categoriaSuperior;
-    }
-
-    public void setCategoriaSuperior(Integer categoriaSuperior) {
-        this.categoriaSuperior = categoriaSuperior;
     }
 
     @Override
@@ -102,6 +94,15 @@ public class Categoria implements Serializable {
     @Override
     public String toString() {
         return "wyv.persistencia.Categoria[ idCategoria=" + idCategoria + " ]";
+    }
+
+    @XmlTransient
+    public List<Subcategoria> getSubcategoriaList() {
+        return subcategoriaList;
+    }
+
+    public void setSubcategoriaList(List<Subcategoria> subcategoriaList) {
+        this.subcategoriaList = subcategoriaList;
     }
 
     @XmlTransient

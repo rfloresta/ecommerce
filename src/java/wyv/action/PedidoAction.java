@@ -230,8 +230,7 @@ public class PedidoAction extends ActionSupport implements SessionAware {
             
             
              pedSer = new PedidoServicio();
-<<<<<<< HEAD
-            VentaObj ven = new VentaObj();
+            PedidoObj ven = new PedidoObj();
             HttpServletResponse response = ServletActionContext.getResponse();
             HttpServletRequest request = ServletActionContext.getRequest();
 
@@ -257,14 +256,7 @@ public class PedidoAction extends ActionSupport implements SessionAware {
                 sesion.put("igv", igv);
                 sesion.put("total", total);
                 sesion.put("cantidadCart", lstLinea.size());
-=======
-             PedidoObj ven = new PedidoObj();
-             clieObj.getIdCli();
-             ven.setCli(clieObj);
-             ven.getFec();
-             ven.getNum();
-             pedSer.registrar(ven);
->>>>>>> 65345ee6f52115baac334b64693a6f6b4473bdff
+
             return "ok";
         } catch (Exception e) {
             resultado = "Error en: listarCate :: " + e.getMessage();
@@ -481,15 +473,8 @@ public class PedidoAction extends ActionSupport implements SessionAware {
             new PedidoServicio().actualizar(ped);
             lstPedido = new PedidoServicio().listar();
 
-            System.out.println(ped.getIdPedido());
-            System.out.println(ped.getNumero());
-            System.out.println(ped.getSubtotal());
-            System.out.println(ped.getTotal());
-            System.out.println(ped.getFecha());
-            System.out.println(ped.getPago());
-            System.out.println(ped.getIgv());
-            System.out.println(ped.getEstado());
-            System.out.println(ped.getIdCliente());
+            System.out.println("total" + ped.getTotal());
+            
 
             return "ok";
         } catch (Exception e) {

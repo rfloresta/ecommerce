@@ -1,22 +1,32 @@
 package wyv.action;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.io.FileUtils;
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.InterceptorRef;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.interceptor.SessionAware;
+import org.json.simple.JSONObject;
 import wyv.servicios.ProductoServicio;
 import wyv.persistencia.Producto;
 import wyv.persistencia.Categoria;
 import wyv.persistencia.Marca;
+import wyv.persistencia.Subcategoria;
 import wyv.servicios.CategoriaServicio;
 import wyv.servicios.MarcaServicio;
+import wyv.servicios.SubCategoriaServicio;
 
 
 @SuppressWarnings("serial")
@@ -28,7 +38,7 @@ public class ProductoAction extends ActionSupport implements SessionAware{
     private Producto producto;
     private List<Producto> lstProducto;
     private List<Categoria> lstCategoria;
-    private List<Categoria> lstSubCategoria;
+    private List<Subcategoria> lstSubCate;
     private List<Marca> lstMarca;
     private int edit;
     private File imagen;
@@ -87,6 +97,11 @@ public class ProductoAction extends ActionSupport implements SessionAware{
         return lstCategoria;
     }
 
+    public List<Subcategoria> getLstSubCate() {
+        return lstSubCate;
+    }
+
+    
     public List<Marca> getLstMarca() {
         return lstMarca;
     }
@@ -95,13 +110,6 @@ public class ProductoAction extends ActionSupport implements SessionAware{
         return edit;
     }
 
-    public List<Categoria> getLstSubCategoria() {
-        return lstSubCategoria;
-    }
-
-    public void setLstSubCategoria(List<Categoria> lstSubCategoria) {
-        this.lstSubCategoria = lstSubCategoria;
-    }
 
     public int getIdCate() {
         return idCate;
@@ -182,6 +190,23 @@ public class ProductoAction extends ActionSupport implements SessionAware{
             return "error";
         }
     }
+    
+    @Action(value = "detalleProducto", results = {
+        @Result(name = "ok", location = "/detalle_producto.jsp")
+        ,
+			@Result(name = "error", location = "/error.jsp")
+    })
+    public String detalleProducto() {
+
+        try {
+            proSer = new ProductoServicio();
+            producto = proSer.buscar(String.valueOf(producto.getIdProducto()));
+            return "ok";
+        } catch (Exception e) {
+            resultado = "Error en: editarProducto :: " + e.getMessage();
+            return "error";
+        }
+    }
 
     @Action(value = "actualizarProducto", results = {
         @Result(name = "ok", location = "/admin/principal/producto.jsp"),
@@ -201,6 +226,8 @@ public class ProductoAction extends ActionSupport implements SessionAware{
                 FileUtils.copyFile(imagen, fileToCreate);
                 producto.setImagen(imagenFileName);
             }
+
+            System.out.println("precio venta:" + producto.getPrecioVenta());
             estado = proSer.actualizar(producto);
             lstProducto = proSer.listar();
             lstCategoria = new CategoriaServicio().listar();
@@ -212,6 +239,7 @@ public class ProductoAction extends ActionSupport implements SessionAware{
             return estado;
         }
     }
+    
 
     @Action(value = "eliminarProducto", results = {
         @Result(name = "ok", location = "/admin/principal/producto.jsp"),
@@ -242,13 +270,37 @@ public class ProductoAction extends ActionSupport implements SessionAware{
             sesion.put("lstProducto", lstProducto);
             lstCategoria = new CategoriaServicio().listar();
             sesion.put("lstCategoria", lstCategoria);
-            //lstSubCategoria = new CategoriaServicio().listarsubCategoria(idCate);
+            lstSubCate = new SubCategoriaServicio().listar();
+            sesion.put("lstSubCate", lstSubCate);
             lstMarca = new MarcaServicio().listar();
             sesion.put("lstMarca", lstMarca);
             return "ok";
         } catch (Exception e) {
             resultado = "Error en: verCatalogo :: " + e.getMessage();
             return "error";
+        }
+    }
+    
+    @Action(value = "listarSubCateFiltro", results = {
+       
+    })
+    
+    public void listarSubCateFiltro() {
+        try {
+            
+            HttpServletResponse response = ServletActionContext.getResponse();
+            HttpServletRequest request = ServletActionContext.getRequest();
+            PrintWriter out = response.getWriter();
+            int idCate = Integer.parseInt(request.getParameter("idCate"));
+            lstSubCate=new ProductoServicio().listarSubPorCate(idCate);
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            String json = gson.toJson(lstSubCate);
+            
+            out.print(json);
+           
+        } catch (Exception e) {
+            resultado = "Error en: verCatalogo :: " + e.getMessage();
+            
         }
     }
 }

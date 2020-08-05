@@ -11,6 +11,7 @@ import wyv.persistencia.IOperacionesBD;
 import wyv.persistencia.Marca;
 import wyv.persistencia.Producto;
 import wyv.persistencia.ProductoDao;
+import wyv.persistencia.Subcategoria;
 
 /**
  *
@@ -53,6 +54,11 @@ public class ProductoServicio implements  IOperacionesBD<Producto>{
     @Override
     public Producto validar(Producto entrada) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+     public List<Subcategoria> listarSubPorCate(int id) {
+         proDao=new ProductoDao();
+        return proDao.listarSubPorCate(id);
     }
     
 }

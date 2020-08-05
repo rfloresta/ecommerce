@@ -145,6 +145,7 @@ public class CategoriaAction extends ActionSupport{
 	public String actualizarCate() {
 		
 		try {
+                        
 			new CategoriaServicio().actualizar(categoria);
 			lstCate=new CategoriaServicio().listar();
                         categoria=new Categoria();

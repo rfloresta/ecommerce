@@ -155,13 +155,7 @@ public class ClienteAction extends ActionSupport implements SessionAware {
             lstCategoria = new CategoriaServicio().listar();
             //lstSubCategoria = new CategoriaServicio().listarsubCategoria(idCate);
             lstMarca = new MarcaServicio().listar();
-<<<<<<< HEAD
-            String nombreClie = "";
-            String apellidoClie = "";
-            int idCliente = 0;
-            System.out.println("El email entrado es : " + cliente.getEmail());
-            System.out.println("El password entrado es : " + cliente.getPassword());
-=======
+
             String id = "";
             String dni = "";
             String nombres = "";
@@ -170,7 +164,7 @@ public class ClienteAction extends ActionSupport implements SessionAware {
             String cel = "";
             String email = "";
             String pass = "";
->>>>>>> 65345ee6f52115baac334b64693a6f6b4473bdff
+
             for (Cliente c : lstClie) {
                 
             String passDesencriptado= Desencriptar(c.getPassword());
@@ -184,16 +178,9 @@ public class ClienteAction extends ActionSupport implements SessionAware {
                     email = c.getEmail();
                     pass = c.getPassword();
                     sesion.put("seccion", 1);
-<<<<<<< HEAD
-                    mensajeError = "";
-                    System.out.println("el id de base de datos es : " + c.getEmail());
-                    System.out.println("El email entrado es : " + cliente.getEmail());
-                    System.out.println("el password de base de datos es : " + c.getPassword());
-                    System.out.println("El password entrado es : " + cliente.getPassword());
 
-=======
                     addActionMessage("");
->>>>>>> 65345ee6f52115baac334b64693a6f6b4473bdff
+
                 } else {
                     addFieldError("mensajeError","Usuario o contraseña incorrecta");
                     sesion.put("seccion", 0);
@@ -208,6 +195,7 @@ public class ClienteAction extends ActionSupport implements SessionAware {
             sesion.put("dir", dir);
             sesion.put("email", email);
             sesion.put("pass", pass);
+            sesion.put("seccion", 1);
             return "ok";
         } catch (Exception e) {
             resultado = "Error en: ingresoClie :: " + e.getMessage();
@@ -405,7 +393,23 @@ public class ClienteAction extends ActionSupport implements SessionAware {
             String passEncryp = Encriptar(cliente.getPassword());
             cliente.setPassword(passEncryp);
             estado=clieSer.registrar(cliente);
+            //Para inicio de sesion
+             lstClie = clieSer.listar();
+
+            int id = 0;
+            for (Cliente c : lstClie) {
+                if (c.getEmail().equals(cliente.getEmail())) {
+                    id = c.getIdCliente();
+                } else {
+                    mensajeError = "Fallo al registrarse";
+                    sesion.put("seccion", 0);
+                }
+            }
+            
+            
+            
             if(estado.equals("ok")){
+            sesion.put("id", id);
             sesion.put("nombres", cliente.getNombres());
             sesion.put("apellidos", cliente.getApellidos());
             sesion.put("email", cliente.getEmail());
@@ -416,32 +420,10 @@ public class ClienteAction extends ActionSupport implements SessionAware {
             addActionError("Falló al registrarse");
             sesion.put("seccion", 0);
             }
-//                    sesion.put("seccion", 0);
-            
-//=======
-//            clieSer = new ClienteServicio();
-//            estado = clieSer.registrar(cliente);
-//            lstClie = clieSer.listar();
-//            String nombreClie = "";
-//            String apellidoClie = "";
-//            int idCliente = 0;
-//            for (Cliente c : lstClie) {
-//                if (c.getEmail().equals(cliente.getEmail())) {
-//                    nombreClie = c.getNombres();
-//                    apellidoClie = c.getApellidos();
-//                    idCliente = c.getIdCliente();
-//                    sesion.put("seccion", 1);
-//                    mensajeError = "";
-//                } else {
-//                    mensajeError = "Fallo al registrarse";
-//                    sesion.put("seccion", 0);
-//                }
-//            }
+ 
+//           
 //
-//            sesion.put("NombreClienteCompleto", nombreClie + " " + apellidoClie);
-//            sesion.put("idClie", idCliente);
-//            resultado = "¡Gracias por registrarte!";
-//>>>>>>> f974d601378f2d29b5a5c79ead12bfe31be4d89a
+//           
             return estado;
         } catch (Exception e) {
             resultado = "Error en: registrarCate :: " + e.getMessage();
@@ -494,20 +476,7 @@ public class ClienteAction extends ActionSupport implements SessionAware {
 		}
 	}
         
-        @Action(value="cerrarSesionClie",results= {
-			@Result(name="ok",location="/index.jsp"),
-			@Result(name="error",location="/error.jsp")
-	})
-	public String cerrarSesionClie() {
-		try {
-                        sesion.clear();
-                        sesion.put("seccion", 0);
-			return estado="ok";
-		} catch (Exception e) {
-			resultado="Error en: cerrarSesionCliente :: "+e.getMessage();
-			return estado;
-		}
-	}
+      
         
         @Action(value="restablecerPasswordClie",results= {
 			@Result(name="ok",location="/cliente/seguridad/validar-codigo.jsp"),
