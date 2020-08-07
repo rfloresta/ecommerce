@@ -63,14 +63,14 @@
                     <div class="col-4  col-md-4">
                         <div class="topbar-child2">
                             <span class="topbar-email">
-                                 
+
                                 <s:if test="#session.email!=null">
                                     <s:label name="#session.nombres+ ' '+#session.apellidos" />
                                 </s:if>
                                 <s:else>
                                     <s:fielderror cssClass="errorMessage text-center text-danger" fieldName="mensajeError"/>
                                 </s:else>
-                                
+
                             </span>
                             <div class="dropdown ml-md-3">
                                 <button  class="dropdown-toggle" type="button" id="dropdownUsuario" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -97,9 +97,9 @@
                                         0
                                     </s:if>
                                     <s:else>
-                                            <s:property value="#session.cantidadCart"/>
+                                        <s:property value="#session.cantidadCart"/>
                                     </s:else>
-                                
+
                                 </span>
 
                                 <!--Contenido de Carrito de compras-->
@@ -121,17 +121,17 @@
                                                         <s:property value="can" /> x <s:property value="proObj.precioVenta" />
                                                     </span>
                                                 </div>
-                                                    
-                                                    <div>
-                                                         <s:url var="LnkQuitar" action="QuitarDelCarro" >
-                                                            <s:param value="proObj.idProducto" name="proObj.idProducto" /> 
-                                                        </s:url>
-                                                        <s:a href="%{LnkQuitar}">
-                                                            <i class="fas fa-times"></i>
-                                                        </s:a>
-                                                    
-                                                    
-                                                    </div>
+
+                                                <div>
+                                                    <s:url var="LnkQuitar" action="QuitarDelCarro" >
+                                                        <s:param value="proObj.idProducto" name="proObj.idProducto" /> 
+                                                    </s:url>
+                                                    <s:a href="%{LnkQuitar}">
+                                                        <i class="fas fa-times"></i>
+                                                    </s:a>
+
+
+                                                </div>
                                             </li>   
 
                                         </s:iterator>
@@ -149,7 +149,7 @@
                                             </a>
                                         </div>
 
-                                       
+
                                     </div>
                                 </div>
                             </div>
@@ -223,84 +223,83 @@
         <!--Inicio Modal Para inicio de sesión -->
         <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
-           
-                    <div class="modal-content">
-                        <div class="modal-header justify-content-center border-bottom-0">
-                            <div class="social-auth-links text-center">
 
-                                <div onlogin="checkLoginState();" appId="282898703055776" scope="public_profile,email" id="facebook-login-button" class="fb-login-button" data-size="large" data-button-type="continue_with" data-layout="default" data-auto-logout-link="false" data-use-continue-as="true" data-width=""></div>
-                            </div>
-                            <div id="fbStatus">
-
-                            </div>
-                            
+                <div class="modal-content">
+                    <div class="modal-header justify-content-center border-bottom-0">
+                        <div class="social-auth-links text-center">
+                            <div onlogin="checkLoginState();" appId="282898703055776" scope="public_profile,email" id="facebook-login-button" class="fb-login-button" data-size="large" data-button-type="continue_with" data-layout="default" data-auto-logout-link="false" data-use-continue-as="true" data-width=""></div>
                         </div>
-                             
-                        <div class="modal-body pt-0">
-                            <div class="tab-content p-t-35">
+                        <div id="fbStatus">
+
+                        </div>
+                    </div>
+                    <div class="modal-body pt-0">
+                        <div class="tab-content p-t-35">
+                            <!--Inicio Tab Login-->
                             <div class="tab-pane fade show active" id="LoginTab" role="tabpanel">
-                            <s:form  action="ingresoCliente" id="form_login"  styleId="acc" theme="simple">
-                                <div class="form-group">
-                                    <s:textfield cssClass="form-control" name="cliente.email" id="email" placeholder="Ingrese Email"/>
-                                </div>
-                                <div class="form-group">
-                                    <s:password cssClass="form-control" name="cliente.password" id="password" placeholder="Ingrese Password"/>
-                                </div>
-                                <div class="form-group">
-                                    <div class="form-check">
-                                        <input type="checkbox" class="form-check-input ml-0" id="dropdownCheck">
-                                        <label class="form-check-label" for="Check">
-                                            Recordar Contraseña
-                                        </label>
+                                <s:form  action="ingresoCliente" id="form_login"  styleId="acc" theme="simple">
+                                    <div class="form-group">
+                                        <s:textfield cssClass="form-control" name="cliente.email" id="email" placeholder="Ingrese Email"/>
                                     </div>
-                                </div>
-                                <s:submit id="ingresar" styleId="btnreg" cssClass="btn btn-primary btn-block  toastrDefaultError" value="Iniciar Sesión" />
-                                <div class="text-center"> 
-                                    <button  type="button" Class="btn btn-link" data-toggle="modal" data-target="#registrarseModal" >Registrese</button>
-                                </div>
-                                <s:if test="hasActionErrors()">
-                                <s:actionerror cssClass="errorMessage text-center text-danger mr-5" />
-                                </s:if>
-                                <s:if test="hasActionMessages()">
-                                    <s:actionmessage cssClass="errorMessage text-center text-success mr-5" />
-                                </s:if>
-                            </s:form>
-                            </div>
-                            
-                    <div class="tab-pane fade" id="RestablecerTab" role="tabpanel">
-                        <s:form  id="form-restablecer" action="restablecerPasswordClie" name="form_rest" styleId="acc" theme="simple">
-                                <div class="input-group mb-3">
-                                    <s:textfield type="email" cssClass="form-control" name="cliente.email" required="required" id="emailRes" placeholder="Ingrese Email"/>
-
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-12">
-                                        <s:submit id="btnRestablecer" cssClass="btn btn-primary btn-block" value="Enviar código"/>
-                                        <div id="incorrecto">
+                                    <div class="form-group">
+                                        <s:password cssClass="form-control" name="cliente.password" id="password" placeholder="Ingrese Password"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="form-check">
+                                            <input type="checkbox" class="form-check-input ml-0" id="dropdownCheck">
+                                            <label class="form-check-label" for="Check">
+                                                Recordar Contraseña
+                                            </label>
                                         </div>
                                     </div>
-                                </div>
-                            </s:form>
-                        </div>
+                                    <s:submit id="ingresar" styleId="btnreg" cssClass="btn btn-primary btn-block  toastrDefaultError" value="Iniciar Sesión" />
+                                    <div class="text-center"> 
+                                        <button  type="button" Class="btn btn-link" data-toggle="modal" data-target="#registrarseModal" >Registrese</button>
+                                    </div>
+                                    <s:if test="hasActionErrors()">
+                                        <s:actionerror cssClass="errorMessage text-center text-danger mr-5" />
+                                    </s:if>
+                                    <s:if test="hasActionMessages()">
+                                        <s:actionmessage cssClass="errorMessage text-center text-success mr-5" />
+                                    </s:if>
+                                </s:form>
                             </div>
+                            <!--Fin Tab Login-->
+
+                            <!--Inicio Tab Restablecer password-->
+                            <div class="tab-pane fade" id="RestablecerTab" role="tabpanel">
+                                <s:form  id="form-restablecer" action="restablecerPasswordClie" name="form_rest" styleId="acc" theme="simple">
+                                    <div class="input-group mb-3">
+                                        <s:textfield type="email" cssClass="form-control" name="cliente.email" required="required" placeholder="Ingrese Email"/>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <s:submit id="btnRestablecer" cssClass="btn btn-primary btn-block" value="Enviar código"/>
+                                            <div id="incorrecto">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </s:form>
+                            </div>
+                            <!--Fin Tab Restablecer password -->
                         </div>
-                        <div class="modal-footer">
-                            <ul class="nav nav-tabs" role="tablist">
-                        <li class="nav-item">
-                            <a class="nav-link active" data-toggle="tab" href="#LoginTab" role="tab">Login</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#RestablecerTab" role="tab">Olvidé mi contraseña</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="btn btn-link" href="admin/seguridad/login.jsp">Iniciar como administrador</a>
-                        </li>
-                    </ul>
-                </div>
+                    </div>
+                    <div class="modal-footer">
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" data-toggle="tab" href="#LoginTab" role="tab">Login</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#RestablecerTab" role="tab">Olvidé mi contraseña</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="btn btn-link" href="admin/seguridad/login.jsp">Iniciar como administrador</a>
+                            </li>
+                        </ul>
                     </div>
                 </div>
-                </div>
+            </div>
+        </div>
         <!--Fin Modal Para inicio de sesión -->
 
 
@@ -359,40 +358,4 @@
         </div>
 
         <!--Fin Modal Para Registrarse -->
-
-        <!--Inicio Modal Para Restablecer Password -->
-        <div class="modal fade" id="restablecerModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header justify-content-center border-bottom-0">
-                    </div>
-                    <div class="modal-body pt-0">
-                        <s:form  action="restablecerPassword" id="form_rest"  styleId="acc" theme="simple">
-                            <div class="form-group">
-                                <s:textfield cssClass="form-control" name="cliente.email" id="" placeholder="Ingrese Email"/>
-                            </div>
-                            <div class="form-group">
-                                <div class="form-check">
-                                    <input type="checkbox" class="form-check-input ml-0" id="dropdownCheck">
-                                    <label class="form-check-label" for="Check">
-                                        Recordar Contraseña
-                                    </label>
-                                </div>
-                            </div>
-
-                            <s:submit id="ingresar" styleId="btnreg" cssClass="btn btn-primary btn-block  toastrDefaultError" value="Iniciar Sesión" />
-                            <div class="text-center"> 
-                                <button  type="button" Class="btn btn-link" data-toggle="modal" data-target="#registrarseModal" >Registrese</button>
-                            </div>
-                        </s:form>
-
-                    </div>
-                    <div class="modal-footer">
-                            <a Class="btn btn-link" href="#">Olvidé mi contraseña</a>
-                        <a Class="btn btn-link" href="admin/seguridad/login.jsp">Iniciar como administrador</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Fin Modal Para Restablecer Password -->
 

@@ -329,7 +329,7 @@ public class AdministradorAction extends ActionSupport implements SessionAware {
         }
     }
 
-    @Action(value = "cambiarPasswordAdmin", results = {
+    @Action(value = "cambiarPasswordInAdmin", results = {
         @Result(name = "ok", location = "/admin/seguridad/login.jsp")
         ,
 			@Result(name = "error", location = "/admin/error.jsp")
@@ -483,4 +483,18 @@ public class AdministradorAction extends ActionSupport implements SessionAware {
             return estado;
         }
     }
+    
+    @Action(value="cerrarSesionAdmin",results= {
+			@Result(name="ok",location="/admin/seguridad/login.jsp"),
+			@Result(name="error",location="/admin/error.jsp")
+	})
+	public String cerrarSesionAdmin() {
+		try {
+                        sesion.clear();
+			return estado="ok";
+		} catch (Exception e) {
+			resultado="Error en: cerrarSesionAdmin :: "+e.getMessage();
+			return estado;
+		}
+	}
 }

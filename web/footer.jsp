@@ -200,7 +200,6 @@
 <script type="text/javascript" src="js/countdowntime.js"></script>
 <!--===============================================================================================-->
 <script type="text/javascript" src="js/lightbox.min.js"></script>
-<script src="admin/js/funciones.js" type="text/javascript"></script>
 <script src="js/funciones.js" type="text/javascript"></script>
 <!--===============================================================================================-->
 <script type="text/javascript" src="js/sweetalert.min.js"></script>
@@ -257,6 +256,6 @@ var filterBar = document.getElementById('filter-bar');
 </script>
 <!--===============================================================================================-->
 <script src="js/main.js"></script>
-
+<script src="js/facebookSDK.js" type="text/javascript"></script>
 </body>
 </html>

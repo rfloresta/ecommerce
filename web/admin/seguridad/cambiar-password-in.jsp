@@ -28,7 +28,7 @@
                         <div class="card-header">
                             <h3 class="card-title font-weight-bold">Cambiar</h3>
                         </div>
-                        <s:form id="form_pass" action="cambiarPasswordAdmin" theme="simple" >
+                        <s:form id="form_pass" action="cambiarPasswordInAdmin" theme="simple" >
                             <div class="card-body">
                                 <div class="row ">
                                     <div class="col-md-12">

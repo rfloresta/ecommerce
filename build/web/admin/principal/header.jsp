@@ -33,8 +33,11 @@
 <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
 </head>
 <body class="hold-transition sidebar-mini">
+    
+    
 <!-- Site wrapper -->
 <div class="wrapper">
+    
   <!-- Navbar -->
   <nav class="main-header navbar navbar-expand navbar-white navbar-light">
     <!-- Left navbar links -->
@@ -74,7 +77,7 @@
              aria-labelledby="#cerrarsesion" >
             <a  href="cargarPerfilAdmin" class="dropdown-item">Perfil</a>
             <a  href="../seguridad/cambiar-password-in.jsp" class="dropdown-item">Cambiar Contraseña</a>
-            <a  href="login.jsp" class="dropdown-item">Cerrar Sesion</a>
+            <a  href="cerrarSesionAdmin" class="dropdown-item">Cerrar Sesion</a>
           
         </div>
       </li>

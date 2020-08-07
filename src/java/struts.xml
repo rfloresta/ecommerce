@@ -3,11 +3,260 @@
 "http://struts.apache.org/dtds/struts-2.0.dtd">
 
 <struts>
-    
-    <include file="example.xml"/>
-    <!-- Configuration for the default package. -->
-    <package name="default" extends="struts-default">
+<constant name="struts.ui.theme" value="simple" />
+		
+		<constant name="struts.action.extension" value="xhtml,,xml,json,action" />
+		
+                
+		<bean type="org.apache.struts2.rest.handler.ContentTypeHandler" name="jackson" class="org.apache.struts2.rest.handler.JacksonLibHandler"/>
+<constant name="struts.rest.handlerOverride.json" value="jackson"/>
+
+<!-- Set to false if the json content can be returned for any kind of http method -->
+<constant name="struts.rest.content.restrictToGET" value="false"/> 
+
+<!-- Set encoding to UTF-8, default is ISO-8859-1 -->
+<constant name="struts.i18n.encoding" value="UTF-8"/>
+		
+		<!-- Its not a mandatory to set 'Controller' at the end of REST actions -->
+		<constant name="struts.convention.action.suffix" value="Action, Controller" />
+    	<constant name="struts.convention.action.mapAllMatches" value="true" />
+    	<constant name="struts.convention.default.parent.package" value="rest-default" />
+    	
+    	<!-- package name of REST controllers (only last part of package) -->
+    	<constant name="struts.convention.package.locators" value="rest" />
+    	
+		<constant name="struts.mapper.class" value="org.apache.struts2.dispatcher.mapper.PrefixBasedActionMapper" />
+		
+		<!-- /api is the namespace of REST calls, second part "struts" for Non-REST calls -->
+		<constant name="struts.mapper.prefixMapping" value="/api:rest,:struts"/>
+   	
+   		<!-- set name space for REST, it should match with "struts.mapper.prefixMapping"-->
+    	<constant name="struts.rest.namespace" value="/api" />
+    	
+    	<!-- Default extension for REST calls -->
+    	<constant name="struts.rest.defaultExtension" value="json" />
+   
+    <package name="action" extends="struts-default">
+        
+        <!-- Administrador -->
+        <action name="ingresoAdmin" class="wyv.action.AdministradorAction" method="ingresoAdmin">
+            <result name="ok">/admin/principal/inicio.jsp</result>
+            <result name="incorrecto">/admin/seguridad/login.jsp</result>
+            <result name="error">/admin/error.jsp</result>
+        </action>
+        <action name="listarAdmin" class="wyv.action.AdministradorAction" method="listarAdmin">
+            <result name="ok">/admin/principal/administrador.jsp</result>
+            <result name="error">/admin/error.jsp</result>
+        </action>
+        <action name="registrarAdmin" class="wyv.action.AdministradorAction" method="registrarAdmin">
+            <result name="ok">/admin/principal/administrador.jsp</result>
+            <result name="error">/admin/error.jsp</result>
+        </action>
+        <action name="editarAdmin" class="wyv.action.AdministradorAction" method="editarAdmin">
+            <result name="ok">/admin/principal/administrador.jsp</result>
+            <result name="error">/admin/error.jsp</result>
+        </action>
+        <action name="actualizarAdmin" class="wyv.action.AdministradorAction" method="actualizarAdmin">
+            <result name="ok">/admin/principal/administrador.jsp</result>
+            <result name="error">/admin/error.jsp</result>
+        </action>
+        <action name="eliminarAdmin" class="wyv.action.AdministradorAction" method="eliminarAdmin">
+            <result name="ok">/admin/principal/administrador.jsp</result>
+            <result name="error">/admin/error.jsp</result>
+        </action>
+        <action name="cargarPerfilAdmin" class="wyv.action.AdministradorAction" method="cargarDatosAdmin">
+            <result name="ok">/admin/principal/perfil.jsp</result>
+            <result name="error">/admin/error.jsp</result>
+        </action>
+        <action name="actualizarDatosAdmin" class="wyv.action.AdministradorAction" method="actualizarDatosAdmin">
+            <result name="ok">/admin/principal/perfil.jsp</result>
+            <result name="error">/admin/error.jsp</result>
+        </action>
+        <action name="cambiarPasswordInAdmin" class="wyv.action.AdministradorAction" method="cambiarPasswordInAdmin">
+            <result name="ok">/admin/seguridad/login.jsp</result>
+            <result name="error">/admin/error.jsp</result>
+            <result name="error">/admin/seguridad/cambiar-password-in.jsp</result>
+        </action>
+        <action name="restablecerPasswordAdmin" class="wyv.action.AdministradorAction" method="restablecerPasswordAdmin">
+            <result name="ok">/admin/seguridad/validar-codigo.jsp</result>
+            <result name="error">/admin/error.jsp</result>
+            <result name="incorrecto">/admin/seguridad/restablecer-password.jsp</result>
+        </action>
+        <action name="validarCodigoAdmin" class="wyv.action.AdministradorAction" method="validarCodigoAdmin">
+            <result name="ok">/admin/seguridad/cambiar-password-out.jsp</result>
+            <result name="error">/admin/error.jsp</result>
+            <result name="error">/admin/seguridad/validar-codigo.jsp</result>
+        </action>
+        <action name="cambiarPasswordOutAdmin" class="wyv.action.AdministradorAction" method="cambiarPasswordOutAdmin">
+            <result name="ok">/admin/seguridad/login.jsp</result>
+            <result name="error">/admin/error.jsp</result>
+            <result name="error">/admin/seguridad/cambiar-password.jsp</result>
+        </action>
+        <action name="cerrarSesionAdmin" class="wyv.action.AdministradorAction" method="cerrarSesionAdmin">
+            <result name="ok">/admin/seguridad/login.jsp</result>
+            <result name="error">/admin/error.jsp</result>
+        </action>
+        
+        <!-- Categoria -->
+        <action name="listarCate" class="wyv.action.CategoriaAction" method="listarCate">
+            <result name="ok">/admin/principal/categoria.jsp</result>
+            <result name="error">/admin/error.jsp</result>
+        </action>
+        <action name="registrarCate" class="wyv.action.CategoriaAction" method="registrarCate">
+            <result name="ok">/admin/principal/categoria.jsp</result>
+            <result name="error">/admin/error.jsp</result>
+        </action>
+        <action name="editarCate" class="wyv.action.CategoriaAction" method="editarCate">
+            <result name="ok">/admin/principal/categoria.jsp</result>
+            <result name="error">/admin/error.jsp</result>
+        </action>
+        <action name="actualizarCate" class="wyv.action.CategoriaAction" method="actualizarCate">
+            <result name="ok">/admin/principal/categoria.jsp</result>
+            <result name="error">/admin/error.jsp</result>
+        </action>
+        <action name="eliminarCate" class="wyv.action.CategoriaAction" method="eliminarCate">
+            <result name="ok">/admin/principal/categoria.jsp</result>
+            <result name="error">/admin/error.jsp</result>
+        </action>
+        
+        <!-- Cliente -->
+     
+        <action name="ingresoCliente" class="wyv.action.ClienteAction" method="ingresoCliente">
+            <result name="ok">/catalogo.jsp</result>
+            <result name="incorrecto">/catalogo.jsp</result>
+            <result name="error">/error</result>
+        </action>
+        
+        <action name="listarClie" class="wyv.action.ClienteAction" method="listarClie">
+            <result name="ok">/admin/principal/cliente.jsp</result>
+            <result name="error">admin/error.jsp</result>
+        </action>
+        <action name="misDatos" class="wyv.action.ClienteAction" method="misDatos">
+            <result>/perfil.jsp</result>
+        </action>
+        <action name="devolverPagPass" class="wyv.action.ClienteAction" method="devolverPag">
+            <result name="ok">/seguridad/cambiar-password-in.jsp</result>
+        </action>
+        <action name="cambiarPasswordClieIn" class="wyv.action.ClienteAction" method="cambiarPasswordClieIn">
+            <result name="ok">/index.jsp</result>
+            <result name="incorrecto">/seguridad/incorrecto.jsp</result>
+            <result name="error">/error</result>
+        </action>
+        <action name="restablecerPasswordClie" class="wyv.action.ClienteAction" method="restablecerPasswordClie">
+            <result name="ok">/seguridad/validar-codigo.jsp</result>
+            <result name="incorrecto">/seguridad/incorrecto.jsp</result>
+            <result name="error">/seguridad/incorrecto.jsp</result>
+        </action>
+        <action name="validarCodigoClie" class="wyv.action.ClienteAction" method="validarCodigoClie">
+            <result name="ok">/seguridad/cambiar-password-out.jsp</result>
+            <result name="incorrecto">/seguridad/incorrecto.jsp</result>
+            <result name="error">/seguridad/incorrecto.jsp</result>
+        </action>
+        <action name="cambiarPasswordOutClie" class="wyv.action.ClienteAction" method="cambiarPasswordOutClie">
+            <result name="ok">/index.jsp</result>
+            <result name="error">/seguridad/incorrecto.jsp</result>
+            <result name="incorrecto">/error.jsp</result>
+        </action>
+        <action name="cerrarSesionClie" class="wyv.action.ClienteAction" method="cerrarSesionClie">
+            <result name="ok">/index.jsp</result>
+            <result name="error">/error.jsp</result>
+        </action>
+        
+        <!-- Empresa -->
+        <action name="cargarEmpresa" class="wyv.action.EmpresaAction" method="cargarEmpresa">
+            <result name="ok">/admin/principal/empresa.jsp</result>
+            <result name="error">/admin/error.jsp</result>
+        </action>
+        <action name="actualizarEmpresa" class="wyv.action.EmpresaAction" method="actualizarEmpresa">
+            <result name="ok">/admin/principal/empresa.jsp</result>
+            <result name="error">/admin/error.jsp</result>
+        </action>
+       
+        <!-- Marca -->
+        <action name="listarMarca" class="wyv.action.MarcaAction" method="listarMarca">
+            <result name="ok">/admin/principal/marca.jsp</result>
+            <result name="error">/admin/error.jsp</result>
+        </action>
+        <action name="registrarMarca" class="wyv.action.MarcaAction" method="registrarMarca">
+            <result name="ok">/admin/principal/marca.jsp</result>
+            <result name="error">/admin/error.jsp</result>
+        </action>
+        <action name="editarMarca" class="wyv.action.MarcaAction" method="editarMarca">
+            <result name="ok">/admin/principal/marca.jsp</result>
+            <result name="error">/admin/error.jsp</result>
+        </action>
+        <action name="actualizarMarca" class="wyv.action.MarcaAction" method="actualizarMarca">
+            <result name="ok">/admin/principal/marca.jsp</result>
+            <result name="error">/admin/error.jsp</result>
+        </action>
+        <action name="eliminarMarca" class="wyv.action.MarcaAction" method="eliminarMarca">
+            <result name="ok">/admin/principal/marca.jsp</result>
+            <result name="error">/admin/error.jsp</result>
+        </action>
+        
+        <!-- Pedido -->
+        <action name="listarPedido" class="wyv.action.PedidoAction" method="listarPedido">
+            <result name="ok">/admin/principal/pedido.jsp</result>
+            <result name="error">/admin/error.jsp</result>
+        </action>
+        <action name="registrarPedido" class="wyv.action.PedidoAction" method="registrarPedido">
+            <result name="ok">/carro.jsp</result>
+            <result name="error">/admin/error.jsp</result>
+        </action>
+        <action name="listarPedido" class="wyv.action.PedidoAction" method="listarPedido">
+            <result name="ok">/admin/principal/pedido.jsp</result>
+            <result name="error">/error.jsp</result>
+        </action>
+        <action name="AgregarCarrito" class="wyv.action.PedidoAction" method="AgregarCarrito">
+            <result name="ok">/index.jsp</result>
+            <result name="error">/admin/error.jsp</result>
+        </action>
+        <action name="QuitarDelCarro" class="wyv.action.PedidoAction" method="QuitarDelCarro">
+            <result name="ok">/carro.jsp</result>
+            <result name="error">/admin/error.jsp</result>
+        </action>
+        <action name="actualizarCantidadCar" class="wyv.action.PedidoAction" method="actualizarCantidadCar">
+            <result name="ok">/carro.jsp</result>
+            <result name="error">/admin/error.jsp</result>
+        </action>
+        <action name="actualizarPedido" class="wyv.action.PedidoAction" method="actualizarCantidadCar">
+            <result name="ok">/admin/principal/pedido.jsp</result>
+            <result name="error">/admin/error.jsp</result>
+        </action>
+        
+        <!-- Producto -->
+        <action name="listarProducto" class="wyv.action.ProductoAction" method="listarProducto">
+            <result name="ok">/admin/principal/producto.jsp</result>
+            <result name="error">/admin/error.jsp</result>
+        </action>
+        <action name="registrarProducto" class="wyv.action.ProductoAction" method="registrarProducto">
+            <result name="ok">/admin/principal/producto.jsp</result>
+            <result name="error">/admin/error.jsp</result>
+        </action>
+        <action name="editarProducto" class="wyv.action.ProductoAction" method="editarProducto">
+            <result name="ok">/admin/principal/producto.jsp</result>
+            <result name="error">/admin/error.jsp</result>
+        </action>
+        <action name="actualizarProducto" class="wyv.action.ProductoAction" method="actualizarProducto">
+            <result name="ok">/admin/principal/producto.jsp</result>
+            <result name="error">/admin/error.jsp</result>
+        </action>
+        <action name="eliminarProducto" class="wyv.action.ProductoAction" method="eliminarProducto">
+            <result name="ok">/admin/principal/producto.jsp</result>
+            <result name="error">/admin/error.jsp</result>
+        </action>
+        <action name="verCatalogo" class="wyv.action.ProductoAction" method="verCatalogo">
+            <result name="ok">/catalogo.jsp</result>
+            <result name="error">/error</result>
+        </action>
         
     </package>
     
+    <package name="api" namespace="/api" extends="rest-default">
+					
+			<action name="cliente" class="wyv.rest.ClienteController">
+			</action>
+				<action name="pedido" class="wyv.rest.PedidoController">
+			</action>		
+		</package> 
 </struts>

@@ -6,26 +6,26 @@
 package wyv.persistencia;
 
 import java.io.Serializable;
+import javax.persistence.Query;
+import javax.persistence.EntityNotFoundException;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.Query;
-import javax.persistence.EntityNotFoundException;
 import javax.persistence.Persistence;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
 import wyv.persistencia.exceptions.NonexistentEntityException;
 
 /**
  *
- * @author bdeg_
+ * @author Romario
  */
 public class ClienteJpa implements Serializable {
-
+    
     public ClienteJpa() {
         this.emf= Persistence.createEntityManagerFactory("W_V_S.A.CPU");
     }
-
     public ClienteJpa(EntityManagerFactory emf) {
         this.emf = emf;
     }
@@ -36,11 +36,29 @@ public class ClienteJpa implements Serializable {
     }
 
     public void create(Cliente cliente) {
+        if (cliente.getPedidoList() == null) {
+            cliente.setPedidoList(new ArrayList<Pedido>());
+        }
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
+            List<Pedido> attachedPedidoList = new ArrayList<Pedido>();
+            for (Pedido pedidoListPedidoToAttach : cliente.getPedidoList()) {
+                pedidoListPedidoToAttach = em.getReference(pedidoListPedidoToAttach.getClass(), pedidoListPedidoToAttach.getIdPedido());
+                attachedPedidoList.add(pedidoListPedidoToAttach);
+            }
+            cliente.setPedidoList(attachedPedidoList);
             em.persist(cliente);
+            for (Pedido pedidoListPedido : cliente.getPedidoList()) {
+                Cliente oldIdClienteOfPedidoListPedido = pedidoListPedido.getIdCliente();
+                pedidoListPedido.setIdCliente(cliente);
+                pedidoListPedido = em.merge(pedidoListPedido);
+                if (oldIdClienteOfPedidoListPedido != null) {
+                    oldIdClienteOfPedidoListPedido.getPedidoList().remove(pedidoListPedido);
+                    oldIdClienteOfPedidoListPedido = em.merge(oldIdClienteOfPedidoListPedido);
+                }
+            }
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -54,7 +72,34 @@ public class ClienteJpa implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
+            Cliente persistentCliente = em.find(Cliente.class, cliente.getIdCliente());
+            List<Pedido> pedidoListOld = persistentCliente.getPedidoList();
+            List<Pedido> pedidoListNew = cliente.getPedidoList();
+            List<Pedido> attachedPedidoListNew = new ArrayList<Pedido>();
+            for (Pedido pedidoListNewPedidoToAttach : pedidoListNew) {
+                pedidoListNewPedidoToAttach = em.getReference(pedidoListNewPedidoToAttach.getClass(), pedidoListNewPedidoToAttach.getIdPedido());
+                attachedPedidoListNew.add(pedidoListNewPedidoToAttach);
+            }
+            pedidoListNew = attachedPedidoListNew;
+            cliente.setPedidoList(pedidoListNew);
             cliente = em.merge(cliente);
+            for (Pedido pedidoListOldPedido : pedidoListOld) {
+                if (!pedidoListNew.contains(pedidoListOldPedido)) {
+                    pedidoListOldPedido.setIdCliente(null);
+                    pedidoListOldPedido = em.merge(pedidoListOldPedido);
+                }
+            }
+            for (Pedido pedidoListNewPedido : pedidoListNew) {
+                if (!pedidoListOld.contains(pedidoListNewPedido)) {
+                    Cliente oldIdClienteOfPedidoListNewPedido = pedidoListNewPedido.getIdCliente();
+                    pedidoListNewPedido.setIdCliente(cliente);
+                    pedidoListNewPedido = em.merge(pedidoListNewPedido);
+                    if (oldIdClienteOfPedidoListNewPedido != null && !oldIdClienteOfPedidoListNewPedido.equals(cliente)) {
+                        oldIdClienteOfPedidoListNewPedido.getPedidoList().remove(pedidoListNewPedido);
+                        oldIdClienteOfPedidoListNewPedido = em.merge(oldIdClienteOfPedidoListNewPedido);
+                    }
+                }
+            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
@@ -83,6 +128,11 @@ public class ClienteJpa implements Serializable {
                 cliente.getIdCliente();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The cliente with id " + id + " no longer exists.", enfe);
+            }
+            List<Pedido> pedidoList = cliente.getPedidoList();
+            for (Pedido pedidoListPedido : pedidoList) {
+                pedidoListPedido.setIdCliente(null);
+                pedidoListPedido = em.merge(pedidoListPedido);
             }
             em.remove(cliente);
             em.getTransaction().commit();

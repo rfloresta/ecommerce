@@ -19,7 +19,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author bdeg_
+ * @author Romario
  */
 @Entity
 @Table(name = "detalle_pedido")
@@ -44,12 +44,12 @@ public class DetallePedido implements Serializable {
     @Basic(optional = false)
     @Column(name = "descuento")
     private double descuento;
-    @JoinColumn(name = "idProducto", referencedColumnName = "idProducto", insertable = false, updatable = false)
-    @ManyToOne(optional = false)
-    private Producto producto;
     @JoinColumn(name = "idPedido", referencedColumnName = "idPedido", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Pedido pedido;
+    @JoinColumn(name = "idProducto", referencedColumnName = "idProducto", insertable = false, updatable = false)
+    @ManyToOne(optional = false)
+    private Producto producto;
 
     public DetallePedido() {
     }
@@ -99,20 +99,20 @@ public class DetallePedido implements Serializable {
         this.descuento = descuento;
     }
 
-    public Producto getProducto() {
-        return producto;
-    }
-
-    public void setProducto(Producto producto) {
-        this.producto = producto;
-    }
-
     public Pedido getPedido() {
         return pedido;
     }
 
     public void setPedido(Pedido pedido) {
         this.pedido = pedido;
+    }
+
+    public Producto getProducto() {
+        return producto;
+    }
+
+    public void setProducto(Producto producto) {
+        this.producto = producto;
     }
 
     @Override

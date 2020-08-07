@@ -194,7 +194,7 @@ public class ClienteAction extends ActionSupport implements SessionAware {
             clieSer = new ClienteServicio();
             lstClie = clieSer.listar();
             return "ok";
-        } catch (Exception e) {
+        }catch (Exception e) {
             resultado = "Error en: listarCate :: " + e.getMessage();
             return "error";
         }
@@ -342,16 +342,16 @@ public class ClienteAction extends ActionSupport implements SessionAware {
     }
     
      @Action(value="devolverPagPass",results= {
-	@Result(name="ok",location="/cambiar-password.jsp")
+	@Result(name="ok",location="/seguridad/cambiar-password-in.jsp")
 	})
     public String devolverPag(){
         return "ok";
     }
     
     @Action(value="cambiarPasswordClieIn",results= {
-			@Result(name="ok",location="/cambiar-password.jsp"),
+			@Result(name="ok",location="/index.jsp"),
 			@Result(name="error",location="/error.jsp"),
-                        @Result(name="incorrecto",location="/cambiar-password.jsp")
+                        @Result(name="incorrecto",location="/seguridad/incorrecto.jsp")
 	})
 	public String cambiarPasswordClieIn() {
 		try {
@@ -361,14 +361,18 @@ public class ClienteAction extends ActionSupport implements SessionAware {
                         clieSer=new ClienteServicio();
 			cliente = recibirSession();
 			estado=clieSer.actualizar(cliente);
-			return estado;
-                        }
+                            if(estado.equals("ok")){
+                                cerrarSesionClie();
+                            }
+                        }else{
                         addActionError("La Contraseña Actual no es la correcta");
-                        return estado="incorrecto";
+                        estado="incorrecto";
+                        }
 		} catch (Exception e) {
 			resultado="Error en: cambiarPasswordClieIn :: "+e.getMessage();
-			return estado;
+			
 		}
+                return estado;
 	}
         
         public Cliente recibirSession() {
@@ -399,7 +403,7 @@ public class ClienteAction extends ActionSupport implements SessionAware {
 		try {
                         sesion.clear();
                         sesion.put("seccion", 0);
-			return estado="ok";
+			return "ok";
 		} catch (Exception e) {
 			resultado="Error en: cerrarSesionCliente :: "+e.getMessage();
 			return estado;
@@ -420,6 +424,7 @@ public class ClienteAction extends ActionSupport implements SessionAware {
             }else{ 
             clieSer=new ClienteServicio();
             String email=cliente.getEmail();
+                System.out.println(email);
             cliente=clieSer.validarEmail(email);
             if(cliente!=null){
             Properties props = new Properties();
@@ -430,13 +435,13 @@ public class ClienteAction extends ActionSupport implements SessionAware {
             Session session = Session.getDefaultInstance(props);
             String correoRemitente = "prueba10021@gmail.com";
             String passwordRemitente = "prueba12344";
-            String correoReceptor = cliente.getEmail();
+            String correoReceptor = email;
             String asunto = "W&V - Restablecer Contraseña";
             //genera un numero entre 1 y 5 y lo guarda en la variable codigo
             int cod = (int)(100000 * Math.random());
             cliente.setCodigoGenerado(String.valueOf(cod));
             clieSer.actualizar(cliente);
-            String mensaje = "Hola "+cliente.getNombres()+"<br>Tu código de restablecimiento es: "+cod;
+            String mensaje = "Hola "+cliente.getNombres()+".<br>Tu código de restablecimiento es: "+cod;
             MimeMessage message = new MimeMessage(session);
             message.setFrom(new InternetAddress(correoRemitente));
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(correoReceptor));

@@ -92,8 +92,6 @@ public class EmpresaAction extends ActionSupport {
 		
 		try {
                     
-                        
-                    
                     String filePath = ServletActionContext.getServletContext().getRealPath("/").concat("admin/imagenes");
                     File fileToCreate = new File(filePath, logoFileName);
                     FileUtils.copyFile(logo, fileToCreate);

@@ -1,10 +1,9 @@
 $('.btnDatosClie').on('click', function () {
     var idCliente = $('#idClie').val();
     $.ajax({
-        type: 'POST',
-        url: 'buscarCliePerfil.action?idClie=' + idCliente,
+        url: 'api/cliente/'+idCliente,
         success: function (respuesta) {
-            var json = JSON.parse(respuesta);
+            var json = respuesta;
             console.log(json);
             var dni = json.dni == null ? '' : json.dni;
             var numCelular = json.numCelular == null ? '' : json.numCelular;
@@ -80,8 +79,6 @@ $('.btnDatosClie').on('click', function () {
 //        }});
 //});
 
-
-
 function ActualizarDatos() {
     var idClie = $('#idClie').val();
     var nombre = $('#nombre').val();
@@ -106,23 +103,22 @@ function ActualizarDatos() {
 
 $('.btnPedidoClie').on('click', function () {
     var idClie = $('#idClie').val();
-    console.log(idClie);
     $.ajax({
-        type: 'POST',
-        url: 'listarPedidoPorCliente.action?idClie=' + idClie,
+        url: 'api/pedido/'+idClie,
         success: function (respuesta) {
-            var json = JSON.parse(respuesta);
-            console.log(json);
+            var json = respuesta;
             var lista = "";
+            
+            var link = /*[[@{/edit.html}]]*/ 'test';
             json.forEach(pedido => {
                 lista += "<div class='row'>\n\
                         <div class='col-6'>\n\
                             <h3 class='text-bold'>Numero de Orden: <span>" + pedido.pedido.numero + "</span></h3>\n\
                             <div class='detalle my-3'>\n\
-                                <img class='img-fluid img-pro-pefil' src='<%=request.getContextPath()%>/admin/imagenes/" + pedido.producto.imagen + "'>\n\
+                                <img class='img-fluid img-pro-pefil' src='http://localhost:8084/W_V_S.A.C/admin/imagenes/" + pedido.producto.imagen + "'>\n\
                                 <div class='d-inline-block ml-2'>\n\
                                     <h4 class='mb-2'>" + pedido.producto.nombre + "</h4>\n\
-                                    <span class='text-success'>" + pedido.producto.precioVenta + "</span>\n\
+                                    <span class='text-success'>S/" + pedido.producto.precioVenta + "</span>\n\
                                     <p>" + pedido.cantidad + " unidad</p>\n\
                                 </div>\n\
                             </div>\n\

@@ -20,17 +20,17 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import wyv.persistencia.exceptions.IllegalOrphanException;
 import wyv.persistencia.exceptions.NonexistentEntityException;
+import wyv.persistencia.exceptions.PreexistingEntityException;
 
 /**
  *
- * @author bdeg_
+ * @author Romario
  */
 public class PedidoJpa implements Serializable {
-
+    
     public PedidoJpa() {
         this.emf = Persistence.createEntityManagerFactory("W_V_S.A.CPU");
     }
-
     public PedidoJpa(EntityManagerFactory emf) {
         this.emf = emf;
     }
@@ -40,7 +40,7 @@ public class PedidoJpa implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(Pedido pedido) {
+    public void create(Pedido pedido) throws PreexistingEntityException, Exception {
         if (pedido.getDetallePedidoList() == null) {
             pedido.setDetallePedidoList(new ArrayList<DetallePedido>());
         }
@@ -74,6 +74,11 @@ public class PedidoJpa implements Serializable {
                 }
             }
             em.getTransaction().commit();
+        } catch (Exception ex) {
+            if (findPedido(pedido.getIdPedido()) != null) {
+                throw new PreexistingEntityException("Pedido " + pedido + " already exists.", ex);
+            }
+            throw ex;
         } finally {
             if (em != null) {
                 em.close();
@@ -292,5 +297,5 @@ public class PedidoJpa implements Serializable {
         }
         return lisPedido;
     }
-
+    
 }

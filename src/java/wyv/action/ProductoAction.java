@@ -17,6 +17,7 @@ import wyv.persistencia.Categoria;
 import wyv.persistencia.Marca;
 import wyv.servicios.CategoriaServicio;
 import wyv.servicios.MarcaServicio;
+import org.apache.struts2.convention.annotation.Namespace;
 
 
 @SuppressWarnings("serial")
@@ -120,7 +121,7 @@ public class ProductoAction extends ActionSupport implements SessionAware{
     @Action(value = "listarProducto", results = {
         @Result(name = "ok", location = "/admin/principal/producto.jsp")
         ,
-	@Result(name = "error", location = "admin/error.jsp")
+	@Result(name = "error", location = "/admin/error.jsp")
 
     })
     public String listarProducto() {
@@ -165,7 +166,7 @@ public class ProductoAction extends ActionSupport implements SessionAware{
     @Action(value = "editarProducto", results = {
         @Result(name = "ok", location = "/admin/principal/producto.jsp")
         ,
-			@Result(name = "error", location = "/error.jsp")
+			@Result(name = "error", location = "/admin/error.jsp")
     })
     public String editarProducto() {
 

@@ -19,10 +19,11 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import org.codehaus.jackson.annotate.JsonIgnore;
 
 /**
  *
- * @author bdeg_
+ * @author Romario
  */
 @Entity
 @Table(name = "categoria")
@@ -34,9 +35,6 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Categoria.findByCategoriaSuperior", query = "SELECT c FROM Categoria c WHERE c.categoriaSuperior = :categoriaSuperior")})
 public class Categoria implements Serializable {
 
-    @OneToMany(mappedBy = "idCategoria")
-    private List<Producto> productoList;
-
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -47,6 +45,8 @@ public class Categoria implements Serializable {
     private String nombre;
     @Column(name = "categoriaSuperior")
     private Integer categoriaSuperior;
+    @OneToMany(mappedBy = "idCategoria")
+    private List<Producto> productoList;
 
     public Categoria() {
     }
@@ -79,6 +79,16 @@ public class Categoria implements Serializable {
         this.categoriaSuperior = categoriaSuperior;
     }
 
+    @XmlTransient
+    @JsonIgnore
+    public List<Producto> getProductoList() {
+        return productoList;
+    }
+
+    public void setProductoList(List<Producto> productoList) {
+        this.productoList = productoList;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -102,15 +112,6 @@ public class Categoria implements Serializable {
     @Override
     public String toString() {
         return "wyv.persistencia.Categoria[ idCategoria=" + idCategoria + " ]";
-    }
-
-    @XmlTransient
-    public List<Producto> getProductoList() {
-        return productoList;
-    }
-
-    public void setProductoList(List<Producto> productoList) {
-        this.productoList = productoList;
     }
     
 }

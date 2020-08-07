@@ -222,7 +222,7 @@ public class PedidoAction extends ActionSupport implements SessionAware {
       @Action(value = "registrarPedido", results = {
         @Result(name = "ok", location = "/carro.jsp")
         ,
-	@Result(name = "error", location = "admin/error.jsp")
+	@Result(name = "error", location = "/error.jsp")
 
     })
     public String registrarPedido() {
@@ -394,7 +394,7 @@ public class PedidoAction extends ActionSupport implements SessionAware {
     @Action(value = "actualizarPedido", results = {
         @Result(name = "ok", location = "/admin/principal/pedido.jsp")
         ,
-			@Result(name = "error", location = "/error.jsp")
+			@Result(name = "error", location = "/admin/error.jsp")
     })
     public String actualizarPedido() {
 
@@ -429,7 +429,7 @@ public class PedidoAction extends ActionSupport implements SessionAware {
 
             return "ok";
         } catch (Exception e) {
-            resultado = "Error en: eliminarMarca :: " + e.getMessage();
+            resultado = "Error en: actualizarPedido :: " + e.getMessage();
             return "error";
         }
     }
