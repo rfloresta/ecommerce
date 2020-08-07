@@ -146,7 +146,7 @@ public class Cliente implements Serializable {
     }
 
     @XmlTransient
-    @JsonIgnore
+//    @JsonIgnore
     public List<Pedido> getPedidoList() {
         return pedidoList;
     }

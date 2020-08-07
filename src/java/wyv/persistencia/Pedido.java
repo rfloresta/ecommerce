@@ -20,7 +20,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import org.codehaus.jackson.annotate.JsonBackReference;
 import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonManagedReference;
 
 /**
  *
@@ -62,9 +64,11 @@ public class Pedido implements Serializable {
     @Column(name = "estado")
     private Character estado;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "pedido")
+    @JsonManagedReference
     private List<DetallePedido> detallePedidoList;
     @JoinColumn(name = "idCliente", referencedColumnName = "idCliente")
     @ManyToOne
+    @JsonBackReference
     private Cliente idCliente;
 
     public Pedido() {
@@ -139,7 +143,7 @@ public class Pedido implements Serializable {
     }
 
     @XmlTransient
-    @JsonIgnore
+//    @JsonIgnore
     public List<DetallePedido> getDetallePedidoList() {
         return detallePedidoList;
     }

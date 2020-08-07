@@ -23,7 +23,7 @@ import wyv.persistencia.exceptions.NonexistentEntityException;
  * @author Romario
  */
 public class ProductoJpa implements Serializable {
-public ProductoJpa() {
+    public ProductoJpa() {
         this.emf= Persistence.createEntityManagerFactory("W_V_S.A.CPU");
     }
     public ProductoJpa(EntityManagerFactory emf) {
@@ -36,9 +36,6 @@ public ProductoJpa() {
     }
 
     public void create(Producto producto) {
-        if (producto.getDetallePedidoList() == null) {
-            producto.setDetallePedidoList(new ArrayList<DetallePedido>());
-        }
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -53,12 +50,6 @@ public ProductoJpa() {
                 idMarca = em.getReference(idMarca.getClass(), idMarca.getIdMarca());
                 producto.setIdMarca(idMarca);
             }
-            List<DetallePedido> attachedDetallePedidoList = new ArrayList<DetallePedido>();
-            for (DetallePedido detallePedidoListDetallePedidoToAttach : producto.getDetallePedidoList()) {
-                detallePedidoListDetallePedidoToAttach = em.getReference(detallePedidoListDetallePedidoToAttach.getClass(), detallePedidoListDetallePedidoToAttach.getDetallePedidoPK());
-                attachedDetallePedidoList.add(detallePedidoListDetallePedidoToAttach);
-            }
-            producto.setDetallePedidoList(attachedDetallePedidoList);
             em.persist(producto);
             if (idCategoria != null) {
                 idCategoria.getProductoList().add(producto);
@@ -68,15 +59,6 @@ public ProductoJpa() {
                 idMarca.getProductoList().add(producto);
                 idMarca = em.merge(idMarca);
             }
-            for (DetallePedido detallePedidoListDetallePedido : producto.getDetallePedidoList()) {
-                Producto oldProductoOfDetallePedidoListDetallePedido = detallePedidoListDetallePedido.getProducto();
-                detallePedidoListDetallePedido.setProducto(producto);
-                detallePedidoListDetallePedido = em.merge(detallePedidoListDetallePedido);
-                if (oldProductoOfDetallePedidoListDetallePedido != null) {
-                    oldProductoOfDetallePedidoListDetallePedido.getDetallePedidoList().remove(detallePedidoListDetallePedido);
-                    oldProductoOfDetallePedidoListDetallePedido = em.merge(oldProductoOfDetallePedidoListDetallePedido);
-                }
-            }
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -85,7 +67,7 @@ public ProductoJpa() {
         }
     }
 
-    public void edit(Producto producto) throws IllegalOrphanException, NonexistentEntityException, Exception {
+    public void edit(Producto producto) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -95,20 +77,6 @@ public ProductoJpa() {
             Categoria idCategoriaNew = producto.getIdCategoria();
             Marca idMarcaOld = persistentProducto.getIdMarca();
             Marca idMarcaNew = producto.getIdMarca();
-            List<DetallePedido> detallePedidoListOld = persistentProducto.getDetallePedidoList();
-            List<DetallePedido> detallePedidoListNew = producto.getDetallePedidoList();
-            List<String> illegalOrphanMessages = null;
-            for (DetallePedido detallePedidoListOldDetallePedido : detallePedidoListOld) {
-                if (!detallePedidoListNew.contains(detallePedidoListOldDetallePedido)) {
-                    if (illegalOrphanMessages == null) {
-                        illegalOrphanMessages = new ArrayList<String>();
-                    }
-                    illegalOrphanMessages.add("You must retain DetallePedido " + detallePedidoListOldDetallePedido + " since its producto field is not nullable.");
-                }
-            }
-            if (illegalOrphanMessages != null) {
-                throw new IllegalOrphanException(illegalOrphanMessages);
-            }
             if (idCategoriaNew != null) {
                 idCategoriaNew = em.getReference(idCategoriaNew.getClass(), idCategoriaNew.getIdCategoria());
                 producto.setIdCategoria(idCategoriaNew);
@@ -117,13 +85,6 @@ public ProductoJpa() {
                 idMarcaNew = em.getReference(idMarcaNew.getClass(), idMarcaNew.getIdMarca());
                 producto.setIdMarca(idMarcaNew);
             }
-            List<DetallePedido> attachedDetallePedidoListNew = new ArrayList<DetallePedido>();
-            for (DetallePedido detallePedidoListNewDetallePedidoToAttach : detallePedidoListNew) {
-                detallePedidoListNewDetallePedidoToAttach = em.getReference(detallePedidoListNewDetallePedidoToAttach.getClass(), detallePedidoListNewDetallePedidoToAttach.getDetallePedidoPK());
-                attachedDetallePedidoListNew.add(detallePedidoListNewDetallePedidoToAttach);
-            }
-            detallePedidoListNew = attachedDetallePedidoListNew;
-            producto.setDetallePedidoList(detallePedidoListNew);
             producto = em.merge(producto);
             if (idCategoriaOld != null && !idCategoriaOld.equals(idCategoriaNew)) {
                 idCategoriaOld.getProductoList().remove(producto);
@@ -140,17 +101,6 @@ public ProductoJpa() {
             if (idMarcaNew != null && !idMarcaNew.equals(idMarcaOld)) {
                 idMarcaNew.getProductoList().add(producto);
                 idMarcaNew = em.merge(idMarcaNew);
-            }
-            for (DetallePedido detallePedidoListNewDetallePedido : detallePedidoListNew) {
-                if (!detallePedidoListOld.contains(detallePedidoListNewDetallePedido)) {
-                    Producto oldProductoOfDetallePedidoListNewDetallePedido = detallePedidoListNewDetallePedido.getProducto();
-                    detallePedidoListNewDetallePedido.setProducto(producto);
-                    detallePedidoListNewDetallePedido = em.merge(detallePedidoListNewDetallePedido);
-                    if (oldProductoOfDetallePedidoListNewDetallePedido != null && !oldProductoOfDetallePedidoListNewDetallePedido.equals(producto)) {
-                        oldProductoOfDetallePedidoListNewDetallePedido.getDetallePedidoList().remove(detallePedidoListNewDetallePedido);
-                        oldProductoOfDetallePedidoListNewDetallePedido = em.merge(oldProductoOfDetallePedidoListNewDetallePedido);
-                    }
-                }
             }
             em.getTransaction().commit();
         } catch (Exception ex) {
@@ -169,7 +119,7 @@ public ProductoJpa() {
         }
     }
 
-    public void destroy(Integer id) throws IllegalOrphanException, NonexistentEntityException {
+    public void destroy(Integer id) throws NonexistentEntityException {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -180,17 +130,6 @@ public ProductoJpa() {
                 producto.getIdProducto();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The producto with id " + id + " no longer exists.", enfe);
-            }
-            List<String> illegalOrphanMessages = null;
-            List<DetallePedido> detallePedidoListOrphanCheck = producto.getDetallePedidoList();
-            for (DetallePedido detallePedidoListOrphanCheckDetallePedido : detallePedidoListOrphanCheck) {
-                if (illegalOrphanMessages == null) {
-                    illegalOrphanMessages = new ArrayList<String>();
-                }
-                illegalOrphanMessages.add("This Producto (" + producto + ") cannot be destroyed since the DetallePedido " + detallePedidoListOrphanCheckDetallePedido + " in its detallePedidoList field has a non-nullable producto field.");
-            }
-            if (illegalOrphanMessages != null) {
-                throw new IllegalOrphanException(illegalOrphanMessages);
             }
             Categoria idCategoria = producto.getIdCategoria();
             if (idCategoria != null) {

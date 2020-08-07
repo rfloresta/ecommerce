@@ -104,29 +104,25 @@ function ActualizarDatos() {
 $('.btnPedidoClie').on('click', function () {
     var idClie = $('#idClie').val();
     $.ajax({
-        url: 'api/pedido/'+idClie,
+        url: 'api/cliente/'+idClie,
         success: function (respuesta) {
-            var json = respuesta;
+            var json = respuesta.pedidoList;
             var lista = "";
             
-            var link = /*[[@{/edit.html}]]*/ 'test';
             json.forEach(pedido => {
                 lista += "<div class='row'>\n\
-                        <div class='col-6'>\n\
-                            <h3 class='text-bold'>Numero de Orden: <span>" + pedido.pedido.numero + "</span></h3>\n\
+                        <div class='col-6 '>\n\
+                            <h4 class='text-muted'>Pedido Realizado: <span>" + pedido.fecha + "</span></h4>\n\
                             <div class='detalle my-3'>\n\
-                                <img class='img-fluid img-pro-pefil' src='http://localhost:8084/W_V_S.A.C/admin/imagenes/" + pedido.producto.imagen + "'>\n\
                                 <div class='d-inline-block ml-2'>\n\
-                                    <h4 class='mb-2'>" + pedido.producto.nombre + "</h4>\n\
-                                    <span class='text-success'>S/" + pedido.producto.precioVenta + "</span>\n\
-                                    <p>" + pedido.cantidad + " unidad</p>\n\
+                                 <p>Tipo Pago: "+ pedido.pago + "</p>\n\
+                                 <span class='text-success d-block'>Total: S/" + pedido.total + "</span>\n\
                                 </div>\n\
                             </div>\n\
                         </div>\n\
                         <div class='col-6 d-flex justify-content-end'>\n\
                             <div class='d-block'>\n\
-                                <p >Total: S/" + pedido.pedido.total + "</p>\n\
-                                <p class='d-block'>Fecha de compra: " + pedido.pedido.fecha + "</p>\n\
+                                <p class='d-block'>Compra numero: " + pedido.numero +"</p>\n\
                                 <button class='btn btn-warning mt-2 text-light'> Ver comprobante</button>\n\
                             </div>\n\
                         </div>\n\

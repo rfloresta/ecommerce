@@ -19,7 +19,6 @@ public class ClienteController  implements ModelDriven<Object> {
         this.id = id;
     }
 
-    
     public HttpHeaders index() {
 		model = clieDao.listar();
 		return new DefaultHttpHeaders("index").disableCaching();

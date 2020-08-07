@@ -3,38 +3,27 @@
 "http://struts.apache.org/dtds/struts-2.0.dtd">
 
 <struts>
-<constant name="struts.ui.theme" value="simple" />
+    <constant name="struts.ui.theme" value="simple" />
+    <constant name="struts.action.extension" value="xhtml,,xml,json,action" />
+    
+    <bean type="org.apache.struts2.rest.handler.ContentTypeHandler" name="jackson" class="org.apache.struts2.rest.handler.JacksonLibHandler"/>
+    <constant name="struts.rest.handlerOverride.json" value="jackson"/>
+    <constant name="struts.rest.content.restrictToGET" value="false"/> 
+    <constant name="struts.i18n.encoding" value="UTF-8"/>
 		
-		<constant name="struts.action.extension" value="xhtml,,xml,json,action" />
-		
-                
-		<bean type="org.apache.struts2.rest.handler.ContentTypeHandler" name="jackson" class="org.apache.struts2.rest.handler.JacksonLibHandler"/>
-<constant name="struts.rest.handlerOverride.json" value="jackson"/>
-
-<!-- Set to false if the json content can be returned for any kind of http method -->
-<constant name="struts.rest.content.restrictToGET" value="false"/> 
-
-<!-- Set encoding to UTF-8, default is ISO-8859-1 -->
-<constant name="struts.i18n.encoding" value="UTF-8"/>
-		
-		<!-- Its not a mandatory to set 'Controller' at the end of REST actions -->
-		<constant name="struts.convention.action.suffix" value="Action, Controller" />
-    	<constant name="struts.convention.action.mapAllMatches" value="true" />
-    	<constant name="struts.convention.default.parent.package" value="rest-default" />
+    <constant name="struts.convention.action.suffix" value="Action, Controller" />
+    <constant name="struts.convention.action.mapAllMatches" value="true" />
+    <constant name="struts.convention.default.parent.package" value="rest-default" />
     	
-    	<!-- package name of REST controllers (only last part of package) -->
-    	<constant name="struts.convention.package.locators" value="rest" />
+    <constant name="struts.convention.package.locators" value="rest" />
     	
-		<constant name="struts.mapper.class" value="org.apache.struts2.dispatcher.mapper.PrefixBasedActionMapper" />
+    <constant name="struts.mapper.class" value="org.apache.struts2.dispatcher.mapper.PrefixBasedActionMapper" />
 		
-		<!-- /api is the namespace of REST calls, second part "struts" for Non-REST calls -->
-		<constant name="struts.mapper.prefixMapping" value="/api:rest,:struts"/>
+    <constant name="struts.mapper.prefixMapping" value="/api:rest,:struts"/>
    	
-   		<!-- set name space for REST, it should match with "struts.mapper.prefixMapping"-->
-    	<constant name="struts.rest.namespace" value="/api" />
+    <constant name="struts.rest.namespace" value="/api" />
     	
-    	<!-- Default extension for REST calls -->
-    	<constant name="struts.rest.defaultExtension" value="json" />
+    <constant name="struts.rest.defaultExtension" value="json" />
    
     <package name="action" extends="struts-default">
         
@@ -253,10 +242,9 @@
     </package>
     
     <package name="api" namespace="/api" extends="rest-default">
-					
-			<action name="cliente" class="wyv.rest.ClienteController">
-			</action>
-				<action name="pedido" class="wyv.rest.PedidoController">
-			</action>		
-		</package> 
+	<action name="cliente" class="wyv.rest.ClienteController">
+        </action>
+        <action name="pedido" class="wyv.rest.PedidoController">
+        </action>		
+    </package> 
 </struts>

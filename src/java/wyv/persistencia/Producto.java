@@ -24,6 +24,7 @@ import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonManagedReference;
 
 /**
  *
@@ -67,6 +68,7 @@ public class Producto implements Serializable {
     @Column(name = "imagen")
     private String imagen;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "producto")
+    @JsonManagedReference
     private List<DetallePedido> detallePedidoList;
     @JoinColumn(name = "idCategoria", referencedColumnName = "idCategoria")
     @ManyToOne

@@ -40,7 +40,7 @@ public class PedidoJpa implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(Pedido pedido) throws PreexistingEntityException, Exception {
+    public void create(Pedido pedido) {
         if (pedido.getDetallePedidoList() == null) {
             pedido.setDetallePedidoList(new ArrayList<DetallePedido>());
         }
@@ -74,11 +74,6 @@ public class PedidoJpa implements Serializable {
                 }
             }
             em.getTransaction().commit();
-        } catch (Exception ex) {
-            if (findPedido(pedido.getIdPedido()) != null) {
-                throw new PreexistingEntityException("Pedido " + pedido + " already exists.", ex);
-            }
-            throw ex;
         } finally {
             if (em != null) {
                 em.close();
