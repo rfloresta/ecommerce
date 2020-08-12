@@ -174,7 +174,7 @@
                                                 <s:url var="lnkAgregarCarro" action="AgregarCarrito">
                                                     <s:param value="idProducto" name="proObj.idProducto" />
                                                     <s:param value="nombre" name="proObj.nombre" />
-                                                    <s:param value="descripcionto" name="proObj.descripcion" />
+                                                    <s:param value="descripcion" name="proObj.descripcion" />
                                                     <s:param value="stock" name="proObj.stock" /> 
                                                     <s:param value="precioCompra" name="proObj.precioCompra" />
                                                     <s:param value="precioVenta" name="proObj.precioVenta" />

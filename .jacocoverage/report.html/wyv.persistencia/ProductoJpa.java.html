@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>ProductoJpa.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;W_V_S.A.C&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">wyv.persistencia</a> &gt; <span class="el_source">ProductoJpa.java</span></div><h1>ProductoJpa.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package wyv.persistencia;
+
+import java.io.Serializable;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Query;
+import javax.persistence.EntityNotFoundException;
+import javax.persistence.Persistence;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+import wyv.persistencia.exceptions.NonexistentEntityException;
+
+/**
+ *
+ * @author bdeg_
+ */
+public class ProductoJpa implements Serializable {
+
+<span class="nc" id="L29">    public ProductoJpa() {</span>
+<span class="nc" id="L30">        this.emf= Persistence.createEntityManagerFactory(&quot;W_V_S.A.CPU&quot;);</span>
+<span class="nc" id="L31">    }</span>
+<span class="nc" id="L32">    public ProductoJpa(EntityManagerFactory emf) {</span>
+<span class="nc" id="L33">        this.emf = emf;</span>
+<span class="nc" id="L34">    }</span>
+<span class="nc" id="L35">    private EntityManagerFactory emf = null;</span>
+
+    public EntityManager getEntityManager() {
+<span class="nc" id="L38">        return emf.createEntityManager();</span>
+    }
+
+    public void create(Producto producto) {
+<span class="nc" id="L42">        EntityManager em = null;</span>
+        try {
+<span class="nc" id="L44">            em = getEntityManager();</span>
+<span class="nc" id="L45">            em.getTransaction().begin();</span>
+<span class="nc" id="L46">            Categoria idCategoria = producto.getIdCategoria();</span>
+<span class="nc bnc" id="L47" title="All 2 branches missed.">            if (idCategoria != null) {</span>
+<span class="nc" id="L48">                idCategoria = em.getReference(idCategoria.getClass(), idCategoria.getIdCategoria());</span>
+<span class="nc" id="L49">                producto.setIdCategoria(idCategoria);</span>
+            }
+<span class="nc" id="L51">            Marca idMarca = producto.getIdMarca();</span>
+<span class="nc bnc" id="L52" title="All 2 branches missed.">            if (idMarca != null) {</span>
+<span class="nc" id="L53">                idMarca = em.getReference(idMarca.getClass(), idMarca.getIdMarca());</span>
+<span class="nc" id="L54">                producto.setIdMarca(idMarca);</span>
+            }
+<span class="nc" id="L56">            Subcategoria idSubCategoria = producto.getIdSubCategoria();</span>
+<span class="nc bnc" id="L57" title="All 2 branches missed.">            if (idSubCategoria != null) {</span>
+<span class="nc" id="L58">                idSubCategoria = em.getReference(idSubCategoria.getClass(), idSubCategoria.getIdSubcategoria());</span>
+<span class="nc" id="L59">                producto.setIdSubCategoria(idSubCategoria);</span>
+            }
+<span class="nc" id="L61">            em.persist(producto);</span>
+<span class="nc bnc" id="L62" title="All 2 branches missed.">            if (idCategoria != null) {</span>
+<span class="nc" id="L63">                idCategoria.getProductoList().add(producto);</span>
+<span class="nc" id="L64">                idCategoria = em.merge(idCategoria);</span>
+            }
+<span class="nc bnc" id="L66" title="All 2 branches missed.">            if (idMarca != null) {</span>
+<span class="nc" id="L67">                idMarca.getProductoList().add(producto);</span>
+<span class="nc" id="L68">                idMarca = em.merge(idMarca);</span>
+            }
+<span class="nc bnc" id="L70" title="All 2 branches missed.">            if (idSubCategoria != null) {</span>
+<span class="nc" id="L71">                idSubCategoria.getProductoList().add(producto);</span>
+<span class="nc" id="L72">                idSubCategoria = em.merge(idSubCategoria);</span>
+            }
+<span class="nc" id="L74">            em.getTransaction().commit();</span>
+        } finally {
+<span class="nc bnc" id="L76" title="All 4 branches missed.">            if (em != null) {</span>
+<span class="nc" id="L77">                em.close();</span>
+            }
+        }
+<span class="nc" id="L80">    }</span>
+
+    public void edit(Producto producto) throws NonexistentEntityException, Exception {
+<span class="nc" id="L83">        EntityManager em = null;</span>
+        try {
+<span class="nc" id="L85">            em = getEntityManager();</span>
+<span class="nc" id="L86">            em.getTransaction().begin();</span>
+<span class="nc" id="L87">            Producto persistentProducto = em.find(Producto.class, producto.getIdProducto());</span>
+<span class="nc" id="L88">            Categoria idCategoriaOld = persistentProducto.getIdCategoria();</span>
+<span class="nc" id="L89">            Categoria idCategoriaNew = producto.getIdCategoria();</span>
+<span class="nc" id="L90">            Marca idMarcaOld = persistentProducto.getIdMarca();</span>
+<span class="nc" id="L91">            Marca idMarcaNew = producto.getIdMarca();</span>
+<span class="nc" id="L92">            Subcategoria idSubCategoriaOld = persistentProducto.getIdSubCategoria();</span>
+<span class="nc" id="L93">            Subcategoria idSubCategoriaNew = producto.getIdSubCategoria();</span>
+<span class="nc bnc" id="L94" title="All 2 branches missed.">            if (idCategoriaNew != null) {</span>
+<span class="nc" id="L95">                idCategoriaNew = em.getReference(idCategoriaNew.getClass(), idCategoriaNew.getIdCategoria());</span>
+<span class="nc" id="L96">                producto.setIdCategoria(idCategoriaNew);</span>
+            }
+<span class="nc bnc" id="L98" title="All 2 branches missed.">            if (idMarcaNew != null) {</span>
+<span class="nc" id="L99">                idMarcaNew = em.getReference(idMarcaNew.getClass(), idMarcaNew.getIdMarca());</span>
+<span class="nc" id="L100">                producto.setIdMarca(idMarcaNew);</span>
+            }
+<span class="nc bnc" id="L102" title="All 2 branches missed.">            if (idSubCategoriaNew != null) {</span>
+<span class="nc" id="L103">                idSubCategoriaNew = em.getReference(idSubCategoriaNew.getClass(), idSubCategoriaNew.getIdSubcategoria());</span>
+<span class="nc" id="L104">                producto.setIdSubCategoria(idSubCategoriaNew);</span>
+            }
+<span class="nc" id="L106">            producto = em.merge(producto);</span>
+<span class="nc bnc" id="L107" title="All 4 branches missed.">            if (idCategoriaOld != null &amp;&amp; !idCategoriaOld.equals(idCategoriaNew)) {</span>
+<span class="nc" id="L108">                idCategoriaOld.getProductoList().remove(producto);</span>
+<span class="nc" id="L109">                idCategoriaOld = em.merge(idCategoriaOld);</span>
+            }
+<span class="nc bnc" id="L111" title="All 4 branches missed.">            if (idCategoriaNew != null &amp;&amp; !idCategoriaNew.equals(idCategoriaOld)) {</span>
+<span class="nc" id="L112">                idCategoriaNew.getProductoList().add(producto);</span>
+<span class="nc" id="L113">                idCategoriaNew = em.merge(idCategoriaNew);</span>
+            }
+<span class="nc bnc" id="L115" title="All 4 branches missed.">            if (idMarcaOld != null &amp;&amp; !idMarcaOld.equals(idMarcaNew)) {</span>
+<span class="nc" id="L116">                idMarcaOld.getProductoList().remove(producto);</span>
+<span class="nc" id="L117">                idMarcaOld = em.merge(idMarcaOld);</span>
+            }
+<span class="nc bnc" id="L119" title="All 4 branches missed.">            if (idMarcaNew != null &amp;&amp; !idMarcaNew.equals(idMarcaOld)) {</span>
+<span class="nc" id="L120">                idMarcaNew.getProductoList().add(producto);</span>
+<span class="nc" id="L121">                idMarcaNew = em.merge(idMarcaNew);</span>
+            }
+<span class="nc bnc" id="L123" title="All 4 branches missed.">            if (idSubCategoriaOld != null &amp;&amp; !idSubCategoriaOld.equals(idSubCategoriaNew)) {</span>
+<span class="nc" id="L124">                idSubCategoriaOld.getProductoList().remove(producto);</span>
+<span class="nc" id="L125">                idSubCategoriaOld = em.merge(idSubCategoriaOld);</span>
+            }
+<span class="nc bnc" id="L127" title="All 4 branches missed.">            if (idSubCategoriaNew != null &amp;&amp; !idSubCategoriaNew.equals(idSubCategoriaOld)) {</span>
+<span class="nc" id="L128">                idSubCategoriaNew.getProductoList().add(producto);</span>
+<span class="nc" id="L129">                idSubCategoriaNew = em.merge(idSubCategoriaNew);</span>
+            }
+<span class="nc" id="L131">            em.getTransaction().commit();</span>
+<span class="nc" id="L132">        } catch (Exception ex) {</span>
+<span class="nc" id="L133">            String msg = ex.getLocalizedMessage();</span>
+<span class="nc bnc" id="L134" title="All 4 branches missed.">            if (msg == null || msg.length() == 0) {</span>
+<span class="nc" id="L135">                Integer id = producto.getIdProducto();</span>
+<span class="nc bnc" id="L136" title="All 2 branches missed.">                if (findProducto(id) == null) {</span>
+<span class="nc" id="L137">                    throw new NonexistentEntityException(&quot;The producto with id &quot; + id + &quot; no longer exists.&quot;);</span>
+                }
+            }
+<span class="nc" id="L140">            throw ex;</span>
+        } finally {
+<span class="nc bnc" id="L142" title="All 4 branches missed.">            if (em != null) {</span>
+<span class="nc" id="L143">                em.close();</span>
+            }
+        }
+<span class="nc" id="L146">    }</span>
+
+    public void destroy(Integer id) throws NonexistentEntityException {
+<span class="nc" id="L149">        EntityManager em = null;</span>
+        try {
+<span class="nc" id="L151">            em = getEntityManager();</span>
+<span class="nc" id="L152">            em.getTransaction().begin();</span>
+            Producto producto;
+            try {
+<span class="nc" id="L155">                producto = em.getReference(Producto.class, id);</span>
+<span class="nc" id="L156">                producto.getIdProducto();</span>
+<span class="nc" id="L157">            } catch (EntityNotFoundException enfe) {</span>
+<span class="nc" id="L158">                throw new NonexistentEntityException(&quot;The producto with id &quot; + id + &quot; no longer exists.&quot;, enfe);</span>
+<span class="nc" id="L159">            }</span>
+<span class="nc" id="L160">            Categoria idCategoria = producto.getIdCategoria();</span>
+<span class="nc bnc" id="L161" title="All 2 branches missed.">            if (idCategoria != null) {</span>
+<span class="nc" id="L162">                idCategoria.getProductoList().remove(producto);</span>
+<span class="nc" id="L163">                idCategoria = em.merge(idCategoria);</span>
+            }
+<span class="nc" id="L165">            Marca idMarca = producto.getIdMarca();</span>
+<span class="nc bnc" id="L166" title="All 2 branches missed.">            if (idMarca != null) {</span>
+<span class="nc" id="L167">                idMarca.getProductoList().remove(producto);</span>
+<span class="nc" id="L168">                idMarca = em.merge(idMarca);</span>
+            }
+<span class="nc" id="L170">            Subcategoria idSubCategoria = producto.getIdSubCategoria();</span>
+<span class="nc bnc" id="L171" title="All 2 branches missed.">            if (idSubCategoria != null) {</span>
+<span class="nc" id="L172">                idSubCategoria.getProductoList().remove(producto);</span>
+<span class="nc" id="L173">                idSubCategoria = em.merge(idSubCategoria);</span>
+            }
+<span class="nc" id="L175">            em.remove(producto);</span>
+<span class="nc" id="L176">            em.getTransaction().commit();</span>
+        } finally {
+<span class="nc bnc" id="L178" title="All 4 branches missed.">            if (em != null) {</span>
+<span class="nc" id="L179">                em.close();</span>
+            }
+        }
+<span class="nc" id="L182">    }</span>
+
+    public List&lt;Producto&gt; findProductoEntities() {
+<span class="nc" id="L185">        return findProductoEntities(true, -1, -1);</span>
+    }
+
+    public List&lt;Producto&gt; findProductoEntities(int maxResults, int firstResult) {
+<span class="nc" id="L189">        return findProductoEntities(false, maxResults, firstResult);</span>
+    }
+
+    private List&lt;Producto&gt; findProductoEntities(boolean all, int maxResults, int firstResult) {
+<span class="nc" id="L193">        EntityManager em = getEntityManager();</span>
+        try {
+<span class="nc" id="L195">            CriteriaQuery cq = em.getCriteriaBuilder().createQuery();</span>
+<span class="nc" id="L196">            cq.select(cq.from(Producto.class));</span>
+<span class="nc" id="L197">            Query q = em.createQuery(cq);</span>
+<span class="nc bnc" id="L198" title="All 2 branches missed.">            if (!all) {</span>
+<span class="nc" id="L199">                q.setMaxResults(maxResults);</span>
+<span class="nc" id="L200">                q.setFirstResult(firstResult);</span>
+            }
+<span class="nc" id="L202">            return q.getResultList();</span>
+        } finally {
+<span class="nc" id="L204">            em.close();</span>
+        }
+    }
+
+    public Producto findProducto(Integer id) {
+<span class="nc" id="L209">        EntityManager em = getEntityManager();</span>
+        try {
+<span class="nc" id="L211">            return em.find(Producto.class, id);</span>
+        } finally {
+<span class="nc" id="L213">            em.close();</span>
+        }
+    }
+
+    public int getProductoCount() {
+<span class="nc" id="L218">        EntityManager em = getEntityManager();</span>
+        try {
+<span class="nc" id="L220">            CriteriaQuery cq = em.getCriteriaBuilder().createQuery();</span>
+<span class="nc" id="L221">            Root&lt;Producto&gt; rt = cq.from(Producto.class);</span>
+<span class="nc" id="L222">            cq.select(em.getCriteriaBuilder().count(rt));</span>
+<span class="nc" id="L223">            Query q = em.createQuery(cq);</span>
+<span class="nc" id="L224">            return ((Long) q.getSingleResult()).intValue();</span>
+        } finally {
+<span class="nc" id="L226">            em.close();</span>
+        }
+    }
+    
+    
+     public List&lt;Subcategoria&gt; listarSubPorCate(int idCate) {
+        PreparedStatement ptstm;
+        Connection cn;
+        ResultSet rs;
+<span class="nc" id="L235">        List&lt;Subcategoria&gt; listSubCategoria = new ArrayList&lt;&gt;();</span>
+        
+        try {
+<span class="nc" id="L238">            cn = Util.getConexionBD();</span>
+<span class="nc" id="L239">            ptstm = cn.prepareStatement(&quot;Select * from subcategoria where idCategoria =&quot;+idCate+&quot;&quot;);</span>
+<span class="nc" id="L240">            rs = ptstm.executeQuery();</span>
+           
+<span class="nc bnc" id="L242" title="All 2 branches missed.">            while (rs.next()) {</span>
+<span class="nc" id="L243">                Subcategoria subC=new Subcategoria();</span>
+<span class="nc" id="L244">                Categoria cat = new Categoria();</span>
+                
+<span class="nc" id="L246">                subC.setIdSubcategoria(rs.getInt(1));</span>
+<span class="nc" id="L247">                subC.setNombre(rs.getString(2));</span>
+<span class="nc" id="L248">                cat.setIdCategoria(rs.getInt(3));</span>
+<span class="nc" id="L249">                subC.setIdCategoria(cat);</span>
+                //Ingresamos cliente
+<span class="nc" id="L251">                listSubCategoria.add(subC);</span>
+                
+<span class="nc" id="L253">}</span>
+<span class="nc" id="L254">        } catch (Exception e) {</span>
+<span class="nc" id="L255">            e.printStackTrace();</span>
+<span class="nc" id="L256">        }</span>
+<span class="nc" id="L257">        return listSubCategoria;</span>
+    }
+   
+   
+    
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

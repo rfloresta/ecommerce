@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>AdministradorJpa.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;W_V_S.A.C&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">wyv.persistencia</a> &gt; <span class="el_source">AdministradorJpa.java</span></div><h1>AdministradorJpa.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package wyv.persistencia;
+
+import java.io.Serializable;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Query;
+import javax.persistence.EntityNotFoundException;
+import javax.persistence.Persistence;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+import wyv.persistencia.exceptions.NonexistentEntityException;
+import wyv.persistencia.exceptions.PreexistingEntityException;
+
+/**
+ *
+ * @author bdeg_
+ */
+public class AdministradorJpa implements Serializable {
+
+<span class="nc" id="L32">    public AdministradorJpa() {</span>
+<span class="nc" id="L33">        this.emf= Persistence.createEntityManagerFactory(&quot;W_V_S.A.CPU&quot;);</span>
+<span class="nc" id="L34">    }</span>
+<span class="nc" id="L35">    public AdministradorJpa(EntityManagerFactory emf) {</span>
+<span class="nc" id="L36">        this.emf = emf;</span>
+<span class="nc" id="L37">    }</span>
+<span class="nc" id="L38">    private EntityManagerFactory emf = null;</span>
+
+    public EntityManager getEntityManager() {
+<span class="nc" id="L41">        return emf.createEntityManager();</span>
+    }
+
+    public void create(Administrador administrador) throws PreexistingEntityException, Exception {
+<span class="nc" id="L45">        EntityManager em = null;</span>
+        try {
+<span class="nc" id="L47">            em = getEntityManager();</span>
+<span class="nc" id="L48">            em.getTransaction().begin();</span>
+<span class="nc" id="L49">            em.persist(administrador);</span>
+<span class="nc" id="L50">            em.getTransaction().commit();</span>
+<span class="nc" id="L51">        } catch (Exception ex) {</span>
+<span class="nc bnc" id="L52" title="All 2 branches missed.">            if (findAdministrador(administrador.getDni()) != null) {</span>
+<span class="nc" id="L53">                throw new PreexistingEntityException(&quot;Administrador &quot; + administrador + &quot; already exists.&quot;, ex);</span>
+            }
+<span class="nc" id="L55">            throw ex;</span>
+        } finally {
+<span class="nc bnc" id="L57" title="All 4 branches missed.">            if (em != null) {</span>
+<span class="nc" id="L58">                em.close();</span>
+            }
+        }
+<span class="nc" id="L61">    }</span>
+
+    public void edit(Administrador administrador) throws NonexistentEntityException, Exception {
+<span class="nc" id="L64">        EntityManager em = null;</span>
+        try {
+<span class="nc" id="L66">            em = getEntityManager();</span>
+<span class="nc" id="L67">            em.getTransaction().begin();</span>
+<span class="nc" id="L68">            administrador = em.merge(administrador);</span>
+<span class="nc" id="L69">            em.getTransaction().commit();</span>
+<span class="nc" id="L70">        } catch (Exception ex) {</span>
+<span class="nc" id="L71">            String msg = ex.getLocalizedMessage();</span>
+<span class="nc bnc" id="L72" title="All 4 branches missed.">            if (msg == null || msg.length() == 0) {</span>
+<span class="nc" id="L73">                String id = administrador.getDni();</span>
+<span class="nc bnc" id="L74" title="All 2 branches missed.">                if (findAdministrador(id) == null) {</span>
+<span class="nc" id="L75">                    throw new NonexistentEntityException(&quot;The administrador with id &quot; + id + &quot; no longer exists.&quot;);</span>
+                }
+            }
+<span class="nc" id="L78">            throw ex;</span>
+        } finally {
+<span class="nc bnc" id="L80" title="All 4 branches missed.">            if (em != null) {</span>
+<span class="nc" id="L81">                em.close();</span>
+            }
+        }
+<span class="nc" id="L84">    }</span>
+
+    public void destroy(String id) throws NonexistentEntityException {
+<span class="nc" id="L87">        EntityManager em = null;</span>
+        try {
+<span class="nc" id="L89">            em = getEntityManager();</span>
+<span class="nc" id="L90">            em.getTransaction().begin();</span>
+            Administrador administrador;
+            try {
+<span class="nc" id="L93">                administrador = em.getReference(Administrador.class, id);</span>
+<span class="nc" id="L94">                administrador.getDni();</span>
+<span class="nc" id="L95">            } catch (EntityNotFoundException enfe) {</span>
+<span class="nc" id="L96">                throw new NonexistentEntityException(&quot;The administrador with id &quot; + id + &quot; no longer exists.&quot;, enfe);</span>
+<span class="nc" id="L97">            }</span>
+<span class="nc" id="L98">            em.remove(administrador);</span>
+<span class="nc" id="L99">            em.getTransaction().commit();</span>
+        } finally {
+<span class="nc bnc" id="L101" title="All 4 branches missed.">            if (em != null) {</span>
+<span class="nc" id="L102">                em.close();</span>
+            }
+        }
+<span class="nc" id="L105">    }</span>
+
+    public List&lt;Administrador&gt; findAdministradorEntities() {
+<span class="nc" id="L108">        return findAdministradorEntities(true, -1, -1);</span>
+    }
+
+    public List&lt;Administrador&gt; findAdministradorEntities(int maxResults, int firstResult) {
+<span class="nc" id="L112">        return findAdministradorEntities(false, maxResults, firstResult);</span>
+    }
+
+    private List&lt;Administrador&gt; findAdministradorEntities(boolean all, int maxResults, int firstResult) {
+<span class="nc" id="L116">        EntityManager em = getEntityManager();</span>
+        try {
+<span class="nc" id="L118">            CriteriaQuery cq = em.getCriteriaBuilder().createQuery();</span>
+<span class="nc" id="L119">            cq.select(cq.from(Administrador.class));</span>
+<span class="nc" id="L120">            Query q = em.createQuery(cq);</span>
+<span class="nc bnc" id="L121" title="All 2 branches missed.">            if (!all) {</span>
+<span class="nc" id="L122">                q.setMaxResults(maxResults);</span>
+<span class="nc" id="L123">                q.setFirstResult(firstResult);</span>
+            }
+<span class="nc" id="L125">            return q.getResultList();</span>
+        } finally {
+<span class="nc" id="L127">            em.close();</span>
+        }
+    }
+
+    public Administrador findAdministrador(String id) {
+<span class="nc" id="L132">        EntityManager em = getEntityManager();</span>
+        try {
+<span class="nc" id="L134">            return em.find(Administrador.class, id);</span>
+        } finally {
+<span class="nc" id="L136">            em.close();</span>
+        }
+    }
+
+    public int getAdministradorCount() {
+<span class="nc" id="L141">        EntityManager em = getEntityManager();</span>
+        try {
+<span class="nc" id="L143">            CriteriaQuery cq = em.getCriteriaBuilder().createQuery();</span>
+<span class="nc" id="L144">            Root&lt;Administrador&gt; rt = cq.from(Administrador.class);</span>
+<span class="nc" id="L145">            cq.select(em.getCriteriaBuilder().count(rt));</span>
+<span class="nc" id="L146">            Query q = em.createQuery(cq);</span>
+<span class="nc" id="L147">            return ((Long) q.getSingleResult()).intValue();</span>
+        } finally {
+<span class="nc" id="L149">            em.close();</span>
+        }
+    }
+    
+    // Mis metodos Personalizados
+    public  List&lt;Map&lt;String, String&gt;&gt; ventaMes()
+    {
+        Connection cn;
+        PreparedStatement pstmt;
+        ResultSet rs;
+
+<span class="nc" id="L160">        List&lt;Map&lt;String, String&gt;&gt; venMes =new ArrayList&lt;&gt;();</span>
+        try {
+
+<span class="nc" id="L163">            cn = Util.getConexionBD();</span>
+<span class="nc" id="L164">            pstmt = cn.prepareStatement(&quot;SELECT fecha as fecha,sum(total) as Total FROM pedido  GROUP BY fecha ORDER BY  fecha&quot;);</span>
+<span class="nc" id="L165">            rs = pstmt.executeQuery();</span>
+<span class="nc" id="L166">            Map&lt;String, String&gt; mapa=null;</span>
+<span class="nc bnc" id="L167" title="All 2 branches missed.">            while(rs.next())</span>
+            {
+<span class="nc" id="L169">                mapa=new HashMap&lt;String, String&gt;();</span>
+<span class="nc" id="L170">                String Mes = rs.getString(&quot;fecha&quot;);</span>
+<span class="nc" id="L171">                String Total = rs.getString(&quot;Total&quot;);</span>
+<span class="nc" id="L172">                mapa.put(&quot;Fecha&quot;, Mes);</span>
+<span class="nc" id="L173">                mapa.put(&quot;Total&quot;, Total);</span>
+<span class="nc" id="L174">                venMes.add(mapa);</span>
+
+
+<span class="nc" id="L177">}</span>
+
+
+<span class="nc" id="L180">        } catch (Exception e) {</span>
+<span class="nc" id="L181">            e.printStackTrace();</span>
+<span class="nc" id="L182">        }</span>
+
+       
+<span class="nc" id="L185">        return venMes;</span>
+
+    }
+
+
+    public int ContarClientes()
+    {
+        Connection cn;
+        PreparedStatement pstmt;
+        ResultSet rs;
+<span class="nc" id="L195">        int resultado = 0;</span>
+
+        try {
+<span class="nc" id="L198">            cn = Util.getConexionBD();</span>
+<span class="nc" id="L199">            pstmt = cn.prepareStatement(&quot;SELECT COUNT(idCliente) FROM cliente&quot;);</span>
+<span class="nc" id="L200">            rs = pstmt.executeQuery();</span>
+<span class="nc bnc" id="L201" title="All 2 branches missed.">            while(rs.next())</span>
+            {
+<span class="nc" id="L203">                resultado = rs.getInt(1);</span>
+            }
+
+<span class="nc" id="L206">        } catch (Exception e) {</span>
+<span class="nc" id="L207">            e.getMessage();</span>
+<span class="nc" id="L208">        }</span>
+<span class="nc" id="L209">        return resultado;</span>
+    }
+
+     public int ContarAdministrador()
+    {
+        Connection cn;
+        PreparedStatement pstmt;
+        ResultSet rs;
+<span class="nc" id="L217">        int resultado = 0;</span>
+
+        try {
+<span class="nc" id="L220">            cn = Util.getConexionBD();</span>
+<span class="nc" id="L221">            pstmt = cn.prepareStatement(&quot;select COUNT(dni) from administrador&quot;);</span>
+<span class="nc" id="L222">            rs = pstmt.executeQuery();</span>
+<span class="nc bnc" id="L223" title="All 2 branches missed.">            while(rs.next())</span>
+            {
+<span class="nc" id="L225">                resultado = rs.getInt(1);</span>
+            }
+
+<span class="nc" id="L228">        } catch (Exception e) {</span>
+<span class="nc" id="L229">            e.getMessage();</span>
+<span class="nc" id="L230">        }</span>
+<span class="nc" id="L231">        return resultado;</span>
+    }
+
+      public int ContarPedido()
+    {
+        Connection cn;
+        PreparedStatement pstmt;
+        ResultSet rs;
+<span class="nc" id="L239">        int resultado = 0;</span>
+
+        try {
+<span class="nc" id="L242">            cn = Util.getConexionBD();</span>
+<span class="nc" id="L243">            pstmt = cn.prepareStatement(&quot;SELECT COUNT(idPedido) from pedido&quot;);</span>
+<span class="nc" id="L244">            rs = pstmt.executeQuery();</span>
+<span class="nc bnc" id="L245" title="All 2 branches missed.">            while(rs.next())</span>
+            {
+<span class="nc" id="L247">                resultado = rs.getInt(1);</span>
+            }
+
+<span class="nc" id="L250">        } catch (Exception e) {</span>
+<span class="nc" id="L251">            e.getMessage();</span>
+<span class="nc" id="L252">        }</span>
+<span class="nc" id="L253">        return resultado;</span>
+    }
+    
+    
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

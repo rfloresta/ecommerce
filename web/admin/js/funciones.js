@@ -111,25 +111,25 @@ $(function () {
 
     });
 });
-//$(function () {
-//    $("#grabar").click(function (event)
-//    {
-//        event.preventDefault();
-//        var form = $(this).parents("#form_mante");
-//        var check = checkCampos(form);
-//        if (!check) {
-//            swal({
-//                title: "¡Error!",
-//                text: "Debe completar todos los campos",
-//                icon: "error",
-//                button: "Aceptar",
-//            });
-//        } else {
-//            form.submit();
-//        }
-//    }
-//    );
-//});
+$(function () {
+    $("#grabar").click(function (event)
+    {
+        event.preventDefault();
+        var form = $(this).parents("#form_mante");
+        var check = checkCampos(form);
+        if (!check) {
+            swal({
+                title: "¡Error!",
+                text: "Debe completar todos los campos",
+                icon: "error",
+                button: "Aceptar",
+            });
+        } else {
+            form.submit();
+        }
+    }
+    );
+});
 
 //$(function () {
 //    $("#enviar").click(function (event)

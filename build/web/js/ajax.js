@@ -1,5 +1,6 @@
 $('.btnDatosClie').on('click', function () {
     var idCliente = $('#idClie').val();
+    $('#div-contenido').html('<div class="loading text-center"><img src="imagenes/carga.gif" class="w-50" alt="loading" /><br/></div>');
     $.ajax({
         type: 'POST',
         url: 'buscarCliePerfil.action?idClie=' + idCliente,
@@ -108,6 +109,7 @@ function ActualizarDatos() {
 $('.btnPedidoClie').on('click', function () {
     var idClie = $('#idClie').val();
     console.log(idClie);
+    $('#div-contenido').html('<div class="loading text-center"><img src="imagenes/carga.gif" class="w-50" alt="loading" /><br/></div>');
     $.ajax({
         type: 'POST',
         url: 'listarPedidoPorCliente.action?idClie=' + idClie,
@@ -144,11 +146,29 @@ $('.btnPedidoClie').on('click', function () {
 
 });
 
- $(function () {
-     $("#btnCambiarPass").click(function (event)
-     {
+$(function () {
+    $("#btnCambiarPass").click(function (event)
+    {
         event.preventDefault();
-      $("#div-contenido").load($(this).attr('href'));
-     }
-     );
- });
+        $("#div-contenido").load($(this).attr('href'));
+    }
+    );
+});
+
+
+
+//Filtros de la pagina productos
+
+$('#btnfiltro').on('click', function () {
+
+    var min_val = $('#value-lower').text();
+    var max_val = $('#value-upper').text();
+     $('#contenido-productos').html('<div class="loading text-center"><img src="imagenes/carga.gif" class="w-50" alt="loading" /><br/>Un momento, por favor...</div>');
+    $.ajax({
+        type: 'POST',
+        url: 'listarFiltroPrecioProducto.action?min_val=' + min_val+ '&max_val='+max_val,
+        success: function (respuesta) {
+           $('#contenido-productos').fadeIn(1000).html(respuesta);
+        }
+    });
+});

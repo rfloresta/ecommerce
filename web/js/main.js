@@ -22,7 +22,7 @@
         overlayClass : 'animsition-overlay-slide',
         overlayParentElement : 'html',
         transition: function(url){ window.location.href = url; }
-    });*/
+    });
     
     /*[ Back to top ]
     ===========================================================*/

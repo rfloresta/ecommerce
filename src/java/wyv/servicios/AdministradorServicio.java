@@ -122,6 +122,6 @@ public class AdministradorServicio implements IOperacionesBD<Administrador> {
             System.out.println(e.getMessage());
             return null;
         }
-        return null;
+        return "incorrecto";
     }
 }

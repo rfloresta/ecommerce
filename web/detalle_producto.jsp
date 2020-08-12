@@ -68,23 +68,38 @@
 					
 					<div class="flex-r-m flex-w p-t-10">
 						<div class="w-size16 flex-m flex-w">
-							<div class="flex-w bo5 of-hidden m-r-22 m-t-10 m-b-10">
+							<!--<div class="flex-w bo5 of-hidden m-r-22 m-t-10 m-b-10">
 								<button class="btn-num-product-down color1 flex-c-m size7 bg8 eff2">
 									<i class="fs-12 fa fa-minus" aria-hidden="true"></i>
 								</button>
 
-								<input class="size8 m-text18 t-center num-product" type="number" name="num-product" value="1">
+                                                            <s:textfield  cssClass="size8 m-text18 t-center num-product" type="number" name="cantidad" value="1" />
 
 								<button class="btn-num-product-up color1 flex-c-m size7 bg8 eff2">
 									<i class="fs-12 fa fa-plus" aria-hidden="true"></i>
 								</button>
-							</div>
+							</div>-->
 
 							<div class="btn-addcart-product-detail size9 trans-0-4 m-t-10 m-b-10">
-								<!-- Button -->
-								<button class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4">
-									Add to Cart
+								
+                                                            
+                                                            <s:form action="AgregarCarrito"  theme="simple" >
+                                                                
+                                                                <s:hidden value="%{producto.idProducto}" name="proObj.idProducto" />
+                                                                <s:hidden value="%{producto.nombre}" name="proObj.nombre" />
+                                                                <s:hidden value="%{producto.descripcion}" name="proObj.descripcion" />
+                                                                <s:hidden value="%{producto.stock}" name="proObj.stock" /> 
+                                                                <s:hidden value="%{producto.precioCompra}" name="proObj.precioCompra" />
+                                                                <s:hidden value="%{producto.precioVenta}" name="proObj.precioVenta" />
+                                                                <s:hidden value="%{producto.descuento}" name="proObj.descuento" />
+                                                                <s:hidden value="%{producto.imagen}" name="proObj.imagen" />
+                                                                <s:hidden value="%{#cantidad}" name="cantidad" />
+                                                           
+								<button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
+									Agregar al Carro
 								</button>
+                                                                
+                                                            </s:form>
 							</div>
 						</div>
 					</div>

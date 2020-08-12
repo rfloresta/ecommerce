@@ -7,6 +7,7 @@ import com.opensymphony.xwork2.ActionSupport;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -303,4 +304,51 @@ public class ProductoAction extends ActionSupport implements SessionAware{
             
         }
     }
+    
+     @Action(value = "listarFiltroPrecioProducto", results = {
+        @Result(name = "ok", location = "/productos_filtrados.jsp"),
+	@Result(name = "error", location = "/error.jsp")
+    })
+    
+    public String listarFiltroPrecioProducto() {
+        try {
+            
+            HttpServletResponse response = ServletActionContext.getResponse();
+            HttpServletRequest request = ServletActionContext.getRequest();
+            PrintWriter out = response.getWriter();
+            
+            
+            double minVal= Double.parseDouble(request.getParameter("min_val"));
+            double maxVal= Double.parseDouble(request.getParameter("max_val"));
+            System.out.println("min val : " + minVal);
+            lstProducto=new ProductoServicio().listar();
+            
+            List<Producto> Productos = new ArrayList<>();
+            Producto pro = new Producto();
+            
+            for(int i=0; i < lstProducto.size(); i++){
+                if(minVal <= lstProducto.get(i).getPrecioVenta() && lstProducto.get(i).getPrecioVenta()<= maxVal ){
+                   pro = lstProducto.get(i);
+                    Productos.add(pro);
+
+                }else{
+                    System.out.println("No se encontraron productos");
+                }
+               
+            }
+            
+            
+            System.out.println("el tamaño de la lista es: " + Productos.size());
+          sesion.put("lstProductoFiltro", Productos);
+            
+          return "ok";  
+           
+        } catch (Exception e) {
+            e.printStackTrace();
+            
+        }
+        return  "error";
+    }
+    
+   
 }

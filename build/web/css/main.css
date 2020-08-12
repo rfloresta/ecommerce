@@ -1836,6 +1836,8 @@ body{
 ///////////////////////////////////////////////////////////
 */
 .pagination {
+    position: absolute;
+    bottom: 200px;
     margin-right: -6px;
     margin-left: -6px;
 }
@@ -2219,3 +2221,5 @@ body{
     cursor: default;
     pointer-events: none;
 }
+
+

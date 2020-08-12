@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>EmpresaAction.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;W_V_S.A.C&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">wyv.action</a> &gt; <span class="el_source">EmpresaAction.java</span></div><h1>EmpresaAction.java</h1><pre class="source lang-java linenums">package wyv.action;
+
+import com.opensymphony.xwork2.ActionSupport;
+import java.io.File;
+import org.apache.commons.io.FileUtils;
+import org.apache.struts2.ServletActionContext;
+import org.apache.struts2.convention.annotation.Action;
+import org.apache.struts2.convention.annotation.Result;
+import wyv.persistencia.Empresa;
+import wyv.servicios.EmpresaServicio;
+import java.io.IOException;
+
+
+/**
+ *
+ * @author Romario
+ */
+@SuppressWarnings(&quot;serial&quot;)
+<span class="nc" id="L19">public class EmpresaAction extends ActionSupport {</span>
+    
+    EmpresaServicio empSer;
+    private String resultado;
+    private Empresa empresa;
+<span class="nc" id="L24">    private String estado=&quot;error&quot;;</span>
+    private File logo;
+    private String logoContentType;
+    private String logoFileName;
+
+    public String getResultado() {
+<span class="nc" id="L30">        return resultado;</span>
+    }
+
+    public Empresa getEmpresa() {
+<span class="nc" id="L34">        return empresa;</span>
+    }
+
+    public void setEmpresa(Empresa empresa) {
+<span class="nc" id="L38">        this.empresa = empresa;</span>
+<span class="nc" id="L39">    }</span>
+
+    public void setEmpSer(EmpresaServicio empSer) {
+<span class="nc" id="L42">        this.empSer = empSer;</span>
+<span class="nc" id="L43">    }</span>
+
+    public File getLogo() {
+<span class="nc" id="L46">        return logo;</span>
+    }
+
+    public void setLogo(File logo) {
+<span class="nc" id="L50">        this.logo = logo;</span>
+<span class="nc" id="L51">    }</span>
+
+    public String getLogoFileName() {
+<span class="nc" id="L54">        return logoFileName;</span>
+    }
+
+    public void setLogoFileName(String logoFileName) {
+<span class="nc" id="L58">        this.logoFileName = logoFileName;</span>
+<span class="nc" id="L59">    }</span>
+
+    public String getLogoContentType() {
+<span class="nc" id="L62">        return logoContentType;</span>
+    }
+
+    public void setLogoContentType(String logoContentType) {
+<span class="nc" id="L66">        this.logoContentType = logoContentType;</span>
+<span class="nc" id="L67">    }</span>
+    
+    
+     @Action(value=&quot;cargarEmpresa&quot;,results= {
+			@Result(name=&quot;ok&quot;,location=&quot;/admin/principal/empresa.jsp&quot;),
+			@Result(name=&quot;error&quot;,location=&quot;/admin/error.jsp&quot;)
+	})
+	public String cargarEmpresa() {
+		
+		try {
+<span class="nc" id="L77">                        empSer=new EmpresaServicio();</span>
+<span class="nc" id="L78">			empresa=empSer.buscar(&quot;1&quot;);</span>
+<span class="nc" id="L79">			return &quot;ok&quot;;</span>
+<span class="nc" id="L80">		} catch (Exception e) {</span>
+<span class="nc" id="L81">			resultado=&quot;Error en: cargarEmpresa :: &quot;+e.getMessage();</span>
+<span class="nc" id="L82">			return &quot;error&quot;;</span>
+		}
+	}
+    
+    @Action(value=&quot;actualizarEmpresa&quot;,results= {
+			@Result(name=&quot;ok&quot;,location=&quot;/admin/principal/empresa.jsp&quot;),
+			@Result(name=&quot;error&quot;,location=&quot;/admin/error.jsp&quot;),
+                        @Result(name=&quot;input&quot;,location=&quot;/admin/error.jsp&quot;)
+	})
+	public String actualizarEmpresa() {
+		
+		try {
+                    
+                        
+                    
+<span class="nc" id="L97">                    String filePath = ServletActionContext.getServletContext().getRealPath(&quot;/&quot;).concat(&quot;admin/imagenes&quot;);</span>
+<span class="nc" id="L98">                    File fileToCreate = new File(filePath, logoFileName);</span>
+<span class="nc" id="L99">                    FileUtils.copyFile(logo, fileToCreate);</span>
+                        
+<span class="nc" id="L101">                        empSer=new EmpresaServicio();</span>
+<span class="nc" id="L102">                        empresa.setLogo(logoFileName);</span>
+                    
+<span class="nc" id="L104">			estado=empSer.actualizar(empresa);</span>
+<span class="nc" id="L105">			empresa=empSer.buscar(String.valueOf(empresa.getIdEmpresa()));</span>
+<span class="nc" id="L106">                        System.out.println(estado);</span>
+<span class="nc" id="L107">			return estado;</span>
+<span class="nc" id="L108">		} catch (Exception e) {</span>
+<span class="nc" id="L109">			resultado=&quot;Error en: actualizarEmpresa :: &quot;+e.getMessage();</span>
+<span class="nc" id="L110">			return estado;</span>
+		}
+	}
+    
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

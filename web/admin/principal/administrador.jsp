@@ -57,11 +57,11 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="inputPrivilegio">Privilegio</label>
-                                    <s:select list="#{"A":'Alto','M':'Medio'}" headerKey="0" label="Privilegio"
+                                    <s:select list="#{'A':'Alto','M':'Medio'}" headerKey="0" label="Privilegio"
                                               headerValue="Selecione" name="admin.privilegio" 
                                               cssClass="form-control" required="required"/>
                                 </div> 
-
+                                    <s:hidden name="admin.codigoGenerado"  value=""/>
                             </div>
 
                             <div class="card-footer">

@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Categoria.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;W_V_S.A.C&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">wyv.persistencia</a> &gt; <span class="el_source">Categoria.java</span></div><h1>Categoria.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package wyv.persistencia;
+
+import java.io.Serializable;
+import java.util.List;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+
+/**
+ *
+ * @author bdeg_
+ */
+@Entity
+@Table(name = &quot;categoria&quot;)
+@XmlRootElement
+@NamedQueries({
+    @NamedQuery(name = &quot;Categoria.findAll&quot;, query = &quot;SELECT c FROM Categoria c&quot;)
+    , @NamedQuery(name = &quot;Categoria.findByIdCategoria&quot;, query = &quot;SELECT c FROM Categoria c WHERE c.idCategoria = :idCategoria&quot;)
+    , @NamedQuery(name = &quot;Categoria.findByNombre&quot;, query = &quot;SELECT c FROM Categoria c WHERE c.nombre = :nombre&quot;)})
+public class Categoria implements Serializable {
+
+    @OneToMany(mappedBy = &quot;idCategoria&quot;)
+    private List&lt;Producto&gt; productoList;
+
+    @OneToMany(mappedBy = &quot;idCategoria&quot;)
+    private List&lt;Subcategoria&gt; subcategoriaList;
+
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = &quot;idCategoria&quot;)
+    private Integer idCategoria;
+    @Column(name = &quot;nombre&quot;)
+    private String nombre;
+
+<span class="nc" id="L51">    public Categoria() {</span>
+<span class="nc" id="L52">    }</span>
+
+<span class="nc" id="L54">    public Categoria(Integer idCategoria) {</span>
+<span class="nc" id="L55">        this.idCategoria = idCategoria;</span>
+<span class="nc" id="L56">    }</span>
+
+    public Integer getIdCategoria() {
+<span class="nc" id="L59">        return idCategoria;</span>
+    }
+
+    public void setIdCategoria(Integer idCategoria) {
+<span class="nc" id="L63">        this.idCategoria = idCategoria;</span>
+<span class="nc" id="L64">    }</span>
+
+    public String getNombre() {
+<span class="nc" id="L67">        return nombre;</span>
+    }
+
+    public void setNombre(String nombre) {
+<span class="nc" id="L71">        this.nombre = nombre;</span>
+<span class="nc" id="L72">    }</span>
+
+    @Override
+    public int hashCode() {
+<span class="nc" id="L76">        int hash = 0;</span>
+<span class="nc bnc" id="L77" title="All 2 branches missed.">        hash += (idCategoria != null ? idCategoria.hashCode() : 0);</span>
+<span class="nc" id="L78">        return hash;</span>
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+<span class="nc bnc" id="L84" title="All 2 branches missed.">        if (!(object instanceof Categoria)) {</span>
+<span class="nc" id="L85">            return false;</span>
+        }
+<span class="nc" id="L87">        Categoria other = (Categoria) object;</span>
+<span class="nc bnc" id="L88" title="All 8 branches missed.">        if ((this.idCategoria == null &amp;&amp; other.idCategoria != null) || (this.idCategoria != null &amp;&amp; !this.idCategoria.equals(other.idCategoria))) {</span>
+<span class="nc" id="L89">            return false;</span>
+        }
+<span class="nc" id="L91">        return true;</span>
+    }
+
+    @Override
+    public String toString() {
+<span class="nc" id="L96">        return &quot;wyv.persistencia.Categoria[ idCategoria=&quot; + idCategoria + &quot; ]&quot;;</span>
+    }
+
+    @XmlTransient
+    public List&lt;Subcategoria&gt; getSubcategoriaList() {
+<span class="nc" id="L101">        return subcategoriaList;</span>
+    }
+
+    public void setSubcategoriaList(List&lt;Subcategoria&gt; subcategoriaList) {
+<span class="nc" id="L105">        this.subcategoriaList = subcategoriaList;</span>
+<span class="nc" id="L106">    }</span>
+
+    @XmlTransient
+    public List&lt;Producto&gt; getProductoList() {
+<span class="nc" id="L110">        return productoList;</span>
+    }
+
+    public void setProductoList(List&lt;Producto&gt; productoList) {
+<span class="nc" id="L114">        this.productoList = productoList;</span>
+<span class="nc" id="L115">    }</span>
+    
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

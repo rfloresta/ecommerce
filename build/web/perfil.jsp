@@ -12,7 +12,7 @@
             <a href="#" class="btnDatosClie list-group-item list-group-item-action"><i class="fa fa-user-cog"></i> Datos Personales</a>
             <s:a href="devolverPagPass" id="btnCambiarPass" Class="list-group-item list-group-item-action"><i class="fa fa-lock"></i> Cambiar Contraseña</s:a>
         </div>
-            <div id="div-contenido" class="col-8 contenido-cliente pt-3">
+            <div id="div-contenido" class="col-8 contenido-cliente pt-3 text-center">
                 <img src="imagenes/logo2.png" class="img-fluid logo-perfil">
 
             </div> 
