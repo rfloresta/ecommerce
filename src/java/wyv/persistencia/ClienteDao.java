@@ -1,24 +1,17 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package wyv.persistencia;
 
 import java.util.List;
+import org.springframework.stereotype.Service;
 
-/**
- *
- * @author Data
- */
+@Service
 public class ClienteDao implements IOperacionesBD<Cliente>{
     
-    ClienteJpa clieJpa=new ClienteJpa();
+    ClienteJpa clieJpa;
 
     @Override
     public String registrar(Cliente a) {
         try {
-           
+            clieJpa=new ClienteJpa();
             clieJpa.create(a);
             return "ok";
         } catch (Exception e) {
@@ -30,6 +23,7 @@ public class ClienteDao implements IOperacionesBD<Cliente>{
     @Override
     public String actualizar(Cliente a) {
          try {
+            clieJpa=new ClienteJpa();
             clieJpa.edit(a);
             return "ok";
         } catch (Exception e) {
@@ -41,7 +35,7 @@ public class ClienteDao implements IOperacionesBD<Cliente>{
     @Override
     public String eliminar(String id) {
         try {
-           
+           clieJpa=new ClienteJpa();
             int clieId= Integer.parseInt(id);
             clieJpa.destroy(clieId);
             return "ok";
@@ -54,9 +48,9 @@ public class ClienteDao implements IOperacionesBD<Cliente>{
     @Override
     public Cliente buscar(String id) {
         try {
-            
+            clieJpa=new ClienteJpa();
             int clieId= Integer.parseInt(id);
-            return clieJpa.findCliente(clieId);
+                return clieJpa.findCliente(clieId);
         } catch (Exception e) {
             e.getMessage();
             return null;
@@ -66,8 +60,7 @@ public class ClienteDao implements IOperacionesBD<Cliente>{
     @Override
     public List<Cliente> listar() {
         try {
-            
-            
+            clieJpa=new ClienteJpa();
             return clieJpa.findClienteEntities();
         } catch (Exception e) {
             e.getMessage();
@@ -77,7 +70,14 @@ public class ClienteDao implements IOperacionesBD<Cliente>{
 
     @Override
     public Cliente validar(Cliente entrada) {
+        clieJpa=new ClienteJpa();
         return clieJpa.findCliente(entrada.getIdCliente());
+    }
+
+    @Override
+    public int contar() {
+        clieJpa=new ClienteJpa();
+        return clieJpa.getClienteCount();
     }
     
 }
