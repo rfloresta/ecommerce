@@ -20,6 +20,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import wyv.persistencia.exceptions.IllegalOrphanException;
 import wyv.persistencia.exceptions.NonexistentEntityException;
+<<<<<<< HEAD
 import wyv.persistencia.exceptions.PreexistingEntityException;
 
 /**
@@ -35,6 +36,23 @@ public class PedidoJpa implements Serializable {
 <span class="nc" id="L35">        this.emf = emf;</span>
 <span class="nc" id="L36">    }</span>
 <span class="nc" id="L37">    private EntityManagerFactory emf = null;</span>
+=======
+
+/**
+ *
+ * @author bdeg_
+ */
+public class PedidoJpa implements Serializable {
+
+<span class="fc" id="L30">    public PedidoJpa() {</span>
+<span class="fc" id="L31">        this.emf = Persistence.createEntityManagerFactory(&quot;W_V_S.A.CPU&quot;);</span>
+<span class="fc" id="L32">    }</span>
+
+<span class="nc" id="L34">    public PedidoJpa(EntityManagerFactory emf) {</span>
+<span class="nc" id="L35">        this.emf = emf;</span>
+<span class="nc" id="L36">    }</span>
+<span class="pc" id="L37">    private EntityManagerFactory emf = null;</span>
+>>>>>>> 774d743aa798fdef07b0c2bb8173fa7ffbd7731a
 
     public EntityManager getEntityManager() {
 <span class="nc" id="L40">        return emf.createEntityManager();</span>
@@ -238,6 +256,7 @@ public class PedidoJpa implements Serializable {
         Connection cn;
         PreparedStatement pstmt;
         ResultSet rs;
+<<<<<<< HEAD
 <span class="nc" id="L241">        int resultado = 0;</span>
 
         try {
@@ -258,12 +277,35 @@ public class PedidoJpa implements Serializable {
 <span class="nc" id="L258">            e.getMessage();</span>
 <span class="nc" id="L259">}</span>
 <span class="nc" id="L260">        return resultado;</span>
+=======
+<span class="fc" id="L241">        int resultado = 0;</span>
+
+        try {
+<span class="fc" id="L244">            cn = Util.getConexionBD();</span>
+<span class="fc" id="L245">            pstmt = cn.prepareStatement(&quot;UPDATE pedido set  numero=?, fecha=?, subtotal=?, igv=?, total=?, pago=?, estado=?, idCliente=? where idPedido=?&quot;);</span>
+<span class="fc" id="L246">            pstmt.setString(1, p.getNumero());</span>
+<span class="fc" id="L247">            pstmt.setString(2, p.getFecha());</span>
+<span class="fc" id="L248">            pstmt.setDouble(3, p.getSubtotal());</span>
+<span class="fc" id="L249">            pstmt.setDouble(4, p.getIgv());</span>
+<span class="fc" id="L250">            pstmt.setDouble(5, p.getTotal());</span>
+<span class="fc" id="L251">            pstmt.setString(6, p.getPago());</span>
+<span class="fc" id="L252">            pstmt.setString(7, String.valueOf(p.getEstado()));</span>
+<span class="fc" id="L253">            pstmt.setInt(8, p.getIdCliente().getIdCliente());</span>
+<span class="fc" id="L254">            pstmt.setInt(9, p.getIdPedido());</span>
+<span class="fc" id="L255">            resultado = pstmt.executeUpdate();</span>
+<span class="fc" id="L256">            System.out.println(&quot;resultado&quot; + resultado);</span>
+<span class="nc" id="L257">        } catch (Exception e) {</span>
+<span class="nc" id="L258">            e.getMessage();</span>
+<span class="fc" id="L259">}</span>
+<span class="fc" id="L260">        return resultado;</span>
+>>>>>>> 774d743aa798fdef07b0c2bb8173fa7ffbd7731a
 
     }
     public List&lt;Pedido&gt; listarPedido() {
         PreparedStatement ptstm;
         Connection cn;
         ResultSet rs;
+<<<<<<< HEAD
 <span class="nc" id="L267">        List&lt;Pedido&gt; lisPedido = new ArrayList&lt;&gt;();</span>
         try {
 <span class="nc" id="L269">            cn = Util.getConexionBD();</span>
@@ -293,5 +335,36 @@ public class PedidoJpa implements Serializable {
 <span class="nc" id="L293">        return lisPedido;</span>
     }
     
+=======
+<span class="fc" id="L267">        List&lt;Pedido&gt; lisPedido = new ArrayList&lt;&gt;();</span>
+        try {
+<span class="fc" id="L269">            cn = Util.getConexionBD();</span>
+<span class="fc" id="L270">            ptstm = cn.prepareStatement(&quot;Select p.*, c.nombres AS NombreCli From pedido AS p INNER JOIN cliente As c on p.idCliente=c.idCliente&quot;);</span>
+<span class="fc" id="L271">            rs = ptstm.executeQuery();</span>
+
+<span class="fc bfc" id="L273" title="All 2 branches covered.">            while (rs.next()) {</span>
+<span class="fc" id="L274">                Pedido pedNext = new Pedido();</span>
+<span class="fc" id="L275">                pedNext.setIdPedido(rs.getInt(1));</span>
+<span class="fc" id="L276">                pedNext.setNumero(rs.getString(2));</span>
+<span class="fc" id="L277">                pedNext.setFecha(rs.getString(3));</span>
+<span class="fc" id="L278">                pedNext.setSubtotal(rs.getDouble(4));</span>
+<span class="fc" id="L279">                pedNext.setIgv(rs.getDouble(5));</span>
+<span class="fc" id="L280">                pedNext.setTotal(rs.getDouble(6));</span>
+<span class="fc" id="L281">                pedNext.setPago(rs.getString(7));</span>
+<span class="fc" id="L282">                char s = rs.getString(8).charAt(0);</span>
+<span class="fc" id="L283">                pedNext.setEstado(s);</span>
+<span class="fc" id="L284">                Cliente cli = new Cliente();</span>
+<span class="fc" id="L285">                cli.setIdCliente(rs.getInt(9));</span>
+<span class="fc" id="L286">                cli.setNombres(rs.getString(&quot;NombreCli&quot;));</span>
+<span class="fc" id="L287">                pedNext.setIdCliente(cli);</span>
+<span class="fc" id="L288">                lisPedido.add(pedNext);</span>
+<span class="fc" id="L289">            }</span>
+<span class="nc" id="L290">        } catch (Exception e) {</span>
+<span class="nc" id="L291">            e.printStackTrace();</span>
+<span class="fc" id="L292">        }</span>
+<span class="fc" id="L293">        return lisPedido;</span>
+    }
+
+>>>>>>> 774d743aa798fdef07b0c2bb8173fa7ffbd7731a
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

@@ -31,7 +31,7 @@ import org.codehaus.jackson.annotate.JsonIgnore;
     , @NamedQuery(name = "Cliente.findByPassword", query = "SELECT c FROM Cliente c WHERE c.password = :password")
     , @NamedQuery(name = "Cliente.findByCodigoGenerado", query = "SELECT c FROM Cliente c WHERE c.codigoGenerado = :codigoGenerado")})
 public class Cliente implements Serializable {
-
+    
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -72,13 +72,10 @@ public class Cliente implements Serializable {
         this.codigoGenerado = codigoGenerado;
         this.pedidoList = pedidoList;
     }
-    
-    
-        
     public Cliente(Integer idCliente) {
         this.idCliente = idCliente;
     }
-
+    
     public Integer getIdCliente() {
         return idCliente;
     }
@@ -160,7 +157,6 @@ public class Cliente implements Serializable {
     public void setPedidoList(List<Pedido> pedidoList) {
         this.pedidoList = pedidoList;
     }
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -185,5 +181,5 @@ public class Cliente implements Serializable {
     public String toString() {
         return "wyv.persistencia.Cliente[ idCliente=" + idCliente + " ]";
     }
-    
+
 }

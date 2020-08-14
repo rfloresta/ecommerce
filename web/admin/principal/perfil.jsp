@@ -58,7 +58,9 @@
                                 </div>
                                 </div>
                             </div>
-
+                                    <s:hidden value="%{#session.pass}" name="admin.password" />
+                                    <s:hidden value="%{#session.cod}" name="admin.codigoGenerado" />
+                                    <s:hidden value="%{#session.privilegio}" name="admin.privilegio" />
                             <div class="card-footer text-center">
                                 <s:submit id="grabar" value="Actualizar" cssClass="btn btn-success"/>
 

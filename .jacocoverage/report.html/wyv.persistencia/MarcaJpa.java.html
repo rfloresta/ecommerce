@@ -6,6 +6,12 @@
 package wyv.persistencia;
 
 import java.io.Serializable;
+<<<<<<< HEAD
+=======
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+>>>>>>> 774d743aa798fdef07b0c2bb8173fa7ffbd7731a
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
@@ -19,6 +25,7 @@ import wyv.persistencia.exceptions.NonexistentEntityException;
 
 /**
  *
+<<<<<<< HEAD
  * @author Romario
  */
 public class MarcaJpa implements Serializable {
@@ -164,19 +171,126 @@ public class MarcaJpa implements Serializable {
 <span class="nc" id="L164">            return q.getResultList();</span>
         } finally {
 <span class="nc" id="L166">            em.close();</span>
+=======
+ * @author bdeg_
+ */
+public class MarcaJpa implements Serializable {
+
+<span class="nc" id="L29">    public MarcaJpa() {</span>
+<span class="nc" id="L30">        this.emf = Persistence.createEntityManagerFactory(&quot;W_V_S.A.CPU&quot;);</span>
+<span class="nc" id="L31">    }</span>
+
+<span class="nc" id="L33">    public MarcaJpa(EntityManagerFactory emf) {</span>
+<span class="nc" id="L34">        this.emf = emf;</span>
+<span class="nc" id="L35">    }</span>
+<span class="nc" id="L36">    private EntityManagerFactory emf = null;</span>
+
+    public EntityManager getEntityManager() {
+<span class="nc" id="L39">        return emf.createEntityManager();</span>
+    }
+
+    public void create(Marca marca) {
+<span class="nc" id="L43">        EntityManager em = null;</span>
+        try {
+<span class="nc" id="L45">            em = getEntityManager();</span>
+<span class="nc" id="L46">            em.getTransaction().begin();</span>
+<span class="nc" id="L47">            em.persist(marca);</span>
+<span class="nc" id="L48">            em.getTransaction().commit();</span>
+        } finally {
+<span class="nc bnc" id="L50" title="All 4 branches missed.">            if (em != null) {</span>
+<span class="nc" id="L51">                em.close();</span>
+            }
+        }
+<span class="nc" id="L54">    }</span>
+
+    public void edit(Marca marca) throws NonexistentEntityException, Exception {
+<span class="nc" id="L57">        EntityManager em = null;</span>
+        try {
+<span class="nc" id="L59">            em = getEntityManager();</span>
+<span class="nc" id="L60">            em.getTransaction().begin();</span>
+<span class="nc" id="L61">            marca = em.merge(marca);</span>
+<span class="nc" id="L62">            em.getTransaction().commit();</span>
+<span class="nc" id="L63">        } catch (Exception ex) {</span>
+<span class="nc" id="L64">            String msg = ex.getLocalizedMessage();</span>
+<span class="nc bnc" id="L65" title="All 4 branches missed.">            if (msg == null || msg.length() == 0) {</span>
+<span class="nc" id="L66">                Integer id = marca.getIdMarca();</span>
+<span class="nc bnc" id="L67" title="All 2 branches missed.">                if (findMarca(id) == null) {</span>
+<span class="nc" id="L68">                    throw new NonexistentEntityException(&quot;The marca with id &quot; + id + &quot; no longer exists.&quot;);</span>
+                }
+            }
+<span class="nc" id="L71">            throw ex;</span>
+        } finally {
+<span class="nc bnc" id="L73" title="All 4 branches missed.">            if (em != null) {</span>
+<span class="nc" id="L74">                em.close();</span>
+            }
+        }
+<span class="nc" id="L77">    }</span>
+
+    public void destroy(Integer id) throws NonexistentEntityException {
+<span class="nc" id="L80">        EntityManager em = null;</span>
+        try {
+<span class="nc" id="L82">            em = getEntityManager();</span>
+<span class="nc" id="L83">            em.getTransaction().begin();</span>
+            Marca marca;
+            try {
+<span class="nc" id="L86">                marca = em.getReference(Marca.class, id);</span>
+<span class="nc" id="L87">                marca.getIdMarca();</span>
+<span class="nc" id="L88">            } catch (EntityNotFoundException enfe) {</span>
+<span class="nc" id="L89">                throw new NonexistentEntityException(&quot;The marca with id &quot; + id + &quot; no longer exists.&quot;, enfe);</span>
+<span class="nc" id="L90">            }</span>
+<span class="nc" id="L91">            em.remove(marca);</span>
+<span class="nc" id="L92">            em.getTransaction().commit();</span>
+        } finally {
+<span class="nc bnc" id="L94" title="All 4 branches missed.">            if (em != null) {</span>
+<span class="nc" id="L95">                em.close();</span>
+            }
+        }
+<span class="nc" id="L98">    }</span>
+
+    public List&lt;Marca&gt; findMarcaEntities() {
+<span class="nc" id="L101">        return findMarcaEntities(true, -1, -1);</span>
+    }
+
+    public List&lt;Marca&gt; findMarcaEntities(int maxResults, int firstResult) {
+<span class="nc" id="L105">        return findMarcaEntities(false, maxResults, firstResult);</span>
+    }
+
+    private List&lt;Marca&gt; findMarcaEntities(boolean all, int maxResults, int firstResult) {
+<span class="nc" id="L109">        EntityManager em = getEntityManager();</span>
+        try {
+<span class="nc" id="L111">            CriteriaQuery cq = em.getCriteriaBuilder().createQuery();</span>
+<span class="nc" id="L112">            cq.select(cq.from(Marca.class));</span>
+<span class="nc" id="L113">            Query q = em.createQuery(cq);</span>
+<span class="nc bnc" id="L114" title="All 2 branches missed.">            if (!all) {</span>
+<span class="nc" id="L115">                q.setMaxResults(maxResults);</span>
+<span class="nc" id="L116">                q.setFirstResult(firstResult);</span>
+            }
+<span class="nc" id="L118">            return q.getResultList();</span>
+        } finally {
+<span class="nc" id="L120">            em.close();</span>
+>>>>>>> 774d743aa798fdef07b0c2bb8173fa7ffbd7731a
         }
     }
 
     public Marca findMarca(Integer id) {
+<<<<<<< HEAD
 <span class="nc" id="L171">        EntityManager em = getEntityManager();</span>
         try {
 <span class="nc" id="L173">            return em.find(Marca.class, id);</span>
         } finally {
 <span class="nc" id="L175">            em.close();</span>
+=======
+<span class="nc" id="L125">        EntityManager em = getEntityManager();</span>
+        try {
+<span class="nc" id="L127">            return em.find(Marca.class, id);</span>
+        } finally {
+<span class="nc" id="L129">            em.close();</span>
+>>>>>>> 774d743aa798fdef07b0c2bb8173fa7ffbd7731a
         }
     }
 
     public int getMarcaCount() {
+<<<<<<< HEAD
 <span class="nc" id="L180">        EntityManager em = getEntityManager();</span>
         try {
 <span class="nc" id="L182">            CriteriaQuery cq = em.getCriteriaBuilder().createQuery();</span>
@@ -189,5 +303,21 @@ public class MarcaJpa implements Serializable {
         }
     }
     
+=======
+<span class="nc" id="L134">        EntityManager em = getEntityManager();</span>
+        try {
+<span class="nc" id="L136">            CriteriaQuery cq = em.getCriteriaBuilder().createQuery();</span>
+<span class="nc" id="L137">            Root&lt;Marca&gt; rt = cq.from(Marca.class);</span>
+<span class="nc" id="L138">            cq.select(em.getCriteriaBuilder().count(rt));</span>
+<span class="nc" id="L139">            Query q = em.createQuery(cq);</span>
+<span class="nc" id="L140">            return ((Long) q.getSingleResult()).intValue();</span>
+        } finally {
+<span class="nc" id="L142">            em.close();</span>
+        }
+    }
+    
+    
+    
+>>>>>>> 774d743aa798fdef07b0c2bb8173fa7ffbd7731a
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

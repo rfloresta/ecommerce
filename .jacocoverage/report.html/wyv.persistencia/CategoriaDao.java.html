@@ -1,18 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>CategoriaDao.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;W_V_S.A.C&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">wyv.persistencia</a> &gt; <span class="el_source">CategoriaDao.java</span></div><h1>CategoriaDao.java</h1><pre class="source lang-java linenums">package wyv.persistencia;
 
 import java.util.List;
+<<<<<<< HEAD
 import org.springframework.stereotype.Service;
 
 @Service
 <span class="nc" id="L7">public class CategoriaDao implements IOperacionesBD&lt;Categoria&gt;{</span>
 
 <span class="nc" id="L9">    CategoriaJpa  cateJpa=new CategoriaJpa();</span>
+=======
+
+<span class="nc" id="L5">public class CategoriaDao implements IOperacionesBD&lt;Categoria&gt;{</span>
+
+<span class="nc" id="L7">    CategoriaJpa  cateJpa=new CategoriaJpa();</span>
+>>>>>>> 774d743aa798fdef07b0c2bb8173fa7ffbd7731a
     Categoria categoria;
     
     @Override
     public String registrar(Categoria a) {
         try {
            
+<<<<<<< HEAD
 <span class="nc" id="L16">            cateJpa.create(a);</span>
 <span class="nc" id="L17">            return &quot;ok&quot;;</span>
 <span class="nc" id="L18">        } catch (Exception e) {</span>
@@ -20,20 +28,49 @@ import org.springframework.stereotype.Service;
 <span class="nc" id="L20">            return &quot;error&quot;;</span>
         }
     }
+=======
+<span class="nc" id="L14">            cateJpa.create(a);</span>
+<span class="nc" id="L15">            return &quot;ok&quot;;</span>
+<span class="nc" id="L16">        } catch (Exception e) {</span>
+<span class="nc" id="L17">            e.getMessage();</span>
+<span class="nc" id="L18">            return &quot;error&quot;;</span>
+        }
+    }
+    /*
+    public String registrarSubCate(Categoria a) {
+        try {
+           
+            cateJpa.crearSubCate(a);
+            return &quot;ok&quot;;
+        } catch (Exception e) {
+            e.getMessage();
+            return &quot;error&quot;;
+        }
+    }*/
+>>>>>>> 774d743aa798fdef07b0c2bb8173fa7ffbd7731a
 
     @Override
     public String actualizar(Categoria a) {
         try {
+<<<<<<< HEAD
 <span class="nc" id="L27">            cateJpa.edit(a);</span>
 <span class="nc" id="L28">            return &quot;ok&quot;;</span>
 <span class="nc" id="L29">        } catch (Exception e) {</span>
 <span class="nc" id="L30">            e.getMessage();</span>
 <span class="nc" id="L31">            return &quot;error&quot;;</span>
+=======
+<span class="nc" id="L36">            cateJpa.edit(a);</span>
+<span class="nc" id="L37">            return &quot;ok&quot;;</span>
+<span class="nc" id="L38">        } catch (Exception e) {</span>
+<span class="nc" id="L39">            e.getMessage();</span>
+<span class="nc" id="L40">            return &quot;error&quot;;</span>
+>>>>>>> 774d743aa798fdef07b0c2bb8173fa7ffbd7731a
         }
     }
 
     @Override
     public String eliminar(String id) {
+<<<<<<< HEAD
 <span class="nc" id="L37">        int idcat= Integer.parseInt(id);</span>
          try {
 <span class="nc" id="L39">            cateJpa.destroy(idcat);</span>
@@ -41,32 +78,58 @@ import org.springframework.stereotype.Service;
 <span class="nc" id="L41">        } catch (Exception e) {</span>
 <span class="nc" id="L42">            e.getMessage();</span>
 <span class="nc" id="L43">            return &quot;error&quot;;</span>
+=======
+<span class="nc" id="L46">        int idcat= Integer.parseInt(id);</span>
+         try {
+<span class="nc" id="L48">            cateJpa.destroy(idcat);</span>
+<span class="nc" id="L49">            return &quot;ok&quot;;</span>
+<span class="nc" id="L50">        } catch (Exception e) {</span>
+<span class="nc" id="L51">            e.getMessage();</span>
+<span class="nc" id="L52">            return &quot;error&quot;;</span>
+>>>>>>> 774d743aa798fdef07b0c2bb8173fa7ffbd7731a
         }
     }
 
     @Override
     public Categoria buscar(String id) {
+<<<<<<< HEAD
 <span class="nc" id="L49">        int idcat= Integer.parseInt(id);</span>
          try {
 <span class="nc" id="L51">            return cateJpa.findCategoria(idcat);</span>
 <span class="nc" id="L52">        } catch (Exception e) {</span>
 <span class="nc" id="L53">            e.getMessage();</span>
 <span class="nc" id="L54">            return null;</span>
+=======
+<span class="nc" id="L58">        int idcat= Integer.parseInt(id);</span>
+         try {
+<span class="nc" id="L60">            return cateJpa.findCategoria(idcat);</span>
+<span class="nc" id="L61">        } catch (Exception e) {</span>
+<span class="nc" id="L62">            e.getMessage();</span>
+<span class="nc" id="L63">            return null;</span>
+>>>>>>> 774d743aa798fdef07b0c2bb8173fa7ffbd7731a
         }
     }
 
     @Override
     public List&lt;Categoria&gt; listar() {
        try {
+<<<<<<< HEAD
 <span class="nc" id="L61">            return cateJpa.findCategoriaEntities();</span>
 <span class="nc" id="L62">        } catch (Exception e) {</span>
 <span class="nc" id="L63">            e.getMessage();</span>
 <span class="nc" id="L64">            return null;</span>
+=======
+<span class="nc" id="L70">            return cateJpa.findCategoriaEntities();</span>
+<span class="nc" id="L71">        } catch (Exception e) {</span>
+<span class="nc" id="L72">            e.getMessage();</span>
+<span class="nc" id="L73">            return null;</span>
+>>>>>>> 774d743aa798fdef07b0c2bb8173fa7ffbd7731a
         }
     }
 
     @Override
     public Categoria validar(Categoria entrada) {
+<<<<<<< HEAD
 <span class="nc" id="L70">        throw new UnsupportedOperationException(&quot;Not supported yet.&quot;); //To change body of generated methods, choose Tools | Templates.</span>
     }
     
@@ -92,5 +155,20 @@ import org.springframework.stereotype.Service;
     public int contar() {
 <span class="nc" id="L93">        throw new UnsupportedOperationException(&quot;Not supported yet.&quot;); //To change body of generated methods, choose Tools | Templates.</span>
     }
+=======
+<span class="nc" id="L79">        throw new UnsupportedOperationException(&quot;Not supported yet.&quot;); //To change body of generated methods, choose Tools | Templates.</span>
+    }
+    
+   
+     
+      public List&lt;Categoria&gt; listarsubCategoria() {
+       try {
+<span class="nc" id="L86">            return cateJpa.listarsubCategoria();</span>
+<span class="nc" id="L87">        } catch (Exception e) {</span>
+<span class="nc" id="L88">            e.getMessage();</span>
+<span class="nc" id="L89">            return null;</span>
+        }
+    }
+>>>>>>> 774d743aa798fdef07b0c2bb8173fa7ffbd7731a
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

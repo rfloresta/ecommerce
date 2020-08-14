@@ -38,6 +38,7 @@
         <link href="css/icheck-bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <!--===============================================================================================-->
         <link href="css/toastr.min.css" rel="stylesheet" type="text/css"/>
+        
     </head>
     <body class="">
 
@@ -177,16 +178,15 @@
                                 Categoría
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <s:iterator value="#session.lstCategoria">
-                                    <s:if test="idCategoria==categoriaSuperior">
+                                <s:iterator value="#session.lstCategoria" var="cate">
+                                   
                                         <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" data-toggle="dropdown" href="#"><s:property value="nombre"/></a>
-                                            <s:set var="idCat" value="idCategoria"></s:set> 
-                                        </s:if>
+                                           
 
                                         <ul class="dropdown-menu">
 
-                                            <s:iterator value="#session.lstCategoria">
-                                                <s:if test="idCategoria!=categoriaSuperior&&categoriaSuperior==#idCat">
+                                            <s:iterator value="#session.lstSubCate" var="subcate">
+                                                <s:if test="#cate.idCategoria == #subcate.idCategoria.idCategoria">
                                                     <a class="dropdown-item" href="#"><s:property value="nombre"/></a>
                                                 </s:if>
 

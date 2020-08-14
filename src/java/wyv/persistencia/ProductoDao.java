@@ -4,13 +4,14 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ProductoDao implements IOperacionesBD<Producto>{
+public class ProductoDao implements IOperacionesBD<Producto> {
 
-    ProductoJpa proJpa=new ProductoJpa();
+    ProductoJpa proJpa;
+
     @Override
     public String registrar(Producto a) {
         try {
-
+            proJpa = new ProductoJpa();
             proJpa.create(a);
             return "ok";
         } catch (Exception e) {
@@ -21,7 +22,8 @@ public class ProductoDao implements IOperacionesBD<Producto>{
 
     @Override
     public String actualizar(Producto a) {
-       try {
+        try {
+            proJpa = new ProductoJpa();
             proJpa.edit(a);
             return "ok";
         } catch (Exception e) {
@@ -32,8 +34,9 @@ public class ProductoDao implements IOperacionesBD<Producto>{
 
     @Override
     public String eliminar(String id) {
-        int idPro= Integer.parseInt(id);
+        int idPro = Integer.parseInt(id);
         try {
+            proJpa = new ProductoJpa();
             proJpa.destroy(idPro);
             return "ok";
         } catch (Exception e) {
@@ -44,9 +47,9 @@ public class ProductoDao implements IOperacionesBD<Producto>{
 
     @Override
     public Producto buscar(String id) {
-        int idPro= Integer.parseInt(id);
+        int idPro = Integer.parseInt(id);
         try {
-            
+            proJpa = new ProductoJpa();
             return proJpa.findProducto(idPro);
         } catch (Exception e) {
             e.getMessage();
@@ -57,12 +60,12 @@ public class ProductoDao implements IOperacionesBD<Producto>{
     @Override
     public List<Producto> listar() {
         try {
-           
-            return  proJpa.findProductoEntities();
+            proJpa = new ProductoJpa();
+            return proJpa.findProductoEntities();
         } catch (Exception e) {
             e.getMessage();
-            return null;
         }
+        return null;
     }
 
     @Override
@@ -74,5 +77,15 @@ public class ProductoDao implements IOperacionesBD<Producto>{
     public int contar() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
+    public List<Subcategoria> listarSubPorCate(int id) {
+        try {
+            proJpa = new ProductoJpa();
+            return proJpa.listarSubPorCate(id);
+        } catch (Exception e) {
+            e.getMessage();
+            return null;
+        }
+    }
+
 }

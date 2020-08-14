@@ -3,17 +3,16 @@ package wyv.servicios;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import wyv.persistencia.Categoria;
 import wyv.persistencia.IOperacionesBD;
-import wyv.persistencia.Marca;
 import wyv.persistencia.Producto;
 import wyv.persistencia.ProductoDao;
+import wyv.persistencia.Subcategoria;
 
 @Service
 public class ProductoServicio implements  IOperacionesBD<Producto>{
 
     @Autowired
-    ProductoDao proDao;
+    ProductoDao proDao/*=new ProductoDao()*/;
     Producto pro;
     
     @Override
@@ -49,6 +48,10 @@ public class ProductoServicio implements  IOperacionesBD<Producto>{
     @Override
     public int contar() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+     public List<Subcategoria> listarSubPorCate(int id) {
+        return proDao.listarSubPorCate(id);
     }
     
 }

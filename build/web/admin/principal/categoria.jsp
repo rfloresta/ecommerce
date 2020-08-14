@@ -39,13 +39,9 @@
                                 <div class="form-group">
                                     <label for="inputID">Nombre</label>
 
-                                    <s:textfield  name="categoria.nombre" cssClass="form-control" placeholder="Ingrese Nombre" />
+                                    <s:textfield required="required" name="categoria.nombre" cssClass="form-control" placeholder="Ingrese Nombre" />
                                 </div>
-                                <div class="form-group">
-                                    <label for="inputNombre">Descripción</label>
-                                    <s:textfield  name="categoria.descripcion" cssClass="form-control" placeholder="Ingrese Descripción"/>
-                                </div>
-
+                              
 
                             </div>
 
@@ -67,15 +63,13 @@
                                     <thead>
                                         <tr class="">
                                             <th>Nombre</th>
-                                            <th>Descripcion</th>
                                             <th>Opciones</th>
                                         </tr> 
                                     </thead>     
                                     <tbody>
                                         <s:iterator value="lstCate">
                                             <tr>
-                                                <td><s:property value="nombre"/></td> 
-                                                <td><s:property value="descripcion"/></td>     
+                                                <td><s:property value="nombre"/></td>  
 
                                                 <td>
                                                     <s:url id="lnkEditar" action="editarCate">
@@ -96,7 +90,6 @@
                                     <tfoot>
                                         <tr>
                                             <th>Nombre</th>
-                                            <th>Descripcion</th>
                                             <th>Opciones</th>
                                         </tr>
                                     </tfoot>

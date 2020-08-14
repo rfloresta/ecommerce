@@ -33,7 +33,7 @@
                                 <s:if test="%{edit==1}">
                                     <div class="form-group">
 
-                                        <s:hidden  name="producto.idProducto" cssClass="form-control" placeholder="Ingrese Nombre" />
+                                        <s:hidden  name="producto.idProducto" cssClass="form-control"  placeholder="Ingrese Nombre" />
                                     </div>
                                 </s:if>
                                 <div class="form-group">
@@ -47,10 +47,22 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="inputNombre">Categoría</label>
-                                    <s:select list="lstCategoria" headerKey="0" 
+                                    <s:select id="Categoria" list="lstCategoria" headerKey="0" 
                                               headerValue="[--Seleccione--]" name="producto.idCategoria.idCategoria"
                                               listKey="idCategoria" listValue="nombre"
                                               label="Categoría" cssClass="form-control"  />
+                                </div>
+                                
+                                 <div class="form-group">
+                                    <label for="inputNombre">Sub Categoría</label>
+                                    <div id="selectSubCate">
+                                        <select class="form-control">
+                                            <option>[--Seleccione--]</option>
+                                            
+                                        </select>
+                                        
+                                    </div>
+                                    
                                 </div>
 
                                 <div class="form-group">
@@ -67,15 +79,15 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="inputNombre">Precio Compra</label>
-                                    <s:textfield  name="producto.precioCompra" cssClass="form-control" placeholder="Ingrese Precio de Compra"/>
+                                    <s:textfield  key="producto.precioCompra" value="%{getText('{0,number,#0.0##}',{producto.precioCompra})}" cssClass="form-control" placeholder="Ingrese Precio de Compra"/>
                                 </div>
                                 <div class="form-group">
                                     <label for="inputNombre">Precio Venta</label>
-                                    <s:textfield  name="producto.precioVenta" cssClass="form-control" placeholder="Ingrese Precio de Venta"/>
+                                    <s:textfield key="producto.precioVenta"  value="%{getText('{0,number,#0.0##}',{producto.precioVenta})}" cssClass="form-control" placeholder="Ingrese Precio de Venta"/>
                                 </div>
                                 <div class="form-group">
                                     <label for="inputNombre">Descuento</label>
-                                    <s:textfield  name="producto.descuento" cssClass="form-control" placeholder="Ingrese Descripción"/>
+                                    <s:textfield  key="producto.descuento" value="%{getText('{0,number,#0.0##}',{producto.descuento})}" cssClass="form-control" placeholder="Ingrese Descripción"/>
                                 </div>
                                 <div class="form-group">
                                     <label for="inputImagen">Imagen</label>

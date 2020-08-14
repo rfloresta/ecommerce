@@ -29,6 +29,7 @@ import wyv.persistencia.exceptions.PreexistingEntityException;
  */
 public class AdministradorJpa implements Serializable {
 
+<<<<<<< HEAD
 <span class="fc" id="L32">    public AdministradorJpa() {</span>
 <span class="fc" id="L33">        this.emf= Persistence.createEntityManagerFactory(&quot;W_V_S.A.CPU&quot;);</span>
 <span class="fc" id="L34">    }</span>
@@ -39,6 +40,18 @@ public class AdministradorJpa implements Serializable {
 
     public EntityManager getEntityManager() {
 <span class="fc" id="L41">        return emf.createEntityManager();</span>
+=======
+<span class="nc" id="L32">    public AdministradorJpa() {</span>
+<span class="nc" id="L33">        this.emf= Persistence.createEntityManagerFactory(&quot;W_V_S.A.CPU&quot;);</span>
+<span class="nc" id="L34">    }</span>
+<span class="nc" id="L35">    public AdministradorJpa(EntityManagerFactory emf) {</span>
+<span class="nc" id="L36">        this.emf = emf;</span>
+<span class="nc" id="L37">    }</span>
+<span class="nc" id="L38">    private EntityManagerFactory emf = null;</span>
+
+    public EntityManager getEntityManager() {
+<span class="nc" id="L41">        return emf.createEntityManager();</span>
+>>>>>>> 774d743aa798fdef07b0c2bb8173fa7ffbd7731a
     }
 
     public void create(Administrador administrador) throws PreexistingEntityException, Exception {
@@ -50,7 +63,11 @@ public class AdministradorJpa implements Serializable {
 <span class="nc" id="L50">            em.getTransaction().commit();</span>
 <span class="nc" id="L51">        } catch (Exception ex) {</span>
 <span class="nc bnc" id="L52" title="All 2 branches missed.">            if (findAdministrador(administrador.getDni()) != null) {</span>
+<<<<<<< HEAD
 <span class="nc" id="L53">                throw new PreexistingEntityException(&quot;El administrador &quot; + administrador + &quot; ya existe.&quot;, ex);</span>
+=======
+<span class="nc" id="L53">                throw new PreexistingEntityException(&quot;Administrador &quot; + administrador + &quot; already exists.&quot;, ex);</span>
+>>>>>>> 774d743aa798fdef07b0c2bb8173fa7ffbd7731a
             }
 <span class="nc" id="L55">            throw ex;</span>
         } finally {
@@ -129,11 +146,19 @@ public class AdministradorJpa implements Serializable {
     }
 
     public Administrador findAdministrador(String id) {
+<<<<<<< HEAD
 <span class="fc" id="L132">        EntityManager em = getEntityManager();</span>
         try {
 <span class="fc" id="L134">            return em.find(Administrador.class, id);</span>
         } finally {
 <span class="pc" id="L136">            em.close();</span>
+=======
+<span class="nc" id="L132">        EntityManager em = getEntityManager();</span>
+        try {
+<span class="nc" id="L134">            return em.find(Administrador.class, id);</span>
+        } finally {
+<span class="nc" id="L136">            em.close();</span>
+>>>>>>> 774d743aa798fdef07b0c2bb8173fa7ffbd7731a
         }
     }
 

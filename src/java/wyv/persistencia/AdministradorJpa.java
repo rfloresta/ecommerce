@@ -41,7 +41,7 @@ public class AdministradorJpa implements Serializable {
             em.getTransaction().commit();
         } catch (Exception ex) {
             if (findAdministrador(administrador.getDni()) != null) {
-                throw new PreexistingEntityException("El administrador " + administrador + " ya existe.", ex);
+                throw new PreexistingEntityException("Administrador " + administrador + " already exists.", ex);
             }
             throw ex;
         } finally {

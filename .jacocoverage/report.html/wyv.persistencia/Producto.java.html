@@ -23,12 +23,19 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+<<<<<<< HEAD
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonManagedReference;
 
 /**
  *
  * @author Romario
+=======
+
+/**
+ *
+ * @author bdeg_
+>>>>>>> 774d743aa798fdef07b0c2bb8173fa7ffbd7731a
  */
 @Entity
 @Table(name = &quot;producto&quot;)
@@ -43,6 +50,12 @@ import org.codehaus.jackson.annotate.JsonManagedReference;
     , @NamedQuery(name = &quot;Producto.findByDescuento&quot;, query = &quot;SELECT p FROM Producto p WHERE p.descuento = :descuento&quot;)})
 public class Producto implements Serializable {
 
+<<<<<<< HEAD
+=======
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = &quot;producto&quot;)
+    private List&lt;DetallePedido&gt; detallePedidoList;
+
+>>>>>>> 774d743aa798fdef07b0c2bb8173fa7ffbd7731a
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -67,15 +80,19 @@ public class Producto implements Serializable {
     @Lob
     @Column(name = &quot;imagen&quot;)
     private String imagen;
+<<<<<<< HEAD
     @OneToMany(cascade = CascadeType.ALL, mappedBy = &quot;producto&quot;)
     @JsonManagedReference
     private List&lt;DetallePedido&gt; detallePedidoList;
+=======
+>>>>>>> 774d743aa798fdef07b0c2bb8173fa7ffbd7731a
     @JoinColumn(name = &quot;idCategoria&quot;, referencedColumnName = &quot;idCategoria&quot;)
     @ManyToOne
     private Categoria idCategoria;
     @JoinColumn(name = &quot;idMarca&quot;, referencedColumnName = &quot;idMarca&quot;)
     @ManyToOne
     private Marca idMarca;
+<<<<<<< HEAD
 
 <span class="fc" id="L80">    public Producto() {</span>
 <span class="fc" id="L81">    }</span>
@@ -184,11 +201,123 @@ public class Producto implements Serializable {
 <span class="nc" id="L184">        int hash = 0;</span>
 <span class="nc bnc" id="L185" title="All 2 branches missed.">        hash += (idProducto != null ? idProducto.hashCode() : 0);</span>
 <span class="nc" id="L186">        return hash;</span>
+=======
+    @JoinColumn(name = &quot;idSubCategoria&quot;, referencedColumnName = &quot;idSubcategoria&quot;)
+    @ManyToOne(optional = false)
+    private Subcategoria idSubCategoria;
+
+<span class="nc" id="L81">    public Producto() {</span>
+<span class="nc" id="L82">    }</span>
+
+<span class="nc" id="L84">    public Producto(Integer idProducto) {</span>
+<span class="nc" id="L85">        this.idProducto = idProducto;</span>
+<span class="nc" id="L86">    }</span>
+
+<span class="nc" id="L88">    public Producto(Integer idProducto, String descripcion) {</span>
+<span class="nc" id="L89">        this.idProducto = idProducto;</span>
+<span class="nc" id="L90">        this.descripcion = descripcion;</span>
+<span class="nc" id="L91">    }</span>
+
+    public Integer getIdProducto() {
+<span class="nc" id="L94">        return idProducto;</span>
+    }
+
+    public void setIdProducto(Integer idProducto) {
+<span class="nc" id="L98">        this.idProducto = idProducto;</span>
+<span class="nc" id="L99">    }</span>
+
+    public String getNombre() {
+<span class="nc" id="L102">        return nombre;</span>
+    }
+
+    public void setNombre(String nombre) {
+<span class="nc" id="L106">        this.nombre = nombre;</span>
+<span class="nc" id="L107">    }</span>
+
+    public String getDescripcion() {
+<span class="nc" id="L110">        return descripcion;</span>
+    }
+
+    public void setDescripcion(String descripcion) {
+<span class="nc" id="L114">        this.descripcion = descripcion;</span>
+<span class="nc" id="L115">    }</span>
+
+    public Integer getStock() {
+<span class="nc" id="L118">        return stock;</span>
+    }
+
+    public void setStock(Integer stock) {
+<span class="nc" id="L122">        this.stock = stock;</span>
+<span class="nc" id="L123">    }</span>
+
+    public Double getPrecioCompra() {
+<span class="nc" id="L126">        return precioCompra;</span>
+    }
+
+    public void setPrecioCompra(Double precioCompra) {
+<span class="nc" id="L130">        this.precioCompra = precioCompra;</span>
+<span class="nc" id="L131">    }</span>
+
+    public Double getPrecioVenta() {
+<span class="nc" id="L134">        return precioVenta;</span>
+    }
+
+    public void setPrecioVenta(Double precioVenta) {
+<span class="nc" id="L138">        this.precioVenta = precioVenta;</span>
+<span class="nc" id="L139">    }</span>
+
+    public Double getDescuento() {
+<span class="nc" id="L142">        return descuento;</span>
+    }
+
+    public void setDescuento(Double descuento) {
+<span class="nc" id="L146">        this.descuento = descuento;</span>
+<span class="nc" id="L147">    }</span>
+
+    public String getImagen() {
+<span class="nc" id="L150">        return imagen;</span>
+    }
+
+    public void setImagen(String imagen) {
+<span class="nc" id="L154">        this.imagen = imagen;</span>
+<span class="nc" id="L155">    }</span>
+
+    public Categoria getIdCategoria() {
+<span class="nc" id="L158">        return idCategoria;</span>
+    }
+
+    public void setIdCategoria(Categoria idCategoria) {
+<span class="nc" id="L162">        this.idCategoria = idCategoria;</span>
+<span class="nc" id="L163">    }</span>
+
+    public Marca getIdMarca() {
+<span class="nc" id="L166">        return idMarca;</span>
+    }
+
+    public void setIdMarca(Marca idMarca) {
+<span class="nc" id="L170">        this.idMarca = idMarca;</span>
+<span class="nc" id="L171">    }</span>
+
+    public Subcategoria getIdSubCategoria() {
+<span class="nc" id="L174">        return idSubCategoria;</span>
+    }
+
+    public void setIdSubCategoria(Subcategoria idSubCategoria) {
+<span class="nc" id="L178">        this.idSubCategoria = idSubCategoria;</span>
+<span class="nc" id="L179">    }</span>
+
+    @Override
+    public int hashCode() {
+<span class="nc" id="L183">        int hash = 0;</span>
+<span class="nc bnc" id="L184" title="All 2 branches missed.">        hash += (idProducto != null ? idProducto.hashCode() : 0);</span>
+<span class="nc" id="L185">        return hash;</span>
+>>>>>>> 774d743aa798fdef07b0c2bb8173fa7ffbd7731a
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
+<<<<<<< HEAD
 <span class="nc bnc" id="L192" title="All 2 branches missed.">        if (!(object instanceof Producto)) {</span>
 <span class="nc" id="L193">            return false;</span>
         }
@@ -197,12 +326,36 @@ public class Producto implements Serializable {
 <span class="nc" id="L197">            return false;</span>
         }
 <span class="nc" id="L199">        return true;</span>
+=======
+<span class="nc bnc" id="L191" title="All 2 branches missed.">        if (!(object instanceof Producto)) {</span>
+<span class="nc" id="L192">            return false;</span>
+        }
+<span class="nc" id="L194">        Producto other = (Producto) object;</span>
+<span class="nc bnc" id="L195" title="All 8 branches missed.">        if ((this.idProducto == null &amp;&amp; other.idProducto != null) || (this.idProducto != null &amp;&amp; !this.idProducto.equals(other.idProducto))) {</span>
+<span class="nc" id="L196">            return false;</span>
+        }
+<span class="nc" id="L198">        return true;</span>
+>>>>>>> 774d743aa798fdef07b0c2bb8173fa7ffbd7731a
     }
 
     @Override
     public String toString() {
+<<<<<<< HEAD
 <span class="nc" id="L204">        return &quot;wyv.persistencia.Producto[ idProducto=&quot; + idProducto + &quot; ]&quot;;</span>
     }
+=======
+<span class="nc" id="L203">        return &quot;wyv.persistencia.Producto[ idProducto=&quot; + idProducto + &quot; ]&quot;;</span>
+    }
+
+    @XmlTransient
+    public List&lt;DetallePedido&gt; getDetallePedidoList() {
+<span class="nc" id="L208">        return detallePedidoList;</span>
+    }
+
+    public void setDetallePedidoList(List&lt;DetallePedido&gt; detallePedidoList) {
+<span class="nc" id="L212">        this.detallePedidoList = detallePedidoList;</span>
+<span class="nc" id="L213">    }</span>
+>>>>>>> 774d743aa798fdef07b0c2bb8173fa7ffbd7731a
     
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

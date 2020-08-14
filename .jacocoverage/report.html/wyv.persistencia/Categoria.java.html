@@ -19,11 +19,18 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+<<<<<<< HEAD
 import org.codehaus.jackson.annotate.JsonIgnore;
 
 /**
  *
  * @author Romario
+=======
+
+/**
+ *
+ * @author bdeg_
+>>>>>>> 774d743aa798fdef07b0c2bb8173fa7ffbd7731a
  */
 @Entity
 @Table(name = &quot;categoria&quot;)
@@ -31,10 +38,22 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 @NamedQueries({
     @NamedQuery(name = &quot;Categoria.findAll&quot;, query = &quot;SELECT c FROM Categoria c&quot;)
     , @NamedQuery(name = &quot;Categoria.findByIdCategoria&quot;, query = &quot;SELECT c FROM Categoria c WHERE c.idCategoria = :idCategoria&quot;)
+<<<<<<< HEAD
     , @NamedQuery(name = &quot;Categoria.findByNombre&quot;, query = &quot;SELECT c FROM Categoria c WHERE c.nombre = :nombre&quot;)
     , @NamedQuery(name = &quot;Categoria.findByCategoriaSuperior&quot;, query = &quot;SELECT c FROM Categoria c WHERE c.categoriaSuperior = :categoriaSuperior&quot;)})
 public class Categoria implements Serializable {
 
+=======
+    , @NamedQuery(name = &quot;Categoria.findByNombre&quot;, query = &quot;SELECT c FROM Categoria c WHERE c.nombre = :nombre&quot;)})
+public class Categoria implements Serializable {
+
+    @OneToMany(mappedBy = &quot;idCategoria&quot;)
+    private List&lt;Producto&gt; productoList;
+
+    @OneToMany(mappedBy = &quot;idCategoria&quot;)
+    private List&lt;Subcategoria&gt; subcategoriaList;
+
+>>>>>>> 774d743aa798fdef07b0c2bb8173fa7ffbd7731a
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,6 +62,7 @@ public class Categoria implements Serializable {
     private Integer idCategoria;
     @Column(name = &quot;nombre&quot;)
     private String nombre;
+<<<<<<< HEAD
     @Column(name = &quot;categoriaSuperior&quot;)
     private Integer categoriaSuperior;
     @OneToMany(mappedBy = &quot;idCategoria&quot;)
@@ -50,6 +70,11 @@ public class Categoria implements Serializable {
 
 <span class="fc" id="L51">    public Categoria() {</span>
 <span class="fc" id="L52">    }</span>
+=======
+
+<span class="nc" id="L51">    public Categoria() {</span>
+<span class="nc" id="L52">    }</span>
+>>>>>>> 774d743aa798fdef07b0c2bb8173fa7ffbd7731a
 
 <span class="nc" id="L54">    public Categoria(Integer idCategoria) {</span>
 <span class="nc" id="L55">        this.idCategoria = idCategoria;</span>
@@ -71,6 +96,7 @@ public class Categoria implements Serializable {
 <span class="nc" id="L71">        this.nombre = nombre;</span>
 <span class="nc" id="L72">    }</span>
 
+<<<<<<< HEAD
     public Integer getCategoriaSuperior() {
 <span class="nc" id="L75">        return categoriaSuperior;</span>
     }
@@ -94,11 +120,19 @@ public class Categoria implements Serializable {
 <span class="nc" id="L94">        int hash = 0;</span>
 <span class="nc bnc" id="L95" title="All 2 branches missed.">        hash += (idCategoria != null ? idCategoria.hashCode() : 0);</span>
 <span class="nc" id="L96">        return hash;</span>
+=======
+    @Override
+    public int hashCode() {
+<span class="nc" id="L76">        int hash = 0;</span>
+<span class="nc bnc" id="L77" title="All 2 branches missed.">        hash += (idCategoria != null ? idCategoria.hashCode() : 0);</span>
+<span class="nc" id="L78">        return hash;</span>
+>>>>>>> 774d743aa798fdef07b0c2bb8173fa7ffbd7731a
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
+<<<<<<< HEAD
 <span class="nc bnc" id="L102" title="All 2 branches missed.">        if (!(object instanceof Categoria)) {</span>
 <span class="nc" id="L103">            return false;</span>
         }
@@ -107,12 +141,45 @@ public class Categoria implements Serializable {
 <span class="nc" id="L107">            return false;</span>
         }
 <span class="nc" id="L109">        return true;</span>
+=======
+<span class="nc bnc" id="L84" title="All 2 branches missed.">        if (!(object instanceof Categoria)) {</span>
+<span class="nc" id="L85">            return false;</span>
+        }
+<span class="nc" id="L87">        Categoria other = (Categoria) object;</span>
+<span class="nc bnc" id="L88" title="All 8 branches missed.">        if ((this.idCategoria == null &amp;&amp; other.idCategoria != null) || (this.idCategoria != null &amp;&amp; !this.idCategoria.equals(other.idCategoria))) {</span>
+<span class="nc" id="L89">            return false;</span>
+        }
+<span class="nc" id="L91">        return true;</span>
+>>>>>>> 774d743aa798fdef07b0c2bb8173fa7ffbd7731a
     }
 
     @Override
     public String toString() {
+<<<<<<< HEAD
 <span class="nc" id="L114">        return &quot;wyv.persistencia.Categoria[ idCategoria=&quot; + idCategoria + &quot; ]&quot;;</span>
     }
+=======
+<span class="nc" id="L96">        return &quot;wyv.persistencia.Categoria[ idCategoria=&quot; + idCategoria + &quot; ]&quot;;</span>
+    }
+
+    @XmlTransient
+    public List&lt;Subcategoria&gt; getSubcategoriaList() {
+<span class="nc" id="L101">        return subcategoriaList;</span>
+    }
+
+    public void setSubcategoriaList(List&lt;Subcategoria&gt; subcategoriaList) {
+<span class="nc" id="L105">        this.subcategoriaList = subcategoriaList;</span>
+<span class="nc" id="L106">    }</span>
+
+    @XmlTransient
+    public List&lt;Producto&gt; getProductoList() {
+<span class="nc" id="L110">        return productoList;</span>
+    }
+
+    public void setProductoList(List&lt;Producto&gt; productoList) {
+<span class="nc" id="L114">        this.productoList = productoList;</span>
+<span class="nc" id="L115">    }</span>
+>>>>>>> 774d743aa798fdef07b0c2bb8173fa7ffbd7731a
     
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

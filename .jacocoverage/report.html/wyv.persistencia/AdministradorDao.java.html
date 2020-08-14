@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>AdministradorDao.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;W_V_S.A.C&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">wyv.persistencia</a> &gt; <span class="el_source">AdministradorDao.java</span></div><h1>AdministradorDao.java</h1><pre class="source lang-java linenums">package wyv.persistencia;
+<<<<<<< HEAD
 
 import java.util.List;
 import java.util.Map;
@@ -17,23 +18,49 @@ import org.springframework.stereotype.Service;
 <span class="nc" id="L17">        } catch (Exception e) {</span>
 <span class="nc" id="L18">            e.printStackTrace();</span>
 <span class="nc" id="L19">            return &quot;error&quot;;</span>
+=======
+import java.util.List;
+import java.util.Map;
+
+<span class="nc" id="L5">public class AdministradorDao implements IOperacionesBD&lt;Administrador&gt; {</span>
+    
+<span class="nc" id="L7">    AdministradorJpa admJpa=new AdministradorJpa();</span>
+    
+    @Override
+    public String registrar(Administrador a) {
+        try {
+<span class="nc" id="L12">            admJpa.create(a);</span>
+<span class="nc" id="L13">            return &quot;ok&quot;;</span>
+<span class="nc" id="L14">        } catch (Exception e) {</span>
+<span class="nc" id="L15">            e.printStackTrace();</span>
+<span class="nc" id="L16">            return &quot;error&quot;;</span>
+>>>>>>> 774d743aa798fdef07b0c2bb8173fa7ffbd7731a
         }
     }
 
     @Override
     public String actualizar(Administrador a) {
         try {
+<<<<<<< HEAD
 <span class="nc" id="L26">            admJpa.edit(a);</span>
 <span class="nc" id="L27">            return &quot;ok&quot;;</span>
 <span class="nc" id="L28">        } catch (Exception e) {</span>
 <span class="nc" id="L29">            e.getMessage();</span>
 <span class="nc" id="L30">            return &quot;error&quot;;</span>
+=======
+<span class="nc" id="L23">            admJpa.edit(a);</span>
+<span class="nc" id="L24">            return &quot;ok&quot;;</span>
+<span class="nc" id="L25">        } catch (Exception e) {</span>
+<span class="nc" id="L26">            e.getMessage();</span>
+<span class="nc" id="L27">            return &quot;error&quot;;</span>
+>>>>>>> 774d743aa798fdef07b0c2bb8173fa7ffbd7731a
         }
     }
 
     @Override
     public String eliminar(String id) {
         try {
+<<<<<<< HEAD
 <span class="nc" id="L37">            admJpa.destroy(id);</span>
 <span class="nc" id="L38">            return &quot;ok&quot;;</span>
 <span class="nc" id="L39">        } catch (Exception e) {</span>
@@ -41,21 +68,41 @@ import org.springframework.stereotype.Service;
 <span class="nc" id="L41">            return null;</span>
         }
 
+=======
+<span class="nc" id="L34">           admJpa.destroy(id);</span>
+<span class="nc" id="L35">           return &quot;ok&quot;;</span>
+<span class="nc" id="L36">       } catch (Exception e) {</span>
+<span class="nc" id="L37">            e.getMessage();</span>
+<span class="nc" id="L38">            return null;</span>
+        }
+      
+>>>>>>> 774d743aa798fdef07b0c2bb8173fa7ffbd7731a
     }
 
     @Override
     public Administrador buscar(String id) {
+<<<<<<< HEAD
 <span class="fc" id="L48">        return admJpa.findAdministrador(id);</span>
+=======
+
+<span class="nc" id="L46">     return  admJpa.findAdministrador(id);</span>
+>>>>>>> 774d743aa798fdef07b0c2bb8173fa7ffbd7731a
     }
 
     @Override
     public List&lt;Administrador&gt; listar() {
+<<<<<<< HEAD
 
 <span class="nc" id="L54">        return admJpa.findAdministradorEntities();</span>
+=======
+        
+<span class="nc" id="L52">       return admJpa.findAdministradorEntities();</span>
+>>>>>>> 774d743aa798fdef07b0c2bb8173fa7ffbd7731a
     }
 
     @Override
     public Administrador validar(Administrador entrada) {
+<<<<<<< HEAD
 
 <span class="nc" id="L60">        return admJpa.findAdministrador(entrada.getDni());</span>
 
@@ -81,6 +128,39 @@ import org.springframework.stereotype.Service;
     @Override
     public int contar() {
 <span class="nc" id="L83">       return admJpa.getAdministradorCount();</span>
+=======
+       
+<span class="nc" id="L58">     return admJpa.findAdministrador(entrada.getDni());</span>
+  
+    }
+    // Metodo para la line Chart
+    public List&lt;Map&lt;String, String&gt;&gt; ventaMes()
+    {
+        
+        
+<span class="nc" id="L66">        return   admJpa.ventaMes();</span>
+    }
+    
+    
+    //Metodo para contar Cliente
+    
+     public int ContarCliente()
+    {
+<span class="nc" id="L74">        return admJpa.ContarClientes();</span>
+    }
+ 
+    //Metodo para contar Administrador 
+     public int ContarAdministrador()
+    {
+<span class="nc" id="L80">        return admJpa.ContarAdministrador();</span>
+    }
+     
+     //Metodo para contar Pedido
+     
+     public int ContarPedido()
+    {
+<span class="nc" id="L87">        return admJpa.ContarPedido();</span>
+>>>>>>> 774d743aa798fdef07b0c2bb8173fa7ffbd7731a
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

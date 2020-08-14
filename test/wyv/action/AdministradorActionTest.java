@@ -14,7 +14,7 @@ import wyv.servicios.AdministradorServicio;
 
 /**
  *
- * @author Romario
+ * @author bdeg_
  */
 public class AdministradorActionTest {
     
@@ -22,373 +22,210 @@ public class AdministradorActionTest {
     }
 
 //    @Test
-//    public void testGetCodigo() {
-//        System.out.println("getCodigo");
+//    public void testIngresoAdminCP1() {
+//        System.out.println("ingresoAdmin");
+//        Administrador admin = new Administrador();
 //        AdministradorAction instance = new AdministradorAction();
-//        String expResult = "";
-//        String result = instance.getCodigo();
+//        admin.setDni("73184116");
+//        admin.setPassword("Bryan321");
+//        String expResult = "ok";
+//        String result = instance.ingresoAdmin(admin);
 //        assertEquals(expResult, result);
-//        fail("The test case is a prototype.");
+//        
 //    }
+//    
+//    @Test
+//    public void testIngresoAdminCP2() {
+//        System.out.println("ingresoAdmin");
+//        Administrador admin = new Administrador();
+//        AdministradorAction instance = new AdministradorAction();
+//        admin.setDni("64897567");
+//        admin.setPassword("25464");
+//        String expResult = "incorrecto";
+//        String result = instance.ingresoAdmin(admin);
+//        assertEquals(expResult, result);
+//        
+//    }
+//
 //
 //    @Test
 //    public void testListarAdmin() {
 //        System.out.println("listarAdmin");
 //        AdministradorAction instance = new AdministradorAction();
-//        String expResult = "";
+//        String expResult = "ok";
 //        String result = instance.listarAdmin();
 //        assertEquals(expResult, result);
-//        fail("The test case is a prototype.");
 //    }
 //
 //    @Test
 //    public void testRegistrarAdmin() {
 //        System.out.println("registrarAdmin");
+
+//        Administrador admin = new Administrador();
 //        AdministradorAction instance = new AdministradorAction();
-//        String expResult = "";
-//        String result = instance.registrarAdmin();
+//        admin.setDni("84567925");
+//        admin.setNombres("Bryan");
+//        admin.setApellidos("Estrada");
+//        admin.setPassword("bryan123");
+//        admin.setEmail("bestradag05@gmail.com");
+//        admin.setCodigoGenerado("28562");
+//        admin.setPrivilegio('A');
+//        String expResult = "ok";
+//        String result = instance.registrarAdmin(admin);
 //        assertEquals(expResult, result);
-//        fail("The test case is a prototype.");
 //    }
 //
-//    @Test
-//    public void testEditarAdmin() {
-//        System.out.println("editarAdmin");
-//        AdministradorAction instance = new AdministradorAction();
-//        String expResult = "";
-//        String result = instance.editarAdmin();
-//        assertEquals(expResult, result);
-//        fail("The test case is a prototype.");
-//    }
-//
-//    @Test
-//    public void testActualizarAdmin() {
-//        System.out.println("actualizarAdmin");
-//        AdministradorAction instance = new AdministradorAction();
-//        String expResult = "";
-//        String result = instance.actualizarAdmin();
-//        assertEquals(expResult, result);
-//        fail("The test case is a prototype.");
-//    }
 //
 //    @Test
 //    public void testEliminarAdmin() {
 //        System.out.println("eliminarAdmin");
+//        Administrador admin = new Administrador();
 //        AdministradorAction instance = new AdministradorAction();
-//        String expResult = "";
-//        String result = instance.eliminarAdmin();
+//        admin.setDni("84567925");
+//        String expResult = "ok";
+//        String result = instance.eliminarAdmin(admin);
 //        assertEquals(expResult, result);
-//        fail("The test case is a prototype.");
 //    }
 //
 //    @Test
 //    public void testCargarDatosAdmin() {
 //        System.out.println("cargarDatosAdmin");
 //        AdministradorAction instance = new AdministradorAction();
-//        String expResult = "";
-//        String result = instance.cargarDatosAdmin();
+//        String dni = "73184116";
+//        String expResult = "ok";
+//        String result = instance.cargarDatosAdmin(dni);
 //        assertEquals(expResult, result);
-//        fail("The test case is a prototype.");
 //    }
 //
 //    @Test
 //    public void testActualizarDatosAdmin() {
 //        System.out.println("actualizarDatosAdmin");
+//        Administrador admin = new Administrador();
 //        AdministradorAction instance = new AdministradorAction();
-//        String expResult = "";
-//        String result = instance.actualizarDatosAdmin();
+//        admin.setDni("73184116");
+//        admin.setNombres("Bryan");
+//        admin.setApellidos("Estrada");
+//        admin.setPassword("Bryan123");
+//        admin.setEmail("bestradag05@gmail.com");
+//        admin.setCodigoGenerado("28562");
+//        admin.setPrivilegio('A');
+//        String expResult = "ok";
+//        String result = instance.actualizarDatosAdmin(admin);
 //        assertEquals(expResult, result);
-//        fail("The test case is a prototype.");
+//       
 //    }
 //
 //    @Test
-//    public void testCambiarPasswordInAdmin() {
+//    public void testCambiarPasswordInAdminCP1() {
 //        System.out.println("cambiarPasswordInAdmin");
+//        Administrador admin = new Administrador();
 //        AdministradorAction instance = new AdministradorAction();
-//        String expResult = "";
-//        String result = instance.cambiarPasswordInAdmin();
+//        String passSesion="Bryan123";
+//        String passwordActual = "Bryan123";
+//        admin.setDni("73184116");
+//        admin.setNombres("Bryan");
+//        admin.setApellidos("Estrada");
+//        admin.setPassword("Bryan4321");
+//        admin.setEmail("bestradag05@gmail.com");
+//        admin.setCodigoGenerado("28562");
+//        admin.setPrivilegio('A');
+//        String expResult = "ok";
+//        String result = instance.cambiarPasswordInAdmin(passSesion,passwordActual,admin);
 //        assertEquals(expResult, result);
-//        fail("The test case is a prototype.");
+//    }
+//    
+//    @Test
+//    public void testCambiarPasswordInAdminCP2() {
+//        System.out.println("cambiarPasswordInAdmin");
+//        Administrador admin = new Administrador();
+//        AdministradorAction instance = new AdministradorAction();
+//        String passSesion="Bryan123";
+//        String passwordActual = "1111";
+//        admin.setDni("73184116");
+//        admin.setNombres("Bryan");
+//        admin.setApellidos("Estrada");
+//        admin.setPassword("Bryan4321");
+//        admin.setEmail("bestradag05@gmail.com");
+//        admin.setCodigoGenerado("28562");
+//        admin.setPrivilegio('A');
+//        String expResult = "incorrecto";
+//        String result = instance.cambiarPasswordInAdmin(passSesion,passwordActual,admin);
+//        assertEquals(expResult, result);
 //    }
 //
+//   
+//
 //    @Test
-//    public void testRestablecerPasswordAdmin() {
+//    public void testRestablecerPasswordAdminCP1() {
 //        System.out.println("restablecerPasswordAdmin");
 //        AdministradorAction instance = new AdministradorAction();
-//        String expResult = "";
-//        String result = instance.restablecerPasswordAdmin();
+//        String emailadmin = "";
+//        String expResult = "incorrecto";
+//        String result = instance.restablecerPasswordAdmin(emailadmin);
 //        assertEquals(expResult, result);
-//        fail("The test case is a prototype.");
+//      
 //    }
-//
 //    
+//    @Test
+//    public void testRestablecerPasswordAdminCP2() {
+//        System.out.println("restablecerPasswordAdmin");
+//        AdministradorAction instance = new AdministradorAction();
+//        String emailadmin = "bestradag05@gmail.com";
+//        String expResult = "ok";
+//        String result = instance.restablecerPasswordAdmin(emailadmin);
+//        assertEquals(expResult, result);
+//      
+//    }
+//    
+//    @Test
+//    public void testRestablecerPasswordAdminCP3() {
+//        System.out.println("restablecerPasswordAdmin");
+//        AdministradorAction instance = new AdministradorAction();
+//        String emailadmin = " noexiste@gmail.com";
+//        String expResult = "incorrecto";
+//        String result = instance.restablecerPasswordAdmin(emailadmin);
+//        assertEquals(expResult, result);
+//      
+//    }
+//////
+//    @Test
+//    public void testValidarCodigoAdminCP1() {
+//        System.out.println("validarCodigoAdmin");
+//        AdministradorAction instance = new AdministradorAction();
+//        String codigo = "";
+//        String dni = "73184116";
+//        String expResult = "incorrecto";
+//        String result = instance.validarCodigoAdmin(codigo, dni );
+//        assertEquals(expResult, result);
+//    }
+//    
+//        @Test
+//    public void testValidarCodigoAdminCP2() {
+//        System.out.println("validarCodigoAdmin");
+//        AdministradorAction instance = new AdministradorAction();
+//        String codigo = "71338";
+//        String dni = "73184116";
+//        String expResult = "ok";
+//        String result = instance.validarCodigoAdmin(codigo, dni );
+//        assertEquals(expResult, result);
+//    }
 //
 //    @Test
 //    public void testCambiarPasswordOutAdmin() {
 //        System.out.println("cambiarPasswordOutAdmin");
+//        Administrador admin = new Administrador();
 //        AdministradorAction instance = new AdministradorAction();
-//        String expResult = "";
-//        String result = instance.cambiarPasswordOutAdmin();
-//        assertEquals(expResult, result);
-//        fail("The test case is a prototype.");
-//    }
-//
-//    @Test
-//    public void testCerrarSesionAdmin() {
-//        System.out.println("cerrarSesionAdmin");
-//        AdministradorAction instance = new AdministradorAction();
-//        String expResult = "";
-//        String result = instance.cerrarSesionAdmin();
-//        assertEquals(expResult, result);
-//        fail("The test case is a prototype.");
-//    }
-//
-//    @Test
-//    public void testIngresoAdmin() {
-//        System.out.println("ingresoAdmin");
-//        Administrador admin =new Administrador();
-//        AdministradorAction instance = new AdministradorAction();
-//        admin.setDni("48887174");
-//        admin.setPassword("Hola12345");
+//        admin.setDni("73184116");
+//        admin.setNombres("Bryan");
+//        admin.setApellidos("Estrada");
+//        admin.setPassword("Bryan321");
+//        admin.setEmail("bestradag05@gmail.com");
+//        admin.setCodigoGenerado("71338");
+//        admin.setPrivilegio('A');
 //        String expResult = "ok";
-//        String result = instance.ingresoAdmin(/*admin*/);
+//        String result = instance.cambiarPasswordOutAdmin(admin);
 //        assertEquals(expResult, result);
 //    }
-
-//    @Test
-//    public void testSetCodigo() {
-//        System.out.println("setCodigo");
-//        String codigo = "";
-//        AdministradorAction instance = new AdministradorAction();
-//        instance.setCodigo(codigo);
-//        fail("The test case is a prototype.");
-//    }
 //
-//    @Test
-//    public void testSetSession() {
-//        System.out.println("setSession");
-//        Map<String, Object> map = null;
-//        AdministradorAction instance = new AdministradorAction();
-//        instance.setSession(map);
-//        fail("The test case is a prototype.");
-//    }
-//
-//    @Test
-//    public void testGetSession() {
-//        System.out.println("getSession");
-//        AdministradorAction instance = new AdministradorAction();
-//        Map expResult = null;
-//        Map result = instance.getSession();
-//        assertEquals(expResult, result);
-//        fail("The test case is a prototype.");
-//    }
-//
-//    @Test
-//    public void testGetContarAdministrador() {
-//        System.out.println("getContarAdministrador");
-//        AdministradorAction instance = new AdministradorAction();
-//        int expResult = 0;
-//        int result = instance.getContarAdministrador();
-//        assertEquals(expResult, result);
-//        fail("The test case is a prototype.");
-//    }
-//
-//    @Test
-//    public void testSetContarAdministrador() {
-//        System.out.println("setContarAdministrador");
-//        int contarAdministrador = 0;
-//        AdministradorAction instance = new AdministradorAction();
-//        instance.setContarAdministrador(contarAdministrador);
-//        fail("The test case is a prototype.");
-//    }
-//
-//    @Test
-//    public void testGetContarPedidos() {
-//        System.out.println("getContarPedidos");
-//        AdministradorAction instance = new AdministradorAction();
-//        int expResult = 0;
-//        int result = instance.getContarPedidos();
-//        assertEquals(expResult, result);
-//        fail("The test case is a prototype.");
-//    }
-//
-//    @Test
-//    public void testSetContarPedidos() {
-//        System.out.println("setContarPedidos");
-//        int contarPedidos = 0;
-//        AdministradorAction instance = new AdministradorAction();
-//        instance.setContarPedidos(contarPedidos);
-//        fail("The test case is a prototype.");
-//    }
-//
-//    @Test
-//    public void testGetContarCliente() {
-//        System.out.println("getContarCliente");
-//        AdministradorAction instance = new AdministradorAction();
-//        int expResult = 0;
-//        int result = instance.getContarCliente();
-//        assertEquals(expResult, result);
-//        fail("The test case is a prototype.");
-//    }
-//
-//    @Test
-//    public void testSetContarCliente() {
-//        System.out.println("setContarCliente");
-//        int contarCliente = 0;
-//        AdministradorAction instance = new AdministradorAction();
-//        instance.setContarCliente(contarCliente);
-//        fail("The test case is a prototype.");
-//    }
-//
-//    @Test
-//    public void testGetJsonMes() {
-//        System.out.println("getJsonMes");
-//        AdministradorAction instance = new AdministradorAction();
-//        String expResult = "";
-//        String result = instance.getJsonMes();
-//        assertEquals(expResult, result);
-//        fail("The test case is a prototype.");
-//    }
-//
-//    @Test
-//    public void testSetJsonMes() {
-//        System.out.println("setJsonMes");
-//        String jsonMes = "";
-//        AdministradorAction instance = new AdministradorAction();
-//        instance.setJsonMes(jsonMes);
-//        fail("The test case is a prototype.");
-//    }
-//
-//    @Test
-//    public void testGetJsonTotal() {
-//        System.out.println("getJsonTotal");
-//        AdministradorAction instance = new AdministradorAction();
-//        String expResult = "";
-//        String result = instance.getJsonTotal();
-//        assertEquals(expResult, result);
-//        fail("The test case is a prototype.");
-//    }
-//
-//    @Test
-//    public void testSetJsonTotal() {
-//        System.out.println("setJsonTotal");
-//        String jsonTotal = "";
-//        AdministradorAction instance = new AdministradorAction();
-//        instance.setJsonTotal(jsonTotal);
-//        fail("The test case is a prototype.");
-//    }
-//
-//    @Test
-//    public void testGetResultado() {
-//        System.out.println("getResultado");
-//        AdministradorAction instance = new AdministradorAction();
-//        String expResult = "";
-//        String result = instance.getResultado();
-//        assertEquals(expResult, result);
-//        fail("The test case is a prototype.");
-//    }
-//
-//    @Test
-//    public void testSetAdmin() {
-//        System.out.println("setAdmin");
-//        Administrador admin = null;
-//        AdministradorAction instance = new AdministradorAction();
-//        instance.setAdmin(admin);
-//        fail("The test case is a prototype.");
-//    }
-//
-//    @Test
-//    public void testGetAdmin() {
-//        System.out.println("getAdmin");
-//        AdministradorAction instance = new AdministradorAction();
-//        Administrador expResult = null;
-//        Administrador result = instance.getAdmin();
-//        assertEquals(expResult, result);
-//        fail("The test case is a prototype.");
-//    }
-//
-//    @Test
-//    public void testGetLstAdmin() {
-//        System.out.println("getLstAdmin");
-//        AdministradorAction instance = new AdministradorAction();
-//        List<Administrador> expResult = null;
-//        List<Administrador> result = instance.getLstAdmin();
-//        assertEquals(expResult, result);
-//        fail("The test case is a prototype.");
-//    }
-//
-//    @Test
-//    public void testGetEdit() {
-//        System.out.println("getEdit");
-//        AdministradorAction instance = new AdministradorAction();
-//        int expResult = 0;
-//        int result = instance.getEdit();
-//        assertEquals(expResult, result);
-//        fail("The test case is a prototype.");
-//    }
-//
-//    @Test
-//    public void testSetAdmSer() {
-//        System.out.println("setAdmSer");
-//        AdministradorServicio admSer = null;
-//        AdministradorAction instance = new AdministradorAction();
-//        instance.setAdmSer(admSer);
-//        fail("The test case is a prototype.");
-//    }
-//
-//    @Test
-//    public void testGetPasswordActual() {
-//        System.out.println("getPasswordActual");
-//        AdministradorAction instance = new AdministradorAction();
-//        String expResult = "";
-//        String result = instance.getPasswordActual();
-//        assertEquals(expResult, result);
-//        fail("The test case is a prototype.");
-//    }
-//
-//    @Test
-//    public void testSetPasswordActual() {
-//        System.out.println("setPasswordActual");
-//        String passwordActual = "";
-//        AdministradorAction instance = new AdministradorAction();
-//        instance.setPasswordActual(passwordActual);
-//        fail("The test case is a prototype.");
-//    }
-//
-//    @Test
-//    public void testEnviarSession() {
-//        System.out.println("enviarSession");
-//        Administrador admin = null;
-//        AdministradorAction instance = new AdministradorAction();
-//        instance.enviarSession(admin);
-//        fail("The test case is a prototype.");
-//    }
-//
-//    @Test
-//    public void testRecibirSession() {
-//        System.out.println("recibirSession");
-//        AdministradorAction instance = new AdministradorAction();
-//        Administrador expResult = null;
-//        Administrador result = instance.recibirSession();
-//        assertEquals(expResult, result);
-//        fail("The test case is a prototype.");
-//    }
-
-
-
-//    @Test
-//    public void testValidarCodigoAdmin() {
-//        System.out.println("validarCodigoAdmin");
-//        String codigo = "24726";
-//        String dni = "48887174";
-//        AdministradorAction instance = new AdministradorAction();
-//        String expResult = "ok";
-//        String result = instance.validarCodigoAdmin(/*codigo, dni*/);
-//        assertEquals(expResult, result);
-//    }
-
-   
-
-    
-
+//   
 }

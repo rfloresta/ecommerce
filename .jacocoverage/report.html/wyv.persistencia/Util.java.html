@@ -7,6 +7,7 @@ import java.sql.*;
 
     public static Connection getConexionBD() {
 
+<<<<<<< HEAD
 <span class="nc" id="L10">		Connection cn=null;</span>
         try 
         {
@@ -19,6 +20,20 @@ import java.sql.*;
 <span class="nc" id="L19">        }</span>
         
 <span class="nc" id="L21">        return cn;</span>
+=======
+<span class="fc" id="L10">		Connection cn=null;</span>
+        try 
+        {
+<span class="fc" id="L13">            Class.forName(&quot;com.mysql.jdbc.Driver&quot;);</span>
+<span class="fc" id="L14">            cn=DriverManager.getConnection(&quot;jdbc:mysql://localhost:3306/tiendaw_v&quot;,&quot;root&quot;,&quot;&quot;);</span>
+<span class="fc" id="L15">            System.out.println(&quot;se conecto!!!!!!&quot;);</span>
+<span class="nc" id="L16">        } catch (Exception e) </span>
+        {
+<span class="nc" id="L18">            System.out.println(&quot;no se conecto!!!!!!&quot;);</span>
+<span class="fc" id="L19">        }</span>
+        
+<span class="fc" id="L21">        return cn;</span>
+>>>>>>> 774d743aa798fdef07b0c2bb8173fa7ffbd7731a
     }
 	
 	

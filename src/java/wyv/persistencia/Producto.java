@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package wyv.persistencia;
 
 import java.io.Serializable;
@@ -26,10 +21,6 @@ import javax.xml.bind.annotation.XmlTransient;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonManagedReference;
 
-/**
- *
- * @author Romario
- */
 @Entity
 @Table(name = "producto")
 @XmlRootElement
@@ -70,12 +61,16 @@ public class Producto implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "producto")
     @JsonManagedReference
     private List<DetallePedido> detallePedidoList;
+    
     @JoinColumn(name = "idCategoria", referencedColumnName = "idCategoria")
     @ManyToOne
     private Categoria idCategoria;
     @JoinColumn(name = "idMarca", referencedColumnName = "idMarca")
     @ManyToOne
     private Marca idMarca;
+    @JoinColumn(name = "idSubCategoria", referencedColumnName = "idSubcategoria")
+    @ManyToOne(optional = false)
+    private Subcategoria idSubCategoria;
 
     public Producto() {
     }
@@ -177,6 +172,14 @@ public class Producto implements Serializable {
 
     public void setIdMarca(Marca idMarca) {
         this.idMarca = idMarca;
+    }
+
+    public Subcategoria getIdSubCategoria() {
+        return idSubCategoria;
+    }
+
+    public void setIdSubCategoria(Subcategoria idSubCategoria) {
+        this.idSubCategoria = idSubCategoria;
     }
 
     @Override

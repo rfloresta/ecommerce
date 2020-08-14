@@ -1,13 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package wyv.persistencia;
 
 import java.io.Serializable;
 import java.sql.CallableStatement;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
@@ -20,10 +16,6 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import wyv.persistencia.exceptions.NonexistentEntityException;
 
-/**
- *
- * @author Romario
- */
 public class CategoriaJpa implements Serializable {
     
     public CategoriaJpa() {
@@ -142,40 +134,41 @@ public class CategoriaJpa implements Serializable {
         }
     }
     
-    public List<Categoria> listarCategoria()
-    {
+    public String registrarCate(Categoria cat) {
         Connection cn;
-        CallableStatement cstmt;
+        PreparedStatement stmt;
         ResultSet rs;
-        List<Categoria> lstCate=new ArrayList<>();
+        
         try {
             cn = Util.getConexionBD();
-            cstmt = cn.prepareCall("call sp_listarcategoria()");
-            rs = cstmt.executeQuery();
-            while(rs.next())
-            {
-                Categoria cat=new Categoria();
-                cat.setIdCategoria(rs.getInt(1));
-                cat.setNombre(rs.getString(2));
-                cat.setCategoriaSuperior(rs.getInt(3));
-                lstCate.add(cat);
-}
+            stmt = cn.prepareCall("INSERT INTO categoria values(?,idCategoria)");
+            stmt.setString(1, cat.getNombre());
+             stmt.executeUpdate();
         } catch (Exception e) {
-            e.getMessage();
-        }
-        return lstCate;
+}
+        return "ok";
     }
     
-    public List<Categoria> listarsubCategoria(int id)
+    public static void main(String[] args)
+    {
+        Categoria cat = new Categoria();
+        cat.setNombre("Prueba2");
+        CategoriaJpa cate = new CategoriaJpa();
+        cate.registrarCate(cat);
+    }
+    
+ 
+    
+    public List<Categoria> listarsubCategoria()
     {
         Connection cn;
-        CallableStatement cstmt;
+        PreparedStatement stmt;
         ResultSet rs;
         List<Categoria> lstCate=new ArrayList<>();
         try {
             cn = Util.getConexionBD();
-            cstmt = cn.prepareCall("call sp_listarsubCategoria("+id+")");
-            rs = cstmt.executeQuery();
+            stmt = cn.prepareCall("select * from categoria where idCategoria != categoriaSuperior");
+            rs = stmt.executeQuery();
             while(rs.next())
             {
                 Categoria cat=new Categoria();

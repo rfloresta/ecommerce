@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>SubcategoriaAction.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;W_V_S.A.C&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">wyv.action</a> &gt; <span class="el_source">SubcategoriaAction.java</span></div><h1>SubcategoriaAction.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package wyv.action;
+
+import com.opensymphony.xwork2.ActionSupport;
+import java.util.List;
+import org.apache.struts2.convention.annotation.Action;
+import org.apache.struts2.convention.annotation.Result;
+import wyv.persistencia.Categoria;
+import wyv.servicios.SubCategoriaServicio;
+import wyv.persistencia.Subcategoria;
+import wyv.servicios.CategoriaServicio;
+
+/**
+ *
+ * @author bdeg_
+ */
+<span class="nc" id="L21">public class SubcategoriaAction extends ActionSupport {</span>
+    
+    SubCategoriaServicio subCatSer;
+    CategoriaServicio catSer;
+    private String resultado;
+    private Subcategoria subCategoria;
+    private List&lt;Subcategoria&gt; lstSubCate;
+    private List&lt;Categoria&gt; lstCategoria;
+    private int edit;
+
+    public SubCategoriaServicio getSubCatSer() {
+<span class="nc" id="L32">        return subCatSer;</span>
+    }
+
+    public void setSubCatSer(SubCategoriaServicio subCatSer) {
+<span class="nc" id="L36">        this.subCatSer = subCatSer;</span>
+<span class="nc" id="L37">    }</span>
+
+    public CategoriaServicio getCatSer() {
+<span class="nc" id="L40">        return catSer;</span>
+    }
+
+    public void setCatSer(CategoriaServicio catSer) {
+<span class="nc" id="L44">        this.catSer = catSer;</span>
+<span class="nc" id="L45">    }</span>
+
+    public String getResultado() {
+<span class="nc" id="L48">        return resultado;</span>
+    }
+
+    public void setResultado(String resultado) {
+<span class="nc" id="L52">        this.resultado = resultado;</span>
+<span class="nc" id="L53">    }</span>
+
+    public Subcategoria getSubCategoria() {
+<span class="nc" id="L56">        return subCategoria;</span>
+    }
+
+    public void setSubCategoria(Subcategoria subCategoria) {
+<span class="nc" id="L60">        this.subCategoria = subCategoria;</span>
+<span class="nc" id="L61">    }</span>
+
+    public List&lt;Subcategoria&gt; getLstSubCate() {
+<span class="nc" id="L64">        return lstSubCate;</span>
+    }
+
+    public void setLstSubCate(List&lt;Subcategoria&gt; lstSubCate) {
+<span class="nc" id="L68">        this.lstSubCate = lstSubCate;</span>
+<span class="nc" id="L69">    }</span>
+
+    public List&lt;Categoria&gt; getLstCategoria() {
+<span class="nc" id="L72">        return lstCategoria;</span>
+    }
+
+    public void setLstCategoria(List&lt;Categoria&gt; lstCategoria) {
+<span class="nc" id="L76">        this.lstCategoria = lstCategoria;</span>
+<span class="nc" id="L77">    }</span>
+
+
+    
+
+    public int getEdit() {
+<span class="nc" id="L83">        return edit;</span>
+    }
+
+    public void setEdit(int edit) {
+<span class="nc" id="L87">        this.edit = edit;</span>
+<span class="nc" id="L88">    }</span>
+
+    
+    
+    
+    
+      @Action(value = &quot;listarSubCate&quot;, results = {
+        @Result(name = &quot;ok&quot;, location = &quot;/admin/principal/subCategoria.jsp&quot;),
+	@Result(name = &quot;error&quot;, location = &quot;admin/error.jsp&quot;)
+
+    })
+    public String listarSubCate() {
+        try {
+<span class="nc" id="L101">            lstSubCate=new SubCategoriaServicio().listar();</span>
+<span class="nc" id="L102">            lstCategoria = new CategoriaServicio().listar();</span>
+             
+<span class="nc" id="L104">            return &quot;ok&quot;;</span>
+<span class="nc" id="L105">        } catch (Exception e) {</span>
+<span class="nc" id="L106">            resultado = &quot;Error en: listarCate :: &quot; + e.getMessage();</span>
+<span class="nc" id="L107">            e.printStackTrace();</span>
+<span class="nc" id="L108">            return &quot;error&quot;;</span>
+        }
+    }
+    
+
+    @Action(value=&quot;registrarSubCate&quot;,results= {
+			@Result(name=&quot;ok&quot;,location=&quot;/admin/principal/subCategoria.jsp&quot;),
+			@Result(name=&quot;error&quot;,location=&quot;/error.jsp&quot;)
+	})
+	public String registrarCate() {
+		try {
+<span class="nc" id="L119">			new SubCategoriaServicio().registrar(subCategoria);</span>
+<span class="nc" id="L120">			lstSubCate=new SubCategoriaServicio().listar();</span>
+<span class="nc" id="L121">                        lstCategoria = new CategoriaServicio().listar();</span>
+<span class="nc" id="L122">			subCategoria=new Subcategoria();</span>
+<span class="nc" id="L123">			return &quot;ok&quot;;</span>
+<span class="nc" id="L124">		} catch (Exception e) {</span>
+<span class="nc" id="L125">			resultado=&quot;Error en: registrarCate :: &quot;+e.getMessage();</span>
+<span class="nc" id="L126">			return &quot;error&quot;;</span>
+		}
+	}
+        
+        
+        @Action(value=&quot;editarSubCate&quot;,results= {
+			@Result(name=&quot;ok&quot;,location=&quot;/admin/principal/subCategoria.jsp&quot;),
+			@Result(name=&quot;error&quot;,location=&quot;/error.jsp&quot;)
+	})
+	public String editarSubCate() {
+		
+		try {
+<span class="nc" id="L138">			subCategoria =new SubCategoriaServicio().buscar(String.valueOf(subCategoria.getIdSubcategoria()));</span>
+<span class="nc" id="L139">			lstSubCate=new SubCategoriaServicio().listar();</span>
+<span class="nc" id="L140">                        lstCategoria = new CategoriaServicio().listar();</span>
+<span class="nc" id="L141">                        edit=1;</span>
+<span class="nc" id="L142">			return &quot;ok&quot;;</span>
+<span class="nc" id="L143">		} catch (Exception e) {</span>
+<span class="nc" id="L144">			resultado=&quot;Error en: editarAdmin :: &quot;+e.getMessage();</span>
+<span class="nc" id="L145">			return &quot;error&quot;;</span>
+		}
+	}
+        
+        
+        @Action(value=&quot;actualizarSubCate&quot;,results= {
+			@Result(name=&quot;ok&quot;,location=&quot;/admin/principal/subCategoria.jsp&quot;),
+			@Result(name=&quot;error&quot;,location=&quot;/error.jsp&quot;)
+	})
+	public String actualizarSubCate() {
+		
+		try {
+                        
+<span class="nc" id="L158">			new SubCategoriaServicio().actualizar(subCategoria);</span>
+<span class="nc" id="L159">			lstSubCate=new SubCategoriaServicio().listar();</span>
+<span class="nc" id="L160">                        lstCategoria = new CategoriaServicio().listar();</span>
+<span class="nc" id="L161">                        subCategoria=new Subcategoria();</span>
+<span class="nc" id="L162">			return &quot;ok&quot;;</span>
+<span class="nc" id="L163">		} catch (Exception e) {</span>
+<span class="nc" id="L164">			resultado=&quot;Error en: eliminarMarca :: &quot;+e.getMessage();</span>
+<span class="nc" id="L165">			return &quot;error&quot;;</span>
+		}
+	}
+
+   @Action(value=&quot;eliminarSubCate&quot;,results= {
+			@Result(name=&quot;ok&quot;,location=&quot;/admin/principal/subCategoria.jsp&quot;),
+			@Result(name=&quot;error&quot;,location=&quot;/error.jsp&quot;)
+	})
+	public String eliminarSubCate() {
+		
+		try {
+<span class="nc" id="L176">			new SubCategoriaServicio().eliminar(String.valueOf(subCategoria.getIdSubcategoria()));</span>
+<span class="nc" id="L177">			lstSubCate=new SubCategoriaServicio().listar();</span>
+<span class="nc" id="L178">                        lstCategoria = new CategoriaServicio().listar();</span>
+<span class="nc" id="L179">			return &quot;ok&quot;;</span>
+<span class="nc" id="L180">		} catch (Exception e) {</span>
+<span class="nc" id="L181">			resultado=&quot;Error en: eliminarMarca :: &quot;+e.getMessage();</span>
+<span class="nc" id="L182">			return &quot;error&quot;;</span>
+		}
+	}
+
+   
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

@@ -3,6 +3,7 @@
 "http://struts.apache.org/dtds/struts-2.0.dtd">
 
 <struts>
+    <constant name="struts.devMode" value="true" />
     <constant name="struts.ui.theme" value="simple" />
     <constant name="struts.action.extension" value="xhtml,,xml,json,action" />
     
@@ -121,7 +122,7 @@
         <action name="misDatos" class="wyv.action.ClienteAction" method="misDatos">
             <result>/perfil.jsp</result>
         </action>
-        <action name="devolverPagPass" class="wyv.action.ClienteAction" method="devolverPag">
+        <action name="devolverPagPass" class="ClienteAction" method="devolverPag">
             <result name="ok">/seguridad/cambiar-password-in.jsp</result>
         </action>
         <action name="cambiarPasswordClieIn" class="ClienteAction" method="cambiarPasswordClieIn">
@@ -190,10 +191,10 @@
             <result name="ok">/carro.jsp</result>
             <result name="error">/admin/error.jsp</result>
         </action>
-        <action name="listarPedido" class="PedidoAction" method="listarPedido">
-            <result name="ok">/admin/principal/pedido.jsp</result>
-            <result name="error">/error.jsp</result>
+        
+        <action name="listarPedidoPorCliente" class="PedidoAction" method="listarPedidoPorCliente">
         </action>
+        
         <action name="AgregarCarrito" class="PedidoAction" method="AgregarCarrito">
             <result name="ok">/index.jsp</result>
             <result name="error">/admin/error.jsp</result>
@@ -206,7 +207,7 @@
             <result name="ok">/carro.jsp</result>
             <result name="error">/admin/error.jsp</result>
         </action>
-        <action name="actualizarPedido" class="PedidoAction" method="actualizarCantidadCar">
+        <action name="actualizarPedido" class="PedidoAction" method="actualizarPedido">
             <result name="ok">/admin/principal/pedido.jsp</result>
             <result name="error">/admin/error.jsp</result>
         </action>
@@ -224,6 +225,10 @@
             <result name="ok">/admin/principal/producto.jsp</result>
             <result name="error">/admin/error.jsp</result>
         </action>
+        <action name="detalleProducto" class="ProductoAction" method="detalleProducto">
+            <result name="ok">/detalle_producto.jsp</result>
+            <result name="error">/error.jsp</result>
+        </action>
         <action name="actualizarProducto" class="ProductoAction" method="actualizarProducto">
             <result name="ok">/admin/principal/producto.jsp</result>
             <result name="error">/admin/error.jsp</result>
@@ -235,6 +240,35 @@
         <action name="verCatalogo" class="ProductoAction" method="verCatalogo">
             <result name="ok">/catalogo.jsp</result>
             <result name="error">/error.jsp</result>
+        </action>
+        <action name="listarSubCateFiltro" class="ProductoAction" method="listarSubCateFiltro">
+        </action>
+        <action name="listarFiltroPrecioProducto" class="ProductoAction" method="listarFiltroPrecioProducto">
+            <result name="ok">/productos_filtrados.jsp</result>
+            <result name="error">/error.jsp</result>
+        </action>
+        
+    
+    <!-- Subcategoria -->
+        <action name="listarSubCate" class="SubcategoriaAction" method="listarSubCate">
+            <result name="ok">/admin/principal/subCategoria.jsp</result>
+            <result name="error">/admin/error.jsp</result>
+        </action>
+        <action name="registrarSubCate" class="SubcategoriaAction" method="registrarSubCate">
+            <result name="ok">/admin/principal/subCategoria.jsp</result>
+            <result name="error">/admin/error.jsp</result>
+        </action>
+        <action name="editarSubCate" class="SubcategoriaAction" method="editarSubCate">
+            <result name="ok">/admin/principal/subCategoria.jsp</result>
+            <result name="error">/admin/error.jsp</result>
+        </action>
+        <action name="actualizarSubCate" class="SubcategoriaAction" method="actualizarSubCate">
+            <result name="ok">/admin/principal/subCategoria.jsp</result>
+            <result name="error">/admin/error.jsp</result>
+        </action>
+        <action name="eliminarSubCate" class="SubcategoriaAction" method="eliminarSubCate">
+            <result name="ok">/admin/principal/subCategoria.jsp</result>
+            <result name="error">/admin/error.jsp</result>
         </action>
     </package>
     

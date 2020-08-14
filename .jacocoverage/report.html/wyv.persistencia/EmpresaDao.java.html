@@ -1,54 +1,90 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>EmpresaDao.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;W_V_S.A.C&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">wyv.persistencia</a> &gt; <span class="el_source">EmpresaDao.java</span></div><h1>EmpresaDao.java</h1><pre class="source lang-java linenums">package wyv.persistencia;
 
 import java.util.List;
+<<<<<<< HEAD
 import org.springframework.stereotype.Service;
 
 @Service
 <span class="nc" id="L7">public class EmpresaDao implements IOperacionesBD&lt;Empresa&gt;{</span>
 
 <span class="nc" id="L9">    EmpresaJpa  empJpa=new EmpresaJpa();</span>
+=======
+
+<span class="nc" id="L5">public class EmpresaDao implements IOperacionesBD&lt;Empresa&gt;{</span>
+
+<span class="nc" id="L7">    EmpresaJpa  empJpa=new EmpresaJpa();</span>
+>>>>>>> 774d743aa798fdef07b0c2bb8173fa7ffbd7731a
     Empresa empresa;
     
 
     @Override
     public String registrar(Empresa a) {
+<<<<<<< HEAD
 <span class="nc" id="L15">        throw new UnsupportedOperationException(&quot;Not supported yet.&quot;); //To change body of generated methods, choose Tools | Templates.</span>
+=======
+<span class="nc" id="L13">        throw new UnsupportedOperationException(&quot;Not supported yet.&quot;); //To change body of generated methods, choose Tools | Templates.</span>
+>>>>>>> 774d743aa798fdef07b0c2bb8173fa7ffbd7731a
     }
 
     @Override
     public String actualizar(Empresa a) {
         try {
+<<<<<<< HEAD
 <span class="nc" id="L21">            empJpa.edit(a);</span>
 <span class="nc" id="L22">            return &quot;ok&quot;;</span>
 <span class="nc" id="L23">        } catch (Exception e) {</span>
 <span class="nc" id="L24">            e.getMessage();</span>
 <span class="nc" id="L25">            return &quot;error&quot;;</span>
+=======
+<span class="nc" id="L19">            empJpa.edit(a);</span>
+<span class="nc" id="L20">            return &quot;ok&quot;;</span>
+<span class="nc" id="L21">        } catch (Exception e) {</span>
+<span class="nc" id="L22">            e.getMessage();</span>
+<span class="nc" id="L23">            return &quot;error&quot;;</span>
+>>>>>>> 774d743aa798fdef07b0c2bb8173fa7ffbd7731a
         }
     }
 
     @Override
     public Empresa validar(Empresa entrada) {
+<<<<<<< HEAD
 <span class="nc" id="L31">        throw new UnsupportedOperationException(&quot;Not supported yet.&quot;); //To change body of generated methods, choose Tools | Templates.</span>
+=======
+<span class="nc" id="L29">        throw new UnsupportedOperationException(&quot;Not supported yet.&quot;); //To change body of generated methods, choose Tools | Templates.</span>
+>>>>>>> 774d743aa798fdef07b0c2bb8173fa7ffbd7731a
     }
 
     @Override
     public String eliminar(String id) {
+<<<<<<< HEAD
 <span class="nc" id="L36">        throw new UnsupportedOperationException(&quot;Not supported yet.&quot;); //To change body of generated methods, choose Tools | Templates.</span>
+=======
+<span class="nc" id="L34">        throw new UnsupportedOperationException(&quot;Not supported yet.&quot;); //To change body of generated methods, choose Tools | Templates.</span>
+>>>>>>> 774d743aa798fdef07b0c2bb8173fa7ffbd7731a
     }
 
     @Override
     public Empresa buscar(String id) {
        try {
+<<<<<<< HEAD
 <span class="nc" id="L42">           empresa=empJpa.findEmpresa(Integer.parseInt(id));</span>
 <span class="nc" id="L43">        } catch (NumberFormatException e) {</span>
 <span class="nc" id="L44">            e.getMessage();</span>
 <span class="nc" id="L45">        }</span>
 <span class="nc" id="L46">       return empresa;</span>
+=======
+<span class="nc" id="L40">           empresa=empJpa.findEmpresa(Integer.parseInt(id));</span>
+<span class="nc" id="L41">        } catch (NumberFormatException e) {</span>
+<span class="nc" id="L42">            e.getMessage();</span>
+<span class="nc" id="L43">        }</span>
+<span class="nc" id="L44">       return empresa;</span>
+>>>>>>> 774d743aa798fdef07b0c2bb8173fa7ffbd7731a
     }
 
     @Override
     public List&lt;Empresa&gt; listar() {
         
+<<<<<<< HEAD
 <span class="nc" id="L52">           return empJpa.findEmpresaEntities();</span>
         
     }
@@ -57,6 +93,11 @@ import org.springframework.stereotype.Service;
     public int contar() {
 <span class="nc" id="L58">        throw new UnsupportedOperationException(&quot;Not supported yet.&quot;); //To change body of generated methods, choose Tools | Templates.</span>
     }
+=======
+<span class="nc" id="L50">           return empJpa.findEmpresaEntities();</span>
+        
+    }
+>>>>>>> 774d743aa798fdef07b0c2bb8173fa7ffbd7731a
     
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

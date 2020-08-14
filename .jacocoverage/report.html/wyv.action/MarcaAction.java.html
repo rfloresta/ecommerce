@@ -1,9 +1,19 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>MarcaAction.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;W_V_S.A.C&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">wyv.action</a> &gt; <span class="el_source">MarcaAction.java</span></div><h1>MarcaAction.java</h1><pre class="source lang-java linenums">package wyv.action;
+=======
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>MarcaAction.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;W_V_S.A.C&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">wyv.action</a> &gt; <span class="el_source">MarcaAction.java</span></div><h1>MarcaAction.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package wyv.action;
+>>>>>>> 774d743aa798fdef07b0c2bb8173fa7ffbd7731a
 
 import com.opensymphony.xwork2.ActionSupport;
 import java.util.List;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Result;
+<<<<<<< HEAD
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -18,11 +28,26 @@ import wyv.persistencia.Marca;
     MarcaServicio marSer;
     private String resultado;
 <span class="nc" id="L20">    private String estado=&quot;error&quot;;</span>
+=======
+import wyv.servicios.MarcaServicio;
+import wyv.persistencia.Marca;
+
+/**
+ *
+ * @author Data
+ */
+@SuppressWarnings(&quot;serial&quot;)
+<span class="nc" id="L20">public class MarcaAction extends ActionSupport {</span>
+
+    MarcaServicio marSer;
+    private String resultado;
+>>>>>>> 774d743aa798fdef07b0c2bb8173fa7ffbd7731a
     private Marca marca;
     private List&lt;Marca&gt; lstMarca;
     private int edit;
 
     public String getResultado() {
+<<<<<<< HEAD
 <span class="nc" id="L26">        return resultado;</span>
     }
 
@@ -42,6 +67,31 @@ import wyv.persistencia.Marca;
 <span class="nc" id="L42">        return edit;</span>
     }
 
+=======
+<span class="nc" id="L29">        return resultado;</span>
+    }
+
+    public Marca getMarca() {
+<span class="nc" id="L33">        return marca;</span>
+    }
+
+    public void setMarca(Marca marca) {
+<span class="nc" id="L37">        this.marca = marca;</span>
+<span class="nc" id="L38">    }</span>
+
+    public List&lt;Marca&gt; getLstMarca() {
+<span class="nc" id="L41">        return lstMarca;</span>
+    }
+
+    public int getEdit() {
+<span class="nc" id="L45">        return edit;</span>
+    }
+
+    public void setMarSer(MarcaServicio marSer) {
+<span class="nc" id="L49">        this.marSer = marSer;</span>
+<span class="nc" id="L50">    }</span>
+
+>>>>>>> 774d743aa798fdef07b0c2bb8173fa7ffbd7731a
     @Action(value = &quot;listarMarca&quot;, results = {
         @Result(name = &quot;ok&quot;, location = &quot;/admin/principal/marca.jsp&quot;)
         ,
@@ -50,11 +100,21 @@ import wyv.persistencia.Marca;
     })
     public String listarMarca() {
         try {
+<<<<<<< HEAD
 <span class="nc" id="L53">            lstMarca = marSer.listar();</span>
 <span class="nc" id="L54">            return &quot;ok&quot;;</span>
 <span class="nc" id="L55">        } catch (Exception e) {</span>
 <span class="nc" id="L56">            resultado = &quot;Error en: listarMarca :: &quot; + e.getMessage();</span>
 <span class="nc" id="L57">            return &quot;error&quot;;</span>
+=======
+<span class="nc" id="L60">            marSer = new MarcaServicio();</span>
+<span class="nc" id="L61">            lstMarca = marSer.listar();</span>
+
+<span class="nc" id="L63">            return &quot;ok&quot;;</span>
+<span class="nc" id="L64">        } catch (Exception e) {</span>
+<span class="nc" id="L65">            resultado = &quot;Error en: listarMarca :: &quot; + e.getMessage();</span>
+<span class="nc" id="L66">            return &quot;error&quot;;</span>
+>>>>>>> 774d743aa798fdef07b0c2bb8173fa7ffbd7731a
         }
     }
 
@@ -65,6 +125,7 @@ import wyv.persistencia.Marca;
     })
     public String registrarMarca() {
         try {
+<<<<<<< HEAD
 <span class="nc" id="L68">            estado=marSer.registrar(marca);</span>
 <span class="nc" id="L69">            lstMarca = marSer.listar();</span>
 <span class="nc" id="L70">            marca = new Marca();</span>
@@ -72,6 +133,15 @@ import wyv.persistencia.Marca;
 <span class="nc" id="L72">        } catch (Exception e) {</span>
 <span class="nc" id="L73">            resultado = &quot;Error en: registrarCate :: &quot; + e.getMessage();</span>
 <span class="nc" id="L74">            return &quot;error&quot;;</span>
+=======
+<span class="nc" id="L77">            new MarcaServicio().registrar(marca);</span>
+<span class="nc" id="L78">            lstMarca = new MarcaServicio().listar();</span>
+<span class="nc" id="L79">            marca = new Marca();</span>
+<span class="nc" id="L80">            return &quot;ok&quot;;</span>
+<span class="nc" id="L81">        } catch (Exception e) {</span>
+<span class="nc" id="L82">            resultado = &quot;Error en: registrarCate :: &quot; + e.getMessage();</span>
+<span class="nc" id="L83">            return &quot;error&quot;;</span>
+>>>>>>> 774d743aa798fdef07b0c2bb8173fa7ffbd7731a
         }
     }
 
@@ -80,6 +150,7 @@ import wyv.persistencia.Marca;
         ,
 			@Result(name = &quot;error&quot;, location = &quot;/error.jsp&quot;)
     })
+<<<<<<< HEAD
     public String editarMarca() {
         try {
 <span class="nc" id="L85">            marca = marSer.buscar(String.valueOf(marca.getIdMarca()));</span>
@@ -89,6 +160,18 @@ import wyv.persistencia.Marca;
 <span class="nc" id="L89">        } catch (Exception e) {</span>
 <span class="nc" id="L90">            resultado = &quot;Error en: editarAdmin :: &quot; + e.getMessage();</span>
 <span class="nc" id="L91">            return &quot;error&quot;;</span>
+=======
+    public String editarCate() {
+
+        try {
+<span class="nc" id="L95">            marca = new MarcaServicio().buscar(String.valueOf(marca.getIdMarca()));</span>
+<span class="nc" id="L96">            lstMarca = new MarcaServicio().listar();</span>
+<span class="nc" id="L97">            edit = 1;</span>
+<span class="nc" id="L98">            return &quot;ok&quot;;</span>
+<span class="nc" id="L99">        } catch (Exception e) {</span>
+<span class="nc" id="L100">            resultado = &quot;Error en: editarAdmin :: &quot; + e.getMessage();</span>
+<span class="nc" id="L101">            return &quot;error&quot;;</span>
+>>>>>>> 774d743aa798fdef07b0c2bb8173fa7ffbd7731a
         }
     }
 
@@ -100,6 +183,7 @@ import wyv.persistencia.Marca;
     public String actualizarMarca() {
 
         try {
+<<<<<<< HEAD
 <span class="nc" id="L103">            estado=marSer.actualizar(marca);</span>
 <span class="nc" id="L104">            lstMarca = marSer.listar();</span>
 <span class="nc" id="L105">            marca = new Marca();</span>
@@ -107,6 +191,16 @@ import wyv.persistencia.Marca;
 <span class="nc" id="L107">            resultado = &quot;Error en: eliminarMarca :: &quot; + e.getMessage();</span>
 <span class="nc" id="L108">        }</span>
 <span class="nc" id="L109">        return estado;</span>
+=======
+<span class="nc" id="L113">            new MarcaServicio().actualizar(marca);</span>
+<span class="nc" id="L114">            lstMarca = new MarcaServicio().listar();</span>
+<span class="nc" id="L115">            marca = new Marca();</span>
+<span class="nc" id="L116">            return &quot;ok&quot;;</span>
+<span class="nc" id="L117">        } catch (Exception e) {</span>
+<span class="nc" id="L118">            resultado = &quot;Error en: eliminarMarca :: &quot; + e.getMessage();</span>
+<span class="nc" id="L119">            return &quot;error&quot;;</span>
+        }
+>>>>>>> 774d743aa798fdef07b0c2bb8173fa7ffbd7731a
     }
 
     @Action(value = &quot;eliminarMarca&quot;, results = {
@@ -117,12 +211,22 @@ import wyv.persistencia.Marca;
     public String eliminarMarca() {
 
         try {
+<<<<<<< HEAD
 <span class="nc" id="L120">            estado=marSer.eliminar(String.valueOf(marca.getIdMarca()));</span>
 <span class="nc" id="L121">            lstMarca = marSer.listar();</span>
 <span class="nc" id="L122">        } catch (Exception e) {</span>
 <span class="nc" id="L123">            resultado = &quot;Error en: eliminarMarca :: &quot; + e.getMessage();</span>
 <span class="nc" id="L124">        }</span>
 <span class="nc" id="L125">        return estado;</span>
+=======
+<span class="nc" id="L131">            new MarcaServicio().eliminar(String.valueOf(marca.getIdMarca()));</span>
+<span class="nc" id="L132">            lstMarca = new MarcaServicio().listar();</span>
+<span class="nc" id="L133">            return &quot;ok&quot;;</span>
+<span class="nc" id="L134">        } catch (Exception e) {</span>
+<span class="nc" id="L135">            resultado = &quot;Error en: eliminarMarca :: &quot; + e.getMessage();</span>
+<span class="nc" id="L136">            return &quot;error&quot;;</span>
+        }
+>>>>>>> 774d743aa798fdef07b0c2bb8173fa7ffbd7731a
     }
 
 }

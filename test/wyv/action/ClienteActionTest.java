@@ -54,21 +54,21 @@ public class ClienteActionTest {
 //        String result = instance.listarClie();
 //        assertEquals(expResult, result);
 //    }
-
-    @Test
-    public void testRegistrarseCP1() {
-        System.out.println("registrarse");
-        cliente =new Cliente();
-        ClienteAction instance = new ClienteAction();
-        cliente.setNombres("Mariana");
-        cliente.setApellidos("Bellido");
-        cliente.setEmail("mariana@gmail.com");
-        
-        cliente.setPassword("123456");
-        String expResult = "ok";
-        String result = instance.registrarse(cliente);
-        assertEquals(expResult, result);
-    }
+//
+//    @Test
+//    public void testRegistrarseCP1() {
+//        System.out.println("registrarse");
+//        cliente =new Cliente();
+//        ClienteAction instance = new ClienteAction();
+//        cliente.setNombres("Mariana");
+//        cliente.setApellidos("Bellido");
+//        cliente.setEmail("mariana@gmail.com");
+//        
+//        cliente.setPassword("123456");
+//        String expResult = "ok";
+//        String result = instance.registrarse(cliente);
+//        assertEquals(expResult, result);
+//    }
 //    
 //    @Test
 //    public void testRegistrarseCP2() {

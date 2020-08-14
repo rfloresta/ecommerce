@@ -20,6 +20,17 @@ public class CategoriaDao implements IOperacionesBD<Categoria>{
             return "error";
         }
     }
+    /*
+    public String registrarSubCate(Categoria a) {
+        try {
+           
+            cateJpa.crearSubCate(a);
+            return "ok";
+        } catch (Exception e) {
+            e.getMessage();
+            return "error";
+        }
+    }*/
 
     @Override
     public String actualizar(Categoria a) {
@@ -70,18 +81,11 @@ public class CategoriaDao implements IOperacionesBD<Categoria>{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
-     public List<Categoria> listarCategoria() {
-       try {
-            return cateJpa.listarCategoria();
-        } catch (Exception e) {
-            e.getMessage();
-            return null;
-}
-    }
+   
      
-      public List<Categoria> listarsubCategoria(int id) {
+      public List<Categoria> listarsubCategoria() {
        try {
-            return cateJpa.listarsubCategoria(id);
+            return cateJpa.listarsubCategoria();
         } catch (Exception e) {
             e.getMessage();
             return null;

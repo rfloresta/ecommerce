@@ -10,6 +10,7 @@
     <class>wyv.persistencia.Cliente</class>
     <class>wyv.persistencia.Categoria</class>
     <class>wyv.persistencia.Marca</class>
+    <class>wyv.persistencia.Subcategoria</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/tiendaw_v?zeroDateTimeBehavior=convertToNull"/>

@@ -50,7 +50,9 @@ public class AdministradorServicio implements IOperacionesBD<Administrador> {
         try {
             admin = admDao.validar(entrada);
             if (admin != null) {
+                System.out.println("aua");
                 String passDesencriptado = Desencriptar(admin.getPassword());
+                
                 if (passDesencriptado.equals(entrada.getPassword())) {
                     return admin;
                 }

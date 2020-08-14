@@ -1836,6 +1836,8 @@ body{
 ///////////////////////////////////////////////////////////
 */
 .pagination {
+    position: absolute;
+    bottom: 200px;
     margin-right: -6px;
     margin-left: -6px;
 }
@@ -2220,7 +2222,11 @@ body{
     pointer-events: none;
 }
 
+<<<<<<< HEAD
 .errorMessage
 {
     list-style: none
 }
+=======
+
+>>>>>>> 774d743aa798fdef07b0c2bb8173fa7ffbd7731a

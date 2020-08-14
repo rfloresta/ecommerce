@@ -1,54 +1,89 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>EmpresaServicio.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;W_V_S.A.C&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">wyv.servicios</a> &gt; <span class="el_source">EmpresaServicio.java</span></div><h1>EmpresaServicio.java</h1><pre class="source lang-java linenums">package wyv.servicios;
 
 import java.util.List;
+<<<<<<< HEAD
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+=======
+>>>>>>> 774d743aa798fdef07b0c2bb8173fa7ffbd7731a
 import wyv.persistencia.Empresa;
 import wyv.persistencia.EmpresaDao;
 import wyv.persistencia.IOperacionesBD;
 
+<<<<<<< HEAD
 @Service
 <span class="nc" id="L11">public class EmpresaServicio implements IOperacionesBD&lt;Empresa&gt; {</span>
 
     @Autowired
+=======
+<span class="nc" id="L8">public class EmpresaServicio implements IOperacionesBD&lt;Empresa&gt; {</span>
+
+>>>>>>> 774d743aa798fdef07b0c2bb8173fa7ffbd7731a
     EmpresaDao empDao;
 
     @Override
     public String registrar(Empresa a) {
+<<<<<<< HEAD
 <span class="nc" id="L18">        throw new UnsupportedOperationException(&quot;Not supported yet.&quot;); //To change body of generated methods, choose Tools | Templates.</span>
+=======
+<span class="nc" id="L14">        throw new UnsupportedOperationException(&quot;Not supported yet.&quot;); //To change body of generated methods, choose Tools | Templates.</span>
+>>>>>>> 774d743aa798fdef07b0c2bb8173fa7ffbd7731a
     }
 
     @Override
     public String actualizar(Empresa a) {
+<<<<<<< HEAD
 <span class="nc" id="L23">        empDao = new EmpresaDao();</span>
 <span class="nc" id="L24">        return empDao.actualizar(a);</span>
+=======
+<span class="nc" id="L19">        empDao = new EmpresaDao();</span>
+<span class="nc" id="L20">        return empDao.actualizar(a);</span>
+>>>>>>> 774d743aa798fdef07b0c2bb8173fa7ffbd7731a
     }
 
     @Override
     public String eliminar(String id) {
+<<<<<<< HEAD
 <span class="nc" id="L29">        throw new UnsupportedOperationException(&quot;Not supported yet.&quot;); //To change body of generated methods, choose Tools | Templates.</span>
+=======
+<span class="nc" id="L25">        throw new UnsupportedOperationException(&quot;Not supported yet.&quot;); //To change body of generated methods, choose Tools | Templates.</span>
+>>>>>>> 774d743aa798fdef07b0c2bb8173fa7ffbd7731a
     }
 
     @Override
     public Empresa buscar(String id) {
+<<<<<<< HEAD
 <span class="nc" id="L34">        empDao = new EmpresaDao();</span>
 <span class="nc" id="L35">        return empDao.buscar(id);</span>
+=======
+<span class="nc" id="L30">        empDao = new EmpresaDao();</span>
+<span class="nc" id="L31">        return empDao.buscar(id);</span>
+>>>>>>> 774d743aa798fdef07b0c2bb8173fa7ffbd7731a
     }
 
     @Override
     public List&lt;Empresa&gt; listar() {
+<<<<<<< HEAD
 <span class="nc" id="L40">        empDao = new EmpresaDao();</span>
 <span class="nc" id="L41">        return empDao.listar();</span>
+=======
+<span class="nc" id="L36">        empDao = new EmpresaDao();</span>
+<span class="nc" id="L37">        return empDao.listar();</span>
+>>>>>>> 774d743aa798fdef07b0c2bb8173fa7ffbd7731a
     }
 
     @Override
     public Empresa validar(Empresa entrada) {
+<<<<<<< HEAD
 <span class="nc" id="L46">        throw new UnsupportedOperationException(&quot;Not supported yet.&quot;); //To change body of generated methods, choose Tools | Templates.</span>
     }
 
     @Override
     public int contar() {
 <span class="nc" id="L51">        throw new UnsupportedOperationException(&quot;Not supported yet.&quot;); //To change body of generated methods, choose Tools | Templates.</span>
+=======
+<span class="nc" id="L42">        throw new UnsupportedOperationException(&quot;Not supported yet.&quot;); //To change body of generated methods, choose Tools | Templates.</span>
+>>>>>>> 774d743aa798fdef07b0c2bb8173fa7ffbd7731a
     }
 
 }

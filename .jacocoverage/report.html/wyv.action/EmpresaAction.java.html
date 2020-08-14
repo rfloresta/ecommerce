@@ -92,6 +92,7 @@ import java.io.IOException;
 		
 		try {
                     
+<<<<<<< HEAD
 <span class="nc" id="L95">                    String filePath = ServletActionContext.getServletContext().getRealPath(&quot;/&quot;).concat(&quot;admin/imagenes&quot;);</span>
 <span class="nc" id="L96">                    File fileToCreate = new File(filePath, logoFileName);</span>
 <span class="nc" id="L97">                    FileUtils.copyFile(logo, fileToCreate);</span>
@@ -106,6 +107,24 @@ import java.io.IOException;
 <span class="nc" id="L106">		} catch (Exception e) {</span>
 <span class="nc" id="L107">			resultado=&quot;Error en: actualizarEmpresa :: &quot;+e.getMessage();</span>
 <span class="nc" id="L108">			return estado;</span>
+=======
+                        
+                    
+<span class="nc" id="L97">                    String filePath = ServletActionContext.getServletContext().getRealPath(&quot;/&quot;).concat(&quot;admin/imagenes&quot;);</span>
+<span class="nc" id="L98">                    File fileToCreate = new File(filePath, logoFileName);</span>
+<span class="nc" id="L99">                    FileUtils.copyFile(logo, fileToCreate);</span>
+                        
+<span class="nc" id="L101">                        empSer=new EmpresaServicio();</span>
+<span class="nc" id="L102">                        empresa.setLogo(logoFileName);</span>
+                    
+<span class="nc" id="L104">			estado=empSer.actualizar(empresa);</span>
+<span class="nc" id="L105">			empresa=empSer.buscar(String.valueOf(empresa.getIdEmpresa()));</span>
+<span class="nc" id="L106">                        System.out.println(estado);</span>
+<span class="nc" id="L107">			return estado;</span>
+<span class="nc" id="L108">		} catch (Exception e) {</span>
+<span class="nc" id="L109">			resultado=&quot;Error en: actualizarEmpresa :: &quot;+e.getMessage();</span>
+<span class="nc" id="L110">			return estado;</span>
+>>>>>>> 774d743aa798fdef07b0c2bb8173fa7ffbd7731a
 		}
 	}
     

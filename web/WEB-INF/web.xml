@@ -18,7 +18,10 @@
     <listener>
         <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
     </listener>
-
+    <context-param>
+        <param-name>urlpaypal</param-name>
+        <param-value>https://www.sandbox.paypal.com/cgi-bin/webscr</param-value>
+    </context-param>
     <filter-mapping>
         <filter-name>struts2</filter-name>
         <url-pattern>/*</url-pattern>

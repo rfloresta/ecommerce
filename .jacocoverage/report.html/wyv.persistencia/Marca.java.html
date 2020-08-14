@@ -19,11 +19,18 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+<<<<<<< HEAD
 import org.codehaus.jackson.annotate.JsonIgnore;
 
 /**
  *
  * @author Romario
+=======
+
+/**
+ *
+ * @author bdeg_
+>>>>>>> 774d743aa798fdef07b0c2bb8173fa7ffbd7731a
  */
 @Entity
 @Table(name = &quot;marca&quot;)
@@ -34,6 +41,12 @@ import org.codehaus.jackson.annotate.JsonIgnore;
     , @NamedQuery(name = &quot;Marca.findByNombre&quot;, query = &quot;SELECT m FROM Marca m WHERE m.nombre = :nombre&quot;)})
 public class Marca implements Serializable {
 
+<<<<<<< HEAD
+=======
+    @OneToMany(mappedBy = &quot;idMarca&quot;)
+    private List&lt;Producto&gt; productoList;
+
+>>>>>>> 774d743aa798fdef07b0c2bb8173fa7ffbd7731a
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -42,11 +55,17 @@ public class Marca implements Serializable {
     private Integer idMarca;
     @Column(name = &quot;nombre&quot;)
     private String nombre;
+<<<<<<< HEAD
     @OneToMany(mappedBy = &quot;idMarca&quot;)
     private List&lt;Producto&gt; productoList;
 
 <span class="fc" id="L48">    public Marca() {</span>
 <span class="fc" id="L49">    }</span>
+=======
+
+<span class="nc" id="L48">    public Marca() {</span>
+<span class="nc" id="L49">    }</span>
+>>>>>>> 774d743aa798fdef07b0c2bb8173fa7ffbd7731a
 
 <span class="nc" id="L51">    public Marca(Integer idMarca) {</span>
 <span class="nc" id="L52">        this.idMarca = idMarca;</span>
@@ -68,6 +87,7 @@ public class Marca implements Serializable {
 <span class="nc" id="L68">        this.nombre = nombre;</span>
 <span class="nc" id="L69">    }</span>
 
+<<<<<<< HEAD
     @XmlTransient
     @JsonIgnore
     public List&lt;Producto&gt; getProductoList() {
@@ -83,11 +103,19 @@ public class Marca implements Serializable {
 <span class="nc" id="L83">        int hash = 0;</span>
 <span class="nc bnc" id="L84" title="All 2 branches missed.">        hash += (idMarca != null ? idMarca.hashCode() : 0);</span>
 <span class="nc" id="L85">        return hash;</span>
+=======
+    @Override
+    public int hashCode() {
+<span class="nc" id="L73">        int hash = 0;</span>
+<span class="nc bnc" id="L74" title="All 2 branches missed.">        hash += (idMarca != null ? idMarca.hashCode() : 0);</span>
+<span class="nc" id="L75">        return hash;</span>
+>>>>>>> 774d743aa798fdef07b0c2bb8173fa7ffbd7731a
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
+<<<<<<< HEAD
 <span class="nc bnc" id="L91" title="All 2 branches missed.">        if (!(object instanceof Marca)) {</span>
 <span class="nc" id="L92">            return false;</span>
         }
@@ -96,12 +124,36 @@ public class Marca implements Serializable {
 <span class="nc" id="L96">            return false;</span>
         }
 <span class="nc" id="L98">        return true;</span>
+=======
+<span class="nc bnc" id="L81" title="All 2 branches missed.">        if (!(object instanceof Marca)) {</span>
+<span class="nc" id="L82">            return false;</span>
+        }
+<span class="nc" id="L84">        Marca other = (Marca) object;</span>
+<span class="nc bnc" id="L85" title="All 8 branches missed.">        if ((this.idMarca == null &amp;&amp; other.idMarca != null) || (this.idMarca != null &amp;&amp; !this.idMarca.equals(other.idMarca))) {</span>
+<span class="nc" id="L86">            return false;</span>
+        }
+<span class="nc" id="L88">        return true;</span>
+>>>>>>> 774d743aa798fdef07b0c2bb8173fa7ffbd7731a
     }
 
     @Override
     public String toString() {
+<<<<<<< HEAD
 <span class="nc" id="L103">        return &quot;wyv.persistencia.Marca[ idMarca=&quot; + idMarca + &quot; ]&quot;;</span>
     }
+=======
+<span class="nc" id="L93">        return &quot;wyv.persistencia.Marca[ idMarca=&quot; + idMarca + &quot; ]&quot;;</span>
+    }
+
+    @XmlTransient
+    public List&lt;Producto&gt; getProductoList() {
+<span class="nc" id="L98">        return productoList;</span>
+    }
+
+    public void setProductoList(List&lt;Producto&gt; productoList) {
+<span class="nc" id="L102">        this.productoList = productoList;</span>
+<span class="nc" id="L103">    }</span>
+>>>>>>> 774d743aa798fdef07b0c2bb8173fa7ffbd7731a
     
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

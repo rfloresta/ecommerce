@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package wyv.persistencia;
 
 import java.io.Serializable;
@@ -21,20 +16,16 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import org.codehaus.jackson.annotate.JsonIgnore;
 
-/**
- *
- * @author Romario
- */
 @Entity
 @Table(name = "categoria")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Categoria.findAll", query = "SELECT c FROM Categoria c")
     , @NamedQuery(name = "Categoria.findByIdCategoria", query = "SELECT c FROM Categoria c WHERE c.idCategoria = :idCategoria")
-    , @NamedQuery(name = "Categoria.findByNombre", query = "SELECT c FROM Categoria c WHERE c.nombre = :nombre")
-    , @NamedQuery(name = "Categoria.findByCategoriaSuperior", query = "SELECT c FROM Categoria c WHERE c.categoriaSuperior = :categoriaSuperior")})
+    , @NamedQuery(name = "Categoria.findByNombre", query = "SELECT c FROM Categoria c WHERE c.nombre = :nombre")})
 public class Categoria implements Serializable {
 
+    
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,10 +34,10 @@ public class Categoria implements Serializable {
     private Integer idCategoria;
     @Column(name = "nombre")
     private String nombre;
-    @Column(name = "categoriaSuperior")
-    private Integer categoriaSuperior;
     @OneToMany(mappedBy = "idCategoria")
     private List<Producto> productoList;
+    @OneToMany(mappedBy = "idCategoria")
+    private List<Subcategoria> subcategoriaList;
 
     public Categoria() {
     }
@@ -71,14 +62,6 @@ public class Categoria implements Serializable {
         this.nombre = nombre;
     }
 
-    public Integer getCategoriaSuperior() {
-        return categoriaSuperior;
-    }
-
-    public void setCategoriaSuperior(Integer categoriaSuperior) {
-        this.categoriaSuperior = categoriaSuperior;
-    }
-
     @XmlTransient
     @JsonIgnore
     public List<Producto> getProductoList() {
@@ -88,7 +71,16 @@ public class Categoria implements Serializable {
     public void setProductoList(List<Producto> productoList) {
         this.productoList = productoList;
     }
+    
+    @XmlTransient
+    public List<Subcategoria> getSubcategoriaList() {
+        return subcategoriaList;
+    }
 
+    public void setSubcategoriaList(List<Subcategoria> subcategoriaList) {
+        this.subcategoriaList = subcategoriaList;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 0;
@@ -114,4 +106,5 @@ public class Categoria implements Serializable {
         return "wyv.persistencia.Categoria[ idCategoria=" + idCategoria + " ]";
     }
     
+
 }

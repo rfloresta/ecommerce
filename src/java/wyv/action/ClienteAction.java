@@ -167,6 +167,22 @@ public class ClienteAction extends ActionSupport implements SessionAware {
         return estado;
     }
 
+    @Action(value = "cerrarSesionClie", results = {
+        @Result(name = "ok", location = "/index.jsp")
+        ,
+			@Result(name = "error", location = "/error.jsp")
+    })
+    public String cerrarSesionClie() {
+        try {
+            sesion.clear();
+            sesion.put("seccion", 0);
+            return estado = "ok";
+        } catch (Exception e) {
+            resultado = "Error en: cerrarSesionCliente :: " + e.getMessage();
+            return estado;
+        }
+    }
+
     @Action(value = "listarClie", results = {
         @Result(name = "ok", location = "/admin/principal/cliente.jsp")
         ,
@@ -195,7 +211,7 @@ public class ClienteAction extends ActionSupport implements SessionAware {
         ,
 			@Result(name = "error", location = "/error.jsp")
     })
-    public String registrarse(Cliente cliente) {
+    public String registrarse(/*Cliente cliente*/) {
         try {
             Cliente clie = clieSer.validarEmail(cliente.getEmail());
             if (clie == null) {
@@ -203,12 +219,12 @@ public class ClienteAction extends ActionSupport implements SessionAware {
                 cliente.setPassword(passEncryp);
                 estado = clieSer.registrar(cliente);
                 cliente = clieSer.validarEmail(cliente.getEmail());
-//                enviarSession(cliente);
-//                sesion.put("seccion", 1);
+                enviarSession(cliente);
+                sesion.put("seccion", 1);
                 addActionMessage("¡Gracias por registrarte!");
             } else {
                 addActionError("El Email ya se encuentra registrado");
-//                sesion.put("seccion", 0);
+                sesion.put("seccion", 0);
                 estado = "incorrecto";
             }
         } catch (Exception e) {
@@ -278,22 +294,6 @@ public class ClienteAction extends ActionSupport implements SessionAware {
         cliente.setNumCelular(cel);
         cliente.setPassword(passEncryp);
         return cliente;
-    }
-
-    @Action(value = "cerrarSesionClie", results = {
-        @Result(name = "ok", location = "/index.jsp")
-        ,
-			@Result(name = "error", location = "/error.jsp")
-    })
-    public String cerrarSesionClie() {
-        try {
-            sesion.clear();
-            sesion.put("seccion", 0);
-            return "ok";
-        } catch (Exception e) {
-            resultado = "Error en: cerrarSesionCliente :: " + e.getMessage();
-            return estado;
-        }
     }
 
     @Action(value = "restablecerPasswordClie", results = {
@@ -386,10 +386,10 @@ public class ClienteAction extends ActionSupport implements SessionAware {
     public String cambiarPasswordOutClie(/*Cliente cliente*/) {
         try {
             cliente = recibirSession();
-            if(cliente.getPassword().isEmpty()){
+            if (cliente.getPassword().isEmpty()) {
                 addActionError("Debe completar el password");
-                estado="incorrecto";
-            }else{
+                estado = "incorrecto";
+            } else {
                 estado = clieSer.actualizar(cliente);
                 addActionMessage("¡Constraseña restablecida!");
             }
@@ -398,4 +398,5 @@ public class ClienteAction extends ActionSupport implements SessionAware {
         }
         return estado;
     }
+
 }

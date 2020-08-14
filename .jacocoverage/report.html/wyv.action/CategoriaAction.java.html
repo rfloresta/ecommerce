@@ -4,6 +4,7 @@ import com.opensymphony.xwork2.ActionSupport;
 import java.util.List;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Result;
+<<<<<<< HEAD
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -15,15 +16,31 @@ import wyv.persistencia.Categoria;
 <span class="nc" id="L15">public class CategoriaAction extends ActionSupport{</span>
     
     @Autowired
+=======
+import wyv.servicios.CategoriaServicio;
+import wyv.persistencia.Categoria;
+/**
+ *
+ * @author Data
+ */
+@SuppressWarnings(&quot;serial&quot;)
+<span class="nc" id="L14">public class CategoriaAction extends ActionSupport{</span>
+    
+>>>>>>> 774d743aa798fdef07b0c2bb8173fa7ffbd7731a
     CategoriaServicio catSer;
     private String resultado;
     private Categoria categoria;
     private List&lt;Categoria&gt; lstCate;
+<<<<<<< HEAD
+=======
+    private List&lt;Categoria&gt; lstSubCate;
+>>>>>>> 774d743aa798fdef07b0c2bb8173fa7ffbd7731a
     private int edit;
 
    
     
     public String getResultado() {
+<<<<<<< HEAD
 <span class="nc" id="L27">        return resultado;</span>
     }
 
@@ -37,16 +54,44 @@ import wyv.persistencia.Categoria;
 
     public List&lt;Categoria&gt; getLstCate() {
 <span class="nc" id="L39">        return lstCate;</span>
+=======
+<span class="nc" id="L26">        return resultado;</span>
+    }
+
+    public Categoria getCategoria() {
+<span class="nc" id="L30">        return categoria;</span>
+    }
+
+    public void setCategoria(Categoria categoria) {
+<span class="nc" id="L34">        this.categoria = categoria;</span>
+<span class="nc" id="L35">    }</span>
+
+    public List&lt;Categoria&gt; getLstCate() {
+<span class="nc" id="L38">        return lstCate;</span>
+    }
+
+    public List&lt;Categoria&gt; getLstSubCate() {
+<span class="nc" id="L42">        return lstSubCate;</span>
+>>>>>>> 774d743aa798fdef07b0c2bb8173fa7ffbd7731a
     }
 
 
     public int getEdit() {
+<<<<<<< HEAD
 <span class="nc" id="L44">        return edit;</span>
     }
 
     public void setCatSer(CategoriaServicio catSer) {
 <span class="nc" id="L48">        this.catSer = catSer;</span>
 <span class="nc" id="L49">    }</span>
+=======
+<span class="nc" id="L47">        return edit;</span>
+    }
+
+    public void setCatSer(CategoriaServicio catSer) {
+<span class="nc" id="L51">        this.catSer = catSer;</span>
+<span class="nc" id="L52">    }</span>
+>>>>>>> 774d743aa798fdef07b0c2bb8173fa7ffbd7731a
 
 
    @Action(value = &quot;listarCate&quot;, results = {
@@ -56,12 +101,38 @@ import wyv.persistencia.Categoria;
     })
     public String listarCate() {
         try {
+<<<<<<< HEAD
 <span class="nc" id="L59">            catSer=new CategoriaServicio();</span>
 <span class="nc" id="L60">            lstCate = catSer.listar();</span>
 <span class="nc" id="L61">            return &quot;ok&quot;;</span>
 <span class="nc" id="L62">        } catch (Exception e) {</span>
 <span class="nc" id="L63">            resultado = &quot;Error en: listarCate :: &quot; + e.getMessage();</span>
 <span class="nc" id="L64">            return &quot;error&quot;;</span>
+=======
+<span class="nc" id="L62">            catSer=new CategoriaServicio();</span>
+<span class="nc" id="L63">            lstCate = catSer.listarCategoria();</span>
+<span class="nc" id="L64">            return &quot;ok&quot;;</span>
+<span class="nc" id="L65">        } catch (Exception e) {</span>
+<span class="nc" id="L66">            resultado = &quot;Error en: listarCate :: &quot; + e.getMessage();</span>
+<span class="nc" id="L67">            return &quot;error&quot;;</span>
+        }
+    }
+    
+    @Action(value = &quot;listarSubCate&quot;, results = {
+        @Result(name = &quot;ok&quot;, location = &quot;/admin/principal/subCategoria.jsp&quot;),
+	@Result(name = &quot;error&quot;, location = &quot;admin/error.jsp&quot;)
+
+    })
+    public String listarSubCate() {
+        try {
+<span class="nc" id="L78">            catSer=new CategoriaServicio();</span>
+<span class="nc" id="L79">            lstSubCate = catSer.listarsubCategoria();</span>
+<span class="nc" id="L80">            lstCate = catSer.listarCategoria();</span>
+<span class="nc" id="L81">            return &quot;ok&quot;;</span>
+<span class="nc" id="L82">        } catch (Exception e) {</span>
+<span class="nc" id="L83">            resultado = &quot;Error en: listarCate :: &quot; + e.getMessage();</span>
+<span class="nc" id="L84">            return &quot;error&quot;;</span>
+>>>>>>> 774d743aa798fdef07b0c2bb8173fa7ffbd7731a
         }
     }
     
@@ -72,6 +143,7 @@ import wyv.persistencia.Categoria;
     })
     public String listarCateCliente() {
         try {
+<<<<<<< HEAD
 <span class="nc" id="L75">            catSer=new CategoriaServicio();</span>
 <span class="nc" id="L76">            lstCate = catSer.listarCategoria();</span>
 <span class="nc" id="L77">            return &quot;ok&quot;;</span>
@@ -81,12 +153,26 @@ import wyv.persistencia.Categoria;
         }
     }
 
+=======
+<span class="nc" id="L95">            catSer=new CategoriaServicio();</span>
+<span class="nc" id="L96">            lstCate = catSer.listarCategoria();</span>
+<span class="nc" id="L97">            return &quot;ok&quot;;</span>
+<span class="nc" id="L98">        } catch (Exception e) {</span>
+<span class="nc" id="L99">            resultado = &quot;Error en: listarCate :: &quot; + e.getMessage();</span>
+<span class="nc" id="L100">            return &quot;error&quot;;</span>
+        }
+    }
+    
+    
+    
+>>>>>>> 774d743aa798fdef07b0c2bb8173fa7ffbd7731a
     @Action(value=&quot;registrarCate&quot;,results= {
 			@Result(name=&quot;ok&quot;,location=&quot;/admin/principal/categoria.jsp&quot;),
 			@Result(name=&quot;error&quot;,location=&quot;/error.jsp&quot;)
 	})
 	public String registrarCate() {
 		try {
+<<<<<<< HEAD
 <span class="nc" id="L90">			new CategoriaServicio().registrar(categoria);</span>
 <span class="nc" id="L91">			lstCate=new CategoriaServicio().listar();</span>
 <span class="nc" id="L92">			categoria=new Categoria();</span>
@@ -94,6 +180,15 @@ import wyv.persistencia.Categoria;
 <span class="nc" id="L94">		} catch (Exception e) {</span>
 <span class="nc" id="L95">			resultado=&quot;Error en: registrarCate :: &quot;+e.getMessage();</span>
 <span class="nc" id="L96">			return &quot;error&quot;;</span>
+=======
+<span class="nc" id="L112">			new CategoriaServicio().registrar(categoria);</span>
+<span class="nc" id="L113">			lstCate=new CategoriaServicio().listar();</span>
+<span class="nc" id="L114">			categoria=new Categoria();</span>
+<span class="nc" id="L115">			return &quot;ok&quot;;</span>
+<span class="nc" id="L116">		} catch (Exception e) {</span>
+<span class="nc" id="L117">			resultado=&quot;Error en: registrarCate :: &quot;+e.getMessage();</span>
+<span class="nc" id="L118">			return &quot;error&quot;;</span>
+>>>>>>> 774d743aa798fdef07b0c2bb8173fa7ffbd7731a
 		}
 	}
         
@@ -105,6 +200,7 @@ import wyv.persistencia.Categoria;
 	public String editarCate() {
 		
 		try {
+<<<<<<< HEAD
 <span class="nc" id="L108">			categoria =new CategoriaServicio().buscar(String.valueOf(categoria.getIdCategoria()));</span>
 <span class="nc" id="L109">			lstCate=new CategoriaServicio().listar();</span>
 <span class="nc" id="L110">                        edit=1;</span>
@@ -115,6 +211,19 @@ import wyv.persistencia.Categoria;
 		}
 	}
 
+=======
+<span class="nc" id="L130">			categoria =new CategoriaServicio().buscar(String.valueOf(categoria.getIdCategoria()));</span>
+<span class="nc" id="L131">			lstCate=new CategoriaServicio().listar();</span>
+<span class="nc" id="L132">                        edit=1;</span>
+<span class="nc" id="L133">			return &quot;ok&quot;;</span>
+<span class="nc" id="L134">		} catch (Exception e) {</span>
+<span class="nc" id="L135">			resultado=&quot;Error en: editarAdmin :: &quot;+e.getMessage();</span>
+<span class="nc" id="L136">			return &quot;error&quot;;</span>
+		}
+	}
+        
+        
+>>>>>>> 774d743aa798fdef07b0c2bb8173fa7ffbd7731a
         @Action(value=&quot;actualizarCate&quot;,results= {
 			@Result(name=&quot;ok&quot;,location=&quot;/admin/principal/categoria.jsp&quot;),
 			@Result(name=&quot;error&quot;,location=&quot;/error.jsp&quot;)
@@ -122,6 +231,7 @@ import wyv.persistencia.Categoria;
 	public String actualizarCate() {
 		
 		try {
+<<<<<<< HEAD
 <span class="nc" id="L125">			new CategoriaServicio().actualizar(categoria);</span>
 <span class="nc" id="L126">			lstCate=new CategoriaServicio().listar();</span>
 <span class="nc" id="L127">                        categoria=new Categoria();</span>
@@ -129,6 +239,16 @@ import wyv.persistencia.Categoria;
 <span class="nc" id="L129">		} catch (Exception e) {</span>
 <span class="nc" id="L130">			resultado=&quot;Error en: eliminarMarca :: &quot;+e.getMessage();</span>
 <span class="nc" id="L131">			return &quot;error&quot;;</span>
+=======
+                        
+<span class="nc" id="L149">			new CategoriaServicio().actualizar(categoria);</span>
+<span class="nc" id="L150">			lstCate=new CategoriaServicio().listar();</span>
+<span class="nc" id="L151">                        categoria=new Categoria();</span>
+<span class="nc" id="L152">			return &quot;ok&quot;;</span>
+<span class="nc" id="L153">		} catch (Exception e) {</span>
+<span class="nc" id="L154">			resultado=&quot;Error en: eliminarMarca :: &quot;+e.getMessage();</span>
+<span class="nc" id="L155">			return &quot;error&quot;;</span>
+>>>>>>> 774d743aa798fdef07b0c2bb8173fa7ffbd7731a
 		}
 	}
 
@@ -139,12 +259,21 @@ import wyv.persistencia.Categoria;
 	public String eliminarCate() {
 		
 		try {
+<<<<<<< HEAD
 <span class="nc" id="L142">			new CategoriaServicio().eliminar(String.valueOf(categoria.getIdCategoria()));</span>
 <span class="nc" id="L143">			lstCate=new CategoriaServicio().listar();</span>
 <span class="nc" id="L144">			return &quot;ok&quot;;</span>
 <span class="nc" id="L145">		} catch (Exception e) {</span>
 <span class="nc" id="L146">			resultado=&quot;Error en: eliminarMarca :: &quot;+e.getMessage();</span>
 <span class="nc" id="L147">			return &quot;error&quot;;</span>
+=======
+<span class="nc" id="L166">			new CategoriaServicio().eliminar(String.valueOf(categoria.getIdCategoria()));</span>
+<span class="nc" id="L167">			lstCate=new CategoriaServicio().listar();</span>
+<span class="nc" id="L168">			return &quot;ok&quot;;</span>
+<span class="nc" id="L169">		} catch (Exception e) {</span>
+<span class="nc" id="L170">			resultado=&quot;Error en: eliminarMarca :: &quot;+e.getMessage();</span>
+<span class="nc" id="L171">			return &quot;error&quot;;</span>
+>>>>>>> 774d743aa798fdef07b0c2bb8173fa7ffbd7731a
 		}
 	}
 

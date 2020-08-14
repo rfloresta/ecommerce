@@ -42,8 +42,8 @@ public class DetallePedidoJpa implements Serializable {
         if (detallePedido.getDetallePedidoPK() == null) {
             detallePedido.setDetallePedidoPK(new DetallePedidoPK());
         }
-        detallePedido.getDetallePedidoPK().setIdProducto(detallePedido.getProducto().getIdProducto());
         detallePedido.getDetallePedidoPK().setIdPedido(detallePedido.getPedido().getIdPedido());
+        detallePedido.getDetallePedidoPK().setIdProducto(detallePedido.getProducto().getIdProducto());
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -81,8 +81,8 @@ public class DetallePedidoJpa implements Serializable {
     }
 
     public void edit(DetallePedido detallePedido) throws NonexistentEntityException, Exception {
-        detallePedido.getDetallePedidoPK().setIdProducto(detallePedido.getProducto().getIdProducto());
         detallePedido.getDetallePedidoPK().setIdPedido(detallePedido.getPedido().getIdPedido());
+        detallePedido.getDetallePedidoPK().setIdProducto(detallePedido.getProducto().getIdProducto());
         EntityManager em = null;
         try {
             em = getEntityManager();

@@ -19,11 +19,18 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+<<<<<<< HEAD
 import org.codehaus.jackson.annotate.JsonIgnore;
 
 /**
  *
  * @author Romario
+=======
+
+/**
+ *
+ * @author bdeg_
+>>>>>>> 774d743aa798fdef07b0c2bb8173fa7ffbd7731a
  */
 @Entity
 @Table(name = &quot;cliente&quot;)
@@ -37,10 +44,19 @@ import org.codehaus.jackson.annotate.JsonIgnore;
     , @NamedQuery(name = &quot;Cliente.findByNumCelular&quot;, query = &quot;SELECT c FROM Cliente c WHERE c.numCelular = :numCelular&quot;)
     , @NamedQuery(name = &quot;Cliente.findByDireccion&quot;, query = &quot;SELECT c FROM Cliente c WHERE c.direccion = :direccion&quot;)
     , @NamedQuery(name = &quot;Cliente.findByEmail&quot;, query = &quot;SELECT c FROM Cliente c WHERE c.email = :email&quot;)
+<<<<<<< HEAD
     , @NamedQuery(name = &quot;Cliente.findByPassword&quot;, query = &quot;SELECT c FROM Cliente c WHERE c.password = :password&quot;)
     , @NamedQuery(name = &quot;Cliente.findByCodigoGenerado&quot;, query = &quot;SELECT c FROM Cliente c WHERE c.codigoGenerado = :codigoGenerado&quot;)})
 public class Cliente implements Serializable {
 
+=======
+    , @NamedQuery(name = &quot;Cliente.findByPassword&quot;, query = &quot;SELECT c FROM Cliente c WHERE c.password = :password&quot;)})
+public class Cliente implements Serializable {
+
+    @OneToMany(mappedBy = &quot;idCliente&quot;)
+    private List&lt;Pedido&gt; pedidoList;
+
+>>>>>>> 774d743aa798fdef07b0c2bb8173fa7ffbd7731a
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -61,6 +77,7 @@ public class Cliente implements Serializable {
     private String email;
     @Column(name = &quot;password&quot;)
     private String password;
+<<<<<<< HEAD
     @Column(name = &quot;codigo_generado&quot;)
     private String codigoGenerado;
     @OneToMany(mappedBy = &quot;idCliente&quot;)
@@ -160,11 +177,91 @@ public class Cliente implements Serializable {
 <span class="nc" id="L160">        int hash = 0;</span>
 <span class="nc bnc" id="L161" title="All 2 branches missed.">        hash += (idCliente != null ? idCliente.hashCode() : 0);</span>
 <span class="nc" id="L162">        return hash;</span>
+=======
+
+<span class="fc" id="L66">    public Cliente() {</span>
+<span class="fc" id="L67">    }</span>
+
+<span class="nc" id="L69">    public Cliente(Integer idCliente) {</span>
+<span class="nc" id="L70">        this.idCliente = idCliente;</span>
+<span class="nc" id="L71">    }</span>
+
+    public Integer getIdCliente() {
+<span class="fc" id="L74">        return idCliente;</span>
+    }
+
+    public void setIdCliente(Integer idCliente) {
+<span class="fc" id="L78">        this.idCliente = idCliente;</span>
+<span class="fc" id="L79">    }</span>
+
+    public String getNombres() {
+<span class="nc" id="L82">        return nombres;</span>
+    }
+
+    public void setNombres(String nombres) {
+<span class="fc" id="L86">        this.nombres = nombres;</span>
+<span class="fc" id="L87">    }</span>
+
+    public String getApellidos() {
+<span class="nc" id="L90">        return apellidos;</span>
+    }
+
+    public void setApellidos(String apellidos) {
+<span class="nc" id="L94">        this.apellidos = apellidos;</span>
+<span class="nc" id="L95">    }</span>
+
+    public String getDni() {
+<span class="nc" id="L98">        return dni;</span>
+    }
+
+    public void setDni(String dni) {
+<span class="nc" id="L102">        this.dni = dni;</span>
+<span class="nc" id="L103">    }</span>
+
+    public String getNumCelular() {
+<span class="nc" id="L106">        return numCelular;</span>
+    }
+
+    public void setNumCelular(String numCelular) {
+<span class="nc" id="L110">        this.numCelular = numCelular;</span>
+<span class="nc" id="L111">    }</span>
+
+    public String getDireccion() {
+<span class="nc" id="L114">        return direccion;</span>
+    }
+
+    public void setDireccion(String direccion) {
+<span class="nc" id="L118">        this.direccion = direccion;</span>
+<span class="nc" id="L119">    }</span>
+
+    public String getEmail() {
+<span class="nc" id="L122">        return email;</span>
+    }
+
+    public void setEmail(String email) {
+<span class="nc" id="L126">        this.email = email;</span>
+<span class="nc" id="L127">    }</span>
+
+    public String getPassword() {
+<span class="nc" id="L130">        return password;</span>
+    }
+
+    public void setPassword(String password) {
+<span class="nc" id="L134">        this.password = password;</span>
+<span class="nc" id="L135">    }</span>
+
+    @Override
+    public int hashCode() {
+<span class="nc" id="L139">        int hash = 0;</span>
+<span class="nc bnc" id="L140" title="All 2 branches missed.">        hash += (idCliente != null ? idCliente.hashCode() : 0);</span>
+<span class="nc" id="L141">        return hash;</span>
+>>>>>>> 774d743aa798fdef07b0c2bb8173fa7ffbd7731a
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
+<<<<<<< HEAD
 <span class="nc bnc" id="L168" title="All 2 branches missed.">        if (!(object instanceof Cliente)) {</span>
 <span class="nc" id="L169">            return false;</span>
         }
@@ -173,12 +270,36 @@ public class Cliente implements Serializable {
 <span class="nc" id="L173">            return false;</span>
         }
 <span class="nc" id="L175">        return true;</span>
+=======
+<span class="nc bnc" id="L147" title="All 2 branches missed.">        if (!(object instanceof Cliente)) {</span>
+<span class="nc" id="L148">            return false;</span>
+        }
+<span class="nc" id="L150">        Cliente other = (Cliente) object;</span>
+<span class="nc bnc" id="L151" title="All 8 branches missed.">        if ((this.idCliente == null &amp;&amp; other.idCliente != null) || (this.idCliente != null &amp;&amp; !this.idCliente.equals(other.idCliente))) {</span>
+<span class="nc" id="L152">            return false;</span>
+        }
+<span class="nc" id="L154">        return true;</span>
+>>>>>>> 774d743aa798fdef07b0c2bb8173fa7ffbd7731a
     }
 
     @Override
     public String toString() {
+<<<<<<< HEAD
 <span class="nc" id="L180">        return &quot;wyv.persistencia.Cliente[ idCliente=&quot; + idCliente + &quot; ]&quot;;</span>
     }
+=======
+<span class="nc" id="L159">        return &quot;wyv.persistencia.Cliente[ idCliente=&quot; + idCliente + &quot; ]&quot;;</span>
+    }
+
+    @XmlTransient
+    public List&lt;Pedido&gt; getPedidoList() {
+<span class="nc" id="L164">        return pedidoList;</span>
+    }
+
+    public void setPedidoList(List&lt;Pedido&gt; pedidoList) {
+<span class="nc" id="L168">        this.pedidoList = pedidoList;</span>
+<span class="nc" id="L169">    }</span>
+>>>>>>> 774d743aa798fdef07b0c2bb8173fa7ffbd7731a
     
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

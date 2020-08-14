@@ -76,25 +76,48 @@ function mostrarPassword(id) {
     }
 }
 
-//$(function () {
-//    $("#grabar").click(function (event)
-//    {
-//        event.preventDefault();
-//        var form = $(this).parents("#form_mante");
-//        var check = checkCampos(form);
-//        if (!check) {
-//            swal({
-//                title: "¡Error!",
-//                text: "Debe completar todos los campos",
-//                icon: "error",
-//                button: "Aceptar",
-//            });
-//        } else {
-//            form.submit();
-//        }
-//    }
-//    );
-//});
+$(function () {
+    $("#Categoria").on('change', function () {
+
+        var selected = $("#Categoria option:selected").val();
+
+        $.ajax({
+            type: 'POST',
+            url: 'listarSubCateFiltro.action?idCate=' + selected,
+            success: function (respuesta) {
+                var json = JSON.parse(respuesta);
+
+
+                var html="";
+               for(let i=0; i < json.length;i++){
+                   html += `<option value="${json[i].idSubcategoria}">${json[i].nombre}</option>`;     
+               }
+               $('#selectSubCate').html(
+                `<select name="producto.idSubCategoria.idSubcategoria" class="form-control">${html} </select>`);
+            }});
+
+
+    });
+});
+$(function () {
+    $("#grabar").click(function (event)
+    {
+        event.preventDefault();
+        var form = $(this).parents("#form_mante");
+        var check = checkCampos(form);
+        if (!check) {
+            swal({
+                title: "¡Error!",
+                text: "Debe completar los campos requeridos (*)",
+                icon: "error",
+                button: "Aceptar",
+            });
+        } else {
+            form.submit();
+        }
+    }
+    );
+});
 
 //$(function () {
 //    $("#enviar").click(function (event)
@@ -121,37 +144,31 @@ function mostrarPassword(id) {
 //    );
 //});
 
-/*
- //Función para comprobar los campos de texto
- function checkCampos(obj) {
- var camposRellenados = true;
- obj.find("input").each(function() {
- var $this = $(this);
- if( $this.val().length <= 0 ) {
- camposRellenados = false;
- return false;
- }
- });
- if(camposRellenados == false) {
- return false;
- }
- else {
- return true;
- }
- }
- //$(function () {
- //    $(".menu").click(function (event)
- //
- //    {
- //       event.preventDefault();
- //        
- //     $("#sectionAjax").load($(this).attr('href'), function (response, status, xhr)
- //    {
- //        if (status == "success") {
- //           
- //        }
- //    });
- //        
- //    }
- //    );
- //});*/
+
+//Función para comprobar los campos de texto
+function checkCampos(obj) {
+    var camposRellenados = true;
+    obj.find("input").each(function () {
+        var $this = $(this);
+        if ($this.val().length <= 0 && $(this).attr("required") === "required" ) {
+            camposRellenados = false;
+        }
+    });
+        return camposRellenados;
+}
+//$(function () {
+//    $(".menu").click(function (event)
+//
+//    {
+//       event.preventDefault();
+//        
+//     $("#sectionAjax").load($(this).attr('href'), function (response, status, xhr)
+//    {
+//        if (status == "success") {
+//           
+//        }
+//    });
+//        
+//    }
+//    );
+//});*/

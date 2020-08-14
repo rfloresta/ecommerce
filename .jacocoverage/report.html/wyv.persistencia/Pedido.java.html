@@ -11,6 +11,11 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+<<<<<<< HEAD
+=======
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+>>>>>>> 774d743aa798fdef07b0c2bb8173fa7ffbd7731a
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -20,6 +25,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+<<<<<<< HEAD
 import org.codehaus.jackson.annotate.JsonBackReference;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonManagedReference;
@@ -27,6 +33,12 @@ import org.codehaus.jackson.annotate.JsonManagedReference;
 /**
  *
  * @author Romario
+=======
+
+/**
+ *
+ * @author bdeg_
+>>>>>>> 774d743aa798fdef07b0c2bb8173fa7ffbd7731a
  */
 @Entity
 @Table(name = &quot;pedido&quot;)
@@ -45,6 +57,10 @@ public class Pedido implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+<<<<<<< HEAD
+=======
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+>>>>>>> 774d743aa798fdef07b0c2bb8173fa7ffbd7731a
     @Basic(optional = false)
     @Column(name = &quot;idPedido&quot;)
     private Integer idPedido;
@@ -64,6 +80,7 @@ public class Pedido implements Serializable {
     @Column(name = &quot;estado&quot;)
     private Character estado;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = &quot;pedido&quot;)
+<<<<<<< HEAD
     @JsonManagedReference
     private List&lt;DetallePedido&gt; detallePedidoList;
     @JoinColumn(name = &quot;idCliente&quot;, referencedColumnName = &quot;idCliente&quot;)
@@ -165,11 +182,112 @@ public class Pedido implements Serializable {
 <span class="nc" id="L165">        int hash = 0;</span>
 <span class="nc bnc" id="L166" title="All 2 branches missed.">        hash += (idPedido != null ? idPedido.hashCode() : 0);</span>
 <span class="nc" id="L167">        return hash;</span>
+=======
+    private List&lt;DetallePedido&gt; detallePedidoList;
+    @JoinColumn(name = &quot;idCliente&quot;, referencedColumnName = &quot;idCliente&quot;)
+    @ManyToOne
+    private Cliente idCliente;
+
+<span class="fc" id="L72">    public Pedido() {</span>
+<span class="fc" id="L73">    }</span>
+
+<span class="nc" id="L75">    public Pedido(Integer idPedido) {</span>
+<span class="nc" id="L76">        this.idPedido = idPedido;</span>
+<span class="nc" id="L77">    }</span>
+
+    public Integer getIdPedido() {
+<span class="fc" id="L80">        return idPedido;</span>
+    }
+
+    public void setIdPedido(Integer idPedido) {
+<span class="fc" id="L84">        this.idPedido = idPedido;</span>
+<span class="fc" id="L85">    }</span>
+
+    public String getNumero() {
+<span class="fc" id="L88">        return numero;</span>
+    }
+
+    public void setNumero(String numero) {
+<span class="fc" id="L92">        this.numero = numero;</span>
+<span class="fc" id="L93">    }</span>
+
+    public String getFecha() {
+<span class="fc" id="L96">        return fecha;</span>
+    }
+
+    public void setFecha(String fecha) {
+<span class="fc" id="L100">        this.fecha = fecha;</span>
+<span class="fc" id="L101">    }</span>
+
+    public Double getSubtotal() {
+<span class="fc" id="L104">        return subtotal;</span>
+    }
+
+    public void setSubtotal(Double subtotal) {
+<span class="fc" id="L108">        this.subtotal = subtotal;</span>
+<span class="fc" id="L109">    }</span>
+
+    public Double getIgv() {
+<span class="fc" id="L112">        return igv;</span>
+    }
+
+    public void setIgv(Double igv) {
+<span class="fc" id="L116">        this.igv = igv;</span>
+<span class="fc" id="L117">    }</span>
+
+    public Double getTotal() {
+<span class="fc" id="L120">        return total;</span>
+    }
+
+    public void setTotal(Double total) {
+<span class="fc" id="L124">        this.total = total;</span>
+<span class="fc" id="L125">    }</span>
+
+    public String getPago() {
+<span class="fc" id="L128">        return pago;</span>
+    }
+
+    public void setPago(String pago) {
+<span class="fc" id="L132">        this.pago = pago;</span>
+<span class="fc" id="L133">    }</span>
+
+    public Character getEstado() {
+<span class="fc" id="L136">        return estado;</span>
+    }
+
+    public void setEstado(Character estado) {
+<span class="fc" id="L140">        this.estado = estado;</span>
+<span class="fc" id="L141">    }</span>
+
+    @XmlTransient
+    public List&lt;DetallePedido&gt; getDetallePedidoList() {
+<span class="nc" id="L145">        return detallePedidoList;</span>
+    }
+
+    public void setDetallePedidoList(List&lt;DetallePedido&gt; detallePedidoList) {
+<span class="nc" id="L149">        this.detallePedidoList = detallePedidoList;</span>
+<span class="nc" id="L150">    }</span>
+
+    public Cliente getIdCliente() {
+<span class="fc" id="L153">        return idCliente;</span>
+    }
+
+    public void setIdCliente(Cliente idCliente) {
+<span class="fc" id="L157">        this.idCliente = idCliente;</span>
+<span class="fc" id="L158">    }</span>
+
+    @Override
+    public int hashCode() {
+<span class="nc" id="L162">        int hash = 0;</span>
+<span class="nc bnc" id="L163" title="All 2 branches missed.">        hash += (idPedido != null ? idPedido.hashCode() : 0);</span>
+<span class="nc" id="L164">        return hash;</span>
+>>>>>>> 774d743aa798fdef07b0c2bb8173fa7ffbd7731a
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
+<<<<<<< HEAD
 <span class="nc bnc" id="L173" title="All 2 branches missed.">        if (!(object instanceof Pedido)) {</span>
 <span class="nc" id="L174">            return false;</span>
         }
@@ -178,11 +296,25 @@ public class Pedido implements Serializable {
 <span class="nc" id="L178">            return false;</span>
         }
 <span class="nc" id="L180">        return true;</span>
+=======
+<span class="nc bnc" id="L170" title="All 2 branches missed.">        if (!(object instanceof Pedido)) {</span>
+<span class="nc" id="L171">            return false;</span>
+        }
+<span class="nc" id="L173">        Pedido other = (Pedido) object;</span>
+<span class="nc bnc" id="L174" title="All 8 branches missed.">        if ((this.idPedido == null &amp;&amp; other.idPedido != null) || (this.idPedido != null &amp;&amp; !this.idPedido.equals(other.idPedido))) {</span>
+<span class="nc" id="L175">            return false;</span>
+        }
+<span class="nc" id="L177">        return true;</span>
+>>>>>>> 774d743aa798fdef07b0c2bb8173fa7ffbd7731a
     }
 
     @Override
     public String toString() {
+<<<<<<< HEAD
 <span class="nc" id="L185">        return &quot;wyv.persistencia.Pedido[ idPedido=&quot; + idPedido + &quot; ]&quot;;</span>
+=======
+<span class="nc" id="L182">        return &quot;wyv.persistencia.Pedido[ idPedido=&quot; + idPedido + &quot; ]&quot;;</span>
+>>>>>>> 774d743aa798fdef07b0c2bb8173fa7ffbd7731a
     }
     
 }

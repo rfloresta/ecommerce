@@ -6,6 +6,7 @@
 package wyv.persistencia;
 
 import java.io.Serializable;
+<<<<<<< HEAD
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
@@ -14,10 +15,21 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+=======
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Query;
+import javax.persistence.EntityNotFoundException;
+import javax.persistence.Persistence;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+>>>>>>> 774d743aa798fdef07b0c2bb8173fa7ffbd7731a
 import wyv.persistencia.exceptions.NonexistentEntityException;
 
 /**
  *
+<<<<<<< HEAD
  * @author Romario
  */
 public class ClienteJpa implements Serializable {
@@ -25,14 +37,30 @@ public class ClienteJpa implements Serializable {
 <span class="fc" id="L25">   public ClienteJpa() {</span>
 <span class="fc" id="L26">        this.emf= Persistence.createEntityManagerFactory(&quot;W_V_S.A.CPU&quot;);</span>
 <span class="fc" id="L27">    }</span>
+=======
+ * @author bdeg_
+ */
+public class ClienteJpa implements Serializable {
+
+<span class="nc" id="L25">    public ClienteJpa() {</span>
+<span class="nc" id="L26">        this.emf= Persistence.createEntityManagerFactory(&quot;W_V_S.A.CPU&quot;);</span>
+<span class="nc" id="L27">    }</span>
+>>>>>>> 774d743aa798fdef07b0c2bb8173fa7ffbd7731a
 
 <span class="nc" id="L29">    public ClienteJpa(EntityManagerFactory emf) {</span>
 <span class="nc" id="L30">        this.emf = emf;</span>
 <span class="nc" id="L31">    }</span>
+<<<<<<< HEAD
 <span class="pc" id="L32">    private EntityManagerFactory emf = null;</span>
 
     public EntityManager getEntityManager() {
 <span class="fc" id="L35">        return emf.createEntityManager();</span>
+=======
+<span class="nc" id="L32">    private EntityManagerFactory emf = null;</span>
+
+    public EntityManager getEntityManager() {
+<span class="nc" id="L35">        return emf.createEntityManager();</span>
+>>>>>>> 774d743aa798fdef07b0c2bb8173fa7ffbd7731a
     }
 
     public void create(Cliente cliente) {
@@ -118,11 +146,19 @@ public class ClienteJpa implements Serializable {
     }
 
     public Cliente findCliente(Integer id) {
+<<<<<<< HEAD
 <span class="fc" id="L121">        EntityManager em = getEntityManager();</span>
         try {
 <span class="fc" id="L123">            return em.find(Cliente.class, id);</span>
         } finally {
 <span class="pc" id="L125">            em.close();</span>
+=======
+<span class="nc" id="L121">        EntityManager em = getEntityManager();</span>
+        try {
+<span class="nc" id="L123">            return em.find(Cliente.class, id);</span>
+        } finally {
+<span class="nc" id="L125">            em.close();</span>
+>>>>>>> 774d743aa798fdef07b0c2bb8173fa7ffbd7731a
         }
     }
 

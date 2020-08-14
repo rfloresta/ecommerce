@@ -17,7 +17,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
+<<<<<<< HEAD
  * @author Romario
+=======
+ * @author bdeg_
+>>>>>>> 774d743aa798fdef07b0c2bb8173fa7ffbd7731a
  */
 @Entity
 @Table(name = &quot;administrador&quot;)
@@ -29,8 +33,13 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = &quot;Administrador.findByApellidos&quot;, query = &quot;SELECT a FROM Administrador a WHERE a.apellidos = :apellidos&quot;)
     , @NamedQuery(name = &quot;Administrador.findByPassword&quot;, query = &quot;SELECT a FROM Administrador a WHERE a.password = :password&quot;)
     , @NamedQuery(name = &quot;Administrador.findByEmail&quot;, query = &quot;SELECT a FROM Administrador a WHERE a.email = :email&quot;)
+<<<<<<< HEAD
     , @NamedQuery(name = &quot;Administrador.findByPrivilegio&quot;, query = &quot;SELECT a FROM Administrador a WHERE a.privilegio = :privilegio&quot;)
     , @NamedQuery(name = &quot;Administrador.findByCodigoGenerado&quot;, query = &quot;SELECT a FROM Administrador a WHERE a.codigoGenerado = :codigoGenerado&quot;)})
+=======
+    , @NamedQuery(name = &quot;Administrador.findByCodigoGenerado&quot;, query = &quot;SELECT a FROM Administrador a WHERE a.codigoGenerado = :codigoGenerado&quot;)
+    , @NamedQuery(name = &quot;Administrador.findByPrivilegio&quot;, query = &quot;SELECT a FROM Administrador a WHERE a.privilegio = :privilegio&quot;)})
+>>>>>>> 774d743aa798fdef07b0c2bb8173fa7ffbd7731a
 public class Administrador implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -40,12 +49,17 @@ public class Administrador implements Serializable {
     private String dni;
     @Column(name = &quot;nombres&quot;)
     private String nombres;
+<<<<<<< HEAD
+=======
+    @Basic(optional = false)
+>>>>>>> 774d743aa798fdef07b0c2bb8173fa7ffbd7731a
     @Column(name = &quot;apellidos&quot;)
     private String apellidos;
     @Column(name = &quot;password&quot;)
     private String password;
     @Column(name = &quot;email&quot;)
     private String email;
+<<<<<<< HEAD
     @Column(name = &quot;privilegio&quot;)
     private Character privilegio;
     @Basic(optional = false)
@@ -125,11 +139,94 @@ public class Administrador implements Serializable {
 <span class="nc" id="L125">        int hash = 0;</span>
 <span class="nc bnc" id="L126" title="All 2 branches missed.">        hash += (dni != null ? dni.hashCode() : 0);</span>
 <span class="nc" id="L127">        return hash;</span>
+=======
+    @Basic(optional = false)
+    @Column(name = &quot;codigoGenerado&quot;)
+    private String codigoGenerado;
+    @Column(name = &quot;privilegio&quot;)
+    private Character privilegio;
+
+<span class="nc" id="L56">    public Administrador() {</span>
+<span class="nc" id="L57">    }</span>
+
+<span class="nc" id="L59">    public Administrador(String dni) {</span>
+<span class="nc" id="L60">        this.dni = dni;</span>
+<span class="nc" id="L61">    }</span>
+
+<span class="nc" id="L63">    public Administrador(String dni, String apellidos, String codigoGenerado) {</span>
+<span class="nc" id="L64">        this.dni = dni;</span>
+<span class="nc" id="L65">        this.apellidos = apellidos;</span>
+<span class="nc" id="L66">        this.codigoGenerado = codigoGenerado;</span>
+<span class="nc" id="L67">    }</span>
+
+    public String getDni() {
+<span class="nc" id="L70">        return dni;</span>
+    }
+
+    public void setDni(String dni) {
+<span class="nc" id="L74">        this.dni = dni;</span>
+<span class="nc" id="L75">    }</span>
+
+    public String getNombres() {
+<span class="nc" id="L78">        return nombres;</span>
+    }
+
+    public void setNombres(String nombres) {
+<span class="nc" id="L82">        this.nombres = nombres;</span>
+<span class="nc" id="L83">    }</span>
+
+    public String getApellidos() {
+<span class="nc" id="L86">        return apellidos;</span>
+    }
+
+    public void setApellidos(String apellidos) {
+<span class="nc" id="L90">        this.apellidos = apellidos;</span>
+<span class="nc" id="L91">    }</span>
+
+    public String getPassword() {
+<span class="nc" id="L94">        return password;</span>
+    }
+
+    public void setPassword(String password) {
+<span class="nc" id="L98">        this.password = password;</span>
+<span class="nc" id="L99">    }</span>
+
+    public String getEmail() {
+<span class="nc" id="L102">        return email;</span>
+    }
+
+    public void setEmail(String email) {
+<span class="nc" id="L106">        this.email = email;</span>
+<span class="nc" id="L107">    }</span>
+
+    public String getCodigoGenerado() {
+<span class="nc" id="L110">        return codigoGenerado;</span>
+    }
+
+    public void setCodigoGenerado(String codigoGenerado) {
+<span class="nc" id="L114">        this.codigoGenerado = codigoGenerado;</span>
+<span class="nc" id="L115">    }</span>
+
+    public Character getPrivilegio() {
+<span class="nc" id="L118">        return privilegio;</span>
+    }
+
+    public void setPrivilegio(Character privilegio) {
+<span class="nc" id="L122">        this.privilegio = privilegio;</span>
+<span class="nc" id="L123">    }</span>
+
+    @Override
+    public int hashCode() {
+<span class="nc" id="L127">        int hash = 0;</span>
+<span class="nc bnc" id="L128" title="All 2 branches missed.">        hash += (dni != null ? dni.hashCode() : 0);</span>
+<span class="nc" id="L129">        return hash;</span>
+>>>>>>> 774d743aa798fdef07b0c2bb8173fa7ffbd7731a
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
+<<<<<<< HEAD
 <span class="nc bnc" id="L133" title="All 2 branches missed.">        if (!(object instanceof Administrador)) {</span>
 <span class="nc" id="L134">            return false;</span>
         }
@@ -138,13 +235,28 @@ public class Administrador implements Serializable {
 <span class="nc" id="L138">            return false;</span>
         }
 <span class="nc" id="L140">        return true;</span>
+=======
+<span class="nc bnc" id="L135" title="All 2 branches missed.">        if (!(object instanceof Administrador)) {</span>
+<span class="nc" id="L136">            return false;</span>
+        }
+<span class="nc" id="L138">        Administrador other = (Administrador) object;</span>
+<span class="nc bnc" id="L139" title="All 8 branches missed.">        if ((this.dni == null &amp;&amp; other.dni != null) || (this.dni != null &amp;&amp; !this.dni.equals(other.dni))) {</span>
+<span class="nc" id="L140">            return false;</span>
+        }
+<span class="nc" id="L142">        return true;</span>
+>>>>>>> 774d743aa798fdef07b0c2bb8173fa7ffbd7731a
     }
 
     @Override
     public String toString() {
+<<<<<<< HEAD
 <span class="nc" id="L145">        return &quot;wyv.persistencia.Administrador[ dni=&quot; + dni + &quot; ]&quot;;</span>
     }
 
+=======
+<span class="nc" id="L147">        return &quot;wyv.persistencia.Administrador[ dni=&quot; + dni + &quot; ]&quot;;</span>
+    }
+>>>>>>> 774d743aa798fdef07b0c2bb8173fa7ffbd7731a
     
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

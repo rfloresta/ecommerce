@@ -1,13 +1,25 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>ProductoServicio.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;W_V_S.A.C&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">wyv.servicios</a> &gt; <span class="el_source">ProductoServicio.java</span></div><h1>ProductoServicio.java</h1><pre class="source lang-java linenums">package wyv.servicios;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+=======
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>ProductoServicio.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;W_V_S.A.C&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">wyv.servicios</a> &gt; <span class="el_source">ProductoServicio.java</span></div><h1>ProductoServicio.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package wyv.servicios;
+
+import java.util.List;
+>>>>>>> 774d743aa798fdef07b0c2bb8173fa7ffbd7731a
 import wyv.persistencia.Categoria;
 import wyv.persistencia.IOperacionesBD;
 import wyv.persistencia.Marca;
 import wyv.persistencia.Producto;
 import wyv.persistencia.ProductoDao;
+<<<<<<< HEAD
 
 @Service
 <span class="nc" id="L13">public class ProductoServicio implements  IOperacionesBD&lt;Producto&gt;{</span>
@@ -19,36 +31,81 @@ import wyv.persistencia.ProductoDao;
     @Override
     public String registrar(Producto a) {
 <span class="nc" id="L21">        return proDao.registrar(a);</span>
+=======
+import wyv.persistencia.Subcategoria;
+
+/**
+ *
+ * @author Data
+ */
+<span class="nc" id="L20">public class ProductoServicio implements  IOperacionesBD&lt;Producto&gt;{</span>
+
+    ProductoDao proDao;
+    Producto pro;
+    @Override
+    public String registrar(Producto a) {
+<span class="nc" id="L26">        proDao=new ProductoDao();</span>
+<span class="nc" id="L27">        return proDao.registrar(a);</span>
+>>>>>>> 774d743aa798fdef07b0c2bb8173fa7ffbd7731a
     }
 
     @Override
     public String actualizar(Producto a) {
+<<<<<<< HEAD
 <span class="nc" id="L26">        return proDao.actualizar(a);</span>
+=======
+<span class="nc" id="L32">        proDao=new ProductoDao();</span>
+<span class="nc" id="L33">        return proDao.actualizar(a);</span>
+>>>>>>> 774d743aa798fdef07b0c2bb8173fa7ffbd7731a
     }
 
     @Override
     public String eliminar(String id) {
+<<<<<<< HEAD
 <span class="nc" id="L31">        return proDao.eliminar(id);</span>
+=======
+<span class="nc" id="L38">        proDao=new ProductoDao();</span>
+<span class="nc" id="L39">        return proDao.eliminar(id);</span>
+>>>>>>> 774d743aa798fdef07b0c2bb8173fa7ffbd7731a
     }
 
     @Override
     public Producto buscar(String id) {
+<<<<<<< HEAD
 <span class="nc" id="L36">        return proDao.buscar(id);</span>
+=======
+<span class="nc" id="L44">        proDao=new ProductoDao();</span>
+<span class="nc" id="L45">        return proDao.buscar(id);</span>
+>>>>>>> 774d743aa798fdef07b0c2bb8173fa7ffbd7731a
     }
 
     @Override
     public List&lt;Producto&gt; listar() {
+<<<<<<< HEAD
 <span class="nc" id="L41">        return proDao.listar();</span>
+=======
+<span class="nc" id="L50">        proDao=new ProductoDao();</span>
+<span class="nc" id="L51">        return proDao.listar();</span>
+>>>>>>> 774d743aa798fdef07b0c2bb8173fa7ffbd7731a
     }
 
     @Override
     public Producto validar(Producto entrada) {
+<<<<<<< HEAD
 <span class="nc" id="L46">        throw new UnsupportedOperationException(&quot;Not supported yet.&quot;); //To change body of generated methods, choose Tools | Templates.</span>
     }
 
     @Override
     public int contar() {
 <span class="nc" id="L51">        throw new UnsupportedOperationException(&quot;Not supported yet.&quot;); //To change body of generated methods, choose Tools | Templates.</span>
+=======
+<span class="nc" id="L56">        throw new UnsupportedOperationException(&quot;Not supported yet.&quot;); //To change body of generated methods, choose Tools | Templates.</span>
+    }
+    
+     public List&lt;Subcategoria&gt; listarSubPorCate(int id) {
+<span class="nc" id="L60">         proDao=new ProductoDao();</span>
+<span class="nc" id="L61">        return proDao.listarSubPorCate(id);</span>
+>>>>>>> 774d743aa798fdef07b0c2bb8173fa7ffbd7731a
     }
     
 }
