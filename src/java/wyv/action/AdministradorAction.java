@@ -18,19 +18,23 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import org.apache.struts2.interceptor.SessionAware;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 import static wyv.action.Encriptacion.Desencriptar;
 import wyv.servicios.AdministradorServicio;
 import wyv.persistencia.Administrador;
 import static wyv.action.Encriptacion.Encriptar;
 
-@SuppressWarnings("serial")
+@Component("AdministradorAction")
+@Scope(value = "prototype")
 public class AdministradorAction extends ActionSupport implements SessionAware {
 
+    @Autowired
     AdministradorServicio admSer;
     private String resultado;
     private String estado = "error";
     private Administrador admin;
-    ;
     private List<Administrador> lstAdmin;
     private List<String> listaMes;
     private List<String> listaTotal;
@@ -123,10 +127,6 @@ public class AdministradorAction extends ActionSupport implements SessionAware {
         return edit;
     }
 
-    public void setAdmSer(AdministradorServicio admSer) {
-        this.admSer = admSer;
-    }
-
     public String getPasswordActual() {
         return passwordActual;
     }
@@ -141,22 +141,18 @@ public class AdministradorAction extends ActionSupport implements SessionAware {
         @Result(name = "incorrecto", location = "/admin/seguridad/login.jsp")
         ,
 	@Result(name = "error", location = "/admin/error.jsp")})
-    public String ingresoAdmin() {
+    public String ingresoAdmin(/*Administrador admin*/) {
         try {
-
             admSer = new AdministradorServicio();
             admin = admSer.validar(admin);
             if (admin != null) {
-                enviarSession(admin);
                 List<Map<String, String>> lista = admSer.ventaMes();
                 List<String> listaMesP = new ArrayList();
                 List<String> listaTotalP = new ArrayList();
                 // se separa las listas
                 for (int i = 0; i < lista.size(); i++) {
-
                     listaMesP.add(lista.get(i).get("Fecha"));
                     listaTotalP.add(lista.get(i).get("Total"));
-
                 }
                 // Se separa las listas para mandarlo en formato JSON
                 listaMes = listaMesP;
@@ -166,20 +162,19 @@ public class AdministradorAction extends ActionSupport implements SessionAware {
                 jsonMes = new Gson().toJson(listaMes);
                 jsonTotal = new Gson().toJson(listaTotal);
 
+                contarAdministrador = admSer.contar();
                 contarCliente = admSer.ContarCliente();
-                contarAdministrador = admSer.ContarAdministrador();
                 contarPedidos = admSer.ContarPedido();
+                enviarSession(admin);
                 estado = "ok";
-            } else if (admin == null) {
+            } else {
                 addActionError("Usuario y/o Contraseña incorrectos");
                 estado = "incorrecto";
             }
-
-            return estado;
         } catch (Exception e) {
             resultado = "Error en: ingresoAdmin :: " + e.getMessage();
-            return estado;
         }
+        return estado;
     }
 
     public void enviarSession(Administrador admin) {
@@ -198,7 +193,6 @@ public class AdministradorAction extends ActionSupport implements SessionAware {
 	@Result(name = "error", location = "admin/error.jsp"),})
     public String listarAdmin() {
         try {
-            admSer = new AdministradorServicio();
             lstAdmin = admSer.listar();
             return "ok";
         } catch (Exception e) {
@@ -206,12 +200,6 @@ public class AdministradorAction extends ActionSupport implements SessionAware {
             return "error";
         }
     }
-
-//    @Override
-//    public void validate(){
-//        if(getAdmin().getDni() == null){
-//            addFieldError("dni", "Ingrese el DNI");
-//        }
 
     //HACER ASÍ EL MANTENIMIENTO, CON LA VARIABLE "estado"
     @Action(value = "registrarAdmin", results = {
@@ -223,7 +211,6 @@ public class AdministradorAction extends ActionSupport implements SessionAware {
     })
     public String registrarAdmin() {
         try {
-            admSer = new AdministradorServicio();
             String passEncryp = Encriptar(admin.getPassword());
             admin.setPassword(passEncryp);
             estado = admSer.registrar(admin);
@@ -244,7 +231,6 @@ public class AdministradorAction extends ActionSupport implements SessionAware {
     public String editarAdmin() {
 
         try {
-            admSer = new AdministradorServicio();
             admin = admSer.buscar(admin.getDni());
             lstAdmin = admSer.listar();
             edit = 1;
@@ -263,7 +249,6 @@ public class AdministradorAction extends ActionSupport implements SessionAware {
     public String actualizarAdmin() {
 
         try {
-            admSer = new AdministradorServicio();
             estado = admSer.actualizar(admin);
             lstAdmin = admSer.listar();
             admin = new Administrador();
@@ -282,7 +267,6 @@ public class AdministradorAction extends ActionSupport implements SessionAware {
     public String eliminarAdmin() {
 
         try {
-            admSer = new AdministradorServicio();
             estado = admSer.eliminar(admin.getDni());
             lstAdmin = admSer.listar();
             return estado;
@@ -300,7 +284,6 @@ public class AdministradorAction extends ActionSupport implements SessionAware {
     public String cargarDatosAdmin() {
 
         try {
-            admSer = new AdministradorServicio();
             String dni = (String) sesion.get("dni");
             admin = admSer.buscar(dni);
             return "ok";
@@ -318,13 +301,12 @@ public class AdministradorAction extends ActionSupport implements SessionAware {
     public String actualizarDatosAdmin() {
 
         try {
-            admSer = new AdministradorServicio();
             estado = admSer.actualizar(admin);
             String dni = (String) sesion.get("dni");
             admin = admSer.buscar(dni);
             return estado;
         } catch (Exception e) {
-            resultado = "Error en: actualizarDatos :: " + e.getMessage();
+            resultado = "Error en: actualizarDatosAdmin :: " + e.getMessage();
             return estado;
         }
     }
@@ -338,12 +320,10 @@ public class AdministradorAction extends ActionSupport implements SessionAware {
     })
     public String cambiarPasswordInAdmin() {
         try {
-            String passSession = Desencriptar((String) sesion.get("pass"));
-            String passForm = passwordActual;
-            if (passSession.equals(passForm)) {
-                admSer = new AdministradorServicio();
-                admin = recibirSession();
-                estado = admSer.actualizar(admin);
+            Administrador adminSession = recibirSession();
+            if (adminSession.getPassword().equals(passwordActual)) {//validar password de la sesion con el password que viene del form
+                adminSession.setPassword(Encriptar(admin.getPassword()));//enviar el password nuevo
+                estado = admSer.actualizar(adminSession);
                 return estado;
             }
             addActionError("La Contraseña Actual no es la correcta");
@@ -354,20 +334,20 @@ public class AdministradorAction extends ActionSupport implements SessionAware {
         }
     }
 
-    public Administrador recibirSession() {
+    public Administrador recibirSession() throws Exception {
         String dni = (String) sesion.get("dni");
         String apellidos = (String) sesion.get("apellidos");
         String nombres = (String) sesion.get("nombres");
         String email = (String) sesion.get("email");
         String privilegio = sesion.get("privilegio").toString();
-        String passEncryp = Encriptar(admin.getPassword());
         String cod = (String) sesion.get("cod");
+        String passSession = (String) sesion.get("pass");
         admin.setDni(dni);
         admin.setNombres(nombres);
         admin.setApellidos(apellidos);
         admin.setEmail(email);
         admin.setPrivilegio(privilegio.charAt(0));
-        admin.setPassword(passEncryp);
+        admin.setPassword(Desencriptar(passSession));
         admin.setCodigoGenerado(cod);
         return admin;
     }
@@ -401,13 +381,13 @@ public class AdministradorAction extends ActionSupport implements SessionAware {
                     String passwordRemitente = "prueba12344";
                     String correoReceptor = email;
                     String asunto = "W&V - Restablecer Contraseña";
-                    //genera un numero entre 1 y 5 y lo guarda en la variable codigo
+                    //genera un numero entre 1 y 5 y lo guarda en la variable cod
                     int cod = (int) (100000 * Math.random());
 
                     admin.setCodigoGenerado(String.valueOf(cod));
                     admSer.actualizar(admin);
 
-                    String mensaje = "Hola " + admin.getNombres() + "<br>Tu código de restablecimiento es: " + cod;
+                    String mensaje = "Hola " + admin.getNombres() + ".<br>Tu código de restablecimiento es: " + cod;
                     MimeMessage message = new MimeMessage(session);
                     message.setFrom(new InternetAddress(correoRemitente));
                     message.addRecipient(Message.RecipientType.TO, new InternetAddress(correoReceptor));
@@ -438,23 +418,20 @@ public class AdministradorAction extends ActionSupport implements SessionAware {
         ,
                         @Result(name = "incorrecto", location = "/admin/seguridad/validar-codigo.jsp")
     })
-    public String validarCodigoAdmin() {
+    public String validarCodigoAdmin(/*String codigo, String dni*/) {
         try {
             if (codigo.isEmpty()) {
                 addActionError("Debe ingresar el código");
                 return estado = "incorrecto";
             } else {
                 admSer = new AdministradorServicio();
-                String dni =(String) sesion.get("dni");
-                admin=new Administrador();
+                String dni = (String) sesion.get("dni");
+                admin = new Administrador();
                 admin.setDni(dni);
                 admin.setCodigoGenerado(codigo);
                 estado = admSer.comparar(admin);
-                if (estado != null) {
-                    return estado;
-                } else {
+                if (estado.equals("incorrecto")) {
                     addActionError("El código es incorrecto");
-                    estado = "incorrecto";
                 }
             }
         } catch (Exception e) {
@@ -473,28 +450,34 @@ public class AdministradorAction extends ActionSupport implements SessionAware {
     })
     public String cambiarPasswordOutAdmin() {
         try {
-            admSer = new AdministradorServicio();
-            admin = recibirSession();
-            estado = admSer.actualizar(admin);
-            addActionMessage("¡Constraseña restablecida!");
-            return estado;
+            if (admin.getPassword().isEmpty()) {
+                addActionError("¡Debe completar el campo password!");
+                estado="incorrecto";
+            }else{
+                Administrador adminSession = recibirSession();
+                adminSession.setPassword(Encriptar(admin.getPassword()));//enviar el password nuevo
+                estado = admSer.actualizar(adminSession);
+                addActionMessage("¡Constraseña restablecida!");
+                
+            }
         } catch (Exception e) {
             resultado = "Error en: cambiarPasswordOutAdmin :: " + e.getMessage();
-            return estado;
         }
+        return estado;
     }
-    
-    @Action(value="cerrarSesionAdmin",results= {
-			@Result(name="ok",location="/admin/seguridad/login.jsp"),
-			@Result(name="error",location="/admin/error.jsp")
-	})
-	public String cerrarSesionAdmin() {
-		try {
-                        sesion.clear();
-			return estado="ok";
-		} catch (Exception e) {
-			resultado="Error en: cerrarSesionAdmin :: "+e.getMessage();
-			return estado;
-		}
-	}
+
+    @Action(value = "cerrarSesionAdmin", results = {
+        @Result(name = "ok", location = "/admin/seguridad/login.jsp")
+        ,
+	@Result(name = "error", location = "/admin/error.jsp")
+    })
+    public String cerrarSesionAdmin() {
+        try {
+            sesion.clear();
+            estado = "ok";
+        } catch (Exception e) {
+            resultado = "Error en: cerrarSesionAdmin :: " + e.getMessage();
+        }
+        return estado;
+    }
 }

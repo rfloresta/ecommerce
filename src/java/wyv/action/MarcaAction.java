@@ -1,26 +1,23 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package wyv.action;
 
 import com.opensymphony.xwork2.ActionSupport;
 import java.util.List;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Result;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 import wyv.servicios.MarcaServicio;
 import wyv.persistencia.Marca;
 
-/**
- *
- * @author Data
- */
-@SuppressWarnings("serial")
+@Component("MarcaAction")
+@Scope(value="prototype")
 public class MarcaAction extends ActionSupport {
 
+    @Autowired
     MarcaServicio marSer;
     private String resultado;
+    private String estado="error";
     private Marca marca;
     private List<Marca> lstMarca;
     private int edit;
@@ -45,10 +42,6 @@ public class MarcaAction extends ActionSupport {
         return edit;
     }
 
-    public void setMarSer(MarcaServicio marSer) {
-        this.marSer = marSer;
-    }
-
     @Action(value = "listarMarca", results = {
         @Result(name = "ok", location = "/admin/principal/marca.jsp")
         ,
@@ -57,9 +50,7 @@ public class MarcaAction extends ActionSupport {
     })
     public String listarMarca() {
         try {
-            marSer = new MarcaServicio();
             lstMarca = marSer.listar();
-
             return "ok";
         } catch (Exception e) {
             resultado = "Error en: listarMarca :: " + e.getMessage();
@@ -74,8 +65,8 @@ public class MarcaAction extends ActionSupport {
     })
     public String registrarMarca() {
         try {
-            new MarcaServicio().registrar(marca);
-            lstMarca = new MarcaServicio().listar();
+            estado=marSer.registrar(marca);
+            lstMarca = marSer.listar();
             marca = new Marca();
             return "ok";
         } catch (Exception e) {
@@ -89,10 +80,9 @@ public class MarcaAction extends ActionSupport {
         ,
 			@Result(name = "error", location = "/error.jsp")
     })
-    public String editarCate() {
-
+    public String editarMarca() {
         try {
-            marca = new MarcaServicio().buscar(String.valueOf(marca.getIdMarca()));
+            marca = marSer.buscar(String.valueOf(marca.getIdMarca()));
             lstMarca = new MarcaServicio().listar();
             edit = 1;
             return "ok";
@@ -110,14 +100,13 @@ public class MarcaAction extends ActionSupport {
     public String actualizarMarca() {
 
         try {
-            new MarcaServicio().actualizar(marca);
-            lstMarca = new MarcaServicio().listar();
+            estado=marSer.actualizar(marca);
+            lstMarca = marSer.listar();
             marca = new Marca();
-            return "ok";
         } catch (Exception e) {
             resultado = "Error en: eliminarMarca :: " + e.getMessage();
-            return "error";
         }
+        return estado;
     }
 
     @Action(value = "eliminarMarca", results = {
@@ -128,13 +117,12 @@ public class MarcaAction extends ActionSupport {
     public String eliminarMarca() {
 
         try {
-            new MarcaServicio().eliminar(String.valueOf(marca.getIdMarca()));
-            lstMarca = new MarcaServicio().listar();
-            return "ok";
+            estado=marSer.eliminar(String.valueOf(marca.getIdMarca()));
+            lstMarca = marSer.listar();
         } catch (Exception e) {
             resultado = "Error en: eliminarMarca :: " + e.getMessage();
-            return "error";
         }
+        return estado;
     }
 
 }

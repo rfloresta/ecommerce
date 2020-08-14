@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>PedidoJpa.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;W_V_S.A.C&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">wyv.persistencia</a> &gt; <span class="el_source">PedidoJpa.java</span></div><h1>PedidoJpa.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package wyv.persistencia;
+
+import java.io.Serializable;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.persistence.Query;
+import javax.persistence.EntityNotFoundException;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import wyv.persistencia.exceptions.IllegalOrphanException;
+import wyv.persistencia.exceptions.NonexistentEntityException;
+import wyv.persistencia.exceptions.PreexistingEntityException;
+
+/**
+ *
+ * @author Romario
+ */
+public class PedidoJpa implements Serializable {
+    
+<span class="nc" id="L31">    public PedidoJpa() {</span>
+<span class="nc" id="L32">        this.emf = Persistence.createEntityManagerFactory(&quot;W_V_S.A.CPU&quot;);</span>
+<span class="nc" id="L33">    }</span>
+<span class="nc" id="L34">    public PedidoJpa(EntityManagerFactory emf) {</span>
+<span class="nc" id="L35">        this.emf = emf;</span>
+<span class="nc" id="L36">    }</span>
+<span class="nc" id="L37">    private EntityManagerFactory emf = null;</span>
+
+    public EntityManager getEntityManager() {
+<span class="nc" id="L40">        return emf.createEntityManager();</span>
+    }
+
+    public void create(Pedido pedido) {
+<span class="nc bnc" id="L44" title="All 2 branches missed.">        if (pedido.getDetallePedidoList() == null) {</span>
+<span class="nc" id="L45">            pedido.setDetallePedidoList(new ArrayList&lt;DetallePedido&gt;());</span>
+        }
+<span class="nc" id="L47">        EntityManager em = null;</span>
+        try {
+<span class="nc" id="L49">            em = getEntityManager();</span>
+<span class="nc" id="L50">            em.getTransaction().begin();</span>
+<span class="nc" id="L51">            Cliente idCliente = pedido.getIdCliente();</span>
+<span class="nc bnc" id="L52" title="All 2 branches missed.">            if (idCliente != null) {</span>
+<span class="nc" id="L53">                idCliente = em.getReference(idCliente.getClass(), idCliente.getIdCliente());</span>
+<span class="nc" id="L54">                pedido.setIdCliente(idCliente);</span>
+            }
+<span class="nc" id="L56">            List&lt;DetallePedido&gt; attachedDetallePedidoList = new ArrayList&lt;DetallePedido&gt;();</span>
+<span class="nc bnc" id="L57" title="All 2 branches missed.">            for (DetallePedido detallePedidoListDetallePedidoToAttach : pedido.getDetallePedidoList()) {</span>
+<span class="nc" id="L58">                detallePedidoListDetallePedidoToAttach = em.getReference(detallePedidoListDetallePedidoToAttach.getClass(), detallePedidoListDetallePedidoToAttach.getDetallePedidoPK());</span>
+<span class="nc" id="L59">                attachedDetallePedidoList.add(detallePedidoListDetallePedidoToAttach);</span>
+<span class="nc" id="L60">            }</span>
+<span class="nc" id="L61">            pedido.setDetallePedidoList(attachedDetallePedidoList);</span>
+<span class="nc" id="L62">            em.persist(pedido);</span>
+<span class="nc bnc" id="L63" title="All 2 branches missed.">            if (idCliente != null) {</span>
+<span class="nc" id="L64">                idCliente.getPedidoList().add(pedido);</span>
+<span class="nc" id="L65">                idCliente = em.merge(idCliente);</span>
+            }
+<span class="nc bnc" id="L67" title="All 2 branches missed.">            for (DetallePedido detallePedidoListDetallePedido : pedido.getDetallePedidoList()) {</span>
+<span class="nc" id="L68">                Pedido oldPedidoOfDetallePedidoListDetallePedido = detallePedidoListDetallePedido.getPedido();</span>
+<span class="nc" id="L69">                detallePedidoListDetallePedido.setPedido(pedido);</span>
+<span class="nc" id="L70">                detallePedidoListDetallePedido = em.merge(detallePedidoListDetallePedido);</span>
+<span class="nc bnc" id="L71" title="All 2 branches missed.">                if (oldPedidoOfDetallePedidoListDetallePedido != null) {</span>
+<span class="nc" id="L72">                    oldPedidoOfDetallePedidoListDetallePedido.getDetallePedidoList().remove(detallePedidoListDetallePedido);</span>
+<span class="nc" id="L73">                    oldPedidoOfDetallePedidoListDetallePedido = em.merge(oldPedidoOfDetallePedidoListDetallePedido);</span>
+                }
+<span class="nc" id="L75">            }</span>
+<span class="nc" id="L76">            em.getTransaction().commit();</span>
+        } finally {
+<span class="nc bnc" id="L78" title="All 4 branches missed.">            if (em != null) {</span>
+<span class="nc" id="L79">                em.close();</span>
+            }
+        }
+<span class="nc" id="L82">    }</span>
+
+    public void edit(Pedido pedido) throws IllegalOrphanException, NonexistentEntityException, Exception {
+<span class="nc" id="L85">        EntityManager em = null;</span>
+        try {
+<span class="nc" id="L87">            em = getEntityManager();</span>
+<span class="nc" id="L88">            em.getTransaction().begin();</span>
+<span class="nc" id="L89">            Pedido persistentPedido = em.find(Pedido.class, pedido.getIdPedido());</span>
+<span class="nc" id="L90">            Cliente idClienteOld = persistentPedido.getIdCliente();</span>
+<span class="nc" id="L91">            Cliente idClienteNew = pedido.getIdCliente();</span>
+<span class="nc" id="L92">            List&lt;DetallePedido&gt; detallePedidoListOld = persistentPedido.getDetallePedidoList();</span>
+<span class="nc" id="L93">            List&lt;DetallePedido&gt; detallePedidoListNew = pedido.getDetallePedidoList();</span>
+<span class="nc" id="L94">            List&lt;String&gt; illegalOrphanMessages = null;</span>
+<span class="nc bnc" id="L95" title="All 2 branches missed.">            for (DetallePedido detallePedidoListOldDetallePedido : detallePedidoListOld) {</span>
+<span class="nc bnc" id="L96" title="All 2 branches missed.">                if (!detallePedidoListNew.contains(detallePedidoListOldDetallePedido)) {</span>
+<span class="nc bnc" id="L97" title="All 2 branches missed.">                    if (illegalOrphanMessages == null) {</span>
+<span class="nc" id="L98">                        illegalOrphanMessages = new ArrayList&lt;String&gt;();</span>
+                    }
+<span class="nc" id="L100">                    illegalOrphanMessages.add(&quot;You must retain DetallePedido &quot; + detallePedidoListOldDetallePedido + &quot; since its pedido field is not nullable.&quot;);</span>
+                }
+<span class="nc" id="L102">            }</span>
+<span class="nc bnc" id="L103" title="All 2 branches missed.">            if (illegalOrphanMessages != null) {</span>
+<span class="nc" id="L104">                throw new IllegalOrphanException(illegalOrphanMessages);</span>
+            }
+<span class="nc bnc" id="L106" title="All 2 branches missed.">            if (idClienteNew != null) {</span>
+<span class="nc" id="L107">                idClienteNew = em.getReference(idClienteNew.getClass(), idClienteNew.getIdCliente());</span>
+<span class="nc" id="L108">                pedido.setIdCliente(idClienteNew);</span>
+            }
+<span class="nc" id="L110">            List&lt;DetallePedido&gt; attachedDetallePedidoListNew = new ArrayList&lt;DetallePedido&gt;();</span>
+<span class="nc bnc" id="L111" title="All 2 branches missed.">            for (DetallePedido detallePedidoListNewDetallePedidoToAttach : detallePedidoListNew) {</span>
+<span class="nc" id="L112">                detallePedidoListNewDetallePedidoToAttach = em.getReference(detallePedidoListNewDetallePedidoToAttach.getClass(), detallePedidoListNewDetallePedidoToAttach.getDetallePedidoPK());</span>
+<span class="nc" id="L113">                attachedDetallePedidoListNew.add(detallePedidoListNewDetallePedidoToAttach);</span>
+<span class="nc" id="L114">            }</span>
+<span class="nc" id="L115">            detallePedidoListNew = attachedDetallePedidoListNew;</span>
+<span class="nc" id="L116">            pedido.setDetallePedidoList(detallePedidoListNew);</span>
+<span class="nc" id="L117">            pedido = em.merge(pedido);</span>
+<span class="nc bnc" id="L118" title="All 4 branches missed.">            if (idClienteOld != null &amp;&amp; !idClienteOld.equals(idClienteNew)) {</span>
+<span class="nc" id="L119">                idClienteOld.getPedidoList().remove(pedido);</span>
+<span class="nc" id="L120">                idClienteOld = em.merge(idClienteOld);</span>
+            }
+<span class="nc bnc" id="L122" title="All 4 branches missed.">            if (idClienteNew != null &amp;&amp; !idClienteNew.equals(idClienteOld)) {</span>
+<span class="nc" id="L123">                idClienteNew.getPedidoList().add(pedido);</span>
+<span class="nc" id="L124">                idClienteNew = em.merge(idClienteNew);</span>
+            }
+<span class="nc bnc" id="L126" title="All 2 branches missed.">            for (DetallePedido detallePedidoListNewDetallePedido : detallePedidoListNew) {</span>
+<span class="nc bnc" id="L127" title="All 2 branches missed.">                if (!detallePedidoListOld.contains(detallePedidoListNewDetallePedido)) {</span>
+<span class="nc" id="L128">                    Pedido oldPedidoOfDetallePedidoListNewDetallePedido = detallePedidoListNewDetallePedido.getPedido();</span>
+<span class="nc" id="L129">                    detallePedidoListNewDetallePedido.setPedido(pedido);</span>
+<span class="nc" id="L130">                    detallePedidoListNewDetallePedido = em.merge(detallePedidoListNewDetallePedido);</span>
+<span class="nc bnc" id="L131" title="All 4 branches missed.">                    if (oldPedidoOfDetallePedidoListNewDetallePedido != null &amp;&amp; !oldPedidoOfDetallePedidoListNewDetallePedido.equals(pedido)) {</span>
+<span class="nc" id="L132">                        oldPedidoOfDetallePedidoListNewDetallePedido.getDetallePedidoList().remove(detallePedidoListNewDetallePedido);</span>
+<span class="nc" id="L133">                        oldPedidoOfDetallePedidoListNewDetallePedido = em.merge(oldPedidoOfDetallePedidoListNewDetallePedido);</span>
+                    }
+                }
+<span class="nc" id="L136">            }</span>
+<span class="nc" id="L137">            em.getTransaction().commit();</span>
+<span class="nc" id="L138">        } catch (Exception ex) {</span>
+<span class="nc" id="L139">            String msg = ex.getLocalizedMessage();</span>
+<span class="nc bnc" id="L140" title="All 4 branches missed.">            if (msg == null || msg.length() == 0) {</span>
+<span class="nc" id="L141">                Integer id = pedido.getIdPedido();</span>
+<span class="nc bnc" id="L142" title="All 2 branches missed.">                if (findPedido(id) == null) {</span>
+<span class="nc" id="L143">                    throw new NonexistentEntityException(&quot;The pedido with id &quot; + id + &quot; no longer exists.&quot;);</span>
+                }
+            }
+<span class="nc" id="L146">            throw ex;</span>
+        } finally {
+<span class="nc bnc" id="L148" title="All 4 branches missed.">            if (em != null) {</span>
+<span class="nc" id="L149">                em.close();</span>
+            }
+        }
+<span class="nc" id="L152">    }</span>
+
+    public void destroy(Integer id) throws IllegalOrphanException, NonexistentEntityException {
+<span class="nc" id="L155">        EntityManager em = null;</span>
+        try {
+<span class="nc" id="L157">            em = getEntityManager();</span>
+<span class="nc" id="L158">            em.getTransaction().begin();</span>
+            Pedido pedido;
+            try {
+<span class="nc" id="L161">                pedido = em.getReference(Pedido.class, id);</span>
+<span class="nc" id="L162">                pedido.getIdPedido();</span>
+<span class="nc" id="L163">            } catch (EntityNotFoundException enfe) {</span>
+<span class="nc" id="L164">                throw new NonexistentEntityException(&quot;The pedido with id &quot; + id + &quot; no longer exists.&quot;, enfe);</span>
+<span class="nc" id="L165">            }</span>
+<span class="nc" id="L166">            List&lt;String&gt; illegalOrphanMessages = null;</span>
+<span class="nc" id="L167">            List&lt;DetallePedido&gt; detallePedidoListOrphanCheck = pedido.getDetallePedidoList();</span>
+<span class="nc bnc" id="L168" title="All 2 branches missed.">            for (DetallePedido detallePedidoListOrphanCheckDetallePedido : detallePedidoListOrphanCheck) {</span>
+<span class="nc bnc" id="L169" title="All 2 branches missed.">                if (illegalOrphanMessages == null) {</span>
+<span class="nc" id="L170">                    illegalOrphanMessages = new ArrayList&lt;String&gt;();</span>
+                }
+<span class="nc" id="L172">                illegalOrphanMessages.add(&quot;This Pedido (&quot; + pedido + &quot;) cannot be destroyed since the DetallePedido &quot; + detallePedidoListOrphanCheckDetallePedido + &quot; in its detallePedidoList field has a non-nullable pedido field.&quot;);</span>
+<span class="nc" id="L173">            }</span>
+<span class="nc bnc" id="L174" title="All 2 branches missed.">            if (illegalOrphanMessages != null) {</span>
+<span class="nc" id="L175">                throw new IllegalOrphanException(illegalOrphanMessages);</span>
+            }
+<span class="nc" id="L177">            Cliente idCliente = pedido.getIdCliente();</span>
+<span class="nc bnc" id="L178" title="All 2 branches missed.">            if (idCliente != null) {</span>
+<span class="nc" id="L179">                idCliente.getPedidoList().remove(pedido);</span>
+<span class="nc" id="L180">                idCliente = em.merge(idCliente);</span>
+            }
+<span class="nc" id="L182">            em.remove(pedido);</span>
+<span class="nc" id="L183">            em.getTransaction().commit();</span>
+        } finally {
+<span class="nc bnc" id="L185" title="All 4 branches missed.">            if (em != null) {</span>
+<span class="nc" id="L186">                em.close();</span>
+            }
+        }
+<span class="nc" id="L189">    }</span>
+
+    public List&lt;Pedido&gt; findPedidoEntities() {
+<span class="nc" id="L192">        return findPedidoEntities(true, -1, -1);</span>
+    }
+
+    public List&lt;Pedido&gt; findPedidoEntities(int maxResults, int firstResult) {
+<span class="nc" id="L196">        return findPedidoEntities(false, maxResults, firstResult);</span>
+    }
+
+    private List&lt;Pedido&gt; findPedidoEntities(boolean all, int maxResults, int firstResult) {
+<span class="nc" id="L200">        EntityManager em = getEntityManager();</span>
+        try {
+<span class="nc" id="L202">            CriteriaQuery cq = em.getCriteriaBuilder().createQuery();</span>
+<span class="nc" id="L203">            cq.select(cq.from(Pedido.class));</span>
+<span class="nc" id="L204">            Query q = em.createQuery(cq);</span>
+<span class="nc bnc" id="L205" title="All 2 branches missed.">            if (!all) {</span>
+<span class="nc" id="L206">                q.setMaxResults(maxResults);</span>
+<span class="nc" id="L207">                q.setFirstResult(firstResult);</span>
+            }
+<span class="nc" id="L209">            return q.getResultList();</span>
+        } finally {
+<span class="nc" id="L211">            em.close();</span>
+        }
+    }
+
+    public Pedido findPedido(Integer id) {
+<span class="nc" id="L216">        EntityManager em = getEntityManager();</span>
+        try {
+<span class="nc" id="L218">            return em.find(Pedido.class, id);</span>
+        } finally {
+<span class="nc" id="L220">            em.close();</span>
+        }
+    }
+
+    public int getPedidoCount() {
+<span class="nc" id="L225">        EntityManager em = getEntityManager();</span>
+        try {
+<span class="nc" id="L227">            CriteriaQuery cq = em.getCriteriaBuilder().createQuery();</span>
+<span class="nc" id="L228">            Root&lt;Pedido&gt; rt = cq.from(Pedido.class);</span>
+<span class="nc" id="L229">            cq.select(em.getCriteriaBuilder().count(rt));</span>
+<span class="nc" id="L230">            Query q = em.createQuery(cq);</span>
+<span class="nc" id="L231">            return ((Long) q.getSingleResult()).intValue();</span>
+        } finally {
+<span class="nc" id="L233">            em.close();</span>
+        }
+    }
+    
+    public int actualizar(Pedido p) {
+        Connection cn;
+        PreparedStatement pstmt;
+        ResultSet rs;
+<span class="nc" id="L241">        int resultado = 0;</span>
+
+        try {
+<span class="nc" id="L244">            cn = Util.getConexionBD();</span>
+<span class="nc" id="L245">            pstmt = cn.prepareStatement(&quot;UPDATE pedido set  numero=?, fecha=?, subtotal=?, igv=?, total=?, pago=?, estado=?, idCliente=? where idPedido=?&quot;);</span>
+<span class="nc" id="L246">            pstmt.setString(1, p.getNumero());</span>
+<span class="nc" id="L247">            pstmt.setString(2, p.getFecha());</span>
+<span class="nc" id="L248">            pstmt.setDouble(3, p.getSubtotal());</span>
+<span class="nc" id="L249">            pstmt.setDouble(4, p.getIgv());</span>
+<span class="nc" id="L250">            pstmt.setDouble(5, p.getTotal());</span>
+<span class="nc" id="L251">            pstmt.setString(6, p.getPago());</span>
+<span class="nc" id="L252">            pstmt.setString(7, String.valueOf(p.getEstado()));</span>
+<span class="nc" id="L253">            pstmt.setInt(8, p.getIdCliente().getIdCliente());</span>
+<span class="nc" id="L254">            pstmt.setInt(9, p.getIdPedido());</span>
+<span class="nc" id="L255">            resultado = pstmt.executeUpdate();</span>
+<span class="nc" id="L256">            System.out.println(&quot;resultado&quot; + resultado);</span>
+<span class="nc" id="L257">        } catch (Exception e) {</span>
+<span class="nc" id="L258">            e.getMessage();</span>
+<span class="nc" id="L259">}</span>
+<span class="nc" id="L260">        return resultado;</span>
+
+    }
+    public List&lt;Pedido&gt; listarPedido() {
+        PreparedStatement ptstm;
+        Connection cn;
+        ResultSet rs;
+<span class="nc" id="L267">        List&lt;Pedido&gt; lisPedido = new ArrayList&lt;&gt;();</span>
+        try {
+<span class="nc" id="L269">            cn = Util.getConexionBD();</span>
+<span class="nc" id="L270">            ptstm = cn.prepareStatement(&quot;Select p.*, c.nombres AS NombreCli From pedido AS p INNER JOIN cliente As c on p.idCliente=c.idCliente&quot;);</span>
+<span class="nc" id="L271">            rs = ptstm.executeQuery();</span>
+
+<span class="nc bnc" id="L273" title="All 2 branches missed.">            while (rs.next()) {</span>
+<span class="nc" id="L274">                Pedido pedNext = new Pedido();</span>
+<span class="nc" id="L275">                pedNext.setIdPedido(rs.getInt(1));</span>
+<span class="nc" id="L276">                pedNext.setNumero(rs.getString(2));</span>
+<span class="nc" id="L277">                pedNext.setFecha(rs.getString(3));</span>
+<span class="nc" id="L278">                pedNext.setSubtotal(rs.getDouble(4));</span>
+<span class="nc" id="L279">                pedNext.setIgv(rs.getDouble(5));</span>
+<span class="nc" id="L280">                pedNext.setTotal(rs.getDouble(6));</span>
+<span class="nc" id="L281">                pedNext.setPago(rs.getString(7));</span>
+<span class="nc" id="L282">                char s = rs.getString(8).charAt(0);</span>
+<span class="nc" id="L283">                pedNext.setEstado(s);</span>
+<span class="nc" id="L284">                Cliente cli = new Cliente();</span>
+<span class="nc" id="L285">                cli.setIdCliente(rs.getInt(9));</span>
+<span class="nc" id="L286">                cli.setNombres(rs.getString(&quot;NombreCli&quot;));</span>
+<span class="nc" id="L287">                pedNext.setIdCliente(cli);</span>
+<span class="nc" id="L288">                lisPedido.add(pedNext);</span>
+<span class="nc" id="L289">            }</span>
+<span class="nc" id="L290">        } catch (Exception e) {</span>
+<span class="nc" id="L291">            e.printStackTrace();</span>
+<span class="nc" id="L292">        }</span>
+<span class="nc" id="L293">        return lisPedido;</span>
+    }
+    
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

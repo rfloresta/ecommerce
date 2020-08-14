@@ -1,11 +1,14 @@
 package wyv.persistencia;
+
 import java.util.List;
 import java.util.Map;
+import org.springframework.stereotype.Service;
 
+@Service
 public class AdministradorDao implements IOperacionesBD<Administrador> {
-    
-    AdministradorJpa admJpa=new AdministradorJpa();
-    
+
+    AdministradorJpa admJpa = new AdministradorJpa();
+
     @Override
     public String registrar(Administrador a) {
         try {
@@ -31,59 +34,52 @@ public class AdministradorDao implements IOperacionesBD<Administrador> {
     @Override
     public String eliminar(String id) {
         try {
-           admJpa.destroy(id);
-           return "ok";
-       } catch (Exception e) {
+            admJpa.destroy(id);
+            return "ok";
+        } catch (Exception e) {
             e.getMessage();
             return null;
         }
-      
+
     }
 
     @Override
     public Administrador buscar(String id) {
-
-     return  admJpa.findAdministrador(id);
+        return admJpa.findAdministrador(id);
     }
 
     @Override
     public List<Administrador> listar() {
-        
-       return admJpa.findAdministradorEntities();
+
+        return admJpa.findAdministradorEntities();
     }
 
     @Override
     public Administrador validar(Administrador entrada) {
-       
-     return admJpa.findAdministrador(entrada.getDni());
-  
+
+        return admJpa.findAdministrador(entrada.getDni());
+
     }
+
     // Metodo para la line Chart
-    public List<Map<String, String>> ventaMes()
-    {
-        
-        
-        return   admJpa.ventaMes();
+    public List<Map<String, String>> ventaMes() {
+        return admJpa.ventaMes();
     }
-    
-    
-    //Metodo para contar Cliente
-    
-     public int ContarCliente()
-    {
+
+    public int ContarCliente() {
         return admJpa.ContarClientes();
     }
- 
-    //Metodo para contar Administrador 
-     public int ContarAdministrador()
-    {
+
+    public int ContarAdministrador() {
         return admJpa.ContarAdministrador();
     }
-     
-     //Metodo para contar Pedido
-     
-     public int ContarPedido()
-    {
+
+    public int ContarPedido() {
         return admJpa.ContarPedido();
+    }
+
+    @Override
+    public int contar() {
+       return admJpa.getAdministradorCount();
     }
 }

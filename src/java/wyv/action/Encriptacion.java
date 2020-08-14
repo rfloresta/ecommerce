@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package wyv.action;
 
 import java.security.MessageDigest;
@@ -12,10 +7,6 @@ import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 import org.apache.commons.codec.binary.Base64;
 
-/**
- *
- * @author Romario
- */
 public class Encriptacion {
     
     

@@ -1,12 +1,16 @@
 package wyv.servicios;
 
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import wyv.persistencia.Empresa;
 import wyv.persistencia.EmpresaDao;
 import wyv.persistencia.IOperacionesBD;
 
+@Service
 public class EmpresaServicio implements IOperacionesBD<Empresa> {
 
+    @Autowired
     EmpresaDao empDao;
 
     @Override
@@ -16,7 +20,6 @@ public class EmpresaServicio implements IOperacionesBD<Empresa> {
 
     @Override
     public String actualizar(Empresa a) {
-        empDao = new EmpresaDao();
         return empDao.actualizar(a);
     }
 
@@ -27,18 +30,21 @@ public class EmpresaServicio implements IOperacionesBD<Empresa> {
 
     @Override
     public Empresa buscar(String id) {
-        empDao = new EmpresaDao();
         return empDao.buscar(id);
     }
 
     @Override
     public List<Empresa> listar() {
-        empDao = new EmpresaDao();
         return empDao.listar();
     }
 
     @Override
     public Empresa validar(Empresa entrada) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int contar() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

@@ -18,12 +18,20 @@ import wyv.persistencia.Marca;
 import wyv.servicios.CategoriaServicio;
 import wyv.servicios.MarcaServicio;
 import org.apache.struts2.convention.annotation.Namespace;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
-
-@SuppressWarnings("serial")
+@Component("ProductoAction")
+@Scope(value="prototype")
 public class ProductoAction extends ActionSupport implements SessionAware{
 
+    @Autowired
     ProductoServicio proSer;
+    @Autowired
+    CategoriaServicio catSer;
+    @Autowired
+    MarcaServicio marSer;
     private String resultado;
     private String estado = "error";
     private Producto producto;
@@ -126,10 +134,9 @@ public class ProductoAction extends ActionSupport implements SessionAware{
     })
     public String listarProducto() {
         try {
-
-            lstProducto = new ProductoServicio().listar();
-            lstCategoria = new CategoriaServicio().listar();
-            lstMarca = new MarcaServicio().listar();
+            lstProducto = proSer.listar();
+            lstCategoria = catSer.listar();
+            lstMarca = marSer.listar();
             return "ok";
         } catch (Exception e) {
             resultado = "Error en: listarProducto :: " + e.getMessage();
@@ -152,12 +159,12 @@ public class ProductoAction extends ActionSupport implements SessionAware{
             proSer = new ProductoServicio();
             producto.setImagen(imagenFileName);
             estado = proSer.registrar(producto);
-            lstCategoria = new CategoriaServicio().listar();
-            lstMarca = new MarcaServicio().listar();
             lstProducto = proSer.listar();
+            lstCategoria = catSer.listar();
+            lstMarca = marSer.listar();
             producto = new Producto();
             return estado;
-        } catch (Exception e) {
+        } catch (IOException e) {
             resultado = "Error en: registrarProducto :: " + e.getMessage();
             return estado;
         }
@@ -171,11 +178,10 @@ public class ProductoAction extends ActionSupport implements SessionAware{
     public String editarProducto() {
 
         try {
-            proSer = new ProductoServicio();
             producto = proSer.buscar(String.valueOf(producto.getIdProducto()));
             lstProducto = proSer.listar();
-            lstCategoria = new CategoriaServicio().listar();
-            lstMarca = new MarcaServicio().listar();
+            lstCategoria = catSer.listar();
+            lstMarca = marSer.listar();
             edit = 1;
             return "ok";
         } catch (Exception e) {
@@ -204,8 +210,8 @@ public class ProductoAction extends ActionSupport implements SessionAware{
             }
             estado = proSer.actualizar(producto);
             lstProducto = proSer.listar();
-            lstCategoria = new CategoriaServicio().listar();
-            lstMarca = new MarcaServicio().listar();
+            lstCategoria = catSer.listar();
+            lstMarca = marSer.listar();
             producto = new Producto();
             return estado;
         } catch (IOException e) {
@@ -220,11 +226,10 @@ public class ProductoAction extends ActionSupport implements SessionAware{
     })
     public String eliminarProducto() {
         try {
-            proSer = new ProductoServicio();
             estado = proSer.eliminar(String.valueOf(producto.getIdProducto()));
             lstProducto = proSer.listar();
-            lstCategoria = new CategoriaServicio().listar();
-            lstMarca = new MarcaServicio().listar();
+            lstCategoria = catSer.listar();
+            lstMarca = marSer.listar();
             return estado;
         } catch (Exception e) {
             resultado = "Error en: eliminarProducto :: " + e.getMessage();
@@ -239,17 +244,16 @@ public class ProductoAction extends ActionSupport implements SessionAware{
     
     public String verCatalogo() {
         try {
-            lstProducto = new ProductoServicio().listar();
+            lstProducto = proSer.listar();
             sesion.put("lstProducto", lstProducto);
-            lstCategoria = new CategoriaServicio().listar();
+            lstCategoria = catSer.listar();
             sesion.put("lstCategoria", lstCategoria);
-            //lstSubCategoria = new CategoriaServicio().listarsubCategoria(idCate);
-            lstMarca = new MarcaServicio().listar();
+            lstMarca = marSer.listar();
             sesion.put("lstMarca", lstMarca);
-            return "ok";
+            estado="ok";
         } catch (Exception e) {
             resultado = "Error en: verCatalogo :: " + e.getMessage();
-            return "error";
         }
+            return estado;
     }
 }

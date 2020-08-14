@@ -1,16 +1,69 @@
 package wyv.rest;
 
+import com.google.gson.Gson;
 import com.opensymphony.xwork2.ModelDriven;
 import org.apache.struts2.rest.HttpHeaders;
 import wyv.persistencia.ClienteDao;
 import org.apache.struts2.rest.DefaultHttpHeaders;
+import org.json.simple.parser.ParseException;
+import wyv.persistencia.Cliente;
 
-public class ClienteController  implements ModelDriven<Object> {
+public class ClienteController implements ModelDriven<Object> {
 
+    public Cliente cliente = new Cliente();
     private String id;
-    private Object model;
-    private final  ClienteDao clieDao = new ClienteDao();
+    private Object clientes;
+    private String estado="";
+    private String json;
+    
+    private ClienteDao clieDao;
 
+    public HttpHeaders index() {
+        clieDao = new ClienteDao();
+        clientes = clieDao.listar();
+        return new DefaultHttpHeaders("index").disableCaching();
+    }
+
+    public HttpHeaders show() {
+        clieDao = new ClienteDao();
+        clientes = clieDao.buscar(id);
+        return new DefaultHttpHeaders("show");
+    }
+    
+    public HttpHeaders edit() throws ParseException {
+        clieDao = new ClienteDao();
+        Gson g = new Gson();
+        cliente = g.fromJson(json, Cliente.class);
+        cliente.setIdCliente(Integer.parseInt(getId()));
+        estado=clieDao.actualizar(cliente);
+        return new DefaultHttpHeaders("edit");
+    }
+
+    @Override
+    public Object getModel() {
+        if (clientes == null) {
+            return estado;
+        } 
+        return clientes;
+    }
+
+    
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public String getJson() {
+        return json;
+    }
+
+    public void setJson(String json) {
+        this.json = json;
+    }
+    
     public String getId() {
         return id;
     }
@@ -19,18 +72,7 @@ public class ClienteController  implements ModelDriven<Object> {
         this.id = id;
     }
 
-    public HttpHeaders index() {
-		model = clieDao.listar();
-		return new DefaultHttpHeaders("index").disableCaching();
-	}
-    public HttpHeaders show() {
-        model = clieDao.buscar(id);
-        return new DefaultHttpHeaders("show");
+    public void setClientes(Cliente clientes) {
+        this.clientes = clientes;
     }
-
-    @Override
-    public Object getModel() {
-        return model;    
-    }
-
 }

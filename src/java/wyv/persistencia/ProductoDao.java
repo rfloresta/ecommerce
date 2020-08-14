@@ -1,16 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package wyv.persistencia;
 
 import java.util.List;
+import org.springframework.stereotype.Service;
 
-/**
- *
- * @author Data
- */
+@Service
 public class ProductoDao implements IOperacionesBD<Producto>{
 
     ProductoJpa proJpa=new ProductoJpa();
@@ -74,6 +67,11 @@ public class ProductoDao implements IOperacionesBD<Producto>{
 
     @Override
     public Producto validar(Producto entrada) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int contar() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

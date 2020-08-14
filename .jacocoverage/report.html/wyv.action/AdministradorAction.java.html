@@ -1,0 +1,496 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>AdministradorAction.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;W_V_S.A.C&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">wyv.action</a> &gt; <span class="el_source">AdministradorAction.java</span></div><h1>AdministradorAction.java</h1><pre class="source lang-java linenums">package wyv.action;
+
+import com.google.gson.Gson;
+import java.util.List;
+
+import org.apache.struts2.convention.annotation.Action;
+import org.apache.struts2.convention.annotation.Result;
+
+import com.opensymphony.xwork2.ActionSupport;
+
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.Properties;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import org.apache.struts2.interceptor.SessionAware;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+import static wyv.action.Encriptacion.Desencriptar;
+import wyv.servicios.AdministradorServicio;
+import wyv.persistencia.Administrador;
+import static wyv.action.Encriptacion.Encriptar;
+import wyv.servicios.ClienteServicio;
+import wyv.servicios.PedidoServicio;
+
+@Component(&quot;AdministradorAction&quot;)
+@Scope(value=&quot;prototype&quot;)
+<span class="nc" id="L33">public class AdministradorAction extends ActionSupport implements SessionAware {</span>
+    
+    @Autowired
+    AdministradorServicio admSer;
+<span class="nc" id="L37">    ClienteServicio cliSer=new ClienteServicio();</span>
+<span class="nc" id="L38">    PedidoServicio pedSer=new PedidoServicio();</span>
+    private String resultado;
+<span class="nc" id="L40">    private String estado = &quot;error&quot;;</span>
+    private Administrador admin;
+    private List&lt;Administrador&gt; lstAdmin;
+    private List&lt;String&gt; listaMes;
+    private List&lt;String&gt; listaTotal;
+    private int edit;
+
+    private int contarCliente;
+    private int contarAdministrador;
+    private int contarPedidos;
+    private String jsonMes;
+    private String jsonTotal;
+    private Map&lt;String, Object&gt; sesion;
+
+    private String passwordActual;
+    private String codigo;
+
+    public String getCodigo() {
+<span class="nc" id="L58">        return codigo;</span>
+    }
+
+    public void setCodigo(String codigo) {
+<span class="nc" id="L62">        this.codigo = codigo;</span>
+<span class="nc" id="L63">    }</span>
+
+    @Override
+    public void setSession(Map&lt;String, Object&gt; map) {
+<span class="nc" id="L67">        this.sesion = map;</span>
+<span class="nc" id="L68">    }</span>
+
+    public Map getSession() {
+<span class="nc" id="L71">        return sesion;</span>
+    }
+
+    public int getContarAdministrador() {
+<span class="nc" id="L75">        return contarAdministrador;</span>
+    }
+
+    public void setContarAdministrador(int contarAdministrador) {
+<span class="nc" id="L79">        this.contarAdministrador = contarAdministrador;</span>
+<span class="nc" id="L80">    }</span>
+
+    public int getContarPedidos() {
+<span class="nc" id="L83">        return contarPedidos;</span>
+    }
+
+    public void setContarPedidos(int contarPedidos) {
+<span class="nc" id="L87">        this.contarPedidos = contarPedidos;</span>
+<span class="nc" id="L88">    }</span>
+
+    public int getContarCliente() {
+<span class="nc" id="L91">        return contarCliente;</span>
+    }
+
+    public void setContarCliente(int contarCliente) {
+<span class="nc" id="L95">        this.contarCliente = contarCliente;</span>
+<span class="nc" id="L96">    }</span>
+
+    public String getJsonMes() {
+<span class="nc" id="L99">        return jsonMes;</span>
+    }
+
+    public void setJsonMes(String jsonMes) {
+<span class="nc" id="L103">        this.jsonMes = jsonMes;</span>
+<span class="nc" id="L104">    }</span>
+
+    public String getJsonTotal() {
+<span class="nc" id="L107">        return jsonTotal;</span>
+    }
+
+    public void setJsonTotal(String jsonTotal) {
+<span class="nc" id="L111">        this.jsonTotal = jsonTotal;</span>
+<span class="nc" id="L112">    }</span>
+
+    public String getResultado() {
+<span class="nc" id="L115">        return resultado;</span>
+    }
+
+    public void setAdmin(Administrador admin) {
+<span class="nc" id="L119">        this.admin = admin;</span>
+<span class="nc" id="L120">    }</span>
+
+    public Administrador getAdmin() {
+<span class="nc" id="L123">        return admin;</span>
+    }
+
+    public List&lt;Administrador&gt; getLstAdmin() {
+<span class="nc" id="L127">        return lstAdmin;</span>
+    }
+
+    public int getEdit() {
+<span class="nc" id="L131">        return edit;</span>
+    }
+
+    public String getPasswordActual() {
+<span class="nc" id="L135">        return passwordActual;</span>
+    }
+
+    public void setPasswordActual(String passwordActual) {
+<span class="nc" id="L139">        this.passwordActual = passwordActual;</span>
+<span class="nc" id="L140">    }</span>
+
+    @Action(value = &quot;ingresoAdmin&quot;, results = {
+        @Result(name = &quot;ok&quot;, location = &quot;/admin/principal/inicio.jsp&quot;)
+        ,
+        @Result(name = &quot;incorrecto&quot;, location = &quot;/admin/seguridad/login.jsp&quot;)
+        ,
+	@Result(name = &quot;error&quot;, location = &quot;/admin/error.jsp&quot;)})
+    public String ingresoAdmin(/*Administrador admin*/) {
+        try {
+<span class="nc" id="L150">            admSer = new AdministradorServicio();</span>
+<span class="nc" id="L151">            admin = admSer.validar(admin);</span>
+<span class="nc bnc" id="L152" title="All 2 branches missed.">            if (admin != null) {</span>
+<span class="nc" id="L153">                List&lt;Map&lt;String, String&gt;&gt; lista = admSer.ventaMes();</span>
+<span class="nc" id="L154">                List&lt;String&gt; listaMesP = new ArrayList();</span>
+<span class="nc" id="L155">                List&lt;String&gt; listaTotalP = new ArrayList();</span>
+                // se separa las listas
+<span class="nc bnc" id="L157" title="All 2 branches missed.">                for (int i = 0; i &lt; lista.size(); i++) {</span>
+<span class="nc" id="L158">                    listaMesP.add(lista.get(i).get(&quot;Fecha&quot;));</span>
+<span class="nc" id="L159">                    listaTotalP.add(lista.get(i).get(&quot;Total&quot;));</span>
+                }
+                // Se separa las listas para mandarlo en formato JSON
+<span class="nc" id="L162">                listaMes = listaMesP;</span>
+<span class="nc" id="L163">                listaTotal = listaTotalP;</span>
+
+                // Se envia al formato Json
+<span class="nc" id="L166">                jsonMes = new Gson().toJson(listaMes);</span>
+<span class="nc" id="L167">                jsonTotal = new Gson().toJson(listaTotal);</span>
+                
+<span class="nc" id="L169">                contarAdministrador = admSer.contar();</span>
+<span class="nc" id="L170">                contarCliente = admSer.ContarCliente();</span>
+<span class="nc" id="L171">                contarPedidos = admSer.ContarPedido();</span>
+<span class="nc" id="L172">                enviarSession(admin);</span>
+<span class="nc" id="L173">                estado = &quot;ok&quot;;</span>
+<span class="nc" id="L174">            } else {</span>
+<span class="nc" id="L175">                addActionError(&quot;Usuario y/o Contraseña incorrectos&quot;);</span>
+<span class="nc" id="L176">                estado = &quot;incorrecto&quot;;</span>
+            }
+<span class="nc" id="L178">        } catch (Exception e) {</span>
+<span class="nc" id="L179">            resultado = &quot;Error en: ingresoAdmin :: &quot; + e.getMessage();</span>
+<span class="nc" id="L180">        }</span>
+<span class="nc" id="L181">            return estado;</span>
+    }
+
+    public void enviarSession(Administrador admin) {
+<span class="nc" id="L185">        sesion.put(&quot;nombres&quot;, admin.getNombres());</span>
+<span class="nc" id="L186">        sesion.put(&quot;apellidos&quot;, admin.getApellidos());</span>
+<span class="nc" id="L187">        sesion.put(&quot;dni&quot;, admin.getDni());</span>
+<span class="nc" id="L188">        sesion.put(&quot;email&quot;, admin.getEmail());</span>
+<span class="nc" id="L189">        sesion.put(&quot;privilegio&quot;, admin.getPrivilegio());</span>
+<span class="nc" id="L190">        sesion.put(&quot;pass&quot;, admin.getPassword());</span>
+<span class="nc" id="L191">        sesion.put(&quot;cod&quot;, admin.getCodigoGenerado());</span>
+<span class="nc" id="L192">    }</span>
+
+    @Action(value = &quot;listarAdmin&quot;, results = {
+        @Result(name = &quot;ok&quot;, location = &quot;/admin/principal/administrador.jsp&quot;)
+        ,
+	@Result(name = &quot;error&quot;, location = &quot;admin/error.jsp&quot;),})
+    public String listarAdmin() {
+        try {
+<span class="nc" id="L200">            admSer = new AdministradorServicio();</span>
+<span class="nc" id="L201">            lstAdmin = admSer.listar();</span>
+<span class="nc" id="L202">            return &quot;ok&quot;;</span>
+<span class="nc" id="L203">        } catch (Exception e) {</span>
+<span class="nc" id="L204">            resultado = &quot;Error en: listarAdmin :: &quot; + e.getMessage();</span>
+<span class="nc" id="L205">            return &quot;error&quot;;</span>
+        }
+    }
+
+//    @Override
+//    public void validate(){
+//        if(getAdmin().getDni() == null){
+//            addFieldError(&quot;dni&quot;, &quot;Ingrese el DNI&quot;);
+//        }
+
+    //HACER ASÍ EL MANTENIMIENTO, CON LA VARIABLE &quot;estado&quot;
+    @Action(value = &quot;registrarAdmin&quot;, results = {
+        @Result(name = &quot;ok&quot;, location = &quot;/admin/principal/administrador.jsp&quot;)
+        ,
+			@Result(name = &quot;error&quot;, location = &quot;/admin/error.jsp&quot;)
+        ,
+                        @Result(name = &quot;input&quot;, location = &quot;/admin/principal/administrador.jsp&quot;)
+    })
+    public String registrarAdmin() {
+        try {
+<span class="nc" id="L225">            admSer = new AdministradorServicio();</span>
+<span class="nc" id="L226">            String passEncryp = Encriptar(admin.getPassword());</span>
+<span class="nc" id="L227">            admin.setPassword(passEncryp);</span>
+<span class="nc" id="L228">            estado = admSer.registrar(admin);</span>
+<span class="nc" id="L229">            lstAdmin = admSer.listar();</span>
+<span class="nc" id="L230">            admin = new Administrador();</span>
+<span class="nc" id="L231">            return estado;</span>
+<span class="nc" id="L232">        } catch (Exception e) {</span>
+<span class="nc" id="L233">            resultado = &quot;Error en: registrarAdmin :: &quot; + e.getMessage();</span>
+<span class="nc" id="L234">            return estado;</span>
+        }
+    }
+
+    @Action(value = &quot;editarAdmin&quot;, results = {
+        @Result(name = &quot;ok&quot;, location = &quot;/admin/principal/administrador.jsp&quot;)
+        ,
+			@Result(name = &quot;error&quot;, location = &quot;/error.jsp&quot;)
+    })
+    public String editarAdmin() {
+
+        try {
+<span class="nc" id="L246">            admSer = new AdministradorServicio();</span>
+<span class="nc" id="L247">            admin = admSer.buscar(admin.getDni());</span>
+<span class="nc" id="L248">            lstAdmin = admSer.listar();</span>
+<span class="nc" id="L249">            edit = 1;</span>
+<span class="nc" id="L250">            return &quot;ok&quot;;</span>
+<span class="nc" id="L251">        } catch (Exception e) {</span>
+<span class="nc" id="L252">            resultado = &quot;Error en: editarAdmin :: &quot; + e.getMessage();</span>
+<span class="nc" id="L253">            return &quot;error&quot;;</span>
+        }
+    }
+
+    @Action(value = &quot;actualizarAdmin&quot;, results = {
+        @Result(name = &quot;ok&quot;, location = &quot;/admin/principal/administrador.jsp&quot;)
+        ,
+			@Result(name = &quot;error&quot;, location = &quot;/admin/error.jsp&quot;)
+    })
+    public String actualizarAdmin() {
+
+        try {
+<span class="nc" id="L265">            admSer = new AdministradorServicio();</span>
+<span class="nc" id="L266">            estado = admSer.actualizar(admin);</span>
+<span class="nc" id="L267">            lstAdmin = admSer.listar();</span>
+<span class="nc" id="L268">            admin = new Administrador();</span>
+<span class="nc" id="L269">            return estado;</span>
+<span class="nc" id="L270">        } catch (Exception e) {</span>
+<span class="nc" id="L271">            resultado = &quot;Error en: eliminarMarca :: &quot; + e.getMessage();</span>
+<span class="nc" id="L272">            return estado;</span>
+        }
+    }
+
+    @Action(value = &quot;eliminarAdmin&quot;, results = {
+        @Result(name = &quot;ok&quot;, location = &quot;/admin/principal/administrador.jsp&quot;)
+        ,
+			@Result(name = &quot;error&quot;, location = &quot;/error.jsp&quot;)
+    })
+    public String eliminarAdmin() {
+
+        try {
+<span class="nc" id="L284">            admSer = new AdministradorServicio();</span>
+<span class="nc" id="L285">            estado = admSer.eliminar(admin.getDni());</span>
+<span class="nc" id="L286">            lstAdmin = admSer.listar();</span>
+<span class="nc" id="L287">            return estado;</span>
+<span class="nc" id="L288">        } catch (Exception e) {</span>
+<span class="nc" id="L289">            resultado = &quot;Error en: eliminarMarca :: &quot; + e.getMessage();</span>
+<span class="nc" id="L290">            return estado;</span>
+        }
+    }
+
+    @Action(value = &quot;cargarPerfilAdmin&quot;, results = {
+        @Result(name = &quot;ok&quot;, location = &quot;/admin/principal/perfil.jsp&quot;)
+        ,
+			@Result(name = &quot;error&quot;, location = &quot;/admin/error.jsp&quot;)
+    })
+    public String cargarDatosAdmin() {
+
+        try {
+<span class="nc" id="L302">            admSer = new AdministradorServicio();</span>
+<span class="nc" id="L303">            String dni = (String) sesion.get(&quot;dni&quot;);</span>
+<span class="nc" id="L304">            admin = admSer.buscar(dni);</span>
+<span class="nc" id="L305">            return &quot;ok&quot;;</span>
+<span class="nc" id="L306">        } catch (Exception e) {</span>
+<span class="nc" id="L307">            resultado = &quot;Error en: cargarPerfilAdmin :: &quot; + e.getMessage();</span>
+<span class="nc" id="L308">            return &quot;error&quot;;</span>
+        }
+    }
+
+    @Action(value = &quot;actualizarDatosAdmin&quot;, results = {
+        @Result(name = &quot;ok&quot;, location = &quot;/admin/principal/perfil.jsp&quot;)
+        ,
+			@Result(name = &quot;error&quot;, location = &quot;/admin/error.jsp&quot;)
+    })
+    public String actualizarDatosAdmin() {
+
+        try {
+<span class="nc" id="L320">            admSer = new AdministradorServicio();</span>
+<span class="nc" id="L321">            estado = admSer.actualizar(admin);</span>
+<span class="nc" id="L322">            String dni = (String) sesion.get(&quot;dni&quot;);</span>
+<span class="nc" id="L323">            admin = admSer.buscar(dni);</span>
+<span class="nc" id="L324">            return estado;</span>
+<span class="nc" id="L325">        } catch (Exception e) {</span>
+<span class="nc" id="L326">            resultado = &quot;Error en: actualizarDatos :: &quot; + e.getMessage();</span>
+<span class="nc" id="L327">            return estado;</span>
+        }
+    }
+
+    @Action(value = &quot;cambiarPasswordInAdmin&quot;, results = {
+        @Result(name = &quot;ok&quot;, location = &quot;/admin/seguridad/login.jsp&quot;)
+        ,
+			@Result(name = &quot;error&quot;, location = &quot;/admin/error.jsp&quot;)
+        ,
+                        @Result(name = &quot;incorrecto&quot;, location = &quot;/admin/seguridad/cambiar-password-in.jsp&quot;)
+    })
+    public String cambiarPasswordInAdmin() {
+        try {
+<span class="nc" id="L340">            String passSession = Desencriptar((String) sesion.get(&quot;pass&quot;));</span>
+<span class="nc" id="L341">            String passForm = passwordActual;</span>
+<span class="nc bnc" id="L342" title="All 2 branches missed.">            if (passSession.equals(passForm)) {</span>
+<span class="nc" id="L343">                admSer = new AdministradorServicio();</span>
+<span class="nc" id="L344">                admin = recibirSession();</span>
+<span class="nc" id="L345">                estado = admSer.actualizar(admin);</span>
+<span class="nc" id="L346">                return estado;</span>
+            }
+<span class="nc" id="L348">            addActionError(&quot;La Contraseña Actual no es la correcta&quot;);</span>
+<span class="nc" id="L349">            return estado = &quot;incorrecto&quot;;</span>
+<span class="nc" id="L350">        } catch (Exception e) {</span>
+<span class="nc" id="L351">            resultado = &quot;Error en: cambiarPasswordInAdmin :: &quot; + e.getMessage();</span>
+<span class="nc" id="L352">            return estado;</span>
+        }
+    }
+
+    public Administrador recibirSession() {
+<span class="nc" id="L357">        String dni = (String) sesion.get(&quot;dni&quot;);</span>
+<span class="nc" id="L358">        String apellidos = (String) sesion.get(&quot;apellidos&quot;);</span>
+<span class="nc" id="L359">        String nombres = (String) sesion.get(&quot;nombres&quot;);</span>
+<span class="nc" id="L360">        String email = (String) sesion.get(&quot;email&quot;);</span>
+<span class="nc" id="L361">        String privilegio = sesion.get(&quot;privilegio&quot;).toString();</span>
+<span class="nc" id="L362">        String passEncryp = Encriptar(admin.getPassword());</span>
+<span class="nc" id="L363">        String cod = (String) sesion.get(&quot;cod&quot;);</span>
+<span class="nc" id="L364">        admin.setDni(dni);</span>
+<span class="nc" id="L365">        admin.setNombres(nombres);</span>
+<span class="nc" id="L366">        admin.setApellidos(apellidos);</span>
+<span class="nc" id="L367">        admin.setEmail(email);</span>
+<span class="nc" id="L368">        admin.setPrivilegio(privilegio.charAt(0));</span>
+<span class="nc" id="L369">        admin.setPassword(passEncryp);</span>
+<span class="nc" id="L370">        admin.setCodigoGenerado(cod);</span>
+<span class="nc" id="L371">        return admin;</span>
+    }
+
+    @Action(value = &quot;restablecerPasswordAdmin&quot;, results = {
+        @Result(name = &quot;ok&quot;, location = &quot;/admin/seguridad/validar-codigo.jsp&quot;)
+        ,
+			@Result(name = &quot;error&quot;, location = &quot;/admin/error.jsp&quot;)
+        ,
+                        @Result(name = &quot;incorrecto&quot;, location = &quot;/admin/seguridad/restablecer-password.jsp&quot;)
+    })
+    public String restablecerPasswordAdmin() {
+        try {
+<span class="nc bnc" id="L383" title="All 2 branches missed.">            if (admin.getEmail().isEmpty()) {</span>
+<span class="nc" id="L384">                addActionError(&quot;Debe ingresar el campo Email&quot;);</span>
+<span class="nc" id="L385">                return estado = &quot;incorrecto&quot;;</span>
+            } else {
+<span class="nc" id="L387">                admSer = new AdministradorServicio();</span>
+<span class="nc" id="L388">                String email = admin.getEmail();</span>
+<span class="nc" id="L389">                admin = admSer.validarEmail(email);</span>
+<span class="nc bnc" id="L390" title="All 2 branches missed.">                if (admin != null) {</span>
+
+<span class="nc" id="L392">                    Properties props = new Properties();</span>
+<span class="nc" id="L393">                    props.setProperty(&quot;mail.smtp.host&quot;, &quot;smtp.gmail.com&quot;);//usamos gmail como host </span>
+<span class="nc" id="L394">                    props.setProperty(&quot;mail.smtp.starttls.enable&quot;, &quot;true&quot;);// habilitamos el protocol seguro TLS</span>
+<span class="nc" id="L395">                    props.setProperty(&quot;mail.smtp.port&quot;, &quot;587&quot;);//Puerto de gmail</span>
+<span class="nc" id="L396">                    props.setProperty(&quot;mail.smtp.auth&quot;, &quot;true&quot;);//Autorización</span>
+
+<span class="nc" id="L398">                    Session session = Session.getDefaultInstance(props);</span>
+<span class="nc" id="L399">                    String correoRemitente = &quot;prueba10021@gmail.com&quot;;</span>
+<span class="nc" id="L400">                    String passwordRemitente = &quot;prueba12344&quot;;</span>
+<span class="nc" id="L401">                    String correoReceptor = email;</span>
+<span class="nc" id="L402">                    String asunto = &quot;W&amp;V - Restablecer Contraseña&quot;;</span>
+                    //genera un numero entre 1 y 5 y lo guarda en la variable cod
+<span class="nc" id="L404">                    int cod = (int) (100000 * Math.random());</span>
+
+<span class="nc" id="L406">                    admin.setCodigoGenerado(String.valueOf(cod));</span>
+<span class="nc" id="L407">                    admSer.actualizar(admin);</span>
+
+<span class="nc" id="L409">                    String mensaje = &quot;Hola &quot; + admin.getNombres() + &quot;.&lt;br&gt;Tu código de restablecimiento es: &quot; + cod;</span>
+<span class="nc" id="L410">                    MimeMessage message = new MimeMessage(session);</span>
+<span class="nc" id="L411">                    message.setFrom(new InternetAddress(correoRemitente));</span>
+<span class="nc" id="L412">                    message.addRecipient(Message.RecipientType.TO, new InternetAddress(correoReceptor));</span>
+<span class="nc" id="L413">                    message.setSubject(asunto);</span>
+<span class="nc" id="L414">                    message.setText(mensaje, &quot;ISO-8859-1&quot;, &quot;html&quot;);</span>
+<span class="nc" id="L415">                    Transport t = session.getTransport(&quot;smtp&quot;);</span>
+<span class="nc" id="L416">                    t.connect(correoRemitente, passwordRemitente);</span>
+<span class="nc" id="L417">                    t.sendMessage(message, message.getRecipients(Message.RecipientType.TO));</span>
+<span class="nc" id="L418">                    t.close();</span>
+<span class="nc" id="L419">                    enviarSession(admin);</span>
+<span class="nc" id="L420">                    estado = &quot;ok&quot;;</span>
+<span class="nc" id="L421">                } else {</span>
+<span class="nc" id="L422">                    addActionError(&quot;El email no existe en el sistema&quot;);</span>
+<span class="nc" id="L423">                    estado = &quot;incorrecto&quot;;</span>
+                }
+            }
+<span class="nc" id="L426">        } catch (MessagingException e) {</span>
+<span class="nc" id="L427">            resultado = &quot;Error en: restablecerPasswordAdmin :: &quot; + e.getMessage();</span>
+<span class="nc" id="L428">            return estado;</span>
+<span class="nc" id="L429">        }</span>
+<span class="nc" id="L430">        return estado;</span>
+    }
+
+    @Action(value = &quot;validarCodigoAdmin&quot;, results = {
+        @Result(name = &quot;ok&quot;, location = &quot;/admin/seguridad/cambiar-password-out.jsp&quot;)
+        ,
+			@Result(name = &quot;error&quot;, location = &quot;/admin/error.jsp&quot;)
+        ,
+                        @Result(name = &quot;incorrecto&quot;, location = &quot;/admin/seguridad/validar-codigo.jsp&quot;)
+    })
+    public String validarCodigoAdmin(/*String codigo, String dni*/) {
+        try {
+<span class="nc bnc" id="L442" title="All 2 branches missed.">            if (codigo.isEmpty()) {</span>
+<span class="nc" id="L443">                addActionError(&quot;Debe ingresar el código&quot;);</span>
+<span class="nc" id="L444">                return estado = &quot;incorrecto&quot;;</span>
+            } else {
+<span class="nc" id="L446">                admSer = new AdministradorServicio();</span>
+<span class="nc" id="L447">                String dni =(String) sesion.get(&quot;dni&quot;);</span>
+<span class="nc" id="L448">                admin=new Administrador();</span>
+<span class="nc" id="L449">                admin.setDni(dni);</span>
+<span class="nc" id="L450">                admin.setCodigoGenerado(codigo);</span>
+<span class="nc" id="L451">                estado = admSer.comparar(admin);</span>
+<span class="nc bnc" id="L452" title="All 2 branches missed.">                if (estado.equals(&quot;incorrecto&quot;)) {</span>
+<span class="nc" id="L453">                    addActionError(&quot;El código es incorrecto&quot;);</span>
+                }
+            }
+<span class="nc" id="L456">        } catch (Exception e) {</span>
+<span class="nc" id="L457">            resultado = &quot;Error en: validarCodigoAdmin :: &quot; + e.getMessage();</span>
+<span class="nc" id="L458">            return estado;</span>
+<span class="nc" id="L459">        }</span>
+<span class="nc" id="L460">        return estado;</span>
+    }
+
+    @Action(value = &quot;cambiarPasswordOutAdmin&quot;, results = {
+        @Result(name = &quot;ok&quot;, location = &quot;/admin/seguridad/login.jsp&quot;)
+        ,
+			@Result(name = &quot;error&quot;, location = &quot;/admin/error.jsp&quot;)
+        ,
+                        @Result(name = &quot;incorrecto&quot;, location = &quot;/admin/seguridad/cambiar-password-out.jsp&quot;)
+    })
+    public String cambiarPasswordOutAdmin() {
+        try {
+<span class="nc" id="L472">            admSer = new AdministradorServicio();</span>
+<span class="nc" id="L473">            admin = recibirSession();</span>
+<span class="nc" id="L474">            estado = admSer.actualizar(admin);</span>
+<span class="nc" id="L475">            addActionMessage(&quot;¡Constraseña restablecida!&quot;);</span>
+<span class="nc" id="L476">        } catch (Exception e) {</span>
+<span class="nc" id="L477">            resultado = &quot;Error en: cambiarPasswordOutAdmin :: &quot; + e.getMessage();</span>
+<span class="nc" id="L478">        }</span>
+<span class="nc" id="L479">        return estado;</span>
+    }
+    
+    @Action(value=&quot;cerrarSesionAdmin&quot;,results= {
+			@Result(name=&quot;ok&quot;,location=&quot;/admin/seguridad/login.jsp&quot;),
+			@Result(name=&quot;error&quot;,location=&quot;/admin/error.jsp&quot;)
+	})
+	public String cerrarSesionAdmin() {
+		try {
+<span class="nc" id="L488">                        sesion.clear();</span>
+<span class="nc" id="L489">			return estado=&quot;ok&quot;;</span>
+<span class="nc" id="L490">		} catch (Exception e) {</span>
+<span class="nc" id="L491">			resultado=&quot;Error en: cerrarSesionAdmin :: &quot;+e.getMessage();</span>
+<span class="nc" id="L492">			return estado;</span>
+		}
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

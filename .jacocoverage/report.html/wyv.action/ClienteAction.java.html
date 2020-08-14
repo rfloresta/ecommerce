@@ -1,0 +1,406 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>ClienteAction.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;W_V_S.A.C&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">wyv.action</a> &gt; <span class="el_source">ClienteAction.java</span></div><h1>ClienteAction.java</h1><pre class="source lang-java linenums">package wyv.action;
+
+import com.opensymphony.xwork2.ActionSupport;
+import java.io.IOException;
+import java.util.List;
+import java.util.Map;
+import java.util.Properties;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import org.apache.struts2.convention.annotation.Action;
+import org.apache.struts2.convention.annotation.Result;
+import org.apache.struts2.interceptor.SessionAware;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+import static wyv.action.Encriptacion.Desencriptar;
+import static wyv.action.Encriptacion.Encriptar;
+import wyv.persistencia.Cliente;
+import wyv.servicios.ClienteServicio;
+import wyv.persistencia.Producto;
+import wyv.persistencia.Categoria;
+import wyv.persistencia.Marca;
+
+@Component(&quot;ClienteAction&quot;)
+@Scope(value = &quot;prototype&quot;)
+<span class="nc" id="L30">public class ClienteAction extends ActionSupport implements SessionAware {</span>
+
+<span class="nc" id="L32">    @Autowired</span>
+    ClienteServicio clieSer = new ClienteServicio();
+    private String resultado;
+    private Cliente cliente;
+    private List&lt;Cliente&gt; lstClie;
+    private int edit;
+    private int inicio;
+    private String jsonPerfil;
+    private int op;
+    private Map&lt;String, Object&gt; sesion;
+    private String passwordActual;
+<span class="nc" id="L43">    private String estado = &quot;error&quot;;</span>
+    private String mensajeError;
+    private List&lt;Producto&gt; lstProducto;
+    private List&lt;Categoria&gt; lstCategoria;
+    private List&lt;Marca&gt; lstMarca;
+    private String codigo;
+
+    public String getMensajeError() {
+<span class="nc" id="L51">        return mensajeError;</span>
+    }
+
+    public List&lt;Producto&gt; getLstProducto() {
+<span class="nc" id="L55">        return lstProducto;</span>
+    }
+
+    public void setLstProducto(List&lt;Producto&gt; lstProducto) {
+<span class="nc" id="L59">        this.lstProducto = lstProducto;</span>
+<span class="nc" id="L60">    }</span>
+
+    public List&lt;Categoria&gt; getLstCategoria() {
+<span class="nc" id="L63">        return lstCategoria;</span>
+    }
+
+    public void setLstCategoria(List&lt;Categoria&gt; lstCategoria) {
+<span class="nc" id="L67">        this.lstCategoria = lstCategoria;</span>
+<span class="nc" id="L68">    }</span>
+
+    public List&lt;Marca&gt; getLstMarca() {
+<span class="nc" id="L71">        return lstMarca;</span>
+    }
+
+    public void setLstMarca(List&lt;Marca&gt; lstMarca) {
+<span class="nc" id="L75">        this.lstMarca = lstMarca;</span>
+<span class="nc" id="L76">    }</span>
+
+    public String getResultado() {
+<span class="nc" id="L79">        return resultado;</span>
+    }
+
+    public String getJsonPerfil() {
+<span class="nc" id="L83">        return jsonPerfil;</span>
+    }
+
+    public void setJsonPerfil(String jsonPerfil) {
+<span class="nc" id="L87">        this.jsonPerfil = jsonPerfil;</span>
+<span class="nc" id="L88">    }</span>
+
+    public int getOp() {
+<span class="nc" id="L91">        return op;</span>
+    }
+
+    public void setOp(int op) {
+<span class="nc" id="L95">        this.op = op;</span>
+<span class="nc" id="L96">    }</span>
+
+    public Cliente getCliente() {
+<span class="nc" id="L99">        return cliente;</span>
+    }
+
+    public void setCliente(Cliente cliente) {
+<span class="nc" id="L103">        this.cliente = cliente;</span>
+<span class="nc" id="L104">    }</span>
+
+    public List&lt;Cliente&gt; getLstClie() {
+<span class="nc" id="L107">        return lstClie;</span>
+    }
+
+    public int getEdit() {
+<span class="nc" id="L111">        return edit;</span>
+    }
+
+    public int getInicio() {
+<span class="nc" id="L115">        return inicio;</span>
+    }
+
+    public void setInicio(int inicio) {
+<span class="nc" id="L119">        this.inicio = inicio;</span>
+<span class="nc" id="L120">    }</span>
+
+    public void setClieSer(ClienteServicio clieSer) {
+<span class="nc" id="L123">        this.clieSer = clieSer;</span>
+<span class="nc" id="L124">    }</span>
+
+    public String getPasswordActual() {
+<span class="nc" id="L127">        return passwordActual;</span>
+    }
+
+    public void setPasswordActual(String passwordActual) {
+<span class="nc" id="L131">        this.passwordActual = passwordActual;</span>
+<span class="nc" id="L132">    }</span>
+
+    @Override
+    public void setSession(Map&lt;String, Object&gt; map) {
+<span class="nc" id="L136">        this.sesion = map;</span>
+<span class="nc" id="L137">    }</span>
+
+    public String getCodigo() {
+<span class="nc" id="L140">        return codigo;</span>
+    }
+
+    public void setCodigo(String codigo) {
+<span class="nc" id="L144">        this.codigo = codigo;</span>
+<span class="nc" id="L145">    }</span>
+
+    @Action(value = &quot;ingresoCliente&quot;, results = {
+        @Result(name = &quot;ok&quot;, location = &quot;/catalogo.jsp&quot;)
+        ,
+        @Result(name = &quot;incorrecto&quot;, location = &quot;/catalogo.jsp&quot;)
+        ,
+	@Result(name = &quot;error&quot;, location = &quot;/error.jsp&quot;),})
+    public String ingresoCliente(/*Cliente cliente*/) {
+        try {
+<span class="nc" id="L155">            lstClie = clieSer.listar();</span>
+<span class="nc bnc" id="L156" title="All 2 branches missed.">            for (Cliente c : lstClie) {</span>
+<span class="nc" id="L157">                String passDesencriptado = Desencriptar(c.getPassword());</span>
+<span class="nc bnc" id="L158" title="All 4 branches missed.">                if (c.getEmail().equals(cliente.getEmail()) &amp;&amp; passDesencriptado.equals(cliente.getPassword())) {</span>
+<span class="nc" id="L159">                    enviarSession(c);</span>
+<span class="nc" id="L160">                    addActionMessage(&quot;&quot;);</span>
+<span class="nc" id="L161">                    sesion.put(&quot;seccion&quot;, 1);</span>
+<span class="nc" id="L162">                    return &quot;ok&quot;;</span>
+                }
+<span class="nc" id="L164">            }</span>
+<span class="nc" id="L165">            addFieldError(&quot;mensajeError&quot;, &quot;Usuario o contraseña incorrecta&quot;);</span>
+<span class="nc" id="L166">            sesion.put(&quot;seccion&quot;, 0);</span>
+<span class="nc" id="L167">            estado = &quot;incorrecto&quot;;</span>
+<span class="nc" id="L168">        } catch (Exception e) {</span>
+<span class="nc" id="L169">            resultado = &quot;Error en: ingresoClie :: &quot; + e.getMessage();</span>
+<span class="nc" id="L170">        }</span>
+<span class="nc" id="L171">        return estado;</span>
+    }
+
+    @Action(value = &quot;listarClie&quot;, results = {
+        @Result(name = &quot;ok&quot;, location = &quot;/admin/principal/cliente.jsp&quot;)
+        ,
+	@Result(name = &quot;error&quot;, location = &quot;admin/error.jsp&quot;)
+
+    })
+    public String listarClie() {
+        try {
+<span class="nc" id="L182">            lstClie = clieSer.listar();</span>
+<span class="nc" id="L183">            estado = &quot;ok&quot;;</span>
+<span class="nc" id="L184">        } catch (Exception e) {</span>
+<span class="nc" id="L185">            resultado = &quot;Error en: listarCate :: &quot; + e.getMessage();</span>
+<span class="nc" id="L186">        }</span>
+<span class="nc" id="L187">        return estado;</span>
+    }
+
+    @Action(value = &quot;misDatos&quot;, results = {
+        @Result(name = &quot;ok&quot;, location = &quot;/perfil.jsp&quot;)
+    })
+    public String misDatos() {
+<span class="nc" id="L194">        return &quot;ok&quot;;</span>
+    }
+
+    @Action(value = &quot;registrarse&quot;, results = {
+        @Result(name = &quot;ok&quot;, location = &quot;/catalogo.jsp&quot;)
+        ,
+			@Result(name = &quot;error&quot;, location = &quot;/error.jsp&quot;)
+    })
+    public String registrarse(/*Cliente cliente*/) {
+        try {
+<span class="nc" id="L204">            Cliente clie = clieSer.validarEmail(cliente.getEmail());</span>
+<span class="nc bnc" id="L205" title="All 2 branches missed.">            if (clie == null) {</span>
+<span class="nc" id="L206">                String passEncryp = Encriptar(cliente.getPassword());</span>
+<span class="nc" id="L207">                cliente.setPassword(passEncryp);</span>
+<span class="nc" id="L208">                estado = clieSer.registrar(cliente);</span>
+<span class="nc" id="L209">                cliente = clieSer.validarEmail(cliente.getEmail());</span>
+<span class="nc" id="L210">                enviarSession(cliente);</span>
+<span class="nc" id="L211">                sesion.put(&quot;seccion&quot;, 1);</span>
+<span class="nc" id="L212">                addActionMessage(&quot;¡Gracias por registrarte!&quot;);</span>
+<span class="nc" id="L213">            } else {</span>
+<span class="nc" id="L214">                addActionError(&quot;El Email ya se encuentra registrado&quot;);</span>
+<span class="nc" id="L215">                sesion.put(&quot;seccion&quot;, 0);</span>
+<span class="nc" id="L216">                estado = &quot;incorrecto&quot;;</span>
+            }
+<span class="nc" id="L218">        } catch (Exception e) {</span>
+<span class="nc" id="L219">            resultado = &quot;Error en: registrarse :: &quot; + e.getMessage();</span>
+<span class="nc" id="L220">        }</span>
+
+<span class="nc" id="L222">        return estado;</span>
+    }
+
+    public void enviarSession(Cliente cliente) {
+<span class="nc" id="L226">        sesion.put(&quot;id&quot;, cliente.getIdCliente());</span>
+<span class="nc" id="L227">        sesion.put(&quot;dni&quot;, cliente.getDni());</span>
+<span class="nc" id="L228">        sesion.put(&quot;nombres&quot;, cliente.getNombres());</span>
+<span class="nc" id="L229">        sesion.put(&quot;apellidos&quot;, cliente.getApellidos());</span>
+<span class="nc" id="L230">        sesion.put(&quot;cel&quot;, cliente.getNumCelular());</span>
+<span class="nc" id="L231">        sesion.put(&quot;dir&quot;, cliente.getDireccion());</span>
+<span class="nc" id="L232">        sesion.put(&quot;email&quot;, cliente.getEmail());</span>
+<span class="nc" id="L233">        sesion.put(&quot;pass&quot;, cliente.getPassword());</span>
+<span class="nc" id="L234">    }</span>
+
+    @Action(value = &quot;devolverPagPass&quot;, results = {
+        @Result(name = &quot;ok&quot;, location = &quot;/seguridad/cambiar-password-in.jsp&quot;)
+    })
+    public String devolverPag() {
+<span class="nc" id="L240">        return &quot;ok&quot;;</span>
+    }
+
+    @Action(value = &quot;cambiarPasswordClieIn&quot;, results = {
+        @Result(name = &quot;ok&quot;, location = &quot;/index.jsp&quot;)
+        ,
+			@Result(name = &quot;error&quot;, location = &quot;/error.jsp&quot;)
+        ,
+                        @Result(name = &quot;incorrecto&quot;, location = &quot;/seguridad/incorrecto.jsp&quot;)
+    })
+    public String cambiarPasswordClieIn(/*String passwordSession, String passwordActual, Cliente cliente*/) {
+        try {
+<span class="nc" id="L252">            String passwordSession = Desencriptar((String) sesion.get(&quot;pass&quot;));</span>
+<span class="nc bnc" id="L253" title="All 2 branches missed.">            if (passwordSession.equals(passwordActual)) {</span>
+<span class="nc" id="L254">                cliente = recibirSession();</span>
+<span class="nc" id="L255">                estado = clieSer.actualizar(cliente);</span>
+<span class="nc" id="L256">                cerrarSesionClie();</span>
+            } else {
+<span class="nc" id="L258">                addActionError(&quot;La Contraseña Actual no es la correcta&quot;);</span>
+<span class="nc" id="L259">                estado = &quot;incorrecto&quot;;</span>
+            }
+<span class="nc" id="L261">        } catch (Exception e) {</span>
+<span class="nc" id="L262">            resultado = &quot;Error en: cambiarPasswordClieIn :: &quot; + e.getMessage();</span>
+<span class="nc" id="L263">        }</span>
+<span class="nc" id="L264">        return estado;</span>
+    }
+
+    public Cliente recibirSession() {
+<span class="nc" id="L268">        int id = (Integer) sesion.get(&quot;id&quot;);</span>
+<span class="nc" id="L269">        String dni = (String) sesion.get(&quot;dni&quot;);</span>
+<span class="nc" id="L270">        String nombres = (String) sesion.get(&quot;nombres&quot;);</span>
+<span class="nc" id="L271">        String apellidos = (String) sesion.get(&quot;apellidos&quot;);</span>
+<span class="nc" id="L272">        String dir = (String) sesion.get(&quot;dir&quot;);</span>
+<span class="nc" id="L273">        String cel = (String) sesion.get(&quot;cel&quot;);</span>
+<span class="nc" id="L274">        String email = (String) sesion.get(&quot;email&quot;);</span>
+<span class="nc" id="L275">        String passEncryp = Encriptar(cliente.getPassword());</span>
+<span class="nc" id="L276">        cliente.setIdCliente(id);</span>
+<span class="nc" id="L277">        cliente.setDni(dni);</span>
+<span class="nc" id="L278">        cliente.setNombres(nombres);</span>
+<span class="nc" id="L279">        cliente.setApellidos(apellidos);</span>
+<span class="nc" id="L280">        cliente.setEmail(email);</span>
+<span class="nc" id="L281">        cliente.setDireccion(dir);</span>
+<span class="nc" id="L282">        cliente.setNumCelular(cel);</span>
+<span class="nc" id="L283">        cliente.setPassword(passEncryp);</span>
+<span class="nc" id="L284">        return cliente;</span>
+    }
+
+    @Action(value = &quot;cerrarSesionClie&quot;, results = {
+        @Result(name = &quot;ok&quot;, location = &quot;/index.jsp&quot;)
+        ,
+			@Result(name = &quot;error&quot;, location = &quot;/error.jsp&quot;)
+    })
+    public String cerrarSesionClie() {
+        try {
+<span class="nc" id="L294">            sesion.clear();</span>
+<span class="nc" id="L295">            sesion.put(&quot;seccion&quot;, 0);</span>
+<span class="nc" id="L296">            return &quot;ok&quot;;</span>
+<span class="nc" id="L297">        } catch (Exception e) {</span>
+<span class="nc" id="L298">            resultado = &quot;Error en: cerrarSesionCliente :: &quot; + e.getMessage();</span>
+<span class="nc" id="L299">            return estado;</span>
+        }
+    }
+
+    @Action(value = &quot;restablecerPasswordClie&quot;, results = {
+        @Result(name = &quot;ok&quot;, location = &quot;/seguridad/validar-codigo.jsp&quot;)
+        ,
+        @Result(name = &quot;incorrecto&quot;, location = &quot;/seguridad/incorrecto.jsp&quot;)
+        ,
+        @Result(name = &quot;error&quot;, location = &quot;/seguridad/incorrecto.jsp&quot;)}
+    )
+    public String restablecerPasswordClie(/*Cliente cliente*/) throws MessagingException, IOException {
+        try {
+<span class="nc bnc" id="L312" title="All 2 branches missed.">            if (cliente.getEmail().isEmpty()) {</span>
+<span class="nc" id="L313">                addActionError(&quot;Debe ingresar el campo Email&quot;);</span>
+<span class="nc" id="L314">                estado = &quot;incorrecto&quot;;</span>
+            } else {
+<span class="nc" id="L316">                String email = cliente.getEmail();</span>
+<span class="nc" id="L317">                cliente = clieSer.validarEmail(email);</span>
+<span class="nc bnc" id="L318" title="All 2 branches missed.">                if (cliente != null) {</span>
+<span class="nc" id="L319">                    Properties props = new Properties();</span>
+<span class="nc" id="L320">                    props.setProperty(&quot;mail.smtp.host&quot;, &quot;smtp.gmail.com&quot;);//usamos gmail como host </span>
+<span class="nc" id="L321">                    props.setProperty(&quot;mail.smtp.starttls.enable&quot;, &quot;true&quot;);// habilitamos el protocol seguro TLS</span>
+<span class="nc" id="L322">                    props.setProperty(&quot;mail.smtp.port&quot;, &quot;587&quot;);//Puerto de gmail</span>
+<span class="nc" id="L323">                    props.setProperty(&quot;mail.smtp.auth&quot;, &quot;true&quot;);//Autorización</span>
+<span class="nc" id="L324">                    Session session = Session.getDefaultInstance(props);</span>
+<span class="nc" id="L325">                    String correoRemitente = &quot;prueba10021@gmail.com&quot;;</span>
+<span class="nc" id="L326">                    String passwordRemitente = &quot;prueba12344&quot;;</span>
+<span class="nc" id="L327">                    String correoReceptor = email;</span>
+<span class="nc" id="L328">                    String asunto = &quot;W&amp;V - Restablecer Contraseña&quot;;</span>
+                    //genera un numero entre 1 y 5 y lo guarda en la variable codigo
+<span class="nc" id="L330">                    int cod = (int) (100000 * Math.random());</span>
+<span class="nc" id="L331">                    cliente.setCodigoGenerado(String.valueOf(cod));</span>
+<span class="nc" id="L332">                    estado = clieSer.actualizar(cliente);</span>
+<span class="nc" id="L333">                    String mensaje = &quot;Hola &quot; + cliente.getNombres() + &quot;.&lt;br&gt;Tu código de restablecimiento es: &quot; + cod;</span>
+<span class="nc" id="L334">                    MimeMessage message = new MimeMessage(session);</span>
+<span class="nc" id="L335">                    message.setFrom(new InternetAddress(correoRemitente));</span>
+<span class="nc" id="L336">                    message.addRecipient(Message.RecipientType.TO, new InternetAddress(correoReceptor));</span>
+<span class="nc" id="L337">                    message.setSubject(asunto);</span>
+<span class="nc" id="L338">                    message.setText(mensaje, &quot;ISO-8859-1&quot;, &quot;html&quot;);</span>
+<span class="nc" id="L339">                    Transport t = session.getTransport(&quot;smtp&quot;);</span>
+<span class="nc" id="L340">                    t.connect(correoRemitente, passwordRemitente);</span>
+<span class="nc" id="L341">                    t.sendMessage(message, message.getRecipients(Message.RecipientType.TO));</span>
+<span class="nc" id="L342">                    t.close();</span>
+<span class="nc" id="L343">                    enviarSession(cliente);</span>
+<span class="nc" id="L344">                } else {</span>
+<span class="nc" id="L345">                    addActionError(&quot;El email no existe en el sistema&quot;);</span>
+<span class="nc" id="L346">                    estado = &quot;incorrecto&quot;;</span>
+                }
+            }
+<span class="nc" id="L349">        } catch (MessagingException e) {</span>
+<span class="nc" id="L350">            resultado = &quot;Error en: restablecerPasswordClie :: &quot; + e.getMessage();</span>
+<span class="nc" id="L351">        }</span>
+<span class="nc" id="L352">        return estado;</span>
+    }
+
+    @Action(value = &quot;validarCodigoClie&quot;, results = {
+        @Result(name = &quot;ok&quot;, location = &quot;/seguridad/cambiar-password-out.jsp&quot;)
+        ,
+        @Result(name = &quot;incorrecto&quot;, location = &quot;/seguridad/incorrecto.jsp&quot;)
+        ,
+        @Result(name = &quot;error&quot;, location = &quot;/seguridad/incorrecto.jsp&quot;)
+    })
+    public String validarCodigoClie(/*String codigo, int id*/) {
+        try {
+<span class="nc bnc" id="L364" title="All 2 branches missed.">            if (codigo.isEmpty()) {</span>
+<span class="nc" id="L365">                addActionError(&quot;Debe ingresar el código&quot;);</span>
+<span class="nc" id="L366">                estado = &quot;incorrecto&quot;;</span>
+            } else {
+<span class="nc" id="L368">                int id = (Integer) sesion.get(&quot;id&quot;);</span>
+<span class="nc" id="L369">                cliente = new Cliente();</span>
+<span class="nc" id="L370">                cliente.setIdCliente(id);</span>
+<span class="nc" id="L371">                cliente.setCodigoGenerado(codigo);</span>
+<span class="nc" id="L372">                estado = clieSer.comparar(cliente);</span>
+<span class="nc bnc" id="L373" title="All 2 branches missed.">                if (estado.equals(&quot;incorrecto&quot;)) {</span>
+<span class="nc" id="L374">                    addActionError(&quot;El código es incorrecto&quot;);</span>
+                }
+            }
+<span class="nc" id="L377">        } catch (Exception e) {</span>
+<span class="nc" id="L378">            resultado = &quot;Error en: validarCodigoClie :: &quot; + e.getMessage();</span>
+<span class="nc" id="L379">        }</span>
+<span class="nc" id="L380">        return estado;</span>
+    }
+
+    @Action(value = &quot;cambiarPasswordOutClie&quot;, results = {
+        @Result(name = &quot;ok&quot;, location = &quot;/index.jsp&quot;)
+        ,
+			@Result(name = &quot;error&quot;, location = &quot;/error.jsp&quot;)
+        ,
+                        @Result(name = &quot;incorrecto&quot;, location = &quot;/seguridad/incorrecto.jsp&quot;)
+    })
+    public String cambiarPasswordOutClie(/*Cliente cliente*/) {
+        try {
+<span class="nc" id="L392">            cliente = recibirSession();</span>
+<span class="nc bnc" id="L393" title="All 2 branches missed.">            if(cliente.getPassword().isEmpty()){</span>
+<span class="nc" id="L394">                addActionError(&quot;Debe completar el password&quot;);</span>
+<span class="nc" id="L395">                estado=&quot;incorrecto&quot;;</span>
+            }else{
+<span class="nc" id="L397">                estado = clieSer.actualizar(cliente);</span>
+<span class="nc" id="L398">                addActionMessage(&quot;¡Constraseña restablecida!&quot;);</span>
+            }
+<span class="nc" id="L400">        } catch (Exception e) {</span>
+<span class="nc" id="L401">            resultado = &quot;Error en: cambiarPasswordOutClie :: &quot; + e.getMessage();</span>
+<span class="nc" id="L402">        }</span>
+<span class="nc" id="L403">        return estado;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

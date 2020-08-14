@@ -2,6 +2,7 @@ package wyv.persistencia;
 
 import java.util.List;
 
+
 public interface IOperacionesBD<T> {
 
 	 String registrar(T a);
@@ -10,6 +11,7 @@ public interface IOperacionesBD<T> {
 	 T buscar(String id);
 	 List<T> listar();
          T validar (T entrada);
+         int contar();
     
 }
 

@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Pedido.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;W_V_S.A.C&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">wyv.persistencia</a> &gt; <span class="el_source">Pedido.java</span></div><h1>Pedido.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package wyv.persistencia;
+
+import java.io.Serializable;
+import java.util.List;
+import javax.persistence.Basic;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+import org.codehaus.jackson.annotate.JsonBackReference;
+import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonManagedReference;
+
+/**
+ *
+ * @author Romario
+ */
+@Entity
+@Table(name = &quot;pedido&quot;)
+@XmlRootElement
+@NamedQueries({
+    @NamedQuery(name = &quot;Pedido.findAll&quot;, query = &quot;SELECT p FROM Pedido p&quot;)
+    , @NamedQuery(name = &quot;Pedido.findByIdPedido&quot;, query = &quot;SELECT p FROM Pedido p WHERE p.idPedido = :idPedido&quot;)
+    , @NamedQuery(name = &quot;Pedido.findByNumero&quot;, query = &quot;SELECT p FROM Pedido p WHERE p.numero = :numero&quot;)
+    , @NamedQuery(name = &quot;Pedido.findByFecha&quot;, query = &quot;SELECT p FROM Pedido p WHERE p.fecha = :fecha&quot;)
+    , @NamedQuery(name = &quot;Pedido.findBySubtotal&quot;, query = &quot;SELECT p FROM Pedido p WHERE p.subtotal = :subtotal&quot;)
+    , @NamedQuery(name = &quot;Pedido.findByIgv&quot;, query = &quot;SELECT p FROM Pedido p WHERE p.igv = :igv&quot;)
+    , @NamedQuery(name = &quot;Pedido.findByTotal&quot;, query = &quot;SELECT p FROM Pedido p WHERE p.total = :total&quot;)
+    , @NamedQuery(name = &quot;Pedido.findByPago&quot;, query = &quot;SELECT p FROM Pedido p WHERE p.pago = :pago&quot;)
+    , @NamedQuery(name = &quot;Pedido.findByEstado&quot;, query = &quot;SELECT p FROM Pedido p WHERE p.estado = :estado&quot;)})
+public class Pedido implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+    @Id
+    @Basic(optional = false)
+    @Column(name = &quot;idPedido&quot;)
+    private Integer idPedido;
+    @Column(name = &quot;numero&quot;)
+    private String numero;
+    @Column(name = &quot;fecha&quot;)
+    private String fecha;
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Column(name = &quot;subtotal&quot;)
+    private Double subtotal;
+    @Column(name = &quot;igv&quot;)
+    private Double igv;
+    @Column(name = &quot;total&quot;)
+    private Double total;
+    @Column(name = &quot;pago&quot;)
+    private String pago;
+    @Column(name = &quot;estado&quot;)
+    private Character estado;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = &quot;pedido&quot;)
+    @JsonManagedReference
+    private List&lt;DetallePedido&gt; detallePedidoList;
+    @JoinColumn(name = &quot;idCliente&quot;, referencedColumnName = &quot;idCliente&quot;)
+    @ManyToOne
+    @JsonBackReference
+    private Cliente idCliente;
+
+<span class="fc" id="L74">    public Pedido() {</span>
+<span class="fc" id="L75">    }</span>
+
+<span class="nc" id="L77">    public Pedido(Integer idPedido) {</span>
+<span class="nc" id="L78">        this.idPedido = idPedido;</span>
+<span class="nc" id="L79">    }</span>
+
+    public Integer getIdPedido() {
+<span class="nc" id="L82">        return idPedido;</span>
+    }
+
+    public void setIdPedido(Integer idPedido) {
+<span class="nc" id="L86">        this.idPedido = idPedido;</span>
+<span class="nc" id="L87">    }</span>
+
+    public String getNumero() {
+<span class="nc" id="L90">        return numero;</span>
+    }
+
+    public void setNumero(String numero) {
+<span class="nc" id="L94">        this.numero = numero;</span>
+<span class="nc" id="L95">    }</span>
+
+    public String getFecha() {
+<span class="nc" id="L98">        return fecha;</span>
+    }
+
+    public void setFecha(String fecha) {
+<span class="nc" id="L102">        this.fecha = fecha;</span>
+<span class="nc" id="L103">    }</span>
+
+    public Double getSubtotal() {
+<span class="nc" id="L106">        return subtotal;</span>
+    }
+
+    public void setSubtotal(Double subtotal) {
+<span class="nc" id="L110">        this.subtotal = subtotal;</span>
+<span class="nc" id="L111">    }</span>
+
+    public Double getIgv() {
+<span class="nc" id="L114">        return igv;</span>
+    }
+
+    public void setIgv(Double igv) {
+<span class="nc" id="L118">        this.igv = igv;</span>
+<span class="nc" id="L119">    }</span>
+
+    public Double getTotal() {
+<span class="nc" id="L122">        return total;</span>
+    }
+
+    public void setTotal(Double total) {
+<span class="nc" id="L126">        this.total = total;</span>
+<span class="nc" id="L127">    }</span>
+
+    public String getPago() {
+<span class="nc" id="L130">        return pago;</span>
+    }
+
+    public void setPago(String pago) {
+<span class="nc" id="L134">        this.pago = pago;</span>
+<span class="nc" id="L135">    }</span>
+
+    public Character getEstado() {
+<span class="nc" id="L138">        return estado;</span>
+    }
+
+    public void setEstado(Character estado) {
+<span class="nc" id="L142">        this.estado = estado;</span>
+<span class="nc" id="L143">    }</span>
+
+    @XmlTransient
+//    @JsonIgnore
+    public List&lt;DetallePedido&gt; getDetallePedidoList() {
+<span class="nc" id="L148">        return detallePedidoList;</span>
+    }
+
+    public void setDetallePedidoList(List&lt;DetallePedido&gt; detallePedidoList) {
+<span class="nc" id="L152">        this.detallePedidoList = detallePedidoList;</span>
+<span class="nc" id="L153">    }</span>
+
+    public Cliente getIdCliente() {
+<span class="nc" id="L156">        return idCliente;</span>
+    }
+
+    public void setIdCliente(Cliente idCliente) {
+<span class="nc" id="L160">        this.idCliente = idCliente;</span>
+<span class="nc" id="L161">    }</span>
+
+    @Override
+    public int hashCode() {
+<span class="nc" id="L165">        int hash = 0;</span>
+<span class="nc bnc" id="L166" title="All 2 branches missed.">        hash += (idPedido != null ? idPedido.hashCode() : 0);</span>
+<span class="nc" id="L167">        return hash;</span>
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+<span class="nc bnc" id="L173" title="All 2 branches missed.">        if (!(object instanceof Pedido)) {</span>
+<span class="nc" id="L174">            return false;</span>
+        }
+<span class="nc" id="L176">        Pedido other = (Pedido) object;</span>
+<span class="nc bnc" id="L177" title="All 8 branches missed.">        if ((this.idPedido == null &amp;&amp; other.idPedido != null) || (this.idPedido != null &amp;&amp; !this.idPedido.equals(other.idPedido))) {</span>
+<span class="nc" id="L178">            return false;</span>
+        }
+<span class="nc" id="L180">        return true;</span>
+    }
+
+    @Override
+    public String toString() {
+<span class="nc" id="L185">        return &quot;wyv.persistencia.Pedido[ idPedido=&quot; + idPedido + &quot; ]&quot;;</span>
+    }
+    
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

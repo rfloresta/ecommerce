@@ -302,7 +302,7 @@
         </div>
         <!--Fin Modal Para inicio de sesión -->
 
-
+        
         <!--Inicio Modal Para Registrarse-->
         <div class="modal fade" id="registrarseModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
@@ -310,15 +310,12 @@
                     <div class="modal-header justify-content-center border-bottom-0">
                         <div class="social-auth-links text-center  mb-3 mt-4">
                             <a href="#" class="btn  btn-primary my-3 my-md-0">
-                                <i class="fa fa-facebook mr-2"></i> Sign in using Facebook
-                            </a>
-                            <a href="#" class="btn  btn-danger">
-                                <i class="fa fa-google-plus mr-2"></i> Sign in using Google+
+                                <i class="fa fa-facebook mr-2"></i> Ingresar con Facebook
                             </a>
                         </div>
                     </div>
                     <div class="modal-body pt-0">
-                        <p class="text-center">- OR -</p>
+                        <p class="text-center">- O -</p>
                         <s:form action="registrarse" theme="simple">
                             <div class="input-group mb-3 mt-3">
                                 <s:textfield cssClass="form-control" name="cliente.nombres" id="nombres" placeholder="Ingrese Nombres"/>
@@ -331,11 +328,12 @@
                             </div>
                             <div class="input-group mb-3">
                                 <s:password cssClass="form-control" name="cliente.password" id="password" placeholder="Ingrese Password"/>
-
                             </div>
+                                <s:if test="#session == null"> <!-- Validación para que no ocurra el error al duplicarse el id password2 en la funcion de cambiar contraseña -->
                             <div class="input-group mb-3">
                                 <s:password cssClass="form-control" name="password2" id="password2" placeholder="Confirmar Password"/>
                             </div>
+                            </s:if>
                             <div class="row">
                                 <!-- /.col -->
                                 <div class="col-8">

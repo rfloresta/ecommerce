@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>CategoriaJpa.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;W_V_S.A.C&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">wyv.persistencia</a> &gt; <span class="el_source">CategoriaJpa.java</span></div><h1>CategoriaJpa.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package wyv.persistencia;
+
+import java.io.Serializable;
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import javax.persistence.Query;
+import javax.persistence.EntityNotFoundException;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import wyv.persistencia.exceptions.NonexistentEntityException;
+
+/**
+ *
+ * @author Romario
+ */
+public class CategoriaJpa implements Serializable {
+    
+<span class="nc" id="L29">    public CategoriaJpa() {</span>
+<span class="nc" id="L30">        this.emf= Persistence.createEntityManagerFactory(&quot;W_V_S.A.CPU&quot;);</span>
+<span class="nc" id="L31">    }</span>
+<span class="nc" id="L32">    public CategoriaJpa(EntityManagerFactory emf) {</span>
+<span class="nc" id="L33">        this.emf = emf;</span>
+<span class="nc" id="L34">    }</span>
+<span class="nc" id="L35">    private EntityManagerFactory emf = null;</span>
+
+    public EntityManager getEntityManager() {
+<span class="nc" id="L38">        return emf.createEntityManager();</span>
+    }
+
+    public void create(Categoria categoria) {
+<span class="nc" id="L42">        EntityManager em = null;</span>
+        try {
+<span class="nc" id="L44">            em = getEntityManager();</span>
+<span class="nc" id="L45">            em.getTransaction().begin();</span>
+<span class="nc" id="L46">            em.persist(categoria);</span>
+<span class="nc" id="L47">            em.getTransaction().commit();</span>
+        } finally {
+<span class="nc bnc" id="L49" title="All 4 branches missed.">            if (em != null) {</span>
+<span class="nc" id="L50">                em.close();</span>
+            }
+        }
+<span class="nc" id="L53">    }</span>
+
+    public void edit(Categoria categoria) throws NonexistentEntityException, Exception {
+<span class="nc" id="L56">        EntityManager em = null;</span>
+        try {
+<span class="nc" id="L58">            em = getEntityManager();</span>
+<span class="nc" id="L59">            em.getTransaction().begin();</span>
+<span class="nc" id="L60">            categoria = em.merge(categoria);</span>
+<span class="nc" id="L61">            em.getTransaction().commit();</span>
+<span class="nc" id="L62">        } catch (Exception ex) {</span>
+<span class="nc" id="L63">            String msg = ex.getLocalizedMessage();</span>
+<span class="nc bnc" id="L64" title="All 4 branches missed.">            if (msg == null || msg.length() == 0) {</span>
+<span class="nc" id="L65">                Integer id = categoria.getIdCategoria();</span>
+<span class="nc bnc" id="L66" title="All 2 branches missed.">                if (findCategoria(id) == null) {</span>
+<span class="nc" id="L67">                    throw new NonexistentEntityException(&quot;The categoria with id &quot; + id + &quot; no longer exists.&quot;);</span>
+                }
+            }
+<span class="nc" id="L70">            throw ex;</span>
+        } finally {
+<span class="nc bnc" id="L72" title="All 4 branches missed.">            if (em != null) {</span>
+<span class="nc" id="L73">                em.close();</span>
+            }
+        }
+<span class="nc" id="L76">    }</span>
+
+    public void destroy(Integer id) throws NonexistentEntityException {
+<span class="nc" id="L79">        EntityManager em = null;</span>
+        try {
+<span class="nc" id="L81">            em = getEntityManager();</span>
+<span class="nc" id="L82">            em.getTransaction().begin();</span>
+            Categoria categoria;
+            try {
+<span class="nc" id="L85">                categoria = em.getReference(Categoria.class, id);</span>
+<span class="nc" id="L86">                categoria.getIdCategoria();</span>
+<span class="nc" id="L87">            } catch (EntityNotFoundException enfe) {</span>
+<span class="nc" id="L88">                throw new NonexistentEntityException(&quot;The categoria with id &quot; + id + &quot; no longer exists.&quot;, enfe);</span>
+<span class="nc" id="L89">            }</span>
+<span class="nc" id="L90">            em.remove(categoria);</span>
+<span class="nc" id="L91">            em.getTransaction().commit();</span>
+        } finally {
+<span class="nc bnc" id="L93" title="All 4 branches missed.">            if (em != null) {</span>
+<span class="nc" id="L94">                em.close();</span>
+            }
+        }
+<span class="nc" id="L97">    }</span>
+
+    public List&lt;Categoria&gt; findCategoriaEntities() {
+<span class="nc" id="L100">        return findCategoriaEntities(true, -1, -1);</span>
+    }
+
+    public List&lt;Categoria&gt; findCategoriaEntities(int maxResults, int firstResult) {
+<span class="nc" id="L104">        return findCategoriaEntities(false, maxResults, firstResult);</span>
+    }
+
+    private List&lt;Categoria&gt; findCategoriaEntities(boolean all, int maxResults, int firstResult) {
+<span class="nc" id="L108">        EntityManager em = getEntityManager();</span>
+        try {
+<span class="nc" id="L110">            CriteriaQuery cq = em.getCriteriaBuilder().createQuery();</span>
+<span class="nc" id="L111">            cq.select(cq.from(Categoria.class));</span>
+<span class="nc" id="L112">            Query q = em.createQuery(cq);</span>
+<span class="nc bnc" id="L113" title="All 2 branches missed.">            if (!all) {</span>
+<span class="nc" id="L114">                q.setMaxResults(maxResults);</span>
+<span class="nc" id="L115">                q.setFirstResult(firstResult);</span>
+            }
+<span class="nc" id="L117">            return q.getResultList();</span>
+        } finally {
+<span class="nc" id="L119">            em.close();</span>
+        }
+    }
+
+    public Categoria findCategoria(Integer id) {
+<span class="nc" id="L124">        EntityManager em = getEntityManager();</span>
+        try {
+<span class="nc" id="L126">            return em.find(Categoria.class, id);</span>
+        } finally {
+<span class="nc" id="L128">            em.close();</span>
+        }
+    }
+
+    public int getCategoriaCount() {
+<span class="nc" id="L133">        EntityManager em = getEntityManager();</span>
+        try {
+<span class="nc" id="L135">            CriteriaQuery cq = em.getCriteriaBuilder().createQuery();</span>
+<span class="nc" id="L136">            Root&lt;Categoria&gt; rt = cq.from(Categoria.class);</span>
+<span class="nc" id="L137">            cq.select(em.getCriteriaBuilder().count(rt));</span>
+<span class="nc" id="L138">            Query q = em.createQuery(cq);</span>
+<span class="nc" id="L139">            return ((Long) q.getSingleResult()).intValue();</span>
+        } finally {
+<span class="nc" id="L141">            em.close();</span>
+        }
+    }
+    
+    public List&lt;Categoria&gt; listarCategoria()
+    {
+        Connection cn;
+        CallableStatement cstmt;
+        ResultSet rs;
+<span class="nc" id="L150">        List&lt;Categoria&gt; lstCate=new ArrayList&lt;&gt;();</span>
+        try {
+<span class="nc" id="L152">            cn = Util.getConexionBD();</span>
+<span class="nc" id="L153">            cstmt = cn.prepareCall(&quot;call sp_listarcategoria()&quot;);</span>
+<span class="nc" id="L154">            rs = cstmt.executeQuery();</span>
+<span class="nc bnc" id="L155" title="All 2 branches missed.">            while(rs.next())</span>
+            {
+<span class="nc" id="L157">                Categoria cat=new Categoria();</span>
+<span class="nc" id="L158">                cat.setIdCategoria(rs.getInt(1));</span>
+<span class="nc" id="L159">                cat.setNombre(rs.getString(2));</span>
+<span class="nc" id="L160">                cat.setCategoriaSuperior(rs.getInt(3));</span>
+<span class="nc" id="L161">                lstCate.add(cat);</span>
+<span class="nc" id="L162">}</span>
+<span class="nc" id="L163">        } catch (Exception e) {</span>
+<span class="nc" id="L164">            e.getMessage();</span>
+<span class="nc" id="L165">        }</span>
+<span class="nc" id="L166">        return lstCate;</span>
+    }
+    
+    public List&lt;Categoria&gt; listarsubCategoria(int id)
+    {
+        Connection cn;
+        CallableStatement cstmt;
+        ResultSet rs;
+<span class="nc" id="L174">        List&lt;Categoria&gt; lstCate=new ArrayList&lt;&gt;();</span>
+        try {
+<span class="nc" id="L176">            cn = Util.getConexionBD();</span>
+<span class="nc" id="L177">            cstmt = cn.prepareCall(&quot;call sp_listarsubCategoria(&quot;+id+&quot;)&quot;);</span>
+<span class="nc" id="L178">            rs = cstmt.executeQuery();</span>
+<span class="nc bnc" id="L179" title="All 2 branches missed.">            while(rs.next())</span>
+            {
+<span class="nc" id="L181">                Categoria cat=new Categoria();</span>
+<span class="nc" id="L182">                cat.setIdCategoria(rs.getInt(1));</span>
+<span class="nc" id="L183">                cat.setNombre(rs.getString(2));</span>
+<span class="nc" id="L184">                lstCate.add(cat);</span>
+<span class="nc" id="L185">            }</span>
+<span class="nc" id="L186">        } catch (Exception e) {</span>
+<span class="nc" id="L187">            e.getMessage();</span>
+<span class="nc" id="L188">        }</span>
+<span class="nc" id="L189">        return lstCate;</span>
+    }
+    
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

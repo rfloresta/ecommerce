@@ -6,11 +6,13 @@
 package wyv.persistencia;
 
 import java.util.List;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author Data
  */
+@Service
 public class MarcaDao  implements IOperacionesBD<Marca>{
 
     MarcaJpa marcaJpa=new MarcaJpa();
@@ -74,6 +76,11 @@ public class MarcaDao  implements IOperacionesBD<Marca>{
 
     @Override
     public Marca validar(Marca entrada) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int contar() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

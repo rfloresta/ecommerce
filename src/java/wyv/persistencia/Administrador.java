@@ -144,5 +144,6 @@ public class Administrador implements Serializable {
     public String toString() {
         return "wyv.persistencia.Administrador[ dni=" + dni + " ]";
     }
+
     
 }

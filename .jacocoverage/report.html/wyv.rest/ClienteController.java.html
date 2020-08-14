@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>ClienteController.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;W_V_S.A.C&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">wyv.rest</a> &gt; <span class="el_source">ClienteController.java</span></div><h1>ClienteController.java</h1><pre class="source lang-java linenums">package wyv.rest;
+
+import com.opensymphony.xwork2.ModelDriven;
+import org.apache.struts2.convention.annotation.Action;
+import org.apache.struts2.convention.annotation.Result;
+import org.apache.struts2.rest.HttpHeaders;
+import wyv.persistencia.ClienteDao;
+import org.apache.struts2.rest.DefaultHttpHeaders;
+
+
+<span class="nc" id="L11">public class ClienteController  implements ModelDriven&lt;Object&gt; {</span>
+
+    private String id;
+    private Object model;
+<span class="nc" id="L15">    private final  ClienteDao clieDao = new ClienteDao();</span>
+
+    public String getId() {
+<span class="nc" id="L18">        return id;</span>
+    }
+
+    public void setId(String id) {
+<span class="nc" id="L22">        this.id = id;</span>
+<span class="nc" id="L23">    }</span>
+
+    public HttpHeaders index() {
+<span class="nc" id="L26">		model = clieDao.listar();</span>
+<span class="nc" id="L27">		return new DefaultHttpHeaders(&quot;index&quot;).disableCaching();</span>
+    }
+    @Action(value = &quot;cliente&quot;, results = {
+       
+    })
+    public HttpHeaders show() {
+<span class="nc" id="L33">        model = clieDao.buscar(id);</span>
+<span class="nc" id="L34">        return new DefaultHttpHeaders(&quot;show&quot;);</span>
+    }
+
+    @Override
+    public Object getModel() {
+<span class="nc" id="L39">        return model;    </span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

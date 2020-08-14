@@ -1,7 +1,9 @@
 package wyv.persistencia;
 
 import java.util.List;
+import org.springframework.stereotype.Service;
 
+@Service
 public class EmpresaDao implements IOperacionesBD<Empresa>{
 
     EmpresaJpa  empJpa=new EmpresaJpa();
@@ -49,6 +51,11 @@ public class EmpresaDao implements IOperacionesBD<Empresa>{
         
            return empJpa.findEmpresaEntities();
         
+    }
+
+    @Override
+    public int contar() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

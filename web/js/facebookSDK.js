@@ -15,7 +15,7 @@ var facebookAppID	= document.getElementById('facebook-login-button').getAttribut
 //	Facebook User Data
 var facebookUser = {};
 //	Child objects:
-//		facebookUser.id
+    //		facebookUser.id
 //		facebookUser.name
 //		facebookUser.first_name
 //		facebookUser.last_name
@@ -39,7 +39,8 @@ var Facebook_correctLogin	= function () {
 		document.getElementById('facebook-login-button').style.display = "none";
 		// Saludar al usuario
 		if (document.getElementById('fbStatus')){
-			document.getElementById('fbStatus').innerHTML = '¡Bienvenido ' + facebookUser.name + '!'
+                        
+                        document.getElementById('fbStatus').innerHTML = '¡Bienvenido ' + facebookUser.name + '!'
 		}
 		// Mostrar los datos en la consola
 		console.log('____________________');

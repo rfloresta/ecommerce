@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package wyv.persistencia;
 
 import java.io.Serializable;
@@ -21,10 +16,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import org.codehaus.jackson.annotate.JsonIgnore;
 
-/**
- *
- * @author Romario
- */
 @Entity
 @Table(name = "cliente")
 @XmlRootElement
@@ -69,6 +60,21 @@ public class Cliente implements Serializable {
     public Cliente() {
     }
 
+    public Cliente(Integer idCliente, String nombres, String apellidos, String dni, String numCelular, String direccion, String email, String password, String codigoGenerado, List<Pedido> pedidoList) {
+        this.idCliente = idCliente;
+        this.nombres = nombres;
+        this.apellidos = apellidos;
+        this.dni = dni;
+        this.numCelular = numCelular;
+        this.direccion = direccion;
+        this.email = email;
+        this.password = password;
+        this.codigoGenerado = codigoGenerado;
+        this.pedidoList = pedidoList;
+    }
+    
+    
+        
     public Cliente(Integer idCliente) {
         this.idCliente = idCliente;
     }

@@ -4,15 +4,17 @@ import com.opensymphony.xwork2.ActionSupport;
 import java.util.List;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Result;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 import wyv.servicios.CategoriaServicio;
 import wyv.persistencia.Categoria;
-/**
- *
- * @author Data
- */
-@SuppressWarnings("serial")
+
+@Component("CategoriaAction")
+@Scope(value="prototype")
 public class CategoriaAction extends ActionSupport{
     
+    @Autowired
     CategoriaServicio catSer;
     private String resultado;
     private Categoria categoria;
@@ -54,7 +56,6 @@ public class CategoriaAction extends ActionSupport{
     })
     public String listarCate() {
         try {
-            catSer=new CategoriaServicio();
             lstCate = catSer.listar();
             return "ok";
         } catch (Exception e) {
@@ -70,7 +71,6 @@ public class CategoriaAction extends ActionSupport{
     })
     public String listarCateCliente() {
         try {
-            catSer=new CategoriaServicio();
             lstCate = catSer.listarCategoria();
             return "ok";
         } catch (Exception e) {
@@ -78,16 +78,14 @@ public class CategoriaAction extends ActionSupport{
             return "error";
         }
     }
-    
-    
-    
+
     @Action(value="registrarCate",results= {
 			@Result(name="ok",location="/admin/principal/categoria.jsp"),
 			@Result(name="error",location="/error.jsp")
 	})
 	public String registrarCate() {
 		try {
-			new CategoriaServicio().registrar(categoria);
+			catSer.registrar(categoria);
 			lstCate=new CategoriaServicio().listar();
 			categoria=new Categoria();
 			return "ok";
@@ -105,8 +103,8 @@ public class CategoriaAction extends ActionSupport{
 	public String editarCate() {
 		
 		try {
-			categoria =new CategoriaServicio().buscar(String.valueOf(categoria.getIdCategoria()));
-			lstCate=new CategoriaServicio().listar();
+			categoria =catSer.buscar(String.valueOf(categoria.getIdCategoria()));
+			lstCate=catSer.listar();
                         edit=1;
 			return "ok";
 		} catch (Exception e) {
@@ -114,8 +112,7 @@ public class CategoriaAction extends ActionSupport{
 			return "error";
 		}
 	}
-        
-        
+
         @Action(value="actualizarCate",results= {
 			@Result(name="ok",location="/admin/principal/categoria.jsp"),
 			@Result(name="error",location="/error.jsp")
@@ -123,8 +120,8 @@ public class CategoriaAction extends ActionSupport{
 	public String actualizarCate() {
 		
 		try {
-			new CategoriaServicio().actualizar(categoria);
-			lstCate=new CategoriaServicio().listar();
+			catSer.actualizar(categoria);
+			lstCate=catSer.listar();
                         categoria=new Categoria();
 			return "ok";
 		} catch (Exception e) {
@@ -140,8 +137,8 @@ public class CategoriaAction extends ActionSupport{
 	public String eliminarCate() {
 		
 		try {
-			new CategoriaServicio().eliminar(String.valueOf(categoria.getIdCategoria()));
-			lstCate=new CategoriaServicio().listar();
+			catSer.eliminar(String.valueOf(categoria.getIdCategoria()));
+			lstCate=catSer.listar();
 			return "ok";
 		} catch (Exception e) {
 			resultado="Error en: eliminarMarca :: "+e.getMessage();

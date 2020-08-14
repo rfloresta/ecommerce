@@ -50,7 +50,7 @@ $(function () {
                 caracter_raro = true;
             }
         }
-        if (password2.length >= 8 && mayuscula && minuscula && !caracter_raro && numero)
+        if (password2.length >= 8 && mayuscula && minuscula && caracter_raro && numero)
         {
             if (password2 !== password3) {
                 toastr.error('Las contraseñas no coinciden');
@@ -59,9 +59,7 @@ $(function () {
             }
             form.submit();
         } else {
-            
-            error.hide();
-            error.show("low");
+            toastr.error('*La contraseña debe tener 8 caracteres como mínimo entre números, minúsculas y mayúsculas y almenos un caracter extraño (@ . - _)* *No debe estar en blanco*');
         }
     }
     );
@@ -71,10 +69,10 @@ function mostrarPassword(id) {
     var idPass = document.getElementById(id);
     if (idPass.type == "password") {
         idPass.type = "text";
-        $('#show_'+id).removeClass('fa fa-eye-slash').addClass('fa fa-eye');
+        $('#show_' + id).removeClass('fa fa-eye-slash').addClass('fa fa-eye');
     } else {
         idPass.type = "password";
-        $('#show_'+id).removeClass('fa fa-eye').addClass('fa fa-eye-slash');
+        $('#show_' + id).removeClass('fa fa-eye').addClass('fa fa-eye-slash');
     }
 }
 

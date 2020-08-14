@@ -1,7 +1,9 @@
 package wyv.persistencia;
 
 import java.util.List;
+import org.springframework.stereotype.Service;
 
+@Service
 public class CategoriaDao implements IOperacionesBD<Categoria>{
 
     CategoriaJpa  cateJpa=new CategoriaJpa();
@@ -84,5 +86,10 @@ public class CategoriaDao implements IOperacionesBD<Categoria>{
             e.getMessage();
             return null;
         }
+    }
+
+    @Override
+    public int contar() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

@@ -1,9 +1,11 @@
 package wyv.persistencia;
 
 import java.util.List;
+import org.springframework.stereotype.Service;
 import wyv.negocio.Linea;
 import wyv.negocio.PedidoObj;
 
+@Service
 public class PedidoDao {
 
     PedidoJpa pedidoJpa = new PedidoJpa();
@@ -71,17 +73,6 @@ public class PedidoDao {
         }
     }
 
-
-    public String eliminar(String id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-
-    public Pedido buscar(String id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-
     public List<Pedido> listar() {
         try {
             return pedidoJpa.listarPedido();
@@ -100,11 +91,6 @@ public class PedidoDao {
         }
     }
 
-
-    public Pedido ingresar(Pedido entrada) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
     public String generaNumero() {
         
         String numObt=null;
@@ -126,5 +112,9 @@ public class PedidoDao {
             numGen="V00001";
         }
         return numGen;
+    }
+    
+    public int contar(){
+        return pedidoJpa.getPedidoCount();
     }
 }

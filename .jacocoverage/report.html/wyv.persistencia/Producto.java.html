@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Producto.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;W_V_S.A.C&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">wyv.persistencia</a> &gt; <span class="el_source">Producto.java</span></div><h1>Producto.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package wyv.persistencia;
+
+import java.io.Serializable;
+import java.util.List;
+import javax.persistence.Basic;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonManagedReference;
+
+/**
+ *
+ * @author Romario
+ */
+@Entity
+@Table(name = &quot;producto&quot;)
+@XmlRootElement
+@NamedQueries({
+    @NamedQuery(name = &quot;Producto.findAll&quot;, query = &quot;SELECT p FROM Producto p&quot;)
+    , @NamedQuery(name = &quot;Producto.findByIdProducto&quot;, query = &quot;SELECT p FROM Producto p WHERE p.idProducto = :idProducto&quot;)
+    , @NamedQuery(name = &quot;Producto.findByNombre&quot;, query = &quot;SELECT p FROM Producto p WHERE p.nombre = :nombre&quot;)
+    , @NamedQuery(name = &quot;Producto.findByStock&quot;, query = &quot;SELECT p FROM Producto p WHERE p.stock = :stock&quot;)
+    , @NamedQuery(name = &quot;Producto.findByPrecioCompra&quot;, query = &quot;SELECT p FROM Producto p WHERE p.precioCompra = :precioCompra&quot;)
+    , @NamedQuery(name = &quot;Producto.findByPrecioVenta&quot;, query = &quot;SELECT p FROM Producto p WHERE p.precioVenta = :precioVenta&quot;)
+    , @NamedQuery(name = &quot;Producto.findByDescuento&quot;, query = &quot;SELECT p FROM Producto p WHERE p.descuento = :descuento&quot;)})
+public class Producto implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = &quot;idProducto&quot;)
+    private Integer idProducto;
+    @Column(name = &quot;nombre&quot;)
+    private String nombre;
+    @Basic(optional = false)
+    @Lob
+    @Column(name = &quot;descripcion&quot;)
+    private String descripcion;
+    @Column(name = &quot;stock&quot;)
+    private Integer stock;
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Column(name = &quot;precioCompra&quot;)
+    private Double precioCompra;
+    @Column(name = &quot;precioVenta&quot;)
+    private Double precioVenta;
+    @Column(name = &quot;descuento&quot;)
+    private Double descuento;
+    @Lob
+    @Column(name = &quot;imagen&quot;)
+    private String imagen;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = &quot;producto&quot;)
+    @JsonManagedReference
+    private List&lt;DetallePedido&gt; detallePedidoList;
+    @JoinColumn(name = &quot;idCategoria&quot;, referencedColumnName = &quot;idCategoria&quot;)
+    @ManyToOne
+    private Categoria idCategoria;
+    @JoinColumn(name = &quot;idMarca&quot;, referencedColumnName = &quot;idMarca&quot;)
+    @ManyToOne
+    private Marca idMarca;
+
+<span class="fc" id="L80">    public Producto() {</span>
+<span class="fc" id="L81">    }</span>
+
+<span class="nc" id="L83">    public Producto(Integer idProducto) {</span>
+<span class="nc" id="L84">        this.idProducto = idProducto;</span>
+<span class="nc" id="L85">    }</span>
+
+<span class="nc" id="L87">    public Producto(Integer idProducto, String descripcion) {</span>
+<span class="nc" id="L88">        this.idProducto = idProducto;</span>
+<span class="nc" id="L89">        this.descripcion = descripcion;</span>
+<span class="nc" id="L90">    }</span>
+
+    public Integer getIdProducto() {
+<span class="nc" id="L93">        return idProducto;</span>
+    }
+
+    public void setIdProducto(Integer idProducto) {
+<span class="nc" id="L97">        this.idProducto = idProducto;</span>
+<span class="nc" id="L98">    }</span>
+
+    public String getNombre() {
+<span class="nc" id="L101">        return nombre;</span>
+    }
+
+    public void setNombre(String nombre) {
+<span class="nc" id="L105">        this.nombre = nombre;</span>
+<span class="nc" id="L106">    }</span>
+
+    public String getDescripcion() {
+<span class="nc" id="L109">        return descripcion;</span>
+    }
+
+    public void setDescripcion(String descripcion) {
+<span class="nc" id="L113">        this.descripcion = descripcion;</span>
+<span class="nc" id="L114">    }</span>
+
+    public Integer getStock() {
+<span class="nc" id="L117">        return stock;</span>
+    }
+
+    public void setStock(Integer stock) {
+<span class="nc" id="L121">        this.stock = stock;</span>
+<span class="nc" id="L122">    }</span>
+
+    public Double getPrecioCompra() {
+<span class="nc" id="L125">        return precioCompra;</span>
+    }
+
+    public void setPrecioCompra(Double precioCompra) {
+<span class="nc" id="L129">        this.precioCompra = precioCompra;</span>
+<span class="nc" id="L130">    }</span>
+
+    public Double getPrecioVenta() {
+<span class="nc" id="L133">        return precioVenta;</span>
+    }
+
+    public void setPrecioVenta(Double precioVenta) {
+<span class="nc" id="L137">        this.precioVenta = precioVenta;</span>
+<span class="nc" id="L138">    }</span>
+
+    public Double getDescuento() {
+<span class="nc" id="L141">        return descuento;</span>
+    }
+
+    public void setDescuento(Double descuento) {
+<span class="nc" id="L145">        this.descuento = descuento;</span>
+<span class="nc" id="L146">    }</span>
+
+    public String getImagen() {
+<span class="nc" id="L149">        return imagen;</span>
+    }
+
+    public void setImagen(String imagen) {
+<span class="nc" id="L153">        this.imagen = imagen;</span>
+<span class="nc" id="L154">    }</span>
+
+    @XmlTransient
+    @JsonIgnore
+    public List&lt;DetallePedido&gt; getDetallePedidoList() {
+<span class="nc" id="L159">        return detallePedidoList;</span>
+    }
+
+    public void setDetallePedidoList(List&lt;DetallePedido&gt; detallePedidoList) {
+<span class="nc" id="L163">        this.detallePedidoList = detallePedidoList;</span>
+<span class="nc" id="L164">    }</span>
+
+    public Categoria getIdCategoria() {
+<span class="nc" id="L167">        return idCategoria;</span>
+    }
+
+    public void setIdCategoria(Categoria idCategoria) {
+<span class="nc" id="L171">        this.idCategoria = idCategoria;</span>
+<span class="nc" id="L172">    }</span>
+
+    public Marca getIdMarca() {
+<span class="nc" id="L175">        return idMarca;</span>
+    }
+
+    public void setIdMarca(Marca idMarca) {
+<span class="nc" id="L179">        this.idMarca = idMarca;</span>
+<span class="nc" id="L180">    }</span>
+
+    @Override
+    public int hashCode() {
+<span class="nc" id="L184">        int hash = 0;</span>
+<span class="nc bnc" id="L185" title="All 2 branches missed.">        hash += (idProducto != null ? idProducto.hashCode() : 0);</span>
+<span class="nc" id="L186">        return hash;</span>
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+<span class="nc bnc" id="L192" title="All 2 branches missed.">        if (!(object instanceof Producto)) {</span>
+<span class="nc" id="L193">            return false;</span>
+        }
+<span class="nc" id="L195">        Producto other = (Producto) object;</span>
+<span class="nc bnc" id="L196" title="All 8 branches missed.">        if ((this.idProducto == null &amp;&amp; other.idProducto != null) || (this.idProducto != null &amp;&amp; !this.idProducto.equals(other.idProducto))) {</span>
+<span class="nc" id="L197">            return false;</span>
+        }
+<span class="nc" id="L199">        return true;</span>
+    }
+
+    @Override
+    public String toString() {
+<span class="nc" id="L204">        return &quot;wyv.persistencia.Producto[ idProducto=&quot; + idProducto + &quot; ]&quot;;</span>
+    }
+    
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

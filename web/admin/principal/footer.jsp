@@ -38,6 +38,7 @@
 <script>
     //Se obtiene la lista y se convierte a json
     var lstFecha = document.getElementById("jsonMes");
+    console.log(lstFecha);
     var datalstFecha = JSON.parse(lstFecha.value);
     var lstTotal = document.getElementById("jsonTotal");
     var datalstTotal = JSON.parse(lstTotal.value);
@@ -55,14 +56,9 @@
         var parteFecha = fecha.split("/"); // separamos por la barra diagonal y devuelve un arreglo
         var dateObject = new Date(+parteFecha[2], parteFecha[1] - 1, +parteFecha[0]); // formateamos la fecha en el orden deseado
         var fechaFormat=new Date(dateObject); // mandamos la fecha para que se formatee
-        
         fechas.push(monthNames[fechaFormat.getMonth()]); // y obtenemos el numero del mes que va deacuerdo al arreglo.
     }
     
-    
-   
-    
-
     //Obtenemos los valores de los json para los widgets
     var total = 0;
     for (var i = 0; i < datalstTotal.length; i++)

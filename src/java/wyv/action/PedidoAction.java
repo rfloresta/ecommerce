@@ -1,23 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package wyv.action;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.opensymphony.xwork2.ActionSupport;
 import java.io.PrintWriter;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,6 +12,9 @@ import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.interceptor.SessionAware;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import wyv.negocio.Linea;
 import wyv.negocio.PedidoObj;
@@ -36,13 +26,11 @@ import wyv.persistencia.Empresa;
 import wyv.negocio.ProductoObj;
 import wyv.negocio.ClienteObj;
 
-/**
- *
- * @author Data
- */
-@SuppressWarnings("serial")
+@Component("PedidoAction")
+@Scope(value = "prototype")
 public class PedidoAction extends ActionSupport implements SessionAware {
-
+    
+    @Autowired
     PedidoServicio pedSer;
     private String resultado;
     private Pedido pedido;
@@ -208,10 +196,7 @@ public class PedidoAction extends ActionSupport implements SessionAware {
     })
     public String listarPedido() {
         try {
-
-            lstPedido = new PedidoServicio().listar();
-
-            System.out.println("Error: " + lstPedido);
+            lstPedido = pedSer.listar();
             return "ok";
         } catch (Exception e) {
             resultado = "Error en: listarCate :: " + e.getMessage();
@@ -227,9 +212,6 @@ public class PedidoAction extends ActionSupport implements SessionAware {
     })
     public String registrarPedido() {
         try {
-            
-            
-             pedSer = new PedidoServicio();
              PedidoObj ven = new PedidoObj();
              clieObj.getIdCli();
              ven.setCli(clieObj);
@@ -239,7 +221,6 @@ public class PedidoAction extends ActionSupport implements SessionAware {
             return "ok";
         } catch (Exception e) {
             resultado = "Error en: listarCate :: " + e.getMessage();
-            e.printStackTrace();
             return "error";
         }
     }
@@ -399,7 +380,6 @@ public class PedidoAction extends ActionSupport implements SessionAware {
     public String actualizarPedido() {
 
         try {
-
             Pedido ped = new Pedido();
             String pedidoString = String.valueOf(pedido.getIdPedido());
 
@@ -415,18 +395,8 @@ public class PedidoAction extends ActionSupport implements SessionAware {
             cliente.getIdCliente();
             ped.setIdCliente(cliente);
             new PedidoServicio().actualizar(ped);
-            lstPedido = new PedidoServicio().listar();
-
-            System.out.println(ped.getIdPedido());
-            System.out.println(ped.getNumero());
-            System.out.println(ped.getSubtotal());
-            System.out.println(ped.getTotal());
-            System.out.println(ped.getFecha());
-            System.out.println(ped.getPago());
-            System.out.println(ped.getIgv());
-            System.out.println(ped.getEstado());
-            System.out.println(ped.getIdCliente());
-
+            lstPedido = pedSer.listar();
+            
             return "ok";
         } catch (Exception e) {
             resultado = "Error en: actualizarPedido :: " + e.getMessage();

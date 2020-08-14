@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>AdministradorServicio.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;W_V_S.A.C&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">wyv.servicios</a> &gt; <span class="el_source">AdministradorServicio.java</span></div><h1>AdministradorServicio.java</h1><pre class="source lang-java linenums">package wyv.servicios;
+
+import java.util.List;
+import java.util.Map;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import static wyv.action.Encriptacion.Desencriptar;
+
+import wyv.persistencia.Administrador;
+import wyv.persistencia.AdministradorDao;
+import wyv.persistencia.IOperacionesBD;
+
+@Service
+<span class="fc" id="L14">public class AdministradorServicio implements IOperacionesBD&lt;Administrador&gt; {</span>
+
+<span class="fc" id="L16">    @Autowired</span>
+    AdministradorDao admDao= new AdministradorDao();
+    Administrador admin;
+    private List&lt;Administrador&gt; lstAdmin;
+
+    @Override
+    public String registrar(Administrador a) {
+<span class="nc" id="L23">        admDao = new AdministradorDao();</span>
+<span class="nc" id="L24">        return admDao.registrar(a);</span>
+    }
+
+    @Override
+    public String actualizar(Administrador a) {
+<span class="nc" id="L29">        admDao = new AdministradorDao();</span>
+<span class="nc" id="L30">        return admDao.actualizar(a);</span>
+
+    }
+
+    @Override
+    public String eliminar(String id) {
+
+<span class="nc" id="L37">        admDao = new AdministradorDao();</span>
+<span class="nc" id="L38">        return admDao.eliminar(id);</span>
+
+    }
+
+    @Override
+    public Administrador buscar(String id) {
+<span class="nc" id="L44">        admDao = new AdministradorDao();</span>
+<span class="nc" id="L45">        return admDao.buscar(id);</span>
+    }
+
+    @Override
+    public List&lt;Administrador&gt; listar() {
+<span class="nc" id="L50">        admDao = new AdministradorDao();</span>
+<span class="nc" id="L51">        return admDao.listar();</span>
+    }
+
+    @Override
+    public Administrador validar(Administrador entrada) {
+        try {
+<span class="nc" id="L57">            admDao = new AdministradorDao();</span>
+<span class="nc" id="L58">            admin = admDao.validar(entrada);</span>
+<span class="nc bnc" id="L59" title="All 2 branches missed.">            if (admin != null) {</span>
+<span class="nc" id="L60">                String passDesencriptado = Desencriptar(admin.getPassword());</span>
+<span class="nc bnc" id="L61" title="All 2 branches missed.">                if (passDesencriptado.equals(entrada.getPassword())) {</span>
+<span class="nc" id="L62">                    return admin;</span>
+                }
+            }
+<span class="nc" id="L65">        } catch (Exception e) {</span>
+<span class="nc" id="L66">            System.out.println(e.getMessage());</span>
+<span class="nc" id="L67">        }</span>
+<span class="nc" id="L68">        return null;</span>
+    }
+
+    public void nuevoObj() {
+<span class="nc" id="L72">        admin = new Administrador();</span>
+<span class="nc" id="L73">    }</span>
+
+    //Metodo para el Chart Line
+    public List&lt;Map&lt;String, String&gt;&gt; ventaMes() {
+<span class="nc" id="L77">        return admDao.ventaMes();</span>
+    }
+
+    public int ContarCliente() {
+<span class="nc" id="L81">        return admDao.ContarCliente();</span>
+    }
+
+    public int ContarAdministrador() {
+<span class="nc" id="L85">        return admDao.ContarAdministrador();</span>
+    }
+
+    public int ContarPedido() {
+<span class="nc" id="L89">        return admDao.ContarPedido();</span>
+    }
+
+    public Administrador validarEmail(String email) {
+        try {
+<span class="nc" id="L94">            lstAdmin = listar();</span>
+<span class="nc bnc" id="L95" title="All 2 branches missed.">            for (Administrador a : lstAdmin) {</span>
+<span class="nc bnc" id="L96" title="All 2 branches missed.">                if (a.getEmail().equals(email)) {</span>
+<span class="nc" id="L97">                    return a;</span>
+                }
+<span class="nc" id="L99">            }</span>
+<span class="nc" id="L100">        } catch (Exception e) {</span>
+<span class="nc" id="L101">            System.out.println(e.getMessage());</span>
+<span class="nc" id="L102">        }</span>
+<span class="nc" id="L103">        return null;</span>
+    }
+
+    public String comparar(Administrador entrada) {
+<span class="fc" id="L107">        String estado = &quot;incorrecto&quot;;</span>
+        try {
+<span class="fc" id="L109">             System.out.println(entrada.getDni());</span>
+<span class="fc" id="L110">            admin = admDao.buscar(entrada.getDni());</span>
+<span class="fc" id="L111">            System.out.println(admin.getCodigoGenerado());</span>
+<span class="fc bfc" id="L112" title="All 2 branches covered.">            if (admin.getCodigoGenerado().equals(entrada.getCodigoGenerado())) {</span>
+<span class="fc" id="L113">                estado = &quot;ok&quot;;</span>
+            }
+<span class="nc" id="L115">        } catch (Exception e) {</span>
+<span class="nc" id="L116">            System.out.println(e.getMessage());</span>
+<span class="fc" id="L117">        }</span>
+<span class="fc" id="L118">        return estado;</span>
+    }
+
+    @Override
+    public int contar() {
+<span class="nc" id="L123">        return admDao.contar();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

@@ -10,7 +10,6 @@ import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -22,11 +21,12 @@ import wyv.persistencia.exceptions.NonexistentEntityException;
  * @author Romario
  */
 public class ClienteJpa implements Serializable {
-    
-    public ClienteJpa() {
+
+   public ClienteJpa() {
         this.emf= Persistence.createEntityManagerFactory("W_V_S.A.CPU");
     }
-   public ClienteJpa(EntityManagerFactory emf) {
+
+    public ClienteJpa(EntityManagerFactory emf) {
         this.emf = emf;
     }
     private EntityManagerFactory emf = null;

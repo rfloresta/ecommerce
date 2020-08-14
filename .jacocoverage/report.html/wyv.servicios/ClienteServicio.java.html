@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>ClienteServicio.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;W_V_S.A.C&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">wyv.servicios</a> &gt; <span class="el_source">ClienteServicio.java</span></div><h1>ClienteServicio.java</h1><pre class="source lang-java linenums">package wyv.servicios;
+
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import wyv.persistencia.Cliente;
+import wyv.persistencia.ClienteDao;
+import wyv.persistencia.IOperacionesBD;
+
+@Service
+<span class="fc" id="L11">public class ClienteServicio implements IOperacionesBD&lt;Cliente&gt; {</span>
+
+<span class="fc" id="L13">    @Autowired</span>
+    ClienteDao clieDao=new ClienteDao();;
+    Cliente cliente;
+
+    @Override
+    public String registrar(Cliente a) {
+<span class="nc" id="L19">        return clieDao.registrar(a);</span>
+    }
+
+    @Override
+    public String actualizar(Cliente a) {
+<span class="nc" id="L24">        return clieDao.actualizar(a);</span>
+    }
+
+    @Override
+    public String eliminar(String id) {
+<span class="nc" id="L29">        return clieDao.eliminar(id);</span>
+    }
+
+    @Override
+    public Cliente buscar(String id) {
+<span class="nc" id="L34">        return clieDao.buscar(id);</span>
+    }
+
+    @Override
+    public List&lt;Cliente&gt; listar() {
+<span class="nc" id="L39">        return clieDao.listar();</span>
+    }
+
+    @Override
+    public Cliente validar(Cliente entrada) {
+<span class="nc" id="L44">        cliente = clieDao.validar(entrada);</span>
+        try {
+<span class="nc bnc" id="L46" title="All 2 branches missed.">            if (cliente != null) {</span>
+<span class="nc bnc" id="L47" title="All 2 branches missed.">                if (cliente.getEmail().equals(entrada.getEmail())) {</span>
+<span class="nc" id="L48">                    return cliente;</span>
+                }
+            }
+<span class="nc" id="L51">        } catch (Exception e) {</span>
+<span class="nc" id="L52">            System.out.println(e.getMessage());</span>
+<span class="nc" id="L53">        }</span>
+<span class="nc" id="L54">        return null;</span>
+    }
+
+    public Cliente validarEmail(String email) {
+<span class="nc" id="L58">        List&lt;Cliente&gt; lstClie = listar();</span>
+<span class="nc bnc" id="L59" title="All 2 branches missed.">        for (Cliente c : lstClie) {</span>
+<span class="nc bnc" id="L60" title="All 2 branches missed.">            if (c.getEmail().equals(email)) {</span>
+<span class="nc" id="L61">                return c;</span>
+            }
+<span class="nc" id="L63">        }</span>
+<span class="nc" id="L64">        return null;</span>
+    }
+
+    public String comparar(Cliente entrada) {
+<span class="fc" id="L68">        String estado = &quot;incorrecto&quot;;</span>
+        try {
+<span class="fc" id="L70">            cliente = clieDao.buscar(entrada.getIdCliente().toString());</span>
+<span class="fc bfc" id="L71" title="All 2 branches covered.">            if (cliente.getCodigoGenerado().equals(entrada.getCodigoGenerado())) {</span>
+<span class="fc" id="L72">                estado = &quot;ok&quot;;</span>
+            }
+<span class="nc" id="L74">        } catch (Exception e) {</span>
+<span class="nc" id="L75">            System.out.println(e.getMessage());</span>
+<span class="fc" id="L76">        }</span>
+<span class="fc" id="L77">        return estado;</span>
+    }
+
+    @Override
+    public int contar() {
+<span class="nc" id="L82">        return clieDao.contar();</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

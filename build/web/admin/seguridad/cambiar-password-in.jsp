@@ -72,7 +72,7 @@
 *La contraseña debe tener 8 caracteres como mínimo entre números, minúsculas y mayúsculas*
 *No debe contener caracteres extraños ni espacios en blanco*
                                 </pre>
-                                <s:submit id="cambiar" value="Guardar" cssClass="btn btn-success"/>
+                                <s:submit id="cambiar" value="Guardar" cssClass="btn btn-info"/>
 
                             </div>
 
