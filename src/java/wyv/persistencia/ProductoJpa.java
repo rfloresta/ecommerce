@@ -226,7 +226,7 @@ public class ProductoJpa implements Serializable {
         
         try {
             cn = Util.getConexionBD();
-            ptstm = cn.prepareStatement("Select * from subcategoria where idCategoria ="+idCate+"");
+            ptstm = cn.prepareStatement("Select * from subcategoria where idCategoria="+idCate+"");
             rs = ptstm.executeQuery();
            
             while (rs.next()) {

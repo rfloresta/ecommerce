@@ -138,6 +138,7 @@ public class ProductoAction extends ActionSupport implements SessionAware {
             lstProducto = proSer.listar();
             lstCategoria = catSer.listar();
             lstMarca = marSer.listar();
+            lstSubCate = subCateSer.listar();
             return "ok";
         } catch (Exception e) {
             resultado = "Error en: listarProducto :: " + e.getMessage();
@@ -165,6 +166,7 @@ public class ProductoAction extends ActionSupport implements SessionAware {
             lstProducto = proSer.listar();
             lstCategoria = catSer.listar();
             lstMarca = marSer.listar();
+            lstSubCate = subCateSer.listar();
             producto = new Producto();
             return estado;
         } catch (IOException e) {
@@ -185,6 +187,7 @@ public class ProductoAction extends ActionSupport implements SessionAware {
             lstProducto = proSer.listar();
             lstCategoria = catSer.listar();
             lstMarca = marSer.listar();
+            lstSubCate = subCateSer.listar();
             edit = 1;
             return "ok";
         } catch (Exception e) {
@@ -233,6 +236,7 @@ public class ProductoAction extends ActionSupport implements SessionAware {
             lstProducto = proSer.listar();
             lstCategoria = catSer.listar();
             lstMarca = marSer.listar();
+            lstSubCate = subCateSer.listar();
             producto = new Producto();
             return estado;
         } catch (IOException e) {
@@ -252,6 +256,7 @@ public class ProductoAction extends ActionSupport implements SessionAware {
             lstProducto = proSer.listar();
             lstCategoria = catSer.listar();
             lstMarca = marSer.listar();
+            lstSubCate = subCateSer.listar();
             return estado;
         } catch (Exception e) {
             resultado = "Error en: eliminarProducto :: " + e.getMessage();
@@ -290,8 +295,8 @@ public class ProductoAction extends ActionSupport implements SessionAware {
             HttpServletResponse response = ServletActionContext.getResponse();
             HttpServletRequest request = ServletActionContext.getRequest();
             PrintWriter out = response.getWriter();
-            int idCate = Integer.parseInt(request.getParameter("idCate"));
-            lstSubCate = new ProductoServicio().listarSubPorCate(idCate);
+            int id = Integer.parseInt(request.getParameter("idCate"));
+            lstSubCate = proSer.listarSubPorCate(id);
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
             String json = gson.toJson(lstSubCate);
             out.print(json);

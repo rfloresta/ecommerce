@@ -46,10 +46,6 @@ public class CategoriaAction extends ActionSupport {
         return edit;
     }
 
-    public void setCatSer(CategoriaServicio catSer) {
-        this.catSer = catSer;
-    }
-
     @Action(value = "listarCate", results = {
         @Result(name = "ok", location = "/admin/principal/categoria.jsp")
         ,
@@ -59,7 +55,6 @@ public class CategoriaAction extends ActionSupport {
     public String listarCate() {
         try {
             //lstCate = catSer.listar();
-            catSer = new CategoriaServicio();
             lstCate = catSer.listarCategoria();
             return "ok";
         } catch (Exception e) {
@@ -109,7 +104,7 @@ public class CategoriaAction extends ActionSupport {
     public String registrarCate() {
         try {
             catSer.registrar(categoria);
-            lstCate = new CategoriaServicio().listar();
+            lstCate =catSer.listar();
             categoria = new Categoria();
             return "ok";
         } catch (Exception e) {
