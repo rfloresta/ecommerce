@@ -32,31 +32,31 @@
 
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label for="inputDni">Dni</label>
+                                    <label for="inputDni">Dni*</label>
                                     <s:textfield type="number" maxlength="8" name="admin.dni"  cssClass="form-control " placeholder="Ingrese Dni" required="required" />
                                 </div>
                                 <div class="form-group">
-                                    <label for="inputNombres">Nombres</label>
+                                    <label for="inputNombres">Nombres*</label>
                                     <s:textfield  name="admin.nombres" cssClass="form-control" placeholder="Ingrese Nombre" required="required" />
                                 </div>
                                 <div class="form-group">
-                                    <label for="inputApellidos">Apellidos</label>
+                                    <label for="inputApellidos">Apellidos*</label>
                                     <s:textfield  name="admin.apellidos" cssClass="form-control" placeholder="Ingrese Apellido" required="required"/>
                                 </div>
                                 <div class="form-group">
                                     <label for="inputApellidos">Email</label>
-                                    <s:textfield  name="admin.email" type="email" cssClass="form-control" placeholder="Ingrese Email" required="required"/>
+                                    <s:textfield  name="admin.email" type="email" cssClass="form-control" placeholder="Ingrese Email"/>
                                 </div>
                                 <div class="form-group">
-                                    <label for="inputPassword">Password</label>
+                                    <label for="inputPassword">Password*</label>
                                     <s:password  name="admin.password" id="password1" cssClass="form-control" placeholder="Ingrese Password" required="required"/>
                                 </div>
                                 <div class="form-group">
-                                    <label for="inputPassword">Confirmar Password</label>
+                                    <label for="inputPassword">Confirmar Password*</label>
                                     <s:password name="passwordConfirmar" id="password2" cssClass="form-control" placeholder="Ingrese Password" required="required"/>
                                 </div>
                                 <div class="form-group">
-                                    <label for="inputPrivilegio">Privilegio</label>
+                                    <label for="inputPrivilegio">Privilegio*</label>
                                     <s:select list="#{'A':'Alto','M':'Medio'}" headerKey="0" label="Privilegio"
                                               headerValue="Selecione" name="admin.privilegio" 
                                               cssClass="form-control" required="required"/>

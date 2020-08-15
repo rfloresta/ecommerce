@@ -179,13 +179,13 @@ public class AdministradorAction extends ActionSupport implements SessionAware {
        System.out.println("el pas es : " + pass);
    }*/
     public void enviarSession(Administrador admin) {
-        sesion.put("nombres", admin.getNombres());
-        sesion.put("apellidos", admin.getApellidos());
-        sesion.put("dni", admin.getDni());
-        sesion.put("email", admin.getEmail());
+        sesion.put("nombresAdmin", admin.getNombres());
+        sesion.put("apellidosAdmin", admin.getApellidos());
+        sesion.put("dniAdmin", admin.getDni());
+        sesion.put("emailAdmin", admin.getEmail());
         sesion.put("privilegio", admin.getPrivilegio());
-        sesion.put("pass", admin.getPassword());
-        sesion.put("cod", admin.getCodigoGenerado());
+        sesion.put("passAdmin", admin.getPassword());
+        sesion.put("codAmin", admin.getCodigoGenerado());
     }
 
     @Action(value = "listarAdmin", results = {
@@ -283,7 +283,7 @@ public class AdministradorAction extends ActionSupport implements SessionAware {
     public String cargarDatosAdmin(/*String dni*/) {
 
         try {
-            String dni = (String) sesion.get("dni");
+            String dni = (String) sesion.get("dniAdmin");
             admin = admSer.buscar(dni);
             estado = "ok";
         } catch (Exception e) {
@@ -303,7 +303,7 @@ public class AdministradorAction extends ActionSupport implements SessionAware {
             String passEncry = Encriptar(admin.getPassword());
             admin.setPassword(passEncry);
             estado = admSer.actualizar(admin);
-            String dni = (String) sesion.get("dni");
+            String dni = (String) sesion.get("dniAdmin");
             admin = admSer.buscar(dni /*admin.getDni()*/);
         } catch (Exception e) {
             resultado = "Error en: actualizarDatos :: " + e.getMessage();
@@ -336,13 +336,13 @@ public class AdministradorAction extends ActionSupport implements SessionAware {
     }
 
     public Administrador recibirSession() throws Exception {
-        String dni = (String) sesion.get("dni");
-        String apellidos = (String) sesion.get("apellidos");
-        String nombres = (String) sesion.get("nombres");
-        String email = (String) sesion.get("email");
+        String dni = (String) sesion.get("dniAdmin");
+        String apellidos = (String) sesion.get("apellidosAdmin");
+        String nombres = (String) sesion.get("nombresAdmin");
+        String email = (String) sesion.get("emailAdmin");
         String privilegio = sesion.get("privilegio").toString();
-        String cod = (String) sesion.get("cod");
-        String passSession = (String) sesion.get("pass");
+        String cod = (String) sesion.get("codAdmin");
+        String passSession = (String) sesion.get("passAdmin");
         admin.setDni(dni);
         admin.setNombres(nombres);
         admin.setApellidos(apellidos);

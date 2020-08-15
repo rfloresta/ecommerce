@@ -2,11 +2,12 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>W&V</title>
         <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>W&V</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!--===============================================================================================-->
-        <link rel="icon" type="image/png" href="imagenes/favicon.png"/>
+        <link rel="icon" type="image/png" href="imagenes/nego.png"/>
         <!--===============================================================================================-->
         <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
         <!--===============================================================================================-->
@@ -38,7 +39,7 @@
         <link href="css/icheck-bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <!--===============================================================================================-->
         <link href="css/toastr.min.css" rel="stylesheet" type="text/css"/>
-        
+
     </head>
     <body class="">
 
@@ -179,9 +180,9 @@
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                 <s:iterator value="#session.lstCategoria" var="cate">
-                                   
-                                        <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" data-toggle="dropdown" href="#"><s:property value="nombre"/></a>
-                                           
+
+                                    <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" data-toggle="dropdown" href="#"><s:property value="nombre"/></a>
+
 
                                         <ul class="dropdown-menu">
 
@@ -302,39 +303,46 @@
         </div>
         <!--Fin Modal Para inicio de sesión -->
 
-        
+
         <!--Inicio Modal Para Registrarse-->
         <div class="modal fade" id="registrarseModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header justify-content-center border-bottom-0">
                         <div class="social-auth-links text-center  mb-3 mt-4">
-                            <a href="#" class="btn  btn-primary my-3 my-md-0">
-                                <i class="fa fa-facebook mr-2"></i> Ingresar con Facebook
-                            </a>
+                            <div onlogin="checkLoginState();" appId="282898703055776" scope="public_profile,email" id="facebook-login-button" class="fb-login-button" data-size="large" data-button-type="continue_with" data-layout="default" data-auto-logout-link="false" data-use-continue-as="true" data-width=""></div>
                         </div>
                     </div>
                     <div class="modal-body pt-0">
-                        <p class="text-center">- O -</p>
-                        <s:form action="registrarse" theme="simple">
+                        <s:form id="form_pass" action="registrarse" theme="simple">
                             <div class="input-group mb-3 mt-3">
-                                <s:textfield cssClass="form-control" name="cliente.nombres" id="nombres" placeholder="Ingrese Nombres"/>
+                                <s:textfield cssClass="form-control" name="cliente.nombres" id="nombres" placeholder="Ingrese Nombres" required="required"/>
                             </div>
                             <div class="input-group mb-3">
-                                <s:textfield cssClass="form-control" name="cliente.apellidos" id="apellidos" placeholder="Ingrese Apellidos"/>
+                                <s:textfield cssClass="form-control" name="cliente.apellidos" id="apellidos" placeholder="Ingrese Apellidos" required="required"/>
                             </div>
                             <div class="input-group mb-3">
-                                <s:textfield  cssClass="form-control" name="cliente.email" id="email" placeholder="Ingrese Email"/>
+                                <s:textfield type="email" cssClass="form-control" name="cliente.email" id="email" placeholder="Ingrese Email" required="required"/>
                             </div>
                             <div class="input-group mb-3">
-                                <s:password cssClass="form-control" name="cliente.password" id="password" placeholder="Ingrese Password"/>
+                                <s:password cssClass="form-control" name="cliente.password" id="password2"  placeholder="Ingrese Contraseña" required="required"/>
+                                <div class="input-group-append">
+                                    <button  class="btn btn-primary" type="button" onclick="mostrarPassword('password2')"> <span id="show_password2" class="fa fa-eye-slash icon"></span> </button>
+                                </div>
                             </div>
-                                <s:if test="#session == null"> <!-- Validación para que no ocurra el error al duplicarse el id password2 en la funcion de cambiar contraseña -->
-                            <div class="input-group mb-3">
-                                <s:password cssClass="form-control" name="password2" id="password2" placeholder="Confirmar Password"/>
-                            </div>
+                            <s:if test="#session.email == null"> <!-- Validación para que no ocurra el error al duplicarse el id password3 en la funcion de cambiar contraseña -->
+                                <div class="input-group mb-3">
+                                    <s:password cssClass="form-control" name="password3" id="password3" placeholder="Confirmar Contraseña" required="required"/>
+                                    <div class="input-group-append">
+                                        <button  class="btn btn-primary" type="button" onclick="mostrarPassword('password3')"> <span id="show_password3" class="fa fa-eye-slash icon"></span> </button>
+                                    </div>
+                                </div>
                             </s:if>
-                            <div class="row">
+                            
+                        </s:form>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="row">
                                 <!-- /.col -->
                                 <div class="col-8">
                                     <div class="icheck-primary">
@@ -345,11 +353,10 @@
                                     </div>
                                 </div>
                                 <div class="col-4">
-                                    <s:submit  cssClass="btn btn-primary btn-block toastrDefaultError" value="Enviar"/>
+                                    <s:submit id="cambiar"  cssClass="btn btn-primary btn-block toastrDefaultError" value="Enviar"/>
                                 </div>
                                 <!-- /.col -->
                             </div>
-                        </s:form>
                     </div>
                 </div>
             </div>

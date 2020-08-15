@@ -1,10 +1,16 @@
 $('.btnDatosClie').on('click', function () {
     var idCliente = $('#idClie').val();
-    $('#div-contenido').html('<div class="loading text-center"><img src="imagenes/carga.gif" class="w-50" alt="loading" /><br/></div>');
     $.ajax({
         url: 'api/clientes/' + idCliente,
+        beforeSend: function (xhr) {
+                $('#div-contenido').html('<div class="loading text-center"><img src="imagenes/carga.gif" class="w-50" alt="loading" /><br/></div>');
+        },
         success: function (respuesta) {
             var json = respuesta;
+            var dni = json.dni == null ? '' : json.dni;
+            var numCelular = json.numCelular == null ? '' : json.numCelular;
+            var direccion = json.direccion == null ? '' : json.direccion;
+            
             console.log(json);
             $('#div-contenido').html("\n\
             <h3 class='mb-4'>Datos Personales</h3>\n\
@@ -14,17 +20,17 @@ $('.btnDatosClie').on('click', function () {
             <label class='text-start'>Nombre</label>\n\
             <input  type='text' id='nombre' name='nombres' class='form-control mb-3' value='" + json.nombres + "'>\n\
             <label>Dni</label>\n\
-            <input  type='text' id='dni' name='dni' class='form-control mb-3' value='" + json.dni + "'>\n\
+            <input  type='text' id='dni' name='dni' class='form-control mb-3' value='" + dni + "'>\n\
             </div>\n\
             <div class='col-6'>\n\
             <label>Apellidos</label>\n\
             <input  type='text' id='apellido' name='apellidos' class='form-control mb-3' value='" + json.apellidos + "'>\n\
             <label>Celular</label>\n\
-            <input  type='text' id='numCelular' name='numCelular' class='form-control mb-3' value='" + json.numCelular + "'>\n\
+            <input  type='text' id='numCelular' name='numCelular' class='form-control mb-3' value='" + numCelular + "'>\n\
             </div>\n\
             <div class='col-6'>\n\
             <label>Direccion</label>\n\
-            <textarea id='direccion' name='direccion' class='form-control mb-3'>" + json.direccion + "</textarea>\n\
+            <textarea id='direccion' name='direccion' class='form-control mb-3'>" + direccion + "</textarea>\n\
             </div>\n\
             <div class='col-6'>\n\
             <label>Email</label>\n\

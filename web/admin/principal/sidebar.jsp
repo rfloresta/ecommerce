@@ -18,7 +18,7 @@
         </div>
         <div class="info">
             
-            <s:label  name="#session.nombres+' '+#session.apellidos" cssClass="text-light" />
+            <s:label  name="#session.nombresAdmin+' '+#session.apellidosAdmin" cssClass="text-light" />
             
             </div>
       </div>

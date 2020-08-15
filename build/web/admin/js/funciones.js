@@ -28,7 +28,6 @@ $(function () {
         var password2 = $("#password2").val();
         var password3 = $("#password3").val();
         var form = $("#form_pass");
-        var error = $("#errorPassword");
         var mayuscula = false;
         var minuscula = false;
         var numero = false;
@@ -54,7 +53,6 @@ $(function () {
         {
             if (password2 !== password3) {
                 toastr.error('Las contraseñas no coinciden');
-                error.hide();
                 return;
             }
             form.submit();

@@ -145,8 +145,12 @@
             <result name="error">/seguridad/incorrecto.jsp</result>
             <result name="incorrecto">/error.jsp</result>
         </action>
-        <action name="cerrarSesionClie" class="wyv.action.ClienteAction" method="cerrarSesionClie">
+        <action name="cerrarSesionClie" class="ClienteAction" method="cerrarSesionClie">
             <result name="ok">/index.jsp</result>
+            <result name="error">/error.jsp</result>
+        </action>
+        <action name="registrarse" class="ClienteAction" method="registrarse">
+            <result name="ok">/catalogo.jsp</result>
             <result name="error">/error.jsp</result>
         </action>
         

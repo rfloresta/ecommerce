@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 4.6.5.2
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 05-08-2020 a las 07:06:44
--- Versión del servidor: 10.4.13-MariaDB
--- Versión de PHP: 7.2.31
+-- Tiempo de generación: 15-08-2020 a las 02:17:26
+-- Versión del servidor: 10.1.21-MariaDB
+-- Versión de PHP: 5.6.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -38,7 +37,7 @@ select count(*) as cantidad from producto where idMarca=marca;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_listarcategoria` ()  BEGIN
-	SELECT idCategoria, nombre, categoriaSuperior from categoria
+	SELECT idCategoria, nombre from categoria
     where idCategoria=categoriaSuperior;
 end$$
 
@@ -62,18 +61,10 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_listarproductoMarca` (`marca` IN
     and p.idMarca=marca;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_listarsubCategoria` (IN `csuperior` INT)  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_listarsubCategoria` (`csuperior` INT)  BEGIN
 	select idCategoria,nombre from categoria
     where idCategoria<>categoriaSuperior and categoriaSuperior=csuperior;
 end$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_listarVendidoMes` ()  BEGIN
-      Select SUM(dt.cantidad) AS Cantidad, p.nombre 
-from detalle_pedido as dt 
-INNER JOIN producto as p on dt.idProducto= p.idProducto 
-GROUP BY dt.idProducto
-order by Cantidad DESC LIMIT 3;
-END$$
 
 DELIMITER ;
 
@@ -89,18 +80,16 @@ CREATE TABLE `administrador` (
   `apellidos` varchar(100) NOT NULL,
   `password` varchar(100) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
-  `codigoGenerado` char(5) NOT NULL,
-  `privilegio` char(1) DEFAULT NULL
+  `privilegio` char(1) DEFAULT NULL,
+  `codigo_generado` char(5) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `administrador`
 --
 
-INSERT INTO `administrador` (`dni`, `nombres`, `apellidos`, `password`, `email`, `codigoGenerado`, `privilegio`) VALUES
-('12345678', 'Juan', 'Perez', NULL, 'juan@gmail.com', '', 'M'),
-('48887174', 'Romario', 'Flores Taipe', 'b5mTWKsLlek=', 'rfloresta@gmail.com', '', 'A'),
-('73184116', 'Bryan', 'Estrada', 'ggbhO1Y1Gbg=', 'bdeg_xd@hotmail.com', '48198', 'A');
+INSERT INTO `administrador` (`dni`, `nombres`, `apellidos`, `password`, `email`, `privilegio`, `codigo_generado`) VALUES
+('48887174', 'Romario', 'Flores Taipe', 'EfrkOriAHudSiGwRC51kkg==', 'romariojulerft@gmail.com', 'A', '24726');
 
 -- --------------------------------------------------------
 
@@ -118,8 +107,9 @@ CREATE TABLE `categoria` (
 --
 
 INSERT INTO `categoria` (`idCategoria`, `nombre`) VALUES
-(35, 'Maquillaje'),
-(36, 'Piel');
+(1, 'Maquillaje'),
+(2, 'Piel'),
+(3, 'Mujer');
 
 -- --------------------------------------------------------
 
@@ -135,16 +125,19 @@ CREATE TABLE `cliente` (
   `numCelular` char(9) DEFAULT NULL,
   `direccion` varchar(200) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
-  `password` varchar(100) DEFAULT NULL
+  `password` varchar(100) DEFAULT NULL,
+  `codigo_generado` char(5) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `cliente`
 --
 
-INSERT INTO `cliente` (`idCliente`, `nombres`, `apellidos`, `dni`, `numCelular`, `direccion`, `email`, `password`) VALUES
-(20, 'Bryan', 'Estrada', '73184116', '977834697', 'Av. Brisas', 'bestradag05@gmail.com', 'ggbhO1Y1Gbg='),
-(21, 'elizabet', 'torres', '64857952', '977654832', 'Av. Brisas 11', 'elizabet@gmail.com', 'ggbhO1Y1Gbg=');
+INSERT INTO `cliente` (`idCliente`, `nombres`, `apellidos`, `dni`, `numCelular`, `direccion`, `email`, `password`, `codigo_generado`) VALUES
+(4, 'Fernanda', 'Castillo', '45963256', '996555254', '', '', '222', NULL),
+(5, 'Romario', 'Flores', '48887174', '1111', NULL, 'rfloresta@autonoma.edu.pe', '2222', '57757'),
+(12, 'Mariana', 'Bellido', '12345678', '3331111', 'Héroes del pacífico', 'mariana@gmail.com', 'cT5laPhj4RI=', NULL),
+(14, '1', '1', NULL, NULL, NULL, 'sd', 'EfrkOriAHucSY5R4zTRSGg==', NULL);
 
 -- --------------------------------------------------------
 
@@ -165,7 +158,9 @@ CREATE TABLE `detalle_pedido` (
 --
 
 INSERT INTO `detalle_pedido` (`cantidad`, `precio`, `descuento`, `idProducto`, `idPedido`) VALUES
-(2, 15.00, 0.00, 7, 14);
+(1, 100.00, 0.00, 3, 1),
+(2, 100.00, 0.00, 3, 2),
+(3, 100.00, 0.00, 3, 3);
 
 --
 -- Disparadores `detalle_pedido`
@@ -196,10 +191,7 @@ CREATE TABLE `empresa` (
 --
 
 INSERT INTO `empresa` (`idEmpresa`, `ruc`, `razonSocial`, `direccion`, `logo`) VALUES
-(1, '20100148162', 'W&V Negocios y Servicios S.A.C', 'Calle...', 'nego.png'),
-(2, '20100148162', 'W&V Negocios y Servicios S.A.C', 'Calle Toribio', NULL),
-(3, '20100148162', 'W&V Negocios y Servicios S.A.C', 'Calle...', 'aua.jpg'),
-(4, '20100148162', 'W&V Negocios y Servicios S.A.C', 'B, Villa El Salvador', 'nego.png');
+(1, '20100148162', 'W&V Negocios y Servicios S.A.C', 'Calle...', 'nego.png');
 
 -- --------------------------------------------------------
 
@@ -219,8 +211,7 @@ CREATE TABLE `marca` (
 INSERT INTO `marca` (`idMarca`, `nombre`) VALUES
 (1, 'Esika'),
 (2, 'Cyzone'),
-(3, 'Unique Editado'),
-(4, 'Prueba');
+(3, 'Unique');
 
 -- --------------------------------------------------------
 
@@ -230,7 +221,7 @@ INSERT INTO `marca` (`idMarca`, `nombre`) VALUES
 
 CREATE TABLE `pedido` (
   `idPedido` int(11) NOT NULL,
-  `numero` varchar(60) DEFAULT NULL,
+  `numero` varchar(20) DEFAULT NULL,
   `fecha` varchar(50) DEFAULT NULL,
   `subtotal` double(10,2) DEFAULT NULL,
   `igv` double(10,2) DEFAULT NULL,
@@ -245,7 +236,9 @@ CREATE TABLE `pedido` (
 --
 
 INSERT INTO `pedido` (`idPedido`, `numero`, `fecha`, `subtotal`, `igv`, `total`, `pago`, `estado`, `idCliente`) VALUES
-(14, 'V00001', '04/08/2020', 30.00, 5.40, 30.00, 'Tarjeta', '1', 20);
+(1, 'A00001', '14/06/2020', 100.00, 0.18, 500.00, 'Tarjeta', '0', 4),
+(2, 'A00002', '14/06/2020', 200.00, 0.18, 200.00, 'Tarjeta', '0', 4),
+(3, 'A00003', '15/06/2020', 300.00, 0.18, 300.00, 'Tarjeta', '0', 4);
 
 -- --------------------------------------------------------
 
@@ -261,18 +254,19 @@ CREATE TABLE `producto` (
   `precioCompra` double(10,2) DEFAULT NULL,
   `precioVenta` double(10,2) DEFAULT NULL,
   `descuento` double(10,2) DEFAULT NULL,
-  `imagen` text DEFAULT NULL,
+  `imagen` text,
   `idCategoria` int(11) DEFAULT NULL,
-  `idSubCategoria` int(11) NOT NULL,
-  `idMarca` int(11) DEFAULT NULL
+  `idMarca` int(11) DEFAULT NULL,
+  `idSubCategoria` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `producto`
 --
 
-INSERT INTO `producto` (`idProducto`, `nombre`, `descripcion`, `stock`, `precioCompra`, `precioVenta`, `descuento`, `imagen`, `idCategoria`, `idSubCategoria`, `idMarca`) VALUES
-(7, 'Prueba', 'prueba des', 8, 12.00, 15.00, 0.00, 'Magnat.jpg', 35, 21, 1);
+INSERT INTO `producto` (`idProducto`, `nombre`, `descripcion`, `stock`, `precioCompra`, `precioVenta`, `descuento`, `imagen`, `idCategoria`, `idMarca`, `idSubCategoria`) VALUES
+(3, 'Glamour', 'perfume con aroma seductor', 286, 80.00, 100.00, 0.00, 'Magnat.jpg', 3, 2, 21),
+(4, 'KromoBlacks', 'Este producto es bueno', 100, 50.00, 60.00, 0.00, 'Leyenda.jpg', 1, 3, 21);
 
 -- --------------------------------------------------------
 
@@ -291,9 +285,9 @@ CREATE TABLE `subcategoria` (
 --
 
 INSERT INTO `subcategoria` (`idSubcategoria`, `nombre`, `idCategoria`) VALUES
-(20, 'Ojos', 35),
-(21, 'Mano', 35),
-(22, 'Rostro', 36);
+(20, 'Ojos', 1),
+(21, 'Mano', 1),
+(22, 'Rostro', 2);
 
 --
 -- Índices para tablas volcadas
@@ -342,7 +336,7 @@ ALTER TABLE `marca`
 --
 ALTER TABLE `pedido`
   ADD PRIMARY KEY (`idPedido`),
-  ADD KEY `pedido_ibfk_1` (`idCliente`);
+  ADD KEY `idCliente` (`idCliente`);
 
 --
 -- Indices de la tabla `producto`
@@ -368,44 +362,32 @@ ALTER TABLE `subcategoria`
 -- AUTO_INCREMENT de la tabla `categoria`
 --
 ALTER TABLE `categoria`
-  MODIFY `idCategoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
-
+  MODIFY `idCategoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT de la tabla `cliente`
 --
 ALTER TABLE `cliente`
-  MODIFY `idCliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
-
+  MODIFY `idCliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 --
 -- AUTO_INCREMENT de la tabla `empresa`
 --
 ALTER TABLE `empresa`
-  MODIFY `idEmpresa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
+  MODIFY `idEmpresa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT de la tabla `marca`
 --
 ALTER TABLE `marca`
   MODIFY `idMarca` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT de la tabla `pedido`
---
-ALTER TABLE `pedido`
-  MODIFY `idPedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
-
 --
 -- AUTO_INCREMENT de la tabla `producto`
 --
 ALTER TABLE `producto`
-  MODIFY `idProducto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-
+  MODIFY `idProducto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT de la tabla `subcategoria`
 --
 ALTER TABLE `subcategoria`
   MODIFY `idSubcategoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
-
 --
 -- Restricciones para tablas volcadas
 --
@@ -414,8 +396,8 @@ ALTER TABLE `subcategoria`
 -- Filtros para la tabla `detalle_pedido`
 --
 ALTER TABLE `detalle_pedido`
-  ADD CONSTRAINT `detallepedido_ibfk_1` FOREIGN KEY (`idProducto`) REFERENCES `producto` (`idProducto`),
-  ADD CONSTRAINT `detallepedido_ibfk_2` FOREIGN KEY (`idPedido`) REFERENCES `pedido` (`idPedido`);
+  ADD CONSTRAINT `detalle_pedido_ibfk_1` FOREIGN KEY (`idPedido`) REFERENCES `pedido` (`idPedido`),
+  ADD CONSTRAINT `detallepedido_ibfk_1` FOREIGN KEY (`idProducto`) REFERENCES `producto` (`idProducto`);
 
 --
 -- Filtros para la tabla `pedido`
@@ -436,7 +418,6 @@ ALTER TABLE `producto`
 --
 ALTER TABLE `subcategoria`
   ADD CONSTRAINT `subcategoria_ibfk_1` FOREIGN KEY (`idCategoria`) REFERENCES `categoria` (`idCategoria`);
-COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

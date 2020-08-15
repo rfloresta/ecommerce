@@ -23,8 +23,5 @@
         </div>
            
       </s:form>
-<pre style="display:none" id="errorPassword" class="text-danger font-weight-bold">
-*La contraseña debe tener 8 caracteres como mínimo entre números, minúsculas y mayúsculas*
-*No debe contener caracteres extraños ni espacios en blanco*
-                                </pre>
+
 <script src="js/funciones.js" type="text/javascript"></script>

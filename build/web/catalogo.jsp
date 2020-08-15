@@ -238,11 +238,11 @@
                                     </a>
 
                                     <span class="block2-oldprice m-text7 p-r-5">
-                                        $29.50
+                                        S/29.50
                                     </span>
 
                                     <span class="block2-newprice m-text8 p-r-5">
-                                        $15.90
+                                        S/15.90
                                     </span>
                                 </div>
                             </div>
@@ -275,7 +275,7 @@
                                     </a>
 
                                     <span class="block2-price m-text6 p-r-5">
-                                        $75.00
+                                        S/75.00
                                     </span>
                                 </div>
                             </div>
@@ -308,7 +308,7 @@
                                     </a>
 
                                     <span class="block2-price m-text6 p-r-5">
-                                        $92.50
+                                        S/92.50
                                     </span>
                                 </div>
                             </div>
@@ -341,7 +341,7 @@
                                     </a>
 
                                     <span class="block2-price m-text6 p-r-5">
-                                        $75.00
+                                        S/75.00
                                     </span>
                                 </div>
                             </div>
@@ -374,11 +374,11 @@
                                     </a>
 
                                     <span class="block2-oldprice m-text7 p-r-5">
-                                        $29.50
+                                        S/29.50
                                     </span>
 
                                     <span class="block2-newprice m-text8 p-r-5">
-                                        $15.90
+                                        S/15.90
                                     </span>
                                 </div>
                             </div>
@@ -411,7 +411,7 @@
                                     </a>
 
                                     <span class="block2-price m-text6 p-r-5">
-                                        $75.00
+                                        S/75.00
                                     </span>
                                 </div>
                             </div>
@@ -444,7 +444,7 @@
                                     </a>
 
                                     <span class="block2-price m-text6 p-r-5">
-                                        $92.50
+                                        S/92.50
                                     </span>
                                 </div>
                             </div>
@@ -482,7 +482,7 @@
                                     </a>
 
                                     <span class="block2-price m-text6 p-r-5">
-                                        $75.00
+                                        S/75.00
                                     </span>
                                 </div>
                             </div>
@@ -515,7 +515,7 @@
                                     </a>
 
                                     <span class="block2-price m-text6 p-r-5">
-                                        $92.50
+                                        S/92.50
                                     </span>
                                 </div>
                             </div>
@@ -548,7 +548,7 @@
                                     </a>
 
                                     <span class="block2-price m-text6 p-r-5">
-                                        $75.00
+                                        S/75.00
                                     </span>
                                 </div>
                             </div>
@@ -581,7 +581,7 @@
                                     </a>
 
                                     <span class="block2-price m-text6 p-r-5">
-                                        $92.50
+                                        S/92.50
                                     </span>
                                 </div>
                             </div>
@@ -619,7 +619,7 @@
                                     </a>
 
                                     <span class="block2-price m-text6 p-r-5">
-                                        $75.00
+                                        S/75.00
                                     </span>
                                 </div>
                             </div>
@@ -652,7 +652,7 @@
                                     </a>
 
                                     <span class="block2-price m-text6 p-r-5">
-                                        $92.50
+                                        S/92.50
                                     </span>
                                 </div>
                             </div>
@@ -685,7 +685,7 @@
                                     </a>
 
                                     <span class="block2-price m-text6 p-r-5">
-                                        $165.90
+                                        S/165.90
                                     </span>
                                 </div>
                             </div>
@@ -718,11 +718,11 @@
                                     </a>
 
                                     <span class="block2-oldprice m-text7 p-r-5">
-                                        $29.50
+                                        S/29.50
                                     </span>
 
                                     <span class="block2-newprice m-text8 p-r-5">
-                                        $15.90
+                                        S/15.90
                                     </span>
                                 </div>
                             </div>
@@ -755,7 +755,7 @@
                                     </a>
 
                                     <span class="block2-price m-text6 p-r-5">
-                                        $165.90
+                                        S/165.90
                                     </span>
                                 </div>
                             </div>
@@ -788,11 +788,11 @@
                                     </a>
 
                                     <span class="block2-oldprice m-text7 p-r-5">
-                                        $29.50
+                                        S/29.50
                                     </span>
 
                                     <span class="block2-newprice m-text8 p-r-5">
-                                        $15.90
+                                        S/15.90
                                     </span>
                                 </div>
                             </div>
@@ -825,7 +825,7 @@
                                     </a>
 
                                     <span class="block2-price m-text6 p-r-5">
-                                        $75.00
+                                        S/75.00
                                     </span>
                                 </div>
                             </div>
@@ -858,7 +858,7 @@
                                     </a>
 
                                     <span class="block2-price m-text6 p-r-5">
-                                        $92.50
+                                        S/92.50
                                     </span>
                                 </div>
                             </div>

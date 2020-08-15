@@ -38,10 +38,8 @@
                                 </s:if> 
                                 <div class="form-group">
                                     <label for="inputID">Nombre</label>
-
                                     <s:textfield required="required" name="categoria.nombre" cssClass="form-control" placeholder="Ingrese Nombre" />
                                 </div>
-                              
 
                             </div>
 
