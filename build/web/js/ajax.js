@@ -15,7 +15,7 @@ $('.btnDatosClie').on('click', function () {
             $('#div-contenido').html("\n\
             <h3 class='mb-4'>Datos Personales</h3>\n\
             <form id='form-datos'>\n\
-            <div class='row' >\n\
+            <div class='row text-left text-bold' >\n\
             <div class='col-6'>\n\
             <label class='text-start'>Nombre</label>\n\
             <input  type='text' id='nombre' name='nombres' class='form-control mb-3' value='" + json.nombres + "'>\n\
