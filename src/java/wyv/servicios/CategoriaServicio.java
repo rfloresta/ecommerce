@@ -1,6 +1,7 @@
 package wyv.servicios;
 
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import wyv.persistencia.Categoria;
 import wyv.persistencia.CategoriaDao;
@@ -8,42 +9,32 @@ import wyv.persistencia.IOperacionesBD;
 
 @Service
 public class CategoriaServicio implements IOperacionesBD<Categoria> {
-
+    @Autowired
     CategoriaDao cateDao;
     Categoria categoria;
     
     @Override
     public String registrar(Categoria a) {
-        cateDao = new CategoriaDao();
         return cateDao.registrar(a);
     }
-    /*
-    public String registrarSubCate(Categoria a) {
-        cateDao = new CategoriaDao();
-        return cateDao.registrarSubCate(a);
-    }*/
-
+    
     @Override
     public String actualizar(Categoria a) {
-        cateDao = new CategoriaDao();
         return cateDao.actualizar(a);
     }
 
     @Override
     public String eliminar(String id) {
-       cateDao = new CategoriaDao();
        return cateDao.eliminar(id);
     }
 
     @Override
     public Categoria buscar(String id) {
-        cateDao = new CategoriaDao();
         return cateDao.buscar(id);
     }
 
     @Override
     public List<Categoria> listar() {
-        cateDao = new CategoriaDao();
         return cateDao.listar();
     }
 
@@ -53,12 +44,10 @@ public class CategoriaServicio implements IOperacionesBD<Categoria> {
     }
     
      public List<Categoria> listarCategoria() {
-       cateDao = new CategoriaDao();
         return cateDao.listar();
     }
      
       public List<Categoria> listarsubCategoria() {
-       cateDao = new CategoriaDao();
         return cateDao.listarsubCategoria();
     }
 
