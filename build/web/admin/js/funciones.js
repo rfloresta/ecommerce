@@ -84,6 +84,7 @@ $(function () {
             url: 'listarSubCateFiltro.action?idCate=' + selected,
             success: function (respuesta) {
                 var json = JSON.parse(respuesta);
+                console.log(json);
 
 
                 var html="";

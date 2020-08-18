@@ -27,7 +27,7 @@ public class ClienteController implements ModelDriven<Object> {
     public HttpHeaders show() {
         clieDao = new ClienteDao();
         clientes = clieDao.buscar(id);
-        return new DefaultHttpHeaders("show");
+        return new DefaultHttpHeaders("show").withETag(clientes);
     }
     
     public HttpHeaders edit() throws ParseException {
@@ -36,7 +36,7 @@ public class ClienteController implements ModelDriven<Object> {
         cliente = g.fromJson(json, Cliente.class);
         cliente.setIdCliente(Integer.parseInt(getId()));
         estado=clieDao.actualizar(cliente);
-        return new DefaultHttpHeaders("edit");
+        return new DefaultHttpHeaders("edit").withETag(clientes);
     }
 
     @Override

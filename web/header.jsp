@@ -187,7 +187,11 @@
 
                                             <s:iterator value="#session.lstSubCate" var="subcate">
                                                 <s:if test="#cate.idCategoria == #subcate.idCategoria.idCategoria">
-                                                    <a class="dropdown-item" href="#"><s:property value="nombre"/></a>
+                                                    <s:url id="LnkBuscarCate" action="listarProductosPorSubCate">
+                                                        <s:param name="idSubCate" value="idSubcategoria" />
+                                                    </s:url>
+                                                    
+                                                    <s:a href="%{LnkBuscarCate}" cssClass="dropdown-item" ><s:property value="nombre"/></s:a>
                                                 </s:if>
 
                                             </s:iterator>
@@ -206,11 +210,15 @@
 
                             <div class="dropdown-menu" aria-labelledby="dropMarca">
                                 <s:iterator value="#session.lstMarca">
-                                    <a class="dropdown-item" href="#"><s:property value="nombre"/></a>
+                                     <s:url id="LnkBuscarXMarca" action="listarProductosPorMarca">
+                                                        <s:param name="idMarca" value="idMarca" />
+                                     </s:url>
+                                                  
+                                    <s:a href="%{LnkBuscarXMarca}" cssClass="dropdown-item"><s:property value="nombre"/></s:a>
                                 </s:iterator>
                             </div>
                         </div>
-                        <a href="productos.jsp" class="nav-link">Productos</a>
+                        <s:a href="listarProductoCliente" cssClass="nav-link">Productos</s:a>
                         <a href="blog.html" class="nav-link">Blog</a>
                         <a href="about.html" class="nav-link">Acerca de</a>
                     </nav>

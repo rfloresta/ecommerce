@@ -1,9 +1,17 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package wyv.persistencia;
 
 import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
@@ -15,7 +23,12 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import wyv.persistencia.exceptions.NonexistentEntityException;
 
+/**
+ *
+ * @author bdeg_
+ */
 public class ProductoJpa implements Serializable {
+
     public ProductoJpa() {
         this.emf= Persistence.createEntityManagerFactory("W_V_S.A.CPU");
     }
@@ -219,9 +232,9 @@ public class ProductoJpa implements Serializable {
     
     
      public List<Subcategoria> listarSubPorCate(int idCate) {
-        PreparedStatement ptstm;
-        Connection cn;
-        ResultSet rs;
+         PreparedStatement ptstm;
+         Connection cn;
+         ResultSet rs;
         List<Subcategoria> listSubCategoria = new ArrayList<>();
         
         try {
@@ -247,6 +260,38 @@ public class ProductoJpa implements Serializable {
         return listSubCategoria;
     }
    
+    public List<Producto> buscarProducto(String value) {
+         PreparedStatement ptstm;
+         Connection cn;
+         ResultSet rs;
+        List<Producto> listProducto = new ArrayList<>();
+        
+        try {
+            cn = Util.getConexionBD();
+            ptstm = cn.prepareStatement("Select * from producto WHERE nombre LIKE '%"+value+"%'");
+            rs = ptstm.executeQuery();
+           
+            while (rs.next()) {
+                Producto pro = new Producto();
+                
+                pro.setIdProducto(rs.getInt(1));
+                pro.setNombre(rs.getString(2));
+                pro.setDescripcion(rs.getString(3));
+                pro.setStock(rs.getInt(4));
+                pro.setPrecioCompra(rs.getDouble(5));
+                pro.setPrecioVenta(rs.getDouble(6));
+                pro.setDescuento(rs.getDouble(7));
+                pro.setImagen(rs.getString(8));
+                //Ingresamos producto
+                listProducto.add(pro);
+                
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return listProducto;
+    }
+    
    
     
 }

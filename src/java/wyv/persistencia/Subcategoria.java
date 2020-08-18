@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package wyv.persistencia;
 
 import java.io.Serializable;
@@ -17,7 +22,12 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import org.codehaus.jackson.annotate.JsonIgnore;
 
+/**
+ *
+ * @author bdeg_
+ */
 @Entity
 @Table(name = "subcategoria")
 @XmlRootElement
@@ -99,6 +109,7 @@ public class Subcategoria implements Serializable {
     }
 
     @XmlTransient
+    @JsonIgnore
     public List<Producto> getProductoList() {
         return productoList;
     }

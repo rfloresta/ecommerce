@@ -23,7 +23,7 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 
 /**
  *
- * @author Romario
+ * @author bdeg_
  */
 @Entity
 @Table(name = "marca")
@@ -34,6 +34,9 @@ import org.codehaus.jackson.annotate.JsonIgnore;
     , @NamedQuery(name = "Marca.findByNombre", query = "SELECT m FROM Marca m WHERE m.nombre = :nombre")})
 public class Marca implements Serializable {
 
+    @OneToMany(mappedBy = "idMarca")
+    private List<Producto> productoList;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -42,8 +45,6 @@ public class Marca implements Serializable {
     private Integer idMarca;
     @Column(name = "nombre")
     private String nombre;
-    @OneToMany(mappedBy = "idMarca")
-    private List<Producto> productoList;
 
     public Marca() {
     }
@@ -66,16 +67,6 @@ public class Marca implements Serializable {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
-
-    @XmlTransient
-    @JsonIgnore
-    public List<Producto> getProductoList() {
-        return productoList;
-    }
-
-    public void setProductoList(List<Producto> productoList) {
-        this.productoList = productoList;
     }
 
     @Override
@@ -101,6 +92,16 @@ public class Marca implements Serializable {
     @Override
     public String toString() {
         return "wyv.persistencia.Marca[ idMarca=" + idMarca + " ]";
+    }
+
+    @XmlTransient
+    @JsonIgnore
+    public List<Producto> getProductoList() {
+        return productoList;
+    }
+
+    public void setProductoList(List<Producto> productoList) {
+        this.productoList = productoList;
     }
     
 }

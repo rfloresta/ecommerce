@@ -221,6 +221,10 @@
             <result name="ok">/admin/principal/producto.jsp</result>
             <result name="error">/admin/error.jsp</result>
         </action>
+        <action name="listarProductoCliente" class="ProductoAction" method="listarProductoCliente">
+            <result name="ok">/productos.jsp</result>
+            <result name="error">/error.jsp</result>
+        </action>
         <action name="registrarProducto" class="ProductoAction" method="registrarProducto">
             <result name="ok">/admin/principal/producto.jsp</result>
             <result name="error">/admin/error.jsp</result>
@@ -247,10 +251,11 @@
         </action>
         <action name="listarSubCateFiltro" class="ProductoAction" method="listarSubCateFiltro">
         </action>
-        <action name="listarFiltroPrecioProducto" class="ProductoAction" method="listarFiltroPrecioProducto">
+        <action name="buscarProducto" class="ProductoAction" method="buscarProducto">
             <result name="ok">/productos_filtrados.jsp</result>
             <result name="error">/error.jsp</result>
         </action>
+        
         
     
     <!-- Subcategoria -->

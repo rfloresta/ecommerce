@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package wyv.persistencia;
 
 import java.io.Serializable;
@@ -6,6 +11,8 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -15,10 +22,12 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
-import org.codehaus.jackson.annotate.JsonBackReference;
 import org.codehaus.jackson.annotate.JsonIgnore;
-import org.codehaus.jackson.annotate.JsonManagedReference;
 
+/**
+ *
+ * @author bdeg_
+ */
 @Entity
 @Table(name = "pedido")
 @XmlRootElement
@@ -36,6 +45,7 @@ public class Pedido implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "idPedido")
     private Integer idPedido;
@@ -55,11 +65,11 @@ public class Pedido implements Serializable {
     @Column(name = "estado")
     private Character estado;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "pedido")
-    @JsonManagedReference
+    @JsonIgnore
     private List<DetallePedido> detallePedidoList;
     @JoinColumn(name = "idCliente", referencedColumnName = "idCliente")
     @ManyToOne
-    @JsonBackReference
+    @JsonIgnore
     private Cliente idCliente;
 
     public Pedido() {
@@ -134,7 +144,7 @@ public class Pedido implements Serializable {
     }
 
     @XmlTransient
-//    @JsonIgnore
+    @JsonIgnore
     public List<DetallePedido> getDetallePedidoList() {
         return detallePedidoList;
     }

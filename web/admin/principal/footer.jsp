@@ -113,7 +113,7 @@
         $(document).ready(function () {
             $('#datos').addClass('nowrap').DataTable({
                 responsive: true,
-
+                "lengthMenu": [ 5, 10, 25, 50, 100 ],
                 "language": {
                     "sProcessing": "Procesando...",
                     "sLengthMenu": "Mostrar _MENU_ registros",

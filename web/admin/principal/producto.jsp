@@ -55,6 +55,14 @@
                                 
                                  <div class="form-group">
                                     <label for="inputNombre">Sub Categoría</label>
+                                    <s:if test="%{edit==1}">
+                                    <s:select id="SubCategoria" list="lstSubCate" headerKey="0" 
+                                          headerValue="[--Seleccione--]" name="producto.idSubCategoria.idSubcategoria"
+                                          listKey="idSubcategoria" listValue="nombre"
+                                          label="SubCategoría" cssClass="form-control"  />
+                                    </s:if>
+                                    <s:else>
+                                        
                                     <div id="selectSubCate">
                                         <select class="form-control">
                                             <option>[--Seleccione--]</option>
@@ -62,6 +70,8 @@
                                         </select>
                                         
                                     </div>
+                                        
+                                    </s:else>
                                     
                                 </div>
 

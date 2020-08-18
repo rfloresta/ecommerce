@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package wyv.persistencia;
 
 import java.io.Serializable;
@@ -19,8 +24,11 @@ import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import org.codehaus.jackson.annotate.JsonIgnore;
-import org.codehaus.jackson.annotate.JsonManagedReference;
 
+/**
+ *
+ * @author bdeg_
+ */
 @Entity
 @Table(name = "producto")
 @XmlRootElement
@@ -33,6 +41,9 @@ import org.codehaus.jackson.annotate.JsonManagedReference;
     , @NamedQuery(name = "Producto.findByPrecioVenta", query = "SELECT p FROM Producto p WHERE p.precioVenta = :precioVenta")
     , @NamedQuery(name = "Producto.findByDescuento", query = "SELECT p FROM Producto p WHERE p.descuento = :descuento")})
 public class Producto implements Serializable {
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "producto")
+    private List<DetallePedido> detallePedidoList;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -58,10 +69,6 @@ public class Producto implements Serializable {
     @Lob
     @Column(name = "imagen")
     private String imagen;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "producto")
-    @JsonManagedReference
-    private List<DetallePedido> detallePedidoList;
-    
     @JoinColumn(name = "idCategoria", referencedColumnName = "idCategoria")
     @ManyToOne
     private Categoria idCategoria;
@@ -148,16 +155,6 @@ public class Producto implements Serializable {
         this.imagen = imagen;
     }
 
-    @XmlTransient
-    @JsonIgnore
-    public List<DetallePedido> getDetallePedidoList() {
-        return detallePedidoList;
-    }
-
-    public void setDetallePedidoList(List<DetallePedido> detallePedidoList) {
-        this.detallePedidoList = detallePedidoList;
-    }
-
     public Categoria getIdCategoria() {
         return idCategoria;
     }
@@ -205,6 +202,16 @@ public class Producto implements Serializable {
     @Override
     public String toString() {
         return "wyv.persistencia.Producto[ idProducto=" + idProducto + " ]";
+    }
+
+    @XmlTransient
+    @JsonIgnore
+    public List<DetallePedido> getDetallePedidoList() {
+        return detallePedidoList;
+    }
+
+    public void setDetallePedidoList(List<DetallePedido> detallePedidoList) {
+        this.detallePedidoList = detallePedidoList;
     }
     
 }
