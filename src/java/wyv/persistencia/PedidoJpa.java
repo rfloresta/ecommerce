@@ -17,7 +17,7 @@ import wyv.persistencia.exceptions.IllegalOrphanException;
 import wyv.persistencia.exceptions.NonexistentEntityException;
 
 public class PedidoJpa implements Serializable {
-    
+
     public PedidoJpa() {
         this.emf = Persistence.createEntityManagerFactory("W_V_S.A.CPU");
     }
@@ -223,7 +223,7 @@ public class PedidoJpa implements Serializable {
             em.close();
         }
     }
-    
+      
     public int actualizar(Pedido p) {
         Connection cn;
         PreparedStatement pstmt;

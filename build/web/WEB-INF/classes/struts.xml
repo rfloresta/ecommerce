@@ -251,7 +251,18 @@
             <result name="ok">/productos_filtrados.jsp</result>
             <result name="error">/error.jsp</result>
         </action>
-        
+        <action name="obtCategoria" class="ProductoAction" method="obtCategoria">
+            <result name="ok">/productos.jsp</result>
+            <result name="error">/error.jsp</result>
+        </action>
+<action name="obtSubcategoria" class="ProductoAction" method="obtSubcategoria">
+            <result name="ok">/productos.jsp</result>
+            <result name="error">/error.jsp</result>
+        </action>
+<action name="obtMarca" class="ProductoAction" method="obtMarca">
+            <result name="ok">/productos.jsp</result>
+            <result name="error">/error.jsp</result>
+        </action>
     
     <!-- Subcategoria -->
         <action name="listarSubCate" class="SubcategoriaAction" method="listarSubCate">

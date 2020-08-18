@@ -49,6 +49,7 @@ function ActualizarDatos() {
     var form = $("#form-datos");
     var idClie = $('#idClie').val();
     var jsonData=form.serializeArray().reduce(function(a, z) { a[z.name] = z.value; return a; }, {});
+    console.log(jsonData);
     $.ajax({
         url: 'api/clientes/' + idClie + '/edit',
         data: {json:JSON.stringify(jsonData)},

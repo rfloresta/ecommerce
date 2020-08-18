@@ -87,5 +87,4 @@ public class ProductoDao implements IOperacionesBD<Producto> {
             return null;
         }
     }
-
 }

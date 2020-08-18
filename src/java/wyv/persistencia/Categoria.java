@@ -25,7 +25,12 @@ import org.codehaus.jackson.annotate.JsonIgnore;
     , @NamedQuery(name = "Categoria.findByNombre", query = "SELECT c FROM Categoria c WHERE c.nombre = :nombre")})
 public class Categoria implements Serializable {
 
-    
+    @OneToMany(mappedBy = "idCategoria")
+    private List<Producto> productoList;
+
+    @OneToMany(mappedBy = "idCategoria")
+    private List<Subcategoria> subcategoriaList;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,10 +39,6 @@ public class Categoria implements Serializable {
     private Integer idCategoria;
     @Column(name = "nombre")
     private String nombre;
-    @OneToMany(mappedBy = "idCategoria")
-    private List<Producto> productoList;
-    @OneToMany(mappedBy = "idCategoria")
-    private List<Subcategoria> subcategoriaList;
 
     public Categoria() {
     }
@@ -62,25 +63,6 @@ public class Categoria implements Serializable {
         this.nombre = nombre;
     }
 
-    @XmlTransient
-    @JsonIgnore
-    public List<Producto> getProductoList() {
-        return productoList;
-    }
-
-    public void setProductoList(List<Producto> productoList) {
-        this.productoList = productoList;
-    }
-    
-    @XmlTransient
-    public List<Subcategoria> getSubcategoriaList() {
-        return subcategoriaList;
-    }
-
-    public void setSubcategoriaList(List<Subcategoria> subcategoriaList) {
-        this.subcategoriaList = subcategoriaList;
-    }
-    
     @Override
     public int hashCode() {
         int hash = 0;
@@ -105,6 +87,25 @@ public class Categoria implements Serializable {
     public String toString() {
         return "wyv.persistencia.Categoria[ idCategoria=" + idCategoria + " ]";
     }
-    
 
+    @XmlTransient
+    @JsonIgnore
+    public List<Subcategoria> getSubcategoriaList() {
+        return subcategoriaList;
+    }
+
+    public void setSubcategoriaList(List<Subcategoria> subcategoriaList) {
+        this.subcategoriaList = subcategoriaList;
+    }
+
+    @XmlTransient
+    @JsonIgnore
+    public List<Producto> getProductoList() {
+        return productoList;
+    }
+
+    public void setProductoList(List<Producto> productoList) {
+        this.productoList = productoList;
+    }
+    
 }

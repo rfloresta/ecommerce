@@ -52,7 +52,7 @@
                                     </s:a>
                                 </div>
                             </td>
-                            <td class="column-5">$<s:property value="importe" /></td>
+                            <td class="column-5">S/<s:property value="importe" /></td>
                             <s:url var="LnkQuitar" action="QuitarDelCarro" >
                                 <s:param value="proObj.idProducto" name="proObj.idProducto" /> 
                             </s:url>
@@ -98,7 +98,7 @@
                     </span>
 
                     <span class="m-text21 w-size20 w-full-sm">
-                        $/<s:property value="#session.subtotal" />
+                        S/<s:property value="#session.subtotal" />
                     </span>
                 </div>
                 <div class="flex-w flex-sb-m p-b-12">
@@ -107,7 +107,7 @@
                     </span>
 
                     <span class="m-text21 w-size20 w-full-sm">
-                        $/<s:property value="#session.descuento" />
+                        S/<s:property value="#session.descuento" />
                     </span>
                 </div>
 
@@ -117,7 +117,7 @@
                     </span>
 
                     <span class="m-text21 w-size20 w-full-sm">
-                        $/<s:property value="#session.igv" />
+                        S/<s:property value="#session.igv" />
                     </span>
                 </div>
 
@@ -127,7 +127,7 @@
                     </span>
 
                     <span class="m-text21 w-size20 w-full-sm">
-                        $/<s:property value="#session.total" />
+                        S/<s:property value="#session.total" />
 
                     </span>
                 </div>

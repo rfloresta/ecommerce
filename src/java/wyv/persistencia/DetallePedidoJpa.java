@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package wyv.persistencia;
 
 import java.io.Serializable;
@@ -21,15 +16,12 @@ import javax.persistence.criteria.Root;
 import wyv.persistencia.exceptions.NonexistentEntityException;
 import wyv.persistencia.exceptions.PreexistingEntityException;
 
-/**
- *
- * @author Romario
- */
 public class DetallePedidoJpa implements Serializable {
+
     public DetallePedidoJpa() {
         this.emf= Persistence.createEntityManagerFactory("W_V_S.A.CPU");
     }
-   public DetallePedidoJpa(EntityManagerFactory emf) {
+    public DetallePedidoJpa(EntityManagerFactory emf) {
         this.emf = emf;
     }
     private EntityManagerFactory emf = null;
@@ -42,30 +34,30 @@ public class DetallePedidoJpa implements Serializable {
         if (detallePedido.getDetallePedidoPK() == null) {
             detallePedido.setDetallePedidoPK(new DetallePedidoPK());
         }
-        detallePedido.getDetallePedidoPK().setIdPedido(detallePedido.getPedido().getIdPedido());
         detallePedido.getDetallePedidoPK().setIdProducto(detallePedido.getProducto().getIdProducto());
+        detallePedido.getDetallePedidoPK().setIdPedido(detallePedido.getPedido().getIdPedido());
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Producto producto = detallePedido.getProducto();
-            if (producto != null) {
-                producto = em.getReference(producto.getClass(), producto.getIdProducto());
-                detallePedido.setProducto(producto);
-            }
             Pedido pedido = detallePedido.getPedido();
             if (pedido != null) {
                 pedido = em.getReference(pedido.getClass(), pedido.getIdPedido());
                 detallePedido.setPedido(pedido);
             }
-            em.persist(detallePedido);
+            Producto producto = detallePedido.getProducto();
             if (producto != null) {
-                producto.getDetallePedidoList().add(detallePedido);
-                producto = em.merge(producto);
+                producto = em.getReference(producto.getClass(), producto.getIdProducto());
+                detallePedido.setProducto(producto);
             }
+            em.persist(detallePedido);
             if (pedido != null) {
                 pedido.getDetallePedidoList().add(detallePedido);
                 pedido = em.merge(pedido);
+            }
+            if (producto != null) {
+                producto.getDetallePedidoList().add(detallePedido);
+                producto = em.merge(producto);
             }
             em.getTransaction().commit();
         } catch (Exception ex) {
@@ -81,34 +73,26 @@ public class DetallePedidoJpa implements Serializable {
     }
 
     public void edit(DetallePedido detallePedido) throws NonexistentEntityException, Exception {
-        detallePedido.getDetallePedidoPK().setIdPedido(detallePedido.getPedido().getIdPedido());
         detallePedido.getDetallePedidoPK().setIdProducto(detallePedido.getProducto().getIdProducto());
+        detallePedido.getDetallePedidoPK().setIdPedido(detallePedido.getPedido().getIdPedido());
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
             DetallePedido persistentDetallePedido = em.find(DetallePedido.class, detallePedido.getDetallePedidoPK());
-            Producto productoOld = persistentDetallePedido.getProducto();
-            Producto productoNew = detallePedido.getProducto();
             Pedido pedidoOld = persistentDetallePedido.getPedido();
             Pedido pedidoNew = detallePedido.getPedido();
-            if (productoNew != null) {
-                productoNew = em.getReference(productoNew.getClass(), productoNew.getIdProducto());
-                detallePedido.setProducto(productoNew);
-            }
+            Producto productoOld = persistentDetallePedido.getProducto();
+            Producto productoNew = detallePedido.getProducto();
             if (pedidoNew != null) {
                 pedidoNew = em.getReference(pedidoNew.getClass(), pedidoNew.getIdPedido());
                 detallePedido.setPedido(pedidoNew);
             }
+            if (productoNew != null) {
+                productoNew = em.getReference(productoNew.getClass(), productoNew.getIdProducto());
+                detallePedido.setProducto(productoNew);
+            }
             detallePedido = em.merge(detallePedido);
-            if (productoOld != null && !productoOld.equals(productoNew)) {
-                productoOld.getDetallePedidoList().remove(detallePedido);
-                productoOld = em.merge(productoOld);
-            }
-            if (productoNew != null && !productoNew.equals(productoOld)) {
-                productoNew.getDetallePedidoList().add(detallePedido);
-                productoNew = em.merge(productoNew);
-            }
             if (pedidoOld != null && !pedidoOld.equals(pedidoNew)) {
                 pedidoOld.getDetallePedidoList().remove(detallePedido);
                 pedidoOld = em.merge(pedidoOld);
@@ -116,6 +100,14 @@ public class DetallePedidoJpa implements Serializable {
             if (pedidoNew != null && !pedidoNew.equals(pedidoOld)) {
                 pedidoNew.getDetallePedidoList().add(detallePedido);
                 pedidoNew = em.merge(pedidoNew);
+            }
+            if (productoOld != null && !productoOld.equals(productoNew)) {
+                productoOld.getDetallePedidoList().remove(detallePedido);
+                productoOld = em.merge(productoOld);
+            }
+            if (productoNew != null && !productoNew.equals(productoOld)) {
+                productoNew.getDetallePedidoList().add(detallePedido);
+                productoNew = em.merge(productoNew);
             }
             em.getTransaction().commit();
         } catch (Exception ex) {
@@ -146,15 +138,15 @@ public class DetallePedidoJpa implements Serializable {
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The detallePedido with id " + id + " no longer exists.", enfe);
             }
-            Producto producto = detallePedido.getProducto();
-            if (producto != null) {
-                producto.getDetallePedidoList().remove(detallePedido);
-                producto = em.merge(producto);
-            }
             Pedido pedido = detallePedido.getPedido();
             if (pedido != null) {
                 pedido.getDetallePedidoList().remove(detallePedido);
                 pedido = em.merge(pedido);
+            }
+            Producto producto = detallePedido.getProducto();
+            if (producto != null) {
+                producto.getDetallePedidoList().remove(detallePedido);
+                producto = em.merge(producto);
             }
             em.remove(detallePedido);
             em.getTransaction().commit();

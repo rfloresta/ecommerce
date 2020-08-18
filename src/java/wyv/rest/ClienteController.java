@@ -13,7 +13,7 @@ public class ClienteController implements ModelDriven<Object> {
     public Cliente cliente = new Cliente();
     private String id;
     private Object clientes;
-    private String estado="";
+    private String estado="error";
     private String json;
     
     private ClienteDao clieDao;
@@ -27,16 +27,27 @@ public class ClienteController implements ModelDriven<Object> {
     public HttpHeaders show() {
         clieDao = new ClienteDao();
         clientes = clieDao.buscar(id);
-        return new DefaultHttpHeaders("show");
+        if(clientes==null){
+            return new DefaultHttpHeaders("show").withStatus(404);
+        }
+        return new DefaultHttpHeaders("show").withETag(clientes);
     }
     
     public HttpHeaders edit() throws ParseException {
+        clieDao = new ClienteDao();
+        cliente = clieDao.buscar(id);
+        if(cliente==null){
+            return new DefaultHttpHeaders("show").withStatus(404);
+        }
+        if(json.equals("")){
+            return new DefaultHttpHeaders("show").withStatus(400);
+        }
         clieDao = new ClienteDao();
         Gson g = new Gson();
         cliente = g.fromJson(json, Cliente.class);
         cliente.setIdCliente(Integer.parseInt(getId()));
         estado=clieDao.actualizar(cliente);
-        return new DefaultHttpHeaders("edit");
+        return new DefaultHttpHeaders("edit").withETag(cliente);
     }
 
     @Override

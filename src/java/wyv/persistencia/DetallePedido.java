@@ -16,7 +16,6 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
-import org.codehaus.jackson.annotate.JsonBackReference;
 
 /**
  *
@@ -47,11 +46,9 @@ public class DetallePedido implements Serializable {
     private double descuento;
     @JoinColumn(name = "idPedido", referencedColumnName = "idPedido", insertable = false, updatable = false)
     @ManyToOne(optional = false)
-    @JsonBackReference
     private Pedido pedido;
     @JoinColumn(name = "idProducto", referencedColumnName = "idProducto", insertable = false, updatable = false)
     @ManyToOne(optional = false)
-    @JsonBackReference
     private Producto producto;
 
     public DetallePedido() {

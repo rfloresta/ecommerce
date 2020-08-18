@@ -18,10 +18,10 @@ import wyv.persistencia.exceptions.NonexistentEntityException;
 
 /**
  *
- * @author bdeg_
+ * @author Romario
  */
 public class SubcategoriaJpa implements Serializable {
-    
+
      public SubcategoriaJpa() {
         this.emf= Persistence.createEntityManagerFactory("W_V_S.A.CPU");
     }

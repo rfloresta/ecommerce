@@ -33,7 +33,7 @@
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="inputDni">Dni*</label>
-                                    <s:textfield type="number" maxlength="8" name="admin.dni"  cssClass="form-control " placeholder="Ingrese Dni" required="required" />
+                                    <s:textfield  maxlength="8" minlength="8"  name="admin.dni"  cssClass="form-control " placeholder="Ingrese Dni" required="required" />
                                 </div>
                                 <div class="form-group">
                                     <label for="inputNombres">Nombres*</label>
@@ -49,11 +49,17 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="inputPassword">Password*</label>
-                                    <s:password  name="admin.password" id="password1" cssClass="form-control" placeholder="Ingrese Password" required="required"/>
+                                    <s:password  name="admin.password" id="password2" cssClass="form-control" placeholder="Ingrese Password" required="required"/>
+                                    <div class="input-group-append">
+                                        <button  class="btn btn-primary" type="button" onclick="mostrarPassword('password2')"> <span id="show_password3" class="fa fa-eye-slash icon"></span> </button>
+                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="inputPassword">Confirmar Password*</label>
-                                    <s:password name="passwordConfirmar" id="password2" cssClass="form-control" placeholder="Ingrese Password" required="required"/>
+                                    <s:password name="passwordConfirmar" id="password3" cssClass="form-control" placeholder="Ingrese Password" required="required"/>
+                                    <div class="input-group-append">
+                                        <button  class="btn btn-primary" type="button" onclick="mostrarPassword('password3')"> <span id="show_password3" class="fa fa-eye-slash icon"></span> </button>
+                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="inputPrivilegio">Privilegio*</label>
@@ -61,11 +67,11 @@
                                               headerValue="Selecione" name="admin.privilegio" 
                                               cssClass="form-control" required="required"/>
                                 </div> 
-                                    <s:hidden name="admin.codigoGenerado"  value=""/>
+                                <s:hidden name="admin.codigoGenerado"  value=""/>
                             </div>
 
                             <div class="card-footer">
-                                <s:submit id="grabar" value="%{(edit==1)? 'Actualizar' : 'Registrar'}" cssClass="%{(edit==1)? 'btn btn-warning' : 'btn btn-success'}"/>
+                                <s:submit id="cambiar" value="%{(edit==1)? 'Actualizar' : 'Registrar'}" cssClass="%{(edit==1)? 'btn btn-warning' : 'btn btn-success'}"/>
                             </div>
                         </s:form>   
                     </div>
@@ -92,7 +98,7 @@
                                         <s:iterator value="lstAdmin">
                                             <tr>
 
-                                                <s:if test="#session.dni.equals(dni)">
+                                                <s:if test="#session.dniAdmin.equals(dni)">
                                                     <td></td>
                                                     <td></td>
                                                     <td></td>
@@ -106,7 +112,7 @@
                                                     <td><s:property value="privilegio"/></td>
 
                                                     <td>
-                                                        <s:if test='privilegio.equals("M")'>
+                                                        <s:if test="privilegio == 'M'">
                                                             <s:url id="lnkEditar" action="editarAdmin">
                                                                 <s:param value="dni" name="admin.dni" />
                                                             </s:url>
@@ -123,7 +129,7 @@
                                                         <s:else>
                                                             <a href="#" Class="btn btn-mini btn-primary disabled"><i class="fa fa-edit"></i></a>
                                                             <a href="#" Class="btn btn-mini btn-danger disabled" ><i class="fa fa-remove"></i></a>  
-                                                        </s:else>
+                                                            </s:else>
 
                                                     </td>
 

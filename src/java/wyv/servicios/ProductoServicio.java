@@ -53,5 +53,9 @@ public class ProductoServicio implements  IOperacionesBD<Producto>{
      public List<Subcategoria> listarSubPorCate(int id) {
         return proDao.listarSubPorCate(id);
     }
+     
+//     public List<Subcategoria> lstSubPorProductos(int id) {
+//        return proDao.lstSubPorProductos(id);
+//    }
     
 }

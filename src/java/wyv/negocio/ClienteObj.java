@@ -1,8 +1,8 @@
-
 package wyv.negocio;
 
 public class ClienteObj {
-   private String idCli,nomCli,apeCli,direCli,teleCli,emailCli,dniCli,passCli;
+
+    private String idCli, nomCli, apeCli, direCli, teleCli, emailCli, dniCli, passCli;
 
     public String getIdCli() {
         return idCli;
@@ -67,7 +67,5 @@ public class ClienteObj {
     public void setPassCli(String passCli) {
         this.passCli = passCli;
     }
-
-
 
 }

@@ -9,31 +9,74 @@
     </p>
 </section>
 
-
 <!-- Content page -->
 <section class="bgwhite p-t-55 p-b-65">
     <div class="container">
         <div class="row">
             <div class="col-sm-6 col-md-4 col-lg-3 p-b-50">
                 <div class="leftbar p-r-20 p-r-0-sm">
+                    <s:if test="#session.marca != null && #session.lstMarcas == null">
+                        <s:set var="lstCate" value="#session.categoria"></s:set>
+                        <s:set var="lstSub" value="#session.subcategoria"></s:set>
+                        <s:set var="lstProductos" value="#session.marca.productoList"></s:set>
+                    </s:if>
+                    <s:elseif test="#session.categoria != null">
+                        <s:set var="lstCate" value="#session.categoria"></s:set>
+                        <s:set var="lstSub" value="#session.categoria.subcategoriaList"></s:set>
+                        <s:set var="lstProductos" value="#session.categoria.productoList"></s:set>
+                    </s:elseif>
+                    <s:else>
+                        <s:set var="lstCate" value="#session.subcategoria.idCategoria"></s:set>
+                        <s:set var="lstSub" value="#session.subcategoria"></s:set>
+                        <s:set var="lstProductos" value="#session.subcategoria.productoList"></s:set>
+                    </s:else>
                     <!--  -->
                     <h4 class="m-text14 p-b-7">
-                        Categories
+                        Marcas
+                    </h4>
+                    <ul class="p-b-54">
+
+                        <s:iterator value="#session.marca" >
+                            <s:url id="lnkMarca" action="obtMarca">
+                                <s:param value="idMarca" name="marca.idMarca" />
+                            </s:url>
+                            <li class="p-t-4">
+                                <s:a href="%{lnkMarca}" cssClass="s-text13">
+                                    <s:property value="nombre"/>
+                                </s:a>
+                            </li>
+                        </s:iterator>
+
+                    </ul>
+                    <h4 class="m-text14 p-b-7">
+                        Categorias
+                    </h4>
+                    <ul class="p-b-54">
+                        <s:iterator value="lstCate">
+                            <s:url id="lnkCategoria" action="obtCategoria">
+                                <s:param value="idCategoria" name="categoria.idCategoria" />
+                            </s:url>
+                            <li class="p-t-4">
+                                <s:a href="%{lnkCategoria}" cssClass="s-text13">
+                                    <s:property value="nombre"/>
+                                </s:a>
+                            </li>
+                        </s:iterator>
+                    </ul>
+                    <!--  -->
+                    <h4 class="m-text14 p-b-7">
+                        Subcategorias
                     </h4>
 
                     <ul class="p-b-54">
-                        <li class="p-t-4">
-                            <a href="#" class="s-text13 active1">
-                                Todas
-                            </a>
-                        </li>
-                        <s:iterator value="#session.lstSubCate" >
+                        <s:iterator value="lstSub" >
+                            <s:url id="lnkSubcategoria" action="obtSubcategoria">
+                                <s:param value="idSubcategoria" name="subcategoria.idSubcategoria" />
+                            </s:url>
                             <li class="p-t-4">
-
-                                <a href="#" class="s-text13">
+                                <s:a href="%{lnkSubcategoria}" cssClass="s-text13">
                                     <s:property value="nombre"/>
-                                </a>
-
+                                </s:a>
                             </li>
                         </s:iterator>
 
@@ -62,7 +105,7 @@
                             </div>
 
                             <div class="s-text3 p-t-10 p-b-10">
-                                Rango: $<span id="value-lower">510</span> - $<span id="value-upper">980</span>
+                                Rango: S/<span id="value-lower">510</span> - S/<span id="value-upper">980</span>
                             </div>
                         </div>
                     </div>
@@ -97,12 +140,10 @@
                                 <input class="checkbox-color-filter" id="color-filter5" type="checkbox" name="color-filter5">
                                 <label class="color-filter color-filter5" for="color-filter5"></label>
                             </li>
-
                             <li class="m-r-10">
                                 <input class="checkbox-color-filter" id="color-filter6" type="checkbox" name="color-filter6">
                                 <label class="color-filter color-filter6" for="color-filter6"></label>
                             </li>
-
                             <li class="m-r-10">
                                 <input class="checkbox-color-filter" id="color-filter7" type="checkbox" name="color-filter7">
                                 <label class="color-filter color-filter7" for="color-filter7"></label>
@@ -112,7 +153,6 @@
 
                     <div class="search-product pos-relative bo4 of-hidden">
                         <input class="s-text7 size6 p-l-23 p-r-50" type="text" name="search-product" placeholder="Search Products...">
-
                         <button class="flex-c-m size5 ab-r-m color2 color0-hov trans-0-4">
                             <i class="fs-12 fa fa-search" aria-hidden="true"></i>
                         </button>
@@ -138,24 +178,24 @@
                         <div class="">
                             <select class=" form-control" name="sorting">
                                 <option>Price</option>
-                                <option>$0.00 - $50.00</option>
-                                <option>$50.00 - $100.00</option>
-                                <option>$100.00 - $150.00</option>
-                                <option>$150.00 - $200.00</option>
-                                <option>$200.00+</option>
+                                <option>S/0.00 - S/50.00</option>
+                                <option>S/50.00 - S/100.00</option>
+                                <option>S/100.00 - S/150.00</option>
+                                <option>S/150.00 - S/200.00</option>
+                                <option>S/200.00+</option>
 
                             </select>
                         </div>
                     </div>
 
                     <span class="s-text8 p-t-5 p-b-5">
-                        Showing  of 16 results
+                        Mostrando <s:property value="#lstProductos.size()"/> resultado(s)
                     </span>
                 </div>
 
                 <!-- Product -->
                 <div class="row" id="contenido-productos">
-                    <s:iterator value="#session.lstProducto">
+                    <s:iterator value="lstProductos">
 
                         <div class="col-sm-12 col-md-6 col-lg-4 p-b-50">
                             <!-- Block2 -->

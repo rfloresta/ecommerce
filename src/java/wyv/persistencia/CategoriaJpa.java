@@ -13,11 +13,15 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.Query;
+import javax.persistence.EntityNotFoundException;
 import javax.persistence.Persistence;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import wyv.persistencia.exceptions.NonexistentEntityException;
 
 public class CategoriaJpa implements Serializable {
-    
+
     public CategoriaJpa() {
         this.emf= Persistence.createEntityManagerFactory("W_V_S.A.CPU");
     }

@@ -1,8 +1,9 @@
 package wyv.negocio;
 
 public class ProductoObj {
-    public String idProducto,nombre,descripcion,imagen, idCategoria, idMarca;
-    public double precioCompra,precioVenta;
+
+    public String idProducto, nombre, descripcion, imagen, idCategoria, idMarca;
+    public double precioCompra, precioVenta;
     public int stock;
     public double descuento;
 
@@ -86,7 +87,4 @@ public class ProductoObj {
         this.descuento = descuento;
     }
 
-   
-
- 
 }

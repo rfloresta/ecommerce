@@ -1,14 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package wyv.negocio;
 
-/**
- *
- * @author Data
- */
 public class UsuarioObj {
      private String dni,nom,pass, tipo;
 
@@ -43,9 +34,5 @@ public class UsuarioObj {
     public void setTipo(String tipo) {
         this.tipo = tipo;
     }
-     
-     
-     
-     
-     
+
 }

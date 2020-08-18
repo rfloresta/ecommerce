@@ -4,6 +4,9 @@ import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
@@ -16,9 +19,11 @@ import javax.persistence.Persistence;
 import wyv.persistencia.exceptions.NonexistentEntityException;
 
 public class ProductoJpa implements Serializable {
+
     public ProductoJpa() {
-        this.emf= Persistence.createEntityManagerFactory("W_V_S.A.CPU");
+        this.emf = Persistence.createEntityManagerFactory("W_V_S.A.CPU");
     }
+
     public ProductoJpa(EntityManagerFactory emf) {
         this.emf = emf;
     }
@@ -216,31 +221,30 @@ public class ProductoJpa implements Serializable {
             em.close();
         }
     }
-    
-    
-     public List<Subcategoria> listarSubPorCate(int idCate) {
+
+    public List<Subcategoria> listarSubPorCate(int idCate) {
         PreparedStatement ptstm;
         Connection cn;
         ResultSet rs;
         List<Subcategoria> listSubCategoria = new ArrayList<>();
-        
+
         try {
             cn = Util.getConexionBD();
-            ptstm = cn.prepareStatement("Select * from subcategoria where idCategoria="+idCate+"");
+            ptstm = cn.prepareStatement("Select * from subcategoria where idCategoria=" + idCate + "");
             rs = ptstm.executeQuery();
-           
+
             while (rs.next()) {
-                Subcategoria subC=new Subcategoria();
+                Subcategoria subC = new Subcategoria();
                 Categoria cat = new Categoria();
-                
+
                 subC.setIdSubcategoria(rs.getInt(1));
                 subC.setNombre(rs.getString(2));
                 cat.setIdCategoria(rs.getInt(3));
                 subC.setIdCategoria(cat);
                 //Ingresamos cliente
                 listSubCategoria.add(subC);
-                
-}
+
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -7,7 +7,6 @@
         <!-- Block2 -->
 
         <div class="block2" >
-
             <div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelnew">
                 <img src="admin/imagenes/<s:property value="imagen"/>" alt="IMG-PRODUCT">
 
