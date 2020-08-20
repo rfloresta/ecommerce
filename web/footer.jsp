@@ -1,4 +1,5 @@
 <!-- Footer -->
+<%@ taglib uri="/struts-tags" prefix="s"%>
 <footer class="bg6 p-t-45 p-b-43 p-l-45 p-r-45">
     <div class="flex-w p-b-90">
         <div class="w-size6 p-t-30 p-l-15 p-r-15 respon3">
@@ -27,29 +28,16 @@
             </h4>
 
             <ul>
-                <li class="p-b-9">
-                    <a href="#" class="s-text7">
-                        Hombre
-                    </a>
+                <s:iterator value="#session.lstCategoria" >
+                <s:url id="lnkCategoria" action="obtCategoria">
+                    <s:param value="idCategoria" name="categoria.idCategoria" />
+                </s:url>
+                <li class="p-t-4">
+                <s:a href="%{lnkCategoria}" cssClass="s-text13">
+                    <s:property value="nombre"/>
+                </s:a>
                 </li>
-
-                <li class="p-b-9">
-                    <a href="#" class="s-text7">
-                        Mujer
-                    </a>
-                </li>
-
-                <li class="p-b-9">
-                    <a href="#" class="s-text7">
-                        Para la piel
-                    </a>
-                </li>
-
-                <li class="p-b-9">
-                    <a href="#" class="s-text7">
-                        Cosmeticos
-                    </a>
-                </li>
+                </s:iterator>
             </ul>
         </div>
 
@@ -185,7 +173,7 @@
             swal(nameProduct, "is added to cart !", "success");
         });
     });
-   </script>
+</script>
 
 <!--===============================================================================================-->
 
@@ -205,7 +193,7 @@
             swal(nameProduct, "Producto agregado !", "success");
         });
     });
-    </script>
+</script>
 <!--===============================================================================================-->
 <script type="text/javascript" src="js/nouislider.min.js"></script>
 <script type="text/javascript">

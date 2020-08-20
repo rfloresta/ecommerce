@@ -37,11 +37,7 @@ public class EmpresaAction extends ActionSupport {
     public void setEmpresa(Empresa empresa) {
         this.empresa = empresa;
     }
-
-    public void setEmpSer(EmpresaServicio empSer) {
-        this.empSer = empSer;
-    }
-
+    
     public File getLogo() {
         return logo;
     }

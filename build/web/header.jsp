@@ -178,43 +178,39 @@
                                 Categoría
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+
                                 <s:iterator value="#session.lstCategoria" var="cate">
-
-                                    <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" data-toggle="dropdown" href="#"><s:property value="nombre"/></a>
-
-
-                                        <ul class="dropdown-menu">
-
+                                    <s:url id="lnkCategoria" action="obtCategoria">
+                                        <s:param value="idCategoria" name="categoria.idCategoria" />
+                                    </s:url>
+                                    <li class="dropdown-submenu"><s:a href="%{lnkCategoria}" cssClass="dropdown-item dropdown-toggle"><s:property value="nombre"/></s:a>
+                                            <ul class="dropdown-menu">
                                             <s:iterator value="#session.lstSubCate" var="subcate">
+                                                <s:url id="lnkSubcategoria" action="obtSubcategoria">
+                                                    <s:param value="idSubcategoria" name="subcategoria.idSubcategoria" />
+                                                </s:url>
                                                 <s:if test="#cate.idCategoria == #subcate.idCategoria.idCategoria">
-                                                    <s:url id="LnkBuscarCate" action="listarProductosPorSubCate">
-                                                        <s:param name="idSubCate" value="idSubcategoria" />
-                                                    </s:url>
-                                                    
-                                                    <s:a href="%{LnkBuscarCate}" cssClass="dropdown-item" ><s:property value="nombre"/></s:a>
+
+                                                    <li cssClass="dropdown-submenu"><s:a cssClass="dropdown-item" href="%{lnkSubcategoria}"><s:property value="nombre"/></s:a>
                                                 </s:if>
-
-                                            </s:iterator>
-
+                                                </s:iterator>
                                         </ul>
                                     </li>
-
                                 </s:iterator>
-
                             </ul>
                         </li>
-
-
                         <div class="dropdown drophover">
-                            <a href="#" class="nav-link" id="dropMarca" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Marca</a>
+                            <a href="#" class="nav-link dropdown-toggle" id="dropMarca" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Marca</a>
 
                             <div class="dropdown-menu" aria-labelledby="dropMarca">
                                 <s:iterator value="#session.lstMarca">
-                                     <s:url id="LnkBuscarXMarca" action="listarProductosPorMarca">
-                                                        <s:param name="idMarca" value="idMarca" />
-                                     </s:url>
-                                                  
-                                    <s:a href="%{LnkBuscarXMarca}" cssClass="dropdown-item"><s:property value="nombre"/></s:a>
+
+                                    <s:url id="lnkMarca" action="obtMarca">
+                                        <s:param value="idMarca" name="marca.idMarca" />
+                                    </s:url>
+                                    <s:a href="%{lnkMarca}" cssClass="dropdown-item">
+                                        <s:property value="nombre"/>
+                                    </s:a>
                                 </s:iterator>
                             </div>
                         </div>
@@ -345,25 +341,25 @@
                                     </div>
                                 </div>
                             </s:if>
-                            
+
                         </s:form>
                     </div>
                     <div class="modal-footer">
                         <div class="row">
-                                <!-- /.col -->
-                                <div class="col-8">
-                                    <div class="icheck-primary">
-                                        <input type="checkbox" id="agreeTerms" name="terms" value="agree">
-                                        <label for="agreeTerms">
-                                            Acepto los  <a href="#">Terminos</a>
-                                        </label>
-                                    </div>
+                            <!-- /.col -->
+                            <div class="col-8">
+                                <div class="icheck-primary">
+                                    <input type="checkbox" id="agreeTerms" name="terms" value="agree">
+                                    <label for="agreeTerms">
+                                        Acepto los  <a href="#">Terminos</a>
+                                    </label>
                                 </div>
-                                <div class="col-4">
-                                    <s:submit id="cambiar"  cssClass="btn btn-primary btn-block toastrDefaultError" value="Enviar"/>
-                                </div>
-                                <!-- /.col -->
                             </div>
+                            <div class="col-4">
+                                <s:submit id="cambiar"  cssClass="btn btn-primary btn-block toastrDefaultError" value="Enviar"/>
+                            </div>
+                            <!-- /.col -->
+                        </div>
                     </div>
                 </div>
             </div>

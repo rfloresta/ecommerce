@@ -224,8 +224,6 @@ public class PedidoAction extends ActionSupport implements SessionAware {
     public String registrarPedido(/*String idCliente*/) {
         try {
             PedidoObj ven = new PedidoObj();
-           
-
             String idCliente = sesion.get("id").toString();
             ClienteObj clie = new ClienteObj();
             clie.setIdCli(idCliente);

@@ -16,26 +16,22 @@ public class MarcaServicio implements IOperacionesBD<Marca> {
 
     @Override
     public String registrar(Marca a) {
-        marDao = new MarcaDao();
         return marDao.registrar(a);
     }
 
     @Override
     public String actualizar(Marca a) {
-            marDao = new MarcaDao();
             return marDao.actualizar(a);   
 
     }
 
     @Override
     public String eliminar(String id) {
-        marDao = new MarcaDao();
         return marDao.eliminar(id);
     }
 
     @Override
     public Marca buscar(String id) {
-        marDao = new MarcaDao();
         return (Marca) marDao.buscar(id);
     }
 

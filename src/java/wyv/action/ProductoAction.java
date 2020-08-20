@@ -101,26 +101,6 @@ public class ProductoAction extends ActionSupport implements SessionAware {
         this.producto = producto;
     }
 
-    public List<Producto> getLstProducto() {
-        return lstProducto;
-    }
-
-    public List<Categoria> getLstCategoria() {
-        return lstCategoria;
-    }
-
-    public List<Subcategoria> getLstSubCate() {
-        return lstSubCate;
-    }
-
-    public List<Marca> getLstMarca() {
-        return lstMarca;
-    }
-
-    public int getEdit() {
-        return edit;
-    }
-
     public Categoria getCategoria() {
         return categoria;
     }
@@ -144,6 +124,27 @@ public class ProductoAction extends ActionSupport implements SessionAware {
     public void setMarca(Marca marca) {
         this.marca = marca;
     }
+    
+    public List<Producto> getLstProducto() {
+        return lstProducto;
+    }
+
+    public List<Categoria> getLstCategoria() {
+        return lstCategoria;
+    }
+
+    public List<Subcategoria> getLstSubCate() {
+        return lstSubCate;
+    }
+
+    public List<Marca> getLstMarca() {
+        return lstMarca;
+    }
+
+    public int getEdit() {
+        return edit;
+    }
+
 
     
 
@@ -176,7 +177,11 @@ public class ProductoAction extends ActionSupport implements SessionAware {
     public String listarProductoCliente() {
         try {
             lstProducto = proSer.listar();
-             sesion.put("lstProducto", lstProducto);
+            lstSubCate = subCateSer.listar();
+            lstCategoria = catSer.listar();
+            lstMarca = marSer.listar();
+            sesion.put("marca",lstMarca);
+
             return "ok";
         } catch (Exception e) {
             resultado = "Error en: listarProducto :: " + e.getMessage();
@@ -317,7 +322,7 @@ public class ProductoAction extends ActionSupport implements SessionAware {
             sesion.put("lstCategoria", lstCategoria);
             lstMarca = marSer.listar();
             sesion.put("lstMarca", lstMarca);
-            lstSubCate = subCateSer.listar();
+            lstSubCate = subCateSer.listar();       
             sesion.put("lstSubCate", lstSubCate);
             estado = "ok";
         } catch (Exception e) {
@@ -371,11 +376,7 @@ public class ProductoAction extends ActionSupport implements SessionAware {
                 if (minVal <= lstProducto.get(i).getPrecioVenta() && lstProducto.get(i).getPrecioVenta() <= maxVal) {
                     pro = lstProducto.get(i);
                     Productos.add(pro);
-
-                } else {
-                    System.out.println("No se encontraron productos");
-                }
-
+                } 
             }
             sesion.put("lstProductoFiltro", Productos);
 
@@ -385,7 +386,6 @@ public class ProductoAction extends ActionSupport implements SessionAware {
         }
         return estado;
     }
-    
     
     @Action(value = "buscarProducto", results = {
         @Result(name = "ok", location = "/productos_filtrados.jsp")
@@ -401,9 +401,9 @@ public class ProductoAction extends ActionSupport implements SessionAware {
             PrintWriter out = response.getWriter();
 
             String valor = request.getParameter("valorBusqueda");
-            
+        
             lstProducto = proSer.buscarProducto(valor);
-
+          
             sesion.put("lstProductoFiltro", lstProducto);
 
             estado= "ok";
@@ -412,5 +412,56 @@ public class ProductoAction extends ActionSupport implements SessionAware {
         }
         return estado;
     }
+    
+    @Action(value = "obtCategoria", results = {@Result(name="ok", location="/productos.jsp"),
+    @Result(name="error", location="/error.jsp")
+    })
 
+    public String obtCategoria() {
+        try {
+            categoria = catSer.buscar(categoria.getIdCategoria().toString());
+            lstMarca = marSer.listar();
+            sesion.put("categoria", categoria);
+            sesion.put("lstMarcas", lstMarca);
+            estado="ok";
+        } catch (Exception e) {
+            resultado = "Error en: obtSubsPorCategoria :: " + e.getMessage();
+        }
+        return estado;
+    }
+    
+    @Action(value = "obtSubcategoria", results = {@Result(name="ok", location="/productos.jsp"),
+    @Result(name="error", location="/error.jsp")})
+
+    public String obtSubcategoria() {
+        try {
+            subcategoria = subCateSer.buscar(subcategoria.getIdSubcategoria().toString());
+            sesion.put("subcategoria", subcategoria);
+            lstMarca = marSer.listar();
+            sesion.put("lstMarcas", lstMarca);
+            sesion.remove("categoria");
+            estado="ok";
+        } catch (Exception e) {
+            resultado = "Error en: obtSubsPorProductos :: " + e.getMessage();
+        }
+        return estado;
+    }
+    
+    @Action(value = "obtMarca", results = {@Result(name="ok", location="/productos.jsp"),
+    @Result(name="error", location="/error.jsp")})
+    public String obtMarca() {
+        try {
+            marca = marSer.buscar(marca.getIdMarca().toString());
+            lstCategoria = catSer.listar();
+            lstSubCate = subCateSer.listar();
+            sesion.remove("lstMarcas");
+            sesion.put("marca", marca);
+            sesion.put("categoria", lstCategoria);
+            sesion.put("subcategoria", lstSubCate);
+            estado="ok";
+        } catch (Exception e) {
+            resultado = "Error en: obtSubsPorProductos :: " + e.getMessage();
+        }
+        return estado;
+    }
 }

@@ -49,7 +49,11 @@ $(function () {
                 caracter_raro = true;
             }
         }
-        if (password2.length >= 8 && mayuscula && minuscula && caracter_raro && numero)
+        var check = checkCampos($(this).parents("#form_pass"));
+        if (!check) {
+            toastr.error('Debe completar los campos requeridos (*)');
+            return;
+        } else if (password2.length >= 8 && mayuscula && minuscula && caracter_raro && numero)
         {
             if (password2 !== password3) {
                 toastr.error('Las contraseñas no coinciden');
@@ -57,7 +61,7 @@ $(function () {
             }
             form.submit();
         } else {
-            toastr.error('*La contraseña debe tener 8 caracteres como mínimo entre números, minúsculas y mayúsculas y almenos un caracter extraño (@ . - _)* *No debe estar en blanco*');
+            toastr.error('*La contraseña debe tener 8 caracteres como mínimo entre números, minúsculas y mayúsculas y almenos un caracter extraño (@ . - _)*');
         }
     }
     );

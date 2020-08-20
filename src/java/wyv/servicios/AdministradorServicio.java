@@ -1,5 +1,6 @@
 package wyv.servicios;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,7 @@ public class AdministradorServicio implements IOperacionesBD<Administrador> {
     @Autowired
     AdministradorDao admDao/*= new AdministradorDao()*/;
     Administrador admin;
-    private List<Administrador> lstAdmin;
+    private List<Administrador> lstAdmin =new ArrayList<>();
 
     @Override
     public String registrar(Administrador a) {
@@ -85,18 +86,34 @@ public class AdministradorServicio implements IOperacionesBD<Administrador> {
     }
 
     public Administrador validarEmail(String email) {
+        
         try {
-            lstAdmin = listar();
-            for (Administrador a : lstAdmin) {
+           
+            lstAdmin = admDao.listar();
+            System.out.println("La liesta tiene " + lstAdmin.size());
+            for(Administrador a : lstAdmin) {
+                 System.out.println("Llego aqui");
+                System.out.println("el admin"+ a.getEmail());
                 if (a.getEmail().equals(email)) {
-                    return a;
+                    
+                    admin= a;
                 }
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
+            admin = null;
         }
-        return null;
+        return admin;
     }
+    
+    
+//    public static void  main(String[] args){
+//        AdministradorServicio a=new AdministradorServicio();
+//       Administrador administrador=new Administrador(); 
+//        administrador=  a.validarEmail("bestradag05@gmail.com");
+//        System.out.println("El admin es : " + administrador.getNombres());
+//       
+//    }
 
     public String comparar(Administrador entrada) {
         String estado = "incorrecto";

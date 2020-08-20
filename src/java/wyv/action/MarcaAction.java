@@ -83,7 +83,7 @@ public class MarcaAction extends ActionSupport {
     public String editarMarca() {
         try {
             marca = marSer.buscar(String.valueOf(marca.getIdMarca()));
-            lstMarca = new MarcaServicio().listar();
+            lstMarca = marSer.listar();
             edit = 1;
             return "ok";
         } catch (Exception e) {

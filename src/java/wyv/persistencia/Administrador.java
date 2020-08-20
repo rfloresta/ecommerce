@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package wyv.persistencia;
 
 import java.io.Serializable;
@@ -10,6 +15,10 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
+/**
+ *
+ * @author bdeg_
+ */
 @Entity
 @Table(name = "administrador")
 @XmlRootElement
@@ -20,8 +29,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Administrador.findByApellidos", query = "SELECT a FROM Administrador a WHERE a.apellidos = :apellidos")
     , @NamedQuery(name = "Administrador.findByPassword", query = "SELECT a FROM Administrador a WHERE a.password = :password")
     , @NamedQuery(name = "Administrador.findByEmail", query = "SELECT a FROM Administrador a WHERE a.email = :email")
-    , @NamedQuery(name = "Administrador.findByCodigoGenerado", query = "SELECT a FROM Administrador a WHERE a.codigoGenerado = :codigoGenerado")
-    , @NamedQuery(name = "Administrador.findByPrivilegio", query = "SELECT a FROM Administrador a WHERE a.privilegio = :privilegio")})
+    , @NamedQuery(name = "Administrador.findByPrivilegio", query = "SELECT a FROM Administrador a WHERE a.privilegio = :privilegio")
+    , @NamedQuery(name = "Administrador.findByCodigoGenerado", query = "SELECT a FROM Administrador a WHERE a.codigoGenerado = :codigoGenerado")})
 public class Administrador implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -38,11 +47,10 @@ public class Administrador implements Serializable {
     private String password;
     @Column(name = "email")
     private String email;
-    @Basic(optional = false)
-    @Column(name = "codigo_generado")
-    private String codigoGenerado;
     @Column(name = "privilegio")
     private Character privilegio;
+    @Column(name = "codigo_generado")
+    private String codigoGenerado;
 
     public Administrador() {
     }
@@ -51,10 +59,9 @@ public class Administrador implements Serializable {
         this.dni = dni;
     }
 
-    public Administrador(String dni, String apellidos, String codigoGenerado) {
+    public Administrador(String dni, String apellidos) {
         this.dni = dni;
         this.apellidos = apellidos;
-        this.codigoGenerado = codigoGenerado;
     }
 
     public String getDni() {
@@ -97,20 +104,20 @@ public class Administrador implements Serializable {
         this.email = email;
     }
 
-    public String getCodigoGenerado() {
-        return codigoGenerado;
-    }
-
-    public void setCodigoGenerado(String codigoGenerado) {
-        this.codigoGenerado = codigoGenerado;
-    }
-
     public Character getPrivilegio() {
         return privilegio;
     }
 
     public void setPrivilegio(Character privilegio) {
         this.privilegio = privilegio;
+    }
+
+    public String getCodigoGenerado() {
+        return codigoGenerado;
+    }
+
+    public void setCodigoGenerado(String codigoGenerado) {
+        this.codigoGenerado = codigoGenerado;
     }
 
     @Override
@@ -137,6 +144,5 @@ public class Administrador implements Serializable {
     public String toString() {
         return "wyv.persistencia.Administrador[ dni=" + dni + " ]";
     }
-
     
 }
