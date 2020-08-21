@@ -86,11 +86,16 @@ public class EmpresaAction extends ActionSupport {
 
         try {
 
-            String filePath = ServletActionContext.getServletContext().getRealPath("/").concat("admin/imagenes");
-            File fileToCreate = new File(filePath, logoFileName);
-            FileUtils.copyFile(logo, fileToCreate);
-
-            empresa.setLogo(logoFileName);
+            if (logo == null) {
+                Empresa empresa_encontrado = empSer.buscar(String.valueOf(empresa.getIdEmpresa()));
+                empresa.setLogo(empresa_encontrado.getLogo());
+            } else {
+                String filePath = ServletActionContext.getServletContext().getRealPath("/").concat("admin/imagenes");
+                System.out.println(filePath);
+                File fileToCreate = new File(filePath, logoFileName);
+                FileUtils.copyFile(logo, fileToCreate);
+                empresa.setLogo(logoFileName);
+            }
             estado = empSer.actualizar(empresa);
             empresa = empSer.buscar(String.valueOf(empresa.getIdEmpresa()));
             System.out.println(estado);

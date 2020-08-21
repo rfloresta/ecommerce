@@ -50,7 +50,6 @@ public class AdministradorServicio implements IOperacionesBD<Administrador> {
         try {
             admin = admDao.validar(entrada);
             if (admin != null) {
-                System.out.println("aua");
                 String passDesencriptado = Desencriptar(admin.getPassword());
                 
                 if (passDesencriptado.equals(entrada.getPassword())) {
@@ -102,7 +101,6 @@ public class AdministradorServicio implements IOperacionesBD<Administrador> {
         String estado = "incorrecto";
         try {
             admin = admDao.buscar(entrada.getDni());
-            System.out.println(admin.getCodigoGenerado());
             if (admin.getCodigoGenerado().equals(entrada.getCodigoGenerado())) {
                 estado = "ok";
             }

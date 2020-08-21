@@ -339,8 +339,6 @@
                                     </div>
                                 </div>
                             </s:if>
-
-                        </s:form>
                     </div>
                     <div class="modal-footer">
                         <div class="row">
@@ -357,6 +355,7 @@
                                 <s:submit id="cambiar"  cssClass="btn btn-primary btn-block toastrDefaultError" value="Enviar"/>
                             </div>
                             <!-- /.col -->
+                        </s:form>
                         </div>
                     </div>
                 </div>

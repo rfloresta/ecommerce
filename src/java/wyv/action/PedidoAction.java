@@ -412,7 +412,7 @@ public class PedidoAction extends ActionSupport implements SessionAware {
             ped.setEstado(pedido.getEstado());
             cliente.getIdCliente();
             ped.setIdCliente(cliente);
-            new PedidoServicio().actualizar(ped);
+            pedSer.actualizar(ped);
             lstPedido = pedSer.listar();
             estado= "ok";
         } catch (Exception e) {

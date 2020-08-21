@@ -39,24 +39,24 @@
                                 <div class="form-group">
                                     <label for="inputID">Nombre</label>
 
-                                    <s:textfield  name="producto.nombre" cssClass="form-control" placeholder="Ingrese Nombre" />
+                                    <s:textfield  name="producto.nombre" cssClass="form-control" placeholder="Ingrese Nombre" required="required"/>
                                 </div>
                                 <div class="form-group">
                                     <label for="inputNombre">Descripción</label>
-                                    <s:textfield  name="producto.descripcion" cssClass="form-control" placeholder="Ingrese Descripción"/>
+                                    <s:textfield  name="producto.descripcion" cssClass="form-control" placeholder="Ingrese Descripción" required="required"/>
                                 </div>
                                 <div class="form-group">
                                     <label for="inputNombre">Categoría</label>
                                     <s:select id="Categoria" list="lstCategoria" headerKey="0" 
                                               headerValue="[--Seleccione--]" name="producto.idCategoria.idCategoria"
                                               listKey="idCategoria" listValue="nombre"
-                                              label="Categoría" cssClass="form-control"  />
+                                              label="Categoría" cssClass="form-control" required="required" />
                                 </div>
                                 
                                  <div class="form-group">
                                     <label for="inputNombre">Sub Categoría</label>
                                     <div id="selectSubCate">
-                                        <select class="form-control">
+                                        <select class="form-control" required="required">
                                             <option>[--Seleccione--]</option>
                                             
                                         </select>
@@ -75,23 +75,23 @@
 
                                 <div class="form-group">
                                     <label for="inputNombre">Stock</label>
-                                    <s:textfield  name="producto.stock" cssClass="form-control" placeholder="Ingrese Stock"/>
+                                    <s:textfield  name="producto.stock" cssClass="form-control" placeholder="Ingrese Stock" required="required"/>
                                 </div>
                                 <div class="form-group">
                                     <label for="inputNombre">Precio Compra</label>
-                                    <s:textfield  key="producto.precioCompra" value="%{getText('{0,number,#0.0##}',{producto.precioCompra})}" cssClass="form-control" placeholder="Ingrese Precio de Compra"/>
+                                    <s:textfield  key="producto.precioCompra" value="%{getText('{0,number,#0.0##}',{producto.precioCompra})}" required="required" cssClass="form-control" placeholder="Ingrese Precio de Compra"/>
                                 </div>
                                 <div class="form-group">
                                     <label for="inputNombre">Precio Venta</label>
-                                    <s:textfield key="producto.precioVenta"  value="%{getText('{0,number,#0.0##}',{producto.precioVenta})}" cssClass="form-control" placeholder="Ingrese Precio de Venta"/>
+                                    <s:textfield key="producto.precioVenta"  value="%{getText('{0,number,#0.0##}',{producto.precioVenta})}" required="required" cssClass="form-control" placeholder="Ingrese Precio de Venta"/>
                                 </div>
                                 <div class="form-group">
                                     <label for="inputNombre">Descuento</label>
-                                    <s:textfield  key="producto.descuento" value="%{getText('{0,number,#0.0##}',{producto.descuento})}" cssClass="form-control" placeholder="Ingrese Descripción"/>
+                                    <s:textfield  key="producto.descuento" value="%{getText('{0,number,#0.0##}',{producto.descuento})}" required="required" cssClass="form-control" placeholder="Ingrese Descripción"/>
                                 </div>
                                 <div class="form-group">
                                     <label for="inputImagen">Imagen</label>
-                                    <s:file  name="imagen" cssClass="form-control"/>
+                                    <s:file required="required" name="imagen" cssClass="form-control"/>
                                 </div>
                             </div>
                             <div class="card-footer">

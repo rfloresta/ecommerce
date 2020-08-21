@@ -24,7 +24,7 @@
 
         <div class="w-size7 p-t-30 p-l-15 p-r-15 respon4">
             <h4 class="s-text12 p-b-30">
-                Categorias
+                Categorías
             </h4>
 
             <ul>
@@ -32,8 +32,8 @@
                 <s:url id="lnkCategoria" action="obtCategoria">
                     <s:param value="idCategoria" name="categoria.idCategoria" />
                 </s:url>
-                <li class="p-t-4">
-                <s:a href="%{lnkCategoria}" cssClass="s-text13">
+                <li class="p-b-9">
+                <s:a href="%{lnkCategoria}" cssClass="s-text7">
                     <s:property value="nombre"/>
                 </s:a>
                 </li>
@@ -127,7 +127,7 @@
 
 
         <div class="t-center s-text8 p-t-20">
-            Copyright Â© 2018 All rights reserved. | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+            Copyright © 2020 Todos los derechos reservados. | W&V Productos y Servicios
         </div>
     </div>
 </footer>

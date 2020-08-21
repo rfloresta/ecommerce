@@ -250,6 +250,9 @@ public class AdministradorAction extends ActionSupport implements SessionAware {
     public String actualizarAdmin() {
 
         try {
+            System.out.println(admin.getPassword());
+            String passEncryp = Encriptar(admin.getPassword());
+            admin.setPassword(passEncryp);
             estado = admSer.actualizar(admin);
             lstAdmin = admSer.listar();
             admin = new Administrador();
@@ -320,10 +323,16 @@ public class AdministradorAction extends ActionSupport implements SessionAware {
     })
     public String cambiarPasswordInAdmin(/*String passSesion,String passwordActual, Administrador admin*/) {
         try {
-            Administrador adminSession = recibirSession();
-            if (adminSession.getPassword().equals(passwordActual)) {//validar password de la sesion con el password que viene del form
-                adminSession.setPassword(Encriptar(admin.getPassword()));//enviar el password nuevo
-                estado = admSer.actualizar(adminSession);
+
+            String passSession = (String) sesion.get("passAdmin");
+
+            String pass = Desencriptar(passSession);
+
+            if (pass.equals(passwordActual)) {//validar password de la sesion con el password que viene del form
+                admin = recibirSession();
+                System.out.println("AUA" + admin.getPassword());
+                admin.setPassword(Encriptar(admin.getPassword()));//enviar el password nuevo
+                estado = admSer.actualizar(admin);
                 return estado;
             }
             addActionError("La Contraseña Actual no es la correcta");
@@ -336,20 +345,24 @@ public class AdministradorAction extends ActionSupport implements SessionAware {
     }
 
     public Administrador recibirSession() throws Exception {
-        String dni = (String) sesion.get("dniAdmin");
-        String apellidos = (String) sesion.get("apellidosAdmin");
-        String nombres = (String) sesion.get("nombresAdmin");
-        String email = (String) sesion.get("emailAdmin");
-        String privilegio = sesion.get("privilegio").toString();
-        String cod = (String) sesion.get("codAdmin");
-        String passSession = (String) sesion.get("passAdmin");
-        admin.setDni(dni);
-        admin.setNombres(nombres);
-        admin.setApellidos(apellidos);
-        admin.setEmail(email);
-        admin.setPrivilegio(privilegio.charAt(0));
-        admin.setPassword(Desencriptar(passSession));
-        admin.setCodigoGenerado(cod);
+        try {
+            String dni = (String) sesion.get("dniAdmin");
+            String apellidos = (String) sesion.get("apellidosAdmin");
+            String nombres = (String) sesion.get("nombresAdmin");
+            String email = (String) sesion.get("emailAdmin");
+            String privilegio = sesion.get("privilegio").toString();
+            String cod = (String) sesion.get("codAdmin");
+            admin.setDni(dni);
+            admin.setNombres(nombres);
+            admin.setApellidos(apellidos);
+            admin.setEmail(email);
+            admin.setPrivilegio(privilegio.charAt(0));
+            admin.setCodigoGenerado(cod);
+
+        } catch (Exception e) {
+            System.out.println("error " + e);
+        }
+
         return admin;
     }
 
@@ -366,8 +379,8 @@ public class AdministradorAction extends ActionSupport implements SessionAware {
                 addActionError("Debe ingresar el campo Email");
                 return estado = "incorrecto";
             } else {
-                admSer = new AdministradorServicio();
                 String email = admin.getEmail();
+                System.out.println(email);
                 /*emailadmin*/
                 admin = admSer.validarEmail(email);
                 if (admin != null) {
@@ -426,8 +439,7 @@ public class AdministradorAction extends ActionSupport implements SessionAware {
                 addActionError("Debe ingresar el código");
                 estado = "incorrecto";
             } else {
-                admSer = new AdministradorServicio();
-                String dni = (String) sesion.get("dni");
+                String dni = (String) sesion.get("dniAdmin");
                 admin = new Administrador();
                 admin.setDni(dni);
                 admin.setCodigoGenerado(codigo);
@@ -451,13 +463,13 @@ public class AdministradorAction extends ActionSupport implements SessionAware {
     })
     public String cambiarPasswordOutAdmin(/*Administrador admin*/) {
         try {
-            if (admin.getPassword().isEmpty()) {
+            if (admin.getPassword().isEmpty() || admin.getPassword() == null || admin.getPassword().equals("")) {
                 addActionError("¡Debe completar el campo password!");
                 estado = "incorrecto";
             } else {
-                Administrador adminSession = recibirSession();
-                adminSession.setPassword(Encriptar(admin.getPassword()));//enviar el password nuevo
-                estado = admSer.actualizar(adminSession);
+                admin = recibirSession();
+                admin.setPassword(Encriptar(admin.getPassword()));//enviar el password nuevo
+                estado = admSer.actualizar(admin);
                 addActionMessage("¡Constraseña restablecida!");
             }
         } catch (Exception e) {

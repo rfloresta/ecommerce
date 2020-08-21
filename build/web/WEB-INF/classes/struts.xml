@@ -3,7 +3,7 @@
 "http://struts.apache.org/dtds/struts-2.0.dtd">
 
 <struts>
-    <constant name="struts.devMode" value="true" />
+    <constant name="struts.devMode" value="false" />
     <constant name="struts.ui.theme" value="simple" />
     <constant name="struts.action.extension" value="xhtml,,xml,json,action" />
     
@@ -63,7 +63,7 @@
         <action name="cambiarPasswordInAdmin" class="AdministradorAction" method="cambiarPasswordInAdmin">
             <result name="ok">/admin/seguridad/login.jsp</result>
             <result name="error">/admin/error.jsp</result>
-            <result name="error">/admin/seguridad/cambiar-password-in.jsp</result>
+            <result name="incorrecto">/admin/seguridad/cambiar-password-in.jsp</result>
         </action>
         <action name="restablecerPasswordAdmin" class="AdministradorAction" method="restablecerPasswordAdmin">
             <result name="ok">/admin/seguridad/validar-codigo.jsp</result>
@@ -73,7 +73,7 @@
         <action name="validarCodigoAdmin" class="AdministradorAction" method="validarCodigoAdmin">
             <result name="ok">/admin/seguridad/cambiar-password-out.jsp</result>
             <result name="error">/admin/error.jsp</result>
-            <result name="error">/admin/seguridad/validar-codigo.jsp</result>
+            <result name="incorrecto">/admin/seguridad/validar-codigo.jsp</result>
         </action>
         <action name="cambiarPasswordOutAdmin" class="AdministradorAction" method="cambiarPasswordOutAdmin">
             <result name="ok">/admin/seguridad/login.jsp</result>

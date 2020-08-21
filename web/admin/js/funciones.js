@@ -56,12 +56,12 @@ $(function () {
         } else if (password2.length >= 8 && mayuscula && minuscula && caracter_raro && numero)
         {
             if (password2 !== password3) {
-                toastr.error('Las contraseñas no coinciden');
+                toastr.error('Las contrase\u00F1as no coinciden');
                 return;
             }
             form.submit();
         } else {
-            toastr.error('*La contraseña debe tener 8 caracteres como mínimo entre números, minúsculas y mayúsculas y almenos un caracter extraño (@ . - _)*');
+            toastr.error('*La contrase\u00F1a debe tener 8 car\u00E1cteres como m\u00EDnimo entre n\u00FAmeros, min\u00FAsculas y may\u00FAsculas y almenos un car\u00E1cter extra\u00F1    o (@ . - _)*');
         }
     }
     );
