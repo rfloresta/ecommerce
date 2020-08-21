@@ -138,7 +138,7 @@ $(function () {
 
 
 
-//Filtros de la pagina productos
+//Filtros de precio de la pagina productos (Pagina Clientes)
 
 $('#btnfiltro').on('click', function () {
 
@@ -152,4 +152,20 @@ $('#btnfiltro').on('click', function () {
            $('#contenido-productos').fadeIn(1000).html(respuesta);
         }
     });
+});
+
+
+$('#search-product').on('keyup', function(){
+   
+   var valorBusqueda = $('#search-product').val();
+   console.log(valorBusqueda);
+    $('#contenido-productos').html('<div class="loading text-center"><img src="imagenes/carga.gif" class="w-50" alt="loading" /><br/>Un momento, por favor...</div>');
+    $.ajax({
+        type: 'POST',
+        url: 'buscarProducto.action?valorBusqueda='+valorBusqueda,
+        success: function (respuesta) {
+           $('#contenido-productos').html(respuesta);
+        }
+    });
+    
 });

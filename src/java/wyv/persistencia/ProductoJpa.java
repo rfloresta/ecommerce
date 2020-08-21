@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package wyv.persistencia;
 
 import java.io.Serializable;
@@ -18,12 +23,15 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import wyv.persistencia.exceptions.NonexistentEntityException;
 
+/**
+ *
+ * @author bdeg_
+ */
 public class ProductoJpa implements Serializable {
 
     public ProductoJpa() {
-        this.emf = Persistence.createEntityManagerFactory("W_V_S.A.CPU");
+        this.emf= Persistence.createEntityManagerFactory("W_V_S.A.CPU");
     }
-
     public ProductoJpa(EntityManagerFactory emf) {
         this.emf = emf;
     }
@@ -221,36 +229,69 @@ public class ProductoJpa implements Serializable {
             em.close();
         }
     }
-
-    public List<Subcategoria> listarSubPorCate(int idCate) {
-        PreparedStatement ptstm;
-        Connection cn;
-        ResultSet rs;
+    
+    
+     public List<Subcategoria> listarSubPorCate(int idCate) {
+         PreparedStatement ptstm;
+         Connection cn;
+         ResultSet rs;
         List<Subcategoria> listSubCategoria = new ArrayList<>();
-
+        
         try {
             cn = Util.getConexionBD();
-            ptstm = cn.prepareStatement("Select * from subcategoria where idCategoria=" + idCate + "");
+            ptstm = cn.prepareStatement("Select * from subcategoria where idCategoria="+idCate+"");
             rs = ptstm.executeQuery();
-
+           
             while (rs.next()) {
-                Subcategoria subC = new Subcategoria();
+                Subcategoria subC=new Subcategoria();
                 Categoria cat = new Categoria();
-
+                
                 subC.setIdSubcategoria(rs.getInt(1));
                 subC.setNombre(rs.getString(2));
                 cat.setIdCategoria(rs.getInt(3));
                 subC.setIdCategoria(cat);
                 //Ingresamos cliente
                 listSubCategoria.add(subC);
-
-            }
+                
+}
         } catch (Exception e) {
             e.printStackTrace();
         }
         return listSubCategoria;
     }
    
+    public List<Producto> buscarProducto(String value) {
+         PreparedStatement ptstm;
+         Connection cn;
+         ResultSet rs;
+        List<Producto> listProducto = new ArrayList<>();
+        
+        try {
+            cn = Util.getConexionBD();
+            ptstm = cn.prepareStatement("Select * from producto WHERE nombre LIKE '%"+value+"%'");
+            rs = ptstm.executeQuery();
+           
+            while (rs.next()) {
+                Producto pro = new Producto();
+                
+                pro.setIdProducto(rs.getInt(1));
+                pro.setNombre(rs.getString(2));
+                pro.setDescripcion(rs.getString(3));
+                pro.setStock(rs.getInt(4));
+                pro.setPrecioCompra(rs.getDouble(5));
+                pro.setPrecioVenta(rs.getDouble(6));
+                pro.setDescuento(rs.getDouble(7));
+                pro.setImagen(rs.getString(8));
+                //Ingresamos producto
+                listProducto.add(pro);
+                
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return listProducto;
+    }
+    
    
     
 }

@@ -6,7 +6,6 @@
 package wyv.persistencia;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -24,7 +23,7 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 
 /**
  *
- * @author Romario
+ * @author bdeg_
  */
 @Entity
 @Table(name = "marca")

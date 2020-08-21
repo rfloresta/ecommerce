@@ -58,7 +58,6 @@ public class ProductoAction extends ActionSupport implements SessionAware {
     private File imagen;
     private String imagenContentType;
     private String imagenFileName;
-    private int idCate;
     private Map<String, Object> sesion;
 
     @Override
@@ -146,13 +145,8 @@ public class ProductoAction extends ActionSupport implements SessionAware {
         return edit;
     }
 
-    public int getIdCate() {
-        return idCate;
-    }
 
-    public void setIdCate(int idCate) {
-        this.idCate = idCate;
-    }
+    
 
     @Action(value = "listarProducto", results = {
         @Result(name = "ok", location = "/admin/principal/producto.jsp")
@@ -172,6 +166,28 @@ public class ProductoAction extends ActionSupport implements SessionAware {
             return "error";
         }
     }
+    
+    
+    @Action(value = "listarProductoCliente", results = {
+        @Result(name = "ok", location = "/productos.jsp")
+        ,
+	@Result(name = "error", location = "/error.jsp")
+
+    })
+    public String listarProductoCliente() {
+        try {
+            lstProducto = proSer.listar();
+            lstSubCate = subCateSer.listar();
+            lstCategoria = catSer.listar();
+            lstMarca = marSer.listar();
+            sesion.put("marca",lstMarca);
+            return "ok";
+        } catch (Exception e) {
+            resultado = "Error en: listarProducto :: " + e.getMessage();
+            return "error";
+        }
+    }
+    
 
     @Action(value = "registrarProducto", results = {
         @Result(name = "ok", location = "/admin/principal/producto.jsp")
@@ -314,7 +330,8 @@ public class ProductoAction extends ActionSupport implements SessionAware {
         return estado;
     }
 
-    @Action(value = "listarSubCateFiltro", results = {})
+    @Action(value = "listarSubCateFiltro", results = {
+    })
 
     public void listarSubCateFiltro() {
         try {
@@ -332,7 +349,7 @@ public class ProductoAction extends ActionSupport implements SessionAware {
             resultado = "Error en: verCatalogo :: " + e.getMessage();
         }
     }
-
+    
     @Action(value = "listarFiltroPrecioProducto", results = {
         @Result(name = "ok", location = "/productos_filtrados.jsp")
         ,
@@ -361,6 +378,32 @@ public class ProductoAction extends ActionSupport implements SessionAware {
                 } 
             }
             sesion.put("lstProductoFiltro", Productos);
+
+            estado= "ok";
+        } catch (IOException | NumberFormatException e) {
+            resultado = "Error en: listarFiltroPrecioProducto :: " + e.getMessage();
+        }
+        return estado;
+    }
+    
+    @Action(value = "buscarProducto", results = {
+        @Result(name = "ok", location = "/productos_filtrados.jsp")
+        ,
+	@Result(name = "error", location = "/error.jsp")
+    })
+
+    public String buscarProducto() {
+        try {
+
+            HttpServletResponse response = ServletActionContext.getResponse();
+            HttpServletRequest request = ServletActionContext.getRequest();
+            PrintWriter out = response.getWriter();
+
+            String valor = request.getParameter("valorBusqueda");
+        
+            lstProducto = proSer.buscarProducto(valor);
+          
+            sesion.put("lstProductoFiltro", lstProducto);
 
             estado= "ok";
         } catch (IOException | NumberFormatException e) {
@@ -405,7 +448,6 @@ public class ProductoAction extends ActionSupport implements SessionAware {
     
     @Action(value = "obtMarca", results = {@Result(name="ok", location="/productos.jsp"),
     @Result(name="error", location="/error.jsp")})
-
     public String obtMarca() {
         try {
             marca = marSer.buscar(marca.getIdMarca().toString());

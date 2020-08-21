@@ -21,7 +21,7 @@ import wyv.persistencia.exceptions.NonexistentEntityException;
 
 /**
  *
- * @author Romario
+ * @author bdeg_
  */
 public class ClienteJpa implements Serializable {
 

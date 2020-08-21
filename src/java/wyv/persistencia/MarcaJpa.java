@@ -22,7 +22,7 @@ import wyv.persistencia.exceptions.NonexistentEntityException;
 
 /**
  *
- * @author Romario
+ * @author bdeg_
  */
 public class MarcaJpa implements Serializable {
 

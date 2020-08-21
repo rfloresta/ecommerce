@@ -27,6 +27,7 @@ public class ClienteController implements ModelDriven<Object> {
     public HttpHeaders show() {
         clieDao = new ClienteDao();
         clientes = clieDao.buscar(id);
+
         if(clientes==null){
             return new DefaultHttpHeaders("show").withStatus(404);
         }
@@ -48,6 +49,7 @@ public class ClienteController implements ModelDriven<Object> {
         cliente.setIdCliente(Integer.parseInt(getId()));
         estado=clieDao.actualizar(cliente);
         return new DefaultHttpHeaders("edit").withETag(cliente);
+
     }
 
     @Override

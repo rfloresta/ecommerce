@@ -27,7 +27,7 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 
 /**
  *
- * @author Romario
+ * @author bdeg_
  */
 @Entity
 @Table(name = "producto")

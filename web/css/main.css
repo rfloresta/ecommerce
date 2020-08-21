@@ -2222,11 +2222,6 @@ body{
     pointer-events: none;
 }
 
-<<<<<<< HEAD
-.errorMessage
-{
-    list-style: none
+#contenido-productos{
+        margin-bottom: 170px;
 }
-=======
-
->>>>>>> 774d743aa798fdef07b0c2bb8173fa7ffbd7731a

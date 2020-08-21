@@ -76,6 +76,7 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
       _jspx_resourceInjector = (org.glassfish.jsp.api.ResourceInjector) application.getAttribute("com.sun.appserv.jsp.resource.injector");
 
       out.write("    ");
+<<<<<<< HEAD
       out.write("\n");
       out.write("\n");
       out.write("<!DOCTYPE html>\n");
@@ -102,6 +103,34 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\n");
       out.write("        <!-- sweetalert -->\n");
       out.write("\n");
+=======
+      out.write("\r\n");
+      out.write("\r\n");
+      out.write("<!DOCTYPE html>\r\n");
+      out.write("<html>\r\n");
+      out.write("    <head>\r\n");
+      out.write("        <meta charset=\"utf-8\">\r\n");
+      out.write("        <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\r\n");
+      out.write("        <title>AdminLTE 3 | Log in</title>\r\n");
+      out.write("        <!-- Tell the browser to be responsive to screen width -->\r\n");
+      out.write("        <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\r\n");
+      out.write("        <!-- icheck bootstrap -->\r\n");
+      out.write("        <link rel=\"stylesheet\" href=\"../css/icheck-bootstrap.min.css\">\r\n");
+      out.write("        <!-- Font Awesome -->\r\n");
+      out.write("        <link rel=\"stylesheet\" href=\"../css/all.min.css\">\r\n");
+      out.write("        <link rel=\"stylesheet\" href=\"https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css\">\r\n");
+      out.write("        <link href=\"../css/main.css\" rel=\"stylesheet\" type=\"text/css\"/>\r\n");
+      out.write("        <!-- Ionicons -->\r\n");
+      out.write("        <link rel=\"stylesheet\" href=\"https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css\">\r\n");
+      out.write("        <link href=\"../css/toastr.min.css\" rel=\"stylesheet\" type=\"text/css\"/>\r\n");
+      out.write("        <!-- Theme style -->\r\n");
+      out.write("        <link rel=\"stylesheet\" href=\"../css/adminlte.min.css\">\r\n");
+      out.write("        <!-- Google Font: Source Sans Pro -->\r\n");
+      out.write("        <link href=\"https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700\" rel=\"stylesheet\">\r\n");
+      out.write("\r\n");
+      out.write("        <!-- sweetalert -->\r\n");
+      out.write("\r\n");
+>>>>>>> 8b79b64002d418b3458df160855064e1f1537fdb
       out.write("    </head>");
       out.write("\r\n");
       out.write("<body class=\"hold-transition login-page\">\r\n");
@@ -129,6 +158,7 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("        <!-- /.login-box -->\r\n");
       out.write("\r\n");
       out.write("    ");
+<<<<<<< HEAD
       out.write("        <!-- jQuery -->\n");
       out.write("        <script src=\"../js/jquery.min.js\"></script>\n");
       out.write("        <!-- Bootstrap 4 -->\n");
@@ -145,6 +175,24 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("        <script src=\"../js/main.js\" type=\"text/javascript\"></script>\n");
       out.write("        <script src=\"../js/toastr.min.js\" type=\"text/javascript\"></script>\n");
       out.write("    </body>\n");
+=======
+      out.write("        <!-- jQuery -->\r\n");
+      out.write("        <script src=\"../js/jquery.min.js\"></script>\r\n");
+      out.write("        <!-- Bootstrap 4 -->\r\n");
+      out.write("        <script src=\"resources/js/bootstrap.bundle.min.js\"></script>\r\n");
+      out.write("        <!-- AdminLTE App -->\r\n");
+      out.write("        <script src=\"resources/js/adminlte.min.js\"></script>\r\n");
+      out.write("\r\n");
+      out.write("\r\n");
+      out.write("        <script src=\"https://cdn.jsdelivr.net/npm/sweetalert2@9\"></script>\r\n");
+      out.write("        <script src=\"../js/funciones.js\" type=\"text/javascript\"></script>\r\n");
+      out.write("        \r\n");
+      out.write("        <script src=\"../plugins/toastr/toastr.min.js\"></script>\r\n");
+      out.write("        <!--mi script-->\r\n");
+      out.write("        <script src=\"../js/main.js\" type=\"text/javascript\"></script>\r\n");
+      out.write("        <script src=\"../js/toastr.min.js\" type=\"text/javascript\"></script>\r\n");
+      out.write("    </body>\r\n");
+>>>>>>> 8b79b64002d418b3458df160855064e1f1537fdb
       out.write("</html>");
       out.write('\r');
       out.write('\n');

@@ -88,8 +88,6 @@ $(function () {
             url: 'listarSubCateFiltro.action?idCate=' + selected,
             success: function (respuesta) {
                 var json = JSON.parse(respuesta);
-
-
                 var html="";
                for(let i=0; i < json.length;i++){
                    html += `<option value="${json[i].idSubcategoria}">${json[i].nombre}</option>`;     
@@ -97,8 +95,6 @@ $(function () {
                $('#selectSubCate').html(
                 `<select name="producto.idSubCategoria.idSubcategoria" class="form-control">${html} </select>`);
             }});
-
-
     });
 });
 $(function () {

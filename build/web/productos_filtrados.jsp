@@ -72,7 +72,7 @@
 </div>
 </s:if>
 <s:else>
-    <h3 class="text-center w-100" style="color: #b1a9a9">*No se encontraron elementos*</h3>
+    <h3 class="text-center w-100" style="color: #b1a9a9">*No se encontraron producto*</h3>
 </s:else>
 
 

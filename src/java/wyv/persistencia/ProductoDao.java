@@ -87,4 +87,15 @@ public class ProductoDao implements IOperacionesBD<Producto> {
             return null;
         }
     }
+    
+     public List<Producto> buscarProducto(String value) {
+        try {
+            proJpa = new ProductoJpa();
+            return proJpa.buscarProducto(value);
+        } catch (Exception e) {
+            e.getMessage();
+            return null;
+        }
+    }
+     
 }

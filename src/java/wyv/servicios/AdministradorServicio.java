@@ -96,7 +96,7 @@ public class AdministradorServicio implements IOperacionesBD<Administrador> {
         }
         return null;
     }
-
+    
     public String comparar(Administrador entrada) {
         String estado = "incorrecto";
         try {

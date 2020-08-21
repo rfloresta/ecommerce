@@ -16,19 +16,19 @@
             <div class="col-sm-6 col-md-4 col-lg-3 p-b-50">
                 <div class="leftbar p-r-20 p-r-0-sm">
                     <s:if test="#session.marca != null && #session.lstMarcas == null">
-                        <s:set var="lstCate" value="#session.categoria"></s:set>
-                        <s:set var="lstSub" value="#session.subcategoria"></s:set>
-                        <s:set var="lstProductos" value="#session.marca.productoList"></s:set>
+                        <s:set var="lstCategoria" value="#session.categoria"></s:set>
+                        <s:set var="lstSubCate" value="#session.subcategoria"></s:set>
+                        <s:set var="lstProducto" value="#session.marca.productoList"></s:set>
                     </s:if>
                     <s:elseif test="#session.categoria != null">
-                        <s:set var="lstCate" value="#session.categoria"></s:set>
-                        <s:set var="lstSub" value="#session.categoria.subcategoriaList"></s:set>
-                        <s:set var="lstProductos" value="#session.categoria.productoList"></s:set>
+                        <s:set var="lstCategoria" value="#session.categoria"></s:set>
+                        <s:set var="lstSubCate" value="#session.categoria.subcategoriaList"></s:set>
+                        <s:set var="lstProducto" value="#session.categoria.productoList"></s:set>
                     </s:elseif>
                     <s:else>
-                        <s:set var="lstCate" value="#session.subcategoria.idCategoria"></s:set>
-                        <s:set var="lstSub" value="#session.subcategoria"></s:set>
-                        <s:set var="lstProductos" value="#session.subcategoria.productoList"></s:set>
+                        <s:set var="lstCategoria" value="#session.subcategoria.idCategoria"></s:set>
+                        <s:set var="lstSubCate" value="#session.subcategoria"></s:set>
+                        <s:set var="lstProducto" value="#session.subcategoria.productoList"></s:set>
                     </s:else>
                     <!--  -->
                     <h4 class="m-text14 p-b-7">
@@ -52,7 +52,7 @@
                         Categorias
                     </h4>
                     <ul class="p-b-54">
-                        <s:iterator value="lstCate">
+                        <s:iterator value="lstCategoria">
                             <s:url id="lnkCategoria" action="obtCategoria">
                                 <s:param value="idCategoria" name="categoria.idCategoria" />
                             </s:url>
@@ -69,7 +69,7 @@
                     </h4>
 
                     <ul class="p-b-54">
-                        <s:iterator value="lstSub" >
+                        <s:iterator value="lstSubCate" >
                             <s:url id="lnkSubcategoria" action="obtSubcategoria">
                                 <s:param value="idSubcategoria" name="subcategoria.idSubcategoria" />
                             </s:url>
@@ -152,7 +152,8 @@
                     </div>
 
                     <div class="search-product pos-relative bo4 of-hidden">
-                        <input class="s-text7 size6 p-l-23 p-r-50" type="text" name="search-product" placeholder="Search Products...">
+                        <input class="s-text7 size6 p-l-23 p-r-50" type="text" id="search-product" placeholder="Buscar Productos...">
+
                         <button class="flex-c-m size5 ab-r-m color2 color0-hov trans-0-4">
                             <i class="fs-12 fa fa-search" aria-hidden="true"></i>
                         </button>
@@ -189,83 +190,88 @@
                     </div>
 
                     <span class="s-text8 p-t-5 p-b-5">
-                        Mostrando <s:property value="#lstProductos.size()"/> resultado(s)
+                        Mostrando <s:property value="lstProducto.size()"/> resultado(s)
                     </span>
                 </div>
 
                 <!-- Product -->
+                <s:if test="#session.lstProducto.size() != 0">
+
                 <div class="row" id="contenido-productos">
-                    <s:iterator value="lstProductos">
+                    <s:iterator value="lstProducto">
+                            <div class="col-sm-12 col-md-6 col-lg-4 p-b-50">
+                                <!-- Block2 -->
 
-                        <div class="col-sm-12 col-md-6 col-lg-4 p-b-50">
-                            <!-- Block2 -->
+                                <div class="block2" >
 
-                            <div class="block2" >
-
-                                <div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelnew">
-                                    <img src="admin/imagenes/<s:property value="imagen"/>" alt="IMG-PRODUCT">
-
-
-                                    <div class="block2-overlay trans-0-4">
-
-                                        <s:url id="lnkBuscar" action="detalleProducto">
-                                            <s:param value="idProducto" name="producto.idProducto" />
-                                        </s:url>
-                                        <s:a href="%{lnkBuscar}" cssClass="block2-btn-addwishlist hov-pointer trans-0-4">
-                                            <i class="fa fa-2x fa-eye" style="margin-top: -1.2rem"></i>
-                                        </s:a>   
+                                    <div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelnew">
+                                        <img src="admin/imagenes/<s:property value="imagen"/>" alt="IMG-PRODUCT">
 
 
-                                        <div class="block2-btn-addcart w-size1 trans-0-4">
-                                            <!-- Button -->
-                                            <s:form action="AgregarCarrito"  theme="simple" >
+                                        <div class="block2-overlay trans-0-4">
 
-                                                <s:hidden value="%{idProducto}" name="proObj.idProducto" />
-                                                <s:hidden value="%{nombre}" name="proObj.nombre" />
-                                                <s:hidden value="%{descripcion}" name="proObj.descripcion" />
-                                                <s:hidden value="%{stock}" name="proObj.stock" /> 
-                                                <s:hidden value="%{precioCompra}" name="proObj.precioCompra" />
-                                                <s:hidden value="%{precioVenta}" name="proObj.precioVenta" />
-                                                <s:hidden value="%{descuento}" name="proObj.descuento" />
-                                                <s:hidden value="%{imagen}" name="proObj.imagen" />
-                                                <s:hidden value="%{#cantidad}" name="cantidad" />
-
-                                                <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
-                                                    Agregar al Carro
-                                                </button>
-
-                                            </s:form>
+                                            <s:url id="lnkBuscar" action="detalleProducto">
+                                                <s:param value="idProducto" name="producto.idProducto" />
+                                            </s:url>
+                                            <s:a href="%{lnkBuscar}" cssClass="block2-btn-addwishlist hov-pointer trans-0-4">
+                                                <i class="fa fa-2x fa-eye" style="margin-top: -1.2rem"></i>
+                                            </s:a>   
 
 
+                                            <div class="block2-btn-addcart w-size1 trans-0-4">
+                                                <!-- Button -->
+                                                <s:form action="AgregarCarrito"  theme="simple" >
+
+                                                    <s:hidden value="%{idProducto}" name="proObj.idProducto" />
+                                                    <s:hidden value="%{nombre}" name="proObj.nombre" />
+                                                    <s:hidden value="%{descripcion}" name="proObj.descripcion" />
+                                                    <s:hidden value="%{stock}" name="proObj.stock" /> 
+                                                    <s:hidden value="%{precioCompra}" name="proObj.precioCompra" />
+                                                    <s:hidden value="%{precioVenta}" name="proObj.precioVenta" />
+                                                    <s:hidden value="%{descuento}" name="proObj.descuento" />
+                                                    <s:hidden value="%{imagen}" name="proObj.imagen" />
+                                                    <s:hidden value="%{#cantidad}" name="cantidad" />
+
+                                                    <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
+                                                        Agregar al Carro
+                                                    </button>
+
+                                                </s:form>
+
+
+                                            </div>
                                         </div>
+
+
                                     </div>
 
+                                    <div class="block2-txt p-t-20">
+                                        <a href="product-detail.html" class="block2-name dis-block s-text3 p-b-5">
+                                            <s:property value="nombre"/>
+                                        </a>
 
-                                </div>
+                                        <span class="block2-price m-text6 p-r-5">
+                                            S/<s:property value="precioVenta"/>
+                                        </span>
+                                    </div>
 
-                                <div class="block2-txt p-t-20">
-                                    <a href="product-detail.html" class="block2-name dis-block s-text3 p-b-5">
-                                        <s:property value="nombre"/>
-                                    </a>
-
-                                    <span class="block2-price m-text6 p-r-5">
-                                        S/<s:property value="precioVenta"/>
-                                    </span>
                                 </div>
 
                             </div>
 
+                        </s:iterator>
+
+
+                        <!-- Pagination -->
+                        <div class="pagination flex-m flex-w p-t-26">
+                            <a href="#" class="item-pagination flex-c-m trans-0-4 active-pagination">1</a>
+                            <a href="#" class="item-pagination flex-c-m trans-0-4">2</a>
                         </div>
-
-                    </s:iterator>
-
-
-                    <!-- Pagination -->
-                    <div class="pagination flex-m flex-w p-t-26">
-                        <a href="#" class="item-pagination flex-c-m trans-0-4 active-pagination">1</a>
-                        <a href="#" class="item-pagination flex-c-m trans-0-4">2</a>
                     </div>
-                </div>
+                </s:if>
+                <s:else>
+                    <h3 class="text-center w-100" style="color: #b1a9a9">*No se encontraron productos*</h3>
+                </s:else>
             </div>
         </div>
 </section>

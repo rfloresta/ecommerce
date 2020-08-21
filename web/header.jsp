@@ -190,8 +190,9 @@
                                                     <s:param value="idSubcategoria" name="subcategoria.idSubcategoria" />
                                                 </s:url>
                                                 <s:if test="#cate.idCategoria == #subcate.idCategoria.idCategoria">
+
                                                     <li cssClass="dropdown-submenu"><s:a cssClass="dropdown-item" href="%{lnkSubcategoria}"><s:property value="nombre"/></s:a>
-                                                    </s:if>
+                                                </s:if>
                                                 </s:iterator>
                                         </ul>
                                     </li>
@@ -203,6 +204,7 @@
 
                             <div class="dropdown-menu" aria-labelledby="dropMarca">
                                 <s:iterator value="#session.lstMarca">
+
                                     <s:url id="lnkMarca" action="obtMarca">
                                         <s:param value="idMarca" name="marca.idMarca" />
                                     </s:url>
@@ -212,7 +214,7 @@
                                 </s:iterator>
                             </div>
                         </div>
-                        <a href="productos.jsp" class="nav-link">Productos</a>
+                        <s:a href="listarProductoCliente" cssClass="nav-link">Productos</s:a>
                         <a href="blog.html" class="nav-link">Blog</a>
                         <a href="about.html" class="nav-link">Acerca de</a>
                     </nav>

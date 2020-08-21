@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.5.2
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 15-08-2020 a las 02:17:26
--- Versión del servidor: 10.1.21-MariaDB
--- Versión de PHP: 5.6.30
+-- Tiempo de generación: 21-08-2020 a las 00:48:44
+-- Versión del servidor: 10.4.13-MariaDB
+-- Versión de PHP: 7.2.31
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -89,7 +90,8 @@ CREATE TABLE `administrador` (
 --
 
 INSERT INTO `administrador` (`dni`, `nombres`, `apellidos`, `password`, `email`, `privilegio`, `codigo_generado`) VALUES
-('48887174', 'Romario', 'Flores Taipe', 'EfrkOriAHudSiGwRC51kkg==', 'romariojulerft@gmail.com', 'A', '24726');
+('48887174', 'Romario', 'Flores Taipe', 'EfrkOriAHudSiGwRC51kkg==', 'romariojulerft@gmail.com', 'A', '24726'),
+('73184116', 'Bryan David', 'Estrada Gomez', '19Oq6s30bkDltr82xGql9g==', 'bestradag05@gmail.com', 'A', '');
 
 -- --------------------------------------------------------
 
@@ -109,7 +111,8 @@ CREATE TABLE `categoria` (
 INSERT INTO `categoria` (`idCategoria`, `nombre`) VALUES
 (1, 'Maquillaje'),
 (2, 'Piel'),
-(3, 'Mujer');
+(3, 'Perfume'),
+(5, 'Cuidado Personal');
 
 -- --------------------------------------------------------
 
@@ -136,8 +139,9 @@ CREATE TABLE `cliente` (
 INSERT INTO `cliente` (`idCliente`, `nombres`, `apellidos`, `dni`, `numCelular`, `direccion`, `email`, `password`, `codigo_generado`) VALUES
 (4, 'Fernanda', 'Castillo', '45963256', '996555254', '', '', '222', NULL),
 (5, 'Romario', 'Flores', '48887174', '1111', NULL, 'rfloresta@autonoma.edu.pe', '2222', '57757'),
-(12, 'Mariana', 'Bellido', '12345678', '3331111', 'Héroes del pacífico', 'mariana@gmail.com', 'cT5laPhj4RI=', NULL),
-(14, '1', '1', NULL, NULL, NULL, 'sd', 'EfrkOriAHucSY5R4zTRSGg==', NULL);
+(12, 'Mariana', 'Bellido', '12345678', '3331111', 'HÃ©roes del pacÃ­fico', 'mariana@gmail.com', 'cT5laPhj4RI=', NULL),
+(14, '1', '1', NULL, NULL, NULL, 'sd', 'EfrkOriAHucSY5R4zTRSGg==', NULL),
+(15, 'Bryan', 'Estrada', '73184116', '977834697', 'Av.Revolucion', 'bestradag05@gmail.com', '19Oq6s30bkDltr82xGql9g==', NULL);
 
 -- --------------------------------------------------------
 
@@ -160,7 +164,12 @@ CREATE TABLE `detalle_pedido` (
 INSERT INTO `detalle_pedido` (`cantidad`, `precio`, `descuento`, `idProducto`, `idPedido`) VALUES
 (1, 100.00, 0.00, 3, 1),
 (2, 100.00, 0.00, 3, 2),
-(3, 100.00, 0.00, 3, 3);
+(3, 100.00, 0.00, 3, 3),
+(2, 100.00, 0.00, 3, 6),
+(2, 100.00, 0.00, 3, 7),
+(1, 60.00, 0.00, 4, 7),
+(1, 45.00, 0.00, 6, 6),
+(2, 45.00, 0.00, 6, 8);
 
 --
 -- Disparadores `detalle_pedido`
@@ -238,7 +247,10 @@ CREATE TABLE `pedido` (
 INSERT INTO `pedido` (`idPedido`, `numero`, `fecha`, `subtotal`, `igv`, `total`, `pago`, `estado`, `idCliente`) VALUES
 (1, 'A00001', '14/06/2020', 100.00, 0.18, 500.00, 'Tarjeta', '0', 4),
 (2, 'A00002', '14/06/2020', 200.00, 0.18, 200.00, 'Tarjeta', '0', 4),
-(3, 'A00003', '15/06/2020', 300.00, 0.18, 300.00, 'Tarjeta', '0', 4);
+(3, 'A00003', '15/06/2020', 300.00, 0.18, 300.00, 'Tarjeta', '0', 4),
+(6, 'A00004', '18/08/2020', 245.00, 44.10, 245.00, 'Tarjeta', '1', 15),
+(7, 'A00005', '18/08/2020', 260.00, 46.80, 260.00, 'Tarjeta', '1', 15),
+(8, 'A00006', '19/08/2020', 90.00, 16.20, 90.00, 'Tarjeta', '1', 15);
 
 -- --------------------------------------------------------
 
@@ -254,7 +266,7 @@ CREATE TABLE `producto` (
   `precioCompra` double(10,2) DEFAULT NULL,
   `precioVenta` double(10,2) DEFAULT NULL,
   `descuento` double(10,2) DEFAULT NULL,
-  `imagen` text,
+  `imagen` text DEFAULT NULL,
   `idCategoria` int(11) DEFAULT NULL,
   `idMarca` int(11) DEFAULT NULL,
   `idSubCategoria` int(11) NOT NULL
@@ -265,8 +277,13 @@ CREATE TABLE `producto` (
 --
 
 INSERT INTO `producto` (`idProducto`, `nombre`, `descripcion`, `stock`, `precioCompra`, `precioVenta`, `descuento`, `imagen`, `idCategoria`, `idMarca`, `idSubCategoria`) VALUES
-(3, 'Glamour', 'perfume con aroma seductor', 286, 80.00, 100.00, 0.00, 'Magnat.jpg', 3, 2, 21),
-(4, 'KromoBlacks', 'Este producto es bueno', 100, 50.00, 60.00, 0.00, 'Leyenda.jpg', 1, 3, 21);
+(3, 'Magnat ', 'Perfume super fuerte', 280, 80.00, 100.00, 0.00, 'Magnat.jpg', 3, 2, 21),
+(4, 'KromoBlack', 'Aroma para conquistar', 97, 50.00, 60.00, 0.00, 'KromoBlack.jpg', 3, 3, 30),
+(5, 'Corrector de ojos', 'Mucho mas belleza', 12, 11.00, 15.00, NULL, 'Otros_Productos_Corrector_OjosOS.jpg', 1, 3, 27),
+(6, 'Crema Facial', 'Para un rostro mucho mas limpio', 17, 30.00, 45.00, NULL, 'Otros_Productos_Crema_Facila_Restauradora_Oxygen_Supreme.jpg', 1, 2, 21),
+(7, 'Desodorante RollStock', 'Una mejor fragancia', 50, 18.00, 22.00, NULL, 'Otros_Productos_Desodorante_ROll-On.jpg', 5, 1, 23),
+(8, 'Labial', 'Color fuerte', 12, 15.00, 18.00, NULL, 'Otros_Productos_Labial_HD_Longwear.jpg', 1, 2, 21),
+(9, 'Perfume Devos', 'Para hombres conquistadores', 100, 27.00, 35.00, NULL, 'perfume_devos.jpg', 3, 3, 30);
 
 -- --------------------------------------------------------
 
@@ -285,9 +302,15 @@ CREATE TABLE `subcategoria` (
 --
 
 INSERT INTO `subcategoria` (`idSubcategoria`, `nombre`, `idCategoria`) VALUES
-(20, 'Ojos', 1),
-(21, 'Mano', 1),
-(22, 'Rostro', 2);
+(21, 'Rostro', 1),
+(23, 'Cuerpo', 5),
+(24, 'Cabello', 5),
+(25, 'Hidratantes', 2),
+(26, 'Cuidado de ojos', 2),
+(27, 'Ojos', 1),
+(28, 'Labios', 1),
+(29, 'Mujer', 3),
+(30, 'Hombre', 3);
 
 --
 -- Índices para tablas volcadas
@@ -362,32 +385,44 @@ ALTER TABLE `subcategoria`
 -- AUTO_INCREMENT de la tabla `categoria`
 --
 ALTER TABLE `categoria`
-  MODIFY `idCategoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `idCategoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
 --
 -- AUTO_INCREMENT de la tabla `cliente`
 --
 ALTER TABLE `cliente`
-  MODIFY `idCliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `idCliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
 --
 -- AUTO_INCREMENT de la tabla `empresa`
 --
 ALTER TABLE `empresa`
   MODIFY `idEmpresa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
 --
 -- AUTO_INCREMENT de la tabla `marca`
 --
 ALTER TABLE `marca`
   MODIFY `idMarca` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT de la tabla `pedido`
+--
+ALTER TABLE `pedido`
+  MODIFY `idPedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
 --
 -- AUTO_INCREMENT de la tabla `producto`
 --
 ALTER TABLE `producto`
-  MODIFY `idProducto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `idProducto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
 --
 -- AUTO_INCREMENT de la tabla `subcategoria`
 --
 ALTER TABLE `subcategoria`
-  MODIFY `idSubcategoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `idSubcategoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+
 --
 -- Restricciones para tablas volcadas
 --
@@ -418,6 +453,7 @@ ALTER TABLE `producto`
 --
 ALTER TABLE `subcategoria`
   ADD CONSTRAINT `subcategoria_ibfk_1` FOREIGN KEY (`idCategoria`) REFERENCES `categoria` (`idCategoria`);
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
